@@ -19,6 +19,5 @@
 - (NSInteger) numberOfCellsOfGridView:(UIGridView *) grid;
 
 - (UIGridViewCell *) gridView:(UIGridView *)grid cellForRowAt:(NSInteger)rowIndex AndColumnAt:(NSInteger)columnIndex;
-- (UIEdgeInsets)gridView:(UIGridView *)collectionView insetForSectionAtIndex:(NSInteger)section;
 
 @end

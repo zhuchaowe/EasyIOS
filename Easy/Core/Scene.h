@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Action.h"
 #import "Easy.h"
+#import "MJRefresh.h"
 typedef enum
 {
     NAV_LEFT                    =0,
@@ -21,7 +22,7 @@ typedef enum
 @property(nonatomic,assign)BOOL hasAddActionObserver;
 @property(nonatomic,assign)Scene *parentScene;
 -(void)handleActionMsg:(ActionData *)msg;
-
+-(void)handlePullLoader:(MJRefreshBaseView *)view state:(NSInteger)state;
 - (void)SEND_ACTION:(NSDictionary *)dict;
 - (void)SEND_ACTION;
 - (void)SEND_CACHE_ACTION;
@@ -31,4 +32,5 @@ typedef enum
 - (void)showBarButton:(EzNavigationBar)position button:(UIButton *)button;
 - (void)leftButtonTouch;
 - (void)rightButtonTouch;
+- (void)initAction;
 @end

@@ -12,7 +12,7 @@ const CGFloat MJRefreshAnimationDuration = 0.25;
 NSString *const MJRefreshFooterPullToRefresh = @"上拉加载";
 NSString *const MJRefreshFooterReleaseToRefresh = @"释放加载";
 NSString *const MJRefreshFooterRefreshing = @"正在刷新";
-NSString *const MJRefreshFooterEnd = @"没有了哦！";
+NSString *const MJRefreshFooterEnd = @"没有更多了";
 
 NSString *const MJRefreshHeaderPullToRefresh = @"下拉刷新";
 NSString *const MJRefreshHeaderReleaseToRefresh = @"释放刷新";

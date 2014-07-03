@@ -28,18 +28,35 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [_action.msg addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:nil];
-    self.hasAddActionObserver =YES;
+
+-(void)initAction{
+    self.action = [Action Action];
+    [self addMsgObserverForState];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    if(self.hasAddActionObserver){
-        [_action.msg removeObserver:self forKeyPath:@"state"];
+}
+
+-(void)dealloc{
+    [self removeMsgObserverForState];
+}
+-(void)addMsgObserverForState{
+    if(self.hasAddActionObserver == NO){
+        [_action.msg addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:nil];
+        self.hasAddActionObserver =YES;
     }
 }
+-(void)removeMsgObserverForState{
+    if(self.hasAddActionObserver == YES){
+        [_action.msg removeObserver:self forKeyPath:@"state"];
+        self.hasAddActionObserver = NO;
+    }
+}
+
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
@@ -57,6 +74,9 @@
     }else if(msg.failed){
         NSLog(@"failed:%@",msg.error);
     }
+}
+-(void)handlePullLoader:(MJRefreshBaseView *)view state:(NSInteger)state{
+    [self addMsgObserverForState];
 }
 - (void)SEND_ACTION:(NSDictionary *)dict{
 }

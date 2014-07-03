@@ -30,12 +30,12 @@
     {
         buttonFrame = CGRectMake(0, 0, image.size.width + 10.0f, NAV_BAR_HEIGHT);
     }
-    if ( buttonFrame.size.width <= NAV_BUTTON_MIN_WIDTH )
+    if ( buttonFrame.size.width >= NAV_BUTTON_MIN_WIDTH )
     {
         buttonFrame.size.width = NAV_BUTTON_MIN_WIDTH;
     }
     
-    if ( buttonFrame.size.height <= NAV_BUTTON_MIN_HEIGHT )
+    if ( buttonFrame.size.height >= NAV_BUTTON_MIN_HEIGHT )
     {
         buttonFrame.size.height = NAV_BUTTON_MIN_HEIGHT;
     }
@@ -48,7 +48,7 @@
 -(UIButton *)initNavigationButtonWithTitle:(NSString *)str color:(UIColor *)color{
     CGRect buttonFrame = CGRectZero;
 
-    CGSize titleSize = [str sizeWithFont:[UIFont boldSystemFontOfSize:13.0f]
+    CGSize titleSize = [str sizeWithFont:[UIFont boldSystemFontOfSize:16.0f]
                         constrainedToSize:CGSizeMake(999999.0f, NAV_BAR_HEIGHT)];
     
     if ( IOS7_OR_LATER )
@@ -60,18 +60,10 @@
         buttonFrame = CGRectMake(0, 0, titleSize.width + 10.0f, NAV_BAR_HEIGHT);
     }
     
-    if ( buttonFrame.size.width <= NAV_BUTTON_MIN_WIDTH )
-    {
-        buttonFrame.size.width = NAV_BUTTON_MIN_WIDTH;
-    }
-    
-    if ( buttonFrame.size.height <= NAV_BUTTON_MIN_HEIGHT )
-    {
-        buttonFrame.size.height = NAV_BUTTON_MIN_HEIGHT;
-    }
     self = [self initWithFrame:buttonFrame];
 	self.contentMode = UIViewContentModeScaleAspectFit;
 	self.backgroundColor = [UIColor clearColor];
+    self.titleLabel.font = [UIFont systemFontOfSize:16.0f];
     [self setTitleColor:color forState:UIControlStateNormal];
     [self setTitle:str forState:UIControlStateNormal];
     return self;

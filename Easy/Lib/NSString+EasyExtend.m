@@ -8,6 +8,9 @@
 
 #import "NSString+EasyExtend.h"
 #import "NSData+EasyExtend.h"
+#import "NSObject+EasyTypeConversion.h"
+#import <AddressBook/AddressBook.h>
+#import "pinyin.h"
 @implementation NSString (EasyExtend)
 
 //#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
@@ -215,6 +218,89 @@
 	}
     
 	return ret;
+}
+
+-(NSString *)getOutOfTheNumber{
+    NSMutableString *strippedString = [NSMutableString
+                                       stringWithCapacity:self.length];
+    
+    NSScanner *scanner = [NSScanner scannerWithString:self];
+    NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    while ([scanner isAtEnd] == NO) {
+        NSString *buffer;
+        if ([scanner scanCharactersFromSet:numbers intoString:&buffer]) {
+            [strippedString appendString:buffer];
+        }
+        else {
+            [scanner setScanLocation:([scanner scanLocation] + 1)];
+        }
+    }
+    return strippedString;
+}
+
+- (NSString *)urlByAppendingDict:(NSDictionary *)params encoding:(BOOL)encoding
+{
+    NSURL * parsedURL = [NSURL URLWithString:self];
+	NSString * queryPrefix = parsedURL.query ? @"&" : @"?";
+	NSString * query = [NSString queryStringFromDictionary:params encoding:encoding];
+	return [NSString stringWithFormat:@"%@%@%@", self, queryPrefix, query];
+}
+
++ (NSString *)queryStringFromDictionary:(NSDictionary *)dict encoding:(BOOL)encoding
+{
+    NSMutableArray * pairs = [NSMutableArray array];
+	for ( NSString * key in dict.allKeys )
+	{
+		NSString * value = [(NSObject *)[dict objectForKey:key] asNSString];
+		NSString * urlEncoding = encoding ? [value urlencode] : value;
+		[pairs addObject:[NSString stringWithFormat:@"%@=%@", key, urlEncoding]];
+	}
+	return [pairs componentsJoinedByString:@"&"];
+}
+
+-(NSString *)getNameFromAddressBookWithPhoneNum{
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+//    if ([[UIDevice currentDevice].systemVersion floatValue] >= 6.0)    {
+//       addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+//        //等待同意后向下执行
+//        dispatch_semaphore_t sema = dispatch_semaphore_create(0);        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)                                                 {                                                     dispatch_semaphore_signal(sema);                                                 });
+//        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);         dispatch(sema);
+//    }else{
+//        addressBook = ABAddressBookCreate();
+//    }
+    CFArrayRef records;
+    if (addressBook) {
+        // 获取通讯录中全部联系人
+        records = ABAddressBookCopyArrayOfAllPeople(addressBook);
+    }else{
+        return nil;
+    }
+    // 遍历全部联系人，检查是否存在指定号码
+    for (int i=0; i<CFArrayGetCount(records); i++) {
+        ABRecordRef record = CFArrayGetValueAtIndex(records, i);
+        CFTypeRef items = ABRecordCopyValue(record, kABPersonPhoneProperty);
+        CFArrayRef phoneNums = ABMultiValueCopyArrayOfAllValues(items);
+        if (phoneNums) {
+            for (int j=0; j<CFArrayGetCount(phoneNums); j++) {                NSString *phone = (NSString*)CFArrayGetValueAtIndex(phoneNums, j);
+                phone = [phone getOutOfTheNumber];
+                if ([phone isEqualToString:self]) {
+                return (__bridge NSString*)ABRecordCopyCompositeName(record);
+            }
+            }
+        }
+    }
+    return nil;
+}
+
+
+- (NSString *)firstLetter
+{
+    return [HTFirstLetter firstLetter:self];
+}
+
+- (NSString *)firstLetters
+{
+    return [HTFirstLetter firstLetters:self];
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "ActionData.h"
 
 #define HOST_URL @"test-leway.zjseek.com.cn:8000"
+//#define HOST_URL @"leway.com"
 #define CLIENT   @"easyIOS"
 #define BASE_URL @"/api/"
 #define CODE_KEY @"code"
@@ -17,17 +18,21 @@
 #define MSG_KEY  @"msg"
 
 @interface Action : MKNetworkEngine
-typedef Action *	(^ActionBlockN)(id first ,id second,... );
+typedef Action *	(^ActionBlockN)(id first ,id second,id third,... );
+typedef Action *	(^ActionBlockTN)(id first ,id second,... );
 @property(nonatomic,strong) ActionData *msg;
-@property (nonatomic, readonly) ActionBlockN GET_MSG;
+@property (nonatomic, readonly) ActionBlockTN GET_MSG;
 @property (nonatomic, readonly) ActionBlockN POST_MSG;
 + (id)Action;
 - (id)initWithCache;
-
+- (void)success:(ActionData *)msg;
+- (void)error:(ActionData *)msg;
+- (void)failed:(ActionData *)msg;
 -(MKNetworkOperation*) GET:(NSString*) path
                     params:(NSDictionary *) params;
 
 -(MKNetworkOperation*) POST:(NSString*) path
+                       file:(NSDictionary *) file
                      params:(NSDictionary *) params;
 
 AS_SINGLETON(Action)

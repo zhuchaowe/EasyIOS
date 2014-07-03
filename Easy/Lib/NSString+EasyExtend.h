@@ -16,9 +16,13 @@
 - (NSString *)substringFromIndex:(NSUInteger)from untilCharset:(NSCharacterSet *)charset endOffset:(NSUInteger *)endOffset;
 - (NSString *)trim;
 - (NSArray *)words;
+- (NSString *)getOutOfTheNumber;
 - (NSString *)urldecode;
 - (NSString *)urlencode;
-
+- (NSString *)urlByAppendingDict:(NSDictionary *)params encoding:(BOOL)encoding;
+- (NSString *)getNameFromAddressBookWithPhoneNum;
+- (NSString *)firstLetter;
+- (NSString *)firstLetters;
 @end
 
 @interface NSMutableString (EasyExtend)

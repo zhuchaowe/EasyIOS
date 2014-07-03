@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "NSDictionary+EasyExtend.h"
-@interface Model : NSObject
+#import "MojoModel.h"
+@interface Model : MojoModel
 
 @end

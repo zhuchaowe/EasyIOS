@@ -23,6 +23,7 @@ typedef enum
 @property(nonatomic,strong)NSError *error;
 @property(nonatomic,assign)NSInteger state;
 @property(nonatomic,strong)NSString *url;
+@property(nonatomic,strong)NSString *path;
 @property(nonatomic,strong)NSString *method;
 @property(nonatomic,strong)NSString *discription;
 @property(nonatomic,strong)NSDictionary *params;

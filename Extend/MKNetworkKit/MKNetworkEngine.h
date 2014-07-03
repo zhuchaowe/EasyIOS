@@ -408,6 +408,7 @@
 -(void) readFromCache;
 -(void) emptyCache;
 -(void) saveCache;
+-(float) getCacheSize;
 
 /*!
  *  @abstract Checks current reachable status

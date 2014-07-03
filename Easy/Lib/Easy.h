@@ -13,6 +13,7 @@
 #import "NSNumber+EasyExtend.h"
 #import "NSDate+EasyExtend.h"
 #import "NSArray+EasyExtend.h"
+#import "NSObject+BeeNotification.h"
 #import "NSDictionary+EasyExtend.h"
 #import "UIColor+EasyExtend.h"
 #import "UIView+EasyExtend.h"
@@ -24,10 +25,16 @@
 #import "Bee_SystemInfo.h"
 #import "Bee_Sandbox.h"
 #import "EzUILabel.h"
+#import "EzMiButton.h"
 #import "RTLabel.h"
 #import "UIGridView.h"
 #import "EzUITapGestureRecognizer.h"
 #import "SVProgressHUD.h"
+#import "DialogUtil.h"
+#import "SysTool.h"
+#import "TimeTool.h"
+#import "ImageTool.h"
+#import "BEVersion.h"
 
 #define EZFRAME(frame)     NSLog(@"%.1f,%.1f,%.1f,%.1f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
 
