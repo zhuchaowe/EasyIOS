@@ -21,6 +21,7 @@
 #import "UILabel+EasyExtend.h"
 #import "UIButton+EasyExtend.h"
 #import "UIImageView+MKNetworkKitAdditions.h"
+#import "UIImage+EasyExtend.h"
 #import "UITabBarController+EasyExtend.h"
 #import "Bee_SystemInfo.h"
 #import "Bee_Sandbox.h"

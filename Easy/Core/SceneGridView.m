@@ -105,4 +105,10 @@
     }
 }
 
+- (void) scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if([self.SceneDelegate respondsToSelector:@selector(sceneGridViewDidScroll:)]){
+        [self.SceneDelegate sceneGridViewDidScroll:scrollView];
+    }
+}
 @end

@@ -25,6 +25,56 @@
 	return [[NSDate dateWithTimeIntervalSince1970:[self doubleValue]] stringWithDateFormat:format];
 }
 
+
+- (BOOL)numberIsInt{
+    if([self floatValue] == [self intValue]){
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
+- (BOOL)numberIsFloat{
+    return ![self numberIsInt];
+}
+
+- (NSString *)stringWithMillionFormat:(NSString *)format{
+    double numberValue= [self safeDouble];
+    NSString *string = nil;
+    if(numberValue > 9999){
+        numberValue=numberValue/10000;
+        if(numberValue >9999){
+            numberValue=numberValue/10000;
+            string = [NSString stringWithFormat:format,numberValue];
+            string = [NSString stringWithFormat:@"%@亿",string];
+        }else{
+            string = [NSString stringWithFormat:format,numberValue];
+            string = [NSString stringWithFormat:@"%@万",string];
+        }
+    }
+    else{
+        string =[NSString stringWithFormat:format,numberValue];
+    }
+    return [string safeString];
+}
+
+//获取安全字符串归零
+-(NSString *)safeString{
+    NSString *string = self !=nil ? [NSString stringWithFormat:@"%@",self] :@"0";
+    return string;
+}
+
+//获取安全数字串归零
+-(NSNumber *)safeNumber{
+    return __DOUBLE([self safeDouble]);
+}
+
+//获取安全Double归零
+-(double)safeDouble{
+    NSNumber *object = [self isKindOfClass:[NSNull class]] ?  __DOUBLE(0.0): self;
+    double number = object !=nil ? [object doubleValue] :0;
+    return number;
+}
 @end
 
 // ----------------------------------

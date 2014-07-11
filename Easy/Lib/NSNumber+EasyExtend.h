@@ -28,5 +28,14 @@
 @property (nonatomic, readonly) NSDate *	dateValue;
 
 - (NSString *)stringWithDateFormat:(NSString *)format;
+- (NSString *)stringWithMillionFormat:(NSString *)format;
+//获取安全字符串归零
+-(NSString *)safeString;
+//获取安全数字串归零
+-(NSNumber *)safeNumber;
+//获取安全Double归零
+-(double)safeDouble;
+-(BOOL)numberIsFloat;
+-(BOOL)numberIsInt;
 
 @end

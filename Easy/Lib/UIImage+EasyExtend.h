@@ -10,4 +10,5 @@
 @interface UIImage (EasyExtend)
 - (UIImage *) toGrayscale;
 - (UIImage *) tintWithColor:(UIColor *)tintColor;
++ (UIImage *) imageWithUrl:(NSString *)url;
 @end

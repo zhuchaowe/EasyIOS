@@ -15,6 +15,7 @@
 @property(nonatomic,assign)NSUInteger pageSize;
 @property(nonatomic,assign)NSUInteger total;
 @property(strong,nonatomic)NSMutableArray *dataArray;
+@property(nonatomic,strong)NSString *cacheDataString;
 @property(nonatomic,strong)UILabel *msgLabel;
 @property (strong, nonatomic) id <SceneCollectionViewDelegate> SceneDelegate;
 -(void)addHeader;

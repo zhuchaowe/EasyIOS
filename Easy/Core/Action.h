@@ -8,6 +8,7 @@
 #import "Easy.h"
 #import "MKNetworkEngine.h"
 #import "ActionData.h"
+#import "ActionDelegate.h"
 
 #define HOST_URL @"test-leway.zjseek.com.cn:8000"
 //#define HOST_URL @"leway.com"
@@ -20,20 +21,23 @@
 @interface Action : MKNetworkEngine
 typedef Action *	(^ActionBlockN)(id first ,id second,id third,... );
 typedef Action *	(^ActionBlockTN)(id first ,id second,... );
-@property(nonatomic,strong) ActionData *msg;
+
 @property (nonatomic, readonly) ActionBlockTN GET_MSG;
 @property (nonatomic, readonly) ActionBlockN POST_MSG;
+@property(nonatomic,strong)id<ActionDelegate> aDelegaete;
 + (id)Action;
 - (id)initWithCache;
 - (void)success:(ActionData *)msg;
 - (void)error:(ActionData *)msg;
 - (void)failed:(ActionData *)msg;
 -(MKNetworkOperation*) GET:(NSString*) path
-                    params:(NSDictionary *) params;
+                    params:(NSDictionary *) params
+                       key:(NSString *)key;
 
 -(MKNetworkOperation*) POST:(NSString*) path
                        file:(NSDictionary *) file
-                     params:(NSDictionary *) params;
+                     params:(NSDictionary *) params
+                        key:(NSString *)key;
 
 AS_SINGLETON(Action)
 @end

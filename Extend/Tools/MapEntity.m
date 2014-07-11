@@ -63,13 +63,12 @@ void bd_decrypt(double bd_lat, double bd_lon, double *gg_lat, double *gg_lon)
     }else{
         return nil;
     }
-    if(callNative){
-        double bdNowLat,bdNowLon;
-        bd_encrypt(self.origin.latitude, self.origin.longitude, &bdNowLat, &bdNowLon);
+    if(callNative && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://"]]){
         NSString *baseUrl = @"baidumap://map/direction";
-        NSDictionary *dict = @{@"origin":[NSString stringWithFormat:@"%.8f,%.8f",bdNowLat,bdNowLon],
+        NSDictionary *dict = @{@"origin":[NSString stringWithFormat:@"%.8f,%.8f",self.origin.latitude,self.origin.longitude],
                                @"destination":[NSString stringWithFormat:@"%.8f,%.8f",self.destination.latitude,self.destination.longitude],
                                @"mode":transModel,
+                               @"coord_type":@"wgs84",
                                @"src":[self.sourceApplication stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]};
         NSString *url = [baseUrl urlByAppendingDict:dict encoding:NO];
         return url;
@@ -90,17 +89,19 @@ void bd_decrypt(double bd_lat, double bd_lon, double *gg_lat, double *gg_lon)
     }else{
         return nil;
     }
-    if(callNative){
+    if(callNative && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"iosamap://"]]){
         NSString *baseUrl = @"iosamap://path";
         NSDictionary *dict = @{@"sourceApplication":[self.sourceApplication stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                @"backScheme":self.backScheme,
+                               @"sid":@"BGVIS1",
+                               @"did":@"BGVIS2",
                                @"slat":[NSString stringWithFormat:@"%.8f",self.origin.latitude],
                                @"slon":[NSString stringWithFormat:@"%.8f",self.origin.longitude],
                                @"dlat":[NSString stringWithFormat:@"%.8f",self.destination.latitude],
                                @"dlon":[NSString stringWithFormat:@"%.8f",self.destination.longitude],
                                @"sname":[self.originName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                @"dname":[self.destinationName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-                               @"dev":@"1",
+                               @"dev":@"0",
                                @"m":@"1",
                                @"t":transModel};
         NSString *url = [baseUrl urlByAppendingDict:dict encoding:NO];
@@ -109,7 +110,7 @@ void bd_decrypt(double bd_lat, double bd_lon, double *gg_lat, double *gg_lon)
         NSString *baseUrl = @"http://mo.amap.com/";
         NSDictionary *dict = @{@"from":[NSString stringWithFormat:@"%.8f,%.8f",self.origin.latitude,self.origin.longitude],
                                @"to":[NSString stringWithFormat:@"%.8f,%.8f",self.destination.latitude,self.destination.longitude],
-                               @"dev":@"1",
+                               @"dev":@"0",
                                @"opt":@"1",
                                @"type":transModel};
         NSString *url = [baseUrl urlByAppendingDict:dict encoding:NO];
@@ -147,13 +148,24 @@ void bd_decrypt(double bd_lat, double bd_lon, double *gg_lat, double *gg_lon)
     if (IOS5_OR_EARLIER || !callNative) {//ios5 调用高德网页地图
         return [self callAMapForPath:mode native:callNative];
     }else{//ios6 ios7 跳转apple map
+        NSString *transModel = @"";
+        if (mode == driving) {
+            transModel = MKLaunchOptionsDirectionsModeDriving;
+        }else if (mode == walking) {
+            transModel = MKLaunchOptionsDirectionsModeWalking;
+        }else if (mode == transit) {
+            transModel = MKLaunchOptionsDirectionsModeDriving;
+        }else {
+            return nil;
+        }
+        
         CLLocationCoordinate2D to;
         to.latitude = self.destination.latitude;
         to.longitude = self.destination.longitude;
         MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
         MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:to addressDictionary:nil]];
         toLocation.name = self.destinationName;
-        [MKMapItem openMapsWithItems:[NSArray arrayWithObjects:currentLocation, toLocation, nil] launchOptions:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:MKLaunchOptionsDirectionsModeDriving, [NSNumber numberWithBool:YES], nil] forKeys:[NSArray arrayWithObjects:MKLaunchOptionsDirectionsModeKey, MKLaunchOptionsShowsTrafficKey, nil]]];
+        [MKMapItem openMapsWithItems:[NSArray arrayWithObjects:currentLocation, toLocation, nil] launchOptions:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:transModel, [NSNumber numberWithBool:YES], nil] forKeys:[NSArray arrayWithObjects:MKLaunchOptionsDirectionsModeKey, MKLaunchOptionsShowsTrafficKey, nil]]];
         return nil;
     }
 }

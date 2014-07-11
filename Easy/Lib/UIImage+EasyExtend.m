@@ -123,4 +123,8 @@
     return img;
 }
 
++ (UIImage *) imageWithUrl:(NSString *)url{
+    return [UIImage imageWithData: [NSData dataWithContentsOfURL:[NSURL URLWithString:url]]];
+}
+
 @end

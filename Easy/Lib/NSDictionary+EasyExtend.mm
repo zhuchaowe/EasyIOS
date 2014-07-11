@@ -133,7 +133,11 @@
 - (id)objectAtPath:(NSString *)path otherwise:(NSObject *)other
 {
 	NSObject * obj = [self objectAtPath:path];
-	return obj ? obj : other;
+    if([obj isKindOfClass:[NSNull class]] || obj == nil){
+        return other;
+    }else{
+        return obj;
+    }
 }
 
 - (id)objectAtPath:(NSString *)path otherwise:(NSObject *)other separator:(NSString *)separator

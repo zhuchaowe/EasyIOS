@@ -11,13 +11,14 @@
 #import "MJRefresh.h"
 
 @protocol SceneGridViewDelegate;
-@interface SceneGridView : UIGridView
+@interface SceneGridView : UIGridView<UIScrollViewDelegate>
 @property(nonatomic,strong)MJRefreshHeaderView *header;
 @property(nonatomic,strong)MJRefreshFooterView *footer;
 @property(nonatomic,assign)NSUInteger page;
 @property(nonatomic,assign)NSUInteger pageSize;
 @property(nonatomic,assign)NSUInteger total;
 @property(strong,nonatomic)NSMutableArray *dataArray;
+@property(strong,nonatomic)NSString *cacheDataString;
 @property(nonatomic,strong)UILabel *msgLabel;
 @property (strong, nonatomic) id <SceneGridViewDelegate> SceneDelegate;
 -(void)addHeader;
@@ -31,5 +32,6 @@
 
 @required
 -(void)handlePullLoader:(MJRefreshBaseView *)view state:(NSInteger)state;
-
+@optional
+- (void) sceneGridViewDidScroll:(UIScrollView *)scrollView;
 @end

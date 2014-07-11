@@ -23,6 +23,11 @@
 - (NSString *)getNameFromAddressBookWithPhoneNum;
 - (NSString *)firstLetter;
 - (NSString *)firstLetters;
++ (NSString *)jsonStringWithDictionary:(NSDictionary *)dictionary;
++ (NSString *)jsonStringWithArray:(NSArray *)array;
++ (NSString *)jsonStringWithString:(NSString *) string;
++ (NSString *)jsonStringWithObject:(id) object;
+-(NSString *)safeString;
 @end
 
 @interface NSMutableString (EasyExtend)

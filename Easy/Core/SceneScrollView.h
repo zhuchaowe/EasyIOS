@@ -10,6 +10,7 @@
 @protocol SceneScrollViewDelegate;
 @interface SceneScrollView : UIScrollView
 @property(nonatomic,strong)MJRefreshHeaderView *header;
+@property(strong,nonatomic)NSString *cacheDataString;
 @property(nonatomic,strong)UILabel *msgLabel;
 @property (strong, nonatomic) id <SceneScrollViewDelegate> SceneDelegate;
 -(void)addHeader;

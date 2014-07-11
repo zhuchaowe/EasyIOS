@@ -23,10 +23,9 @@ DEF_SINGLETON(Action)
 		{
             if ( [second isKindOfClass:[NSDictionary class]] )
 			{
-                self.msg.key = @"";
                 NSString * path = (NSString *)first;
 				NSDictionary *	params = (NSDictionary *)second;
-                [self GET:path params:params];
+                [self GET:path params:params key:@""];
                 
             }else{
                 va_list args;
@@ -38,8 +37,7 @@ DEF_SINGLETON(Action)
                 
 				if ( key && params )
 				{
-                    self.msg.key = key;
-                    [self GET:path params:params];
+                    [self GET:path params:params key:key];
 				}
 				va_end( args );
             }
@@ -62,8 +60,7 @@ DEF_SINGLETON(Action)
                 NSString * path = (NSString *)first;
                 NSDictionary *files = (NSDictionary *)second;
 				NSDictionary *params = (NSDictionary *)third;
-                self.msg.key = @"";
-                [self POST:path file:files params:params];
+                [self POST:path file:files params:params key:@""];
             }else{
                 va_list args;
 				va_start( args, third );
@@ -75,8 +72,7 @@ DEF_SINGLETON(Action)
                 
 				if ( key && path)
 				{
-                    self.msg.key = key;
-                    [self POST:path file:files params:params];
+                    [self POST:path file:files params:params key:key];
 				}
 				va_end( args );
             }
@@ -92,8 +88,7 @@ DEF_SINGLETON(Action)
 - (id)init
 {
     self = [super initWithHostName:HOST_URL customHeaderFields:@{@"x-client-identifier" : CLIENT}];
-    self.msg = [ActionData Data];
-	return self;
+    return self;
 }
 
 - (id)initWithCache
@@ -105,24 +100,25 @@ DEF_SINGLETON(Action)
 
 -(MKNetworkOperation*) GET:(NSString*) path
                     params:(NSDictionary *) params
+                       key:(NSString *)key
 {
-    
-    
     MKNetworkOperation *op = [self operationWithPath:[NSString stringWithFormat:@"%@%@",BASE_URL,path]
                                               params:params
                                           httpMethod:@"GET"];
-    self.msg.url = op.url;
-    self.msg.state = SendingState;
-    self.msg.method = @"GET";
-    self.msg.params = params;
-    self.msg.path = path;
+    ActionData *msg = [ActionData Data];
+    msg.op = op;
+    msg.method = @"GET";
+    msg.params = params;
+    msg.path = path;
+    msg.key = key;
+    [self sending:msg];
     
-    NSLog(@"%@",self.msg.url);
+    NSLog(@"%@",msg.op.url);
     [op addCompletionHandler:^(MKNetworkOperation* completedOperation) {
         [completedOperation responseJSONWithCompletionHandler:^(id jsonObject) {
-            self.msg.output = jsonObject;
-            NSLog(@"%@",jsonObject);
-            [self checkCode:self.msg];
+            msg.responseString = completedOperation.responseString;
+            msg.output = jsonObject;
+            [self checkCode:msg];
             if([completedOperation isCachedResponse]){
                 NSLog(@"iscache:YES");
             }else{
@@ -130,14 +126,8 @@ DEF_SINGLETON(Action)
             }
         }];
     } errorHandler:^(MKNetworkOperation *errorOp, NSError* error) {
-        
-        self.msg.error = error;
-        if(error.userInfo!= nil && [error.userInfo objectForKey:@"NSLocalizedDescription"]){
-            self.msg.discription = [error.userInfo objectForKey:@"NSLocalizedDescription"];
-        }
-        self.msg.state = FailState;
-        [self failed:self.msg];
-        NSLog(@"Failed:%@",error);
+        msg.error = error;
+        [self failed:msg];
     }];
     [self enqueueOperation:op];
     return op;
@@ -146,27 +136,29 @@ DEF_SINGLETON(Action)
 -(MKNetworkOperation*) POST:(NSString*) path
                        file:(NSDictionary *) file
                      params:(NSDictionary *) params
+                        key:(NSString *)key
 {
     MKNetworkOperation *op = [self operationWithPath:[NSString stringWithFormat:@"%@%@",BASE_URL,path]
                                               params:params
                                           httpMethod:@"POST"];
-    self.msg.params = params;
-    self.msg.path = path;
-    self.msg.url = op.url;
-    self.msg.method = @"POST";
-    self.msg.state = SendingState;
-    
+    ActionData *msg = [ActionData Data];
+    msg.op = op;
+    msg.params = params;
+    msg.path = path;
+    msg.method = @"POST";
+    msg.key = key;
+    msg.files = file;
     for (NSString *key in [file allKeys]) {
         [op addFile:[file objectForKey:key] forKey:key];
     }
     [op setFreezable:NO];
-    NSLog(@"%@",self.msg.url);
+    [self sending:msg];
+    NSLog(@"%@",op.url);
     [op addCompletionHandler:^(MKNetworkOperation* completedOperation) {
-        NSLog(@"%@",[completedOperation responseString]);
         [completedOperation responseJSONWithCompletionHandler:^(id jsonObject) {
-            self.msg.output = jsonObject;
-            NSLog(@"%@",jsonObject);
-            [self checkCode:self.msg];
+            msg.responseString = completedOperation.responseString;
+            msg.output = jsonObject;
+            [self checkCode:msg];
             if([completedOperation isCachedResponse]){
                 NSLog(@"iscache:YES");
             }else{
@@ -174,13 +166,12 @@ DEF_SINGLETON(Action)
             }
         }];
     } errorHandler:^(MKNetworkOperation *errorOp, NSError* error) {
-        self.msg.error = error;
-        if(error.userInfo!= nil && [error.userInfo objectForKey:@"NSLocalizedDescription"]){
-            self.msg.discription = [error.userInfo objectForKey:@"NSLocalizedDescription"];
-        }
-        self.msg.state = FailState;
-        [self failed:self.msg];
-        NSLog(@"Failed:%@",error);
+        msg.error = error;
+        [self failed:msg];
+    }];
+    [op onUploadProgressChanged:^(double progress) {
+        msg.progress = progress;
+        [self progressing:msg];
     }];
     [self enqueueOperation:op];
     return op;
@@ -189,28 +180,55 @@ DEF_SINGLETON(Action)
 
 -(void)checkCode:(ActionData *)msg{
     if([msg.output objectForKey:CODE_KEY] && [[msg.output objectForKey:CODE_KEY] intValue] == RIGHT_CODE){
-        msg.discription = [msg.output objectForKey:MSG_KEY];
-        if (msg.state != SuccessState) {
-            msg.state = SuccessState;
-            [self success:msg];
-        }
+        [self success:msg];
     }else{
-        if([msg.output objectForKey:MSG_KEY]){
-            msg.discription = [msg.output objectForKey:MSG_KEY];
-            NSLog(@"Error:%@",msg.discription);
-        }
-         msg.state = ErrorState;
         [self error:msg];
     }
 }
 
+-(void)sending:(ActionData *)msg{
+    msg.state = SendingState;
+    if([self.aDelegaete respondsToSelector:@selector(handleActionMsg:)]){
+        [self.aDelegaete handleActionMsg:msg];
+    }
+}
+
 - (void)success:(ActionData *)msg{
-
+    msg.discription = [msg.output objectForKey:MSG_KEY];
+    if (msg.state != SuccessState) {
+        msg.state = SuccessState;
+        if([self.aDelegaete respondsToSelector:@selector(handleActionMsg:)]){
+            [self.aDelegaete handleActionMsg:msg];
+        }
+    }
 }
+
 - (void)failed:(ActionData *)msg{
+    if(msg.error.userInfo!= nil && [msg.error.userInfo objectForKey:@"NSLocalizedDescription"]){
+        msg.discription = [msg.error.userInfo objectForKey:@"NSLocalizedDescription"];
+    }
+    msg.state = FailState;
+    NSLog(@"Failed:%@",msg.error);
+    if([self.aDelegaete respondsToSelector:@selector(handleActionMsg:)]){
+        [self.aDelegaete handleActionMsg:msg];
+    }
+}
 
-}
 - (void)error:(ActionData *)msg{
-    
+    if([msg.output objectForKey:MSG_KEY]){
+        msg.discription = [msg.output objectForKey:MSG_KEY];
+        NSLog(@"Error:%@",msg.discription);
+    }
+    msg.state = ErrorState;
+    if([self.aDelegaete respondsToSelector:@selector(handleActionMsg:)]){
+        [self.aDelegaete handleActionMsg:msg];
+    }
 }
+
+-(void)progressing:(ActionData *)msg{
+    if([self.aDelegaete respondsToSelector:@selector(handleProgressMsg:)]){
+        [self.aDelegaete handleProgressMsg:msg];
+    }
+}
+
 @end

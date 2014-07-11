@@ -388,7 +388,7 @@
         {
             if (_vertical)
             {
-                frame = CGRectMake(0.0f, (self.frame.size.height - _itemSize.height * _itemsPerPage)/2.0f,
+               frame = CGRectMake(0.0f, (self.frame.size.height - _itemSize.height * _itemsPerPage)/2.0f,
                                    self.frame.size.width, _itemSize.height * _itemsPerPage);
                 contentSize.height = _itemSize.height * _numberOfItems;
             }

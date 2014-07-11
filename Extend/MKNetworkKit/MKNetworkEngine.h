@@ -252,6 +252,8 @@
 - (MKNetworkOperation*)imageAtURL:(NSURL *)url size:(CGSize) size completionHandler:(MKNKImageBlock) imageFetchedBlock errorHandler:(MKNKResponseErrorBlock) errorBlock;
 #endif
 
+-(BOOL)isInCache:(NSString *)url;
+
 /*!
  *  @abstract Enqueues your operation into the shared queue
  *

@@ -409,6 +409,16 @@ static NSOperationQueue *_sharedNetworkQueue;
     [operation addHeaders:self.customHeaders];
 }
 
+-(BOOL)isInCache:(NSString *)url{
+    MKNetworkOperation *operation = [self operationWithURLString:url];
+    [self readFromCache];
+    NSData *data = [self cachedDataForOperation:operation];
+    if(data == nil){
+        return NO;
+    }else{
+        return YES;
+    }
+}
 -(NSData*) cachedDataForOperation:(MKNetworkOperation*) operation {
     
     if(self.loadByCache == NO){

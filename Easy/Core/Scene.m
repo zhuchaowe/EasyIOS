@@ -26,12 +26,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setTitleText:self.title];
     // Do any additional setup after loading the view.
 }
 
 -(void)initAction{
     self.action = [Action Action];
-    [self addMsgObserverForState];
+    self.action.aDelegaete = self;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -41,34 +42,9 @@
     [super viewWillDisappear:animated];
 }
 
--(void)dealloc{
-    [self removeMsgObserverForState];
-}
--(void)addMsgObserverForState{
-    if(self.hasAddActionObserver == NO){
-        [_action.msg addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:nil];
-        self.hasAddActionObserver =YES;
-    }
-}
--(void)removeMsgObserverForState{
-    if(self.hasAddActionObserver == YES){
-        [_action.msg removeObserver:self forKeyPath:@"state"];
-        self.hasAddActionObserver = NO;
-    }
-}
-
-
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if([keyPath isEqualToString:@"state"])
-    {
-        [self handleActionMsg:_action.msg];
-    }
-}
-
 -(void)handleActionMsg:(ActionData *)msg{
     if(msg.sending){
-        NSLog(@"sending:%@",msg.url);
+        NSLog(@"sending:%@",msg.op.url);
     }else if(msg.succeed){
         NSLog(@"success:%@",msg.output);
     }else if(msg.failed){
@@ -76,7 +52,7 @@
     }
 }
 -(void)handlePullLoader:(MJRefreshBaseView *)view state:(NSInteger)state{
-    [self addMsgObserverForState];
+    
 }
 - (void)SEND_ACTION:(NSDictionary *)dict{
 }
@@ -121,6 +97,21 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)rightButtonTouch{
+}
+
+-(void)setTitleText:(NSString *)str{
+    if(self.navigationItem.titleView == nil && ![self.title isEqualToString:@""]){
+        UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+        EzUILabel *titleLabel = [[EzUILabel alloc]initWithFrame:CGRectMake(0, 0, titleView.width, 44)];
+        titleLabel.text = str;
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        titleLabel.textColor = [UIColor blackColor];
+        titleLabel.font = [UIFont systemFontOfSize:18.0f];
+        titleLabel.frame = CGRectMake(0, 0, titleLabel.autoSize.width, 44);
+        titleView.frame = titleLabel.frame;
+        [titleView addSubview:titleLabel];
+        self.navigationItem.titleView = titleView;
+    }
 }
 
 @end

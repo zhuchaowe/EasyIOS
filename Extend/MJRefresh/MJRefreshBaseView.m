@@ -265,7 +265,7 @@
             
         case MJRefreshStateEnd: // 没有了状态
             // 显示箭头
-            _arrowImage.hidden = NO;
+            _arrowImage.hidden = YES;
             // 停止转圈圈
 			[_activityView stopAnimating];
 			break;

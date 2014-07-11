@@ -17,9 +17,8 @@ typedef enum
 } EzNavigationBar;
 
 
-@interface Scene : UIViewController
+@interface Scene : UIViewController<ActionDelegate>
 @property(nonatomic,strong)Action *action;
-@property(nonatomic,assign)BOOL hasAddActionObserver;
 @property(nonatomic,assign)Scene *parentScene;
 -(void)handleActionMsg:(ActionData *)msg;
 -(void)handlePullLoader:(MJRefreshBaseView *)view state:(NSInteger)state;
@@ -33,4 +32,5 @@ typedef enum
 - (void)leftButtonTouch;
 - (void)rightButtonTouch;
 - (void)initAction;
+- (void)setTitleText:(NSString *)str;
 @end

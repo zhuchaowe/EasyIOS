@@ -20,12 +20,12 @@
     self = [super init];
     self.state = SendingState;
     self.output = nil;
-    self.url = @"";
     self.key = @"";
     self.discription = @"";
+    self.progress = 0.0f;
+    self.files = [NSDictionary dictionary];
 	return self;
 }
-
 
 - (BOOL)succeed
 {
