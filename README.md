@@ -31,8 +31,8 @@ SceneCollectionView 一个CollectionView，配合scene提供了集成下拉刷�
 
 EasyIOS官方qq群 :340906744 欢迎大家加入讨论
 
-* [git@oschina ](http://git.oschina.net/zhuchaowe/EasyIOS)
-* [git@github ](https://github.com/zhuchaowe/EasyIOS)
+* [git on oschina ](http://git.oschina.net/zhuchaowe/EasyIOS)
+* [git on github ](https://github.com/zhuchaowe/EasyIOS)
 
 ##1.0.1版本更新
 #####1.增加了ORM支持，从此可以实现json、object、sqlite三者之间的一键转换,可以节省很多代码,是不是很酷。
