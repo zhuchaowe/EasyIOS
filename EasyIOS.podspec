@@ -6,22 +6,22 @@ Pod::Spec.new do |s|
   s.social_media_url      = "https://swift.08dream.com"
   s.license               = { :type => "MIT", :file => "LICENSE" }
   s.author                = { "zhuchao" => "zhuchaowe@163.com" }
-  s.source                = { :git => "https://github.com/zhuchaowe/EasyIOS"}
+  s.source                = { :git => "https://github.com/zhuchaowe/EasyIOS.git"}
   s.ios.deployment_target = "6.0"
   s.osx.deployment_target = "10.6"
   s.requires_arc          = true
   s.framework             = "CoreFoundation","Foundation","CoreGraphics","Security","UIKit"
-  s.library		= "z.1.1.3","stdc++”,”sqlite3”
+  s.library		= "z.1.1.3","stdc++","sqlite3"
   s.subspec 'Easy' do |sp|
-    sp.source_files = 'EasyIOS/Easy/**/*.{h,m,mm}'
+    sp.source_files = 'Easy/**/*.{h,m,mm}'
     sp.requires_arc = true
-    sp.resources = "EasyIOS/Easy/**/*.{png}"
+    sp.resources = "Easy/**/*.{png}"
 
   end
   s.subspec 'Extend' do |sp|
-    sp.source_files = 'EasyIOS/Extend/**/*.{h,m,mm}'
+    sp.source_files = 'Extend/**/*.{h,m,mm}'
     sp.requires_arc = true
-    sp.resources 	 = "EasyIOS/Extend/**/*.{png}"
+    sp.resources 	 = "Extend/**/*.{png}"
   end
 
 end
