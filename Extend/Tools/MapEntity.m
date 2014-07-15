@@ -8,6 +8,7 @@
 
 #import "MapEntity.h"
 #import <MapKit/MapKit.h>
+#import "Easy.h"
 
 const double x_pi = 3.14159265358979324 * 3000.0 / 180.0;
 //火星转百度坐标

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 @interface ImageTool : NSObject
 + (ImageTool *)sharedInstance;
 //压缩图片

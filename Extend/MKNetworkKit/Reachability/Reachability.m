@@ -26,7 +26,7 @@
  */
 
 #import "Reachability.h"
-
+#import <Foundation/Foundation.h>
 
 NSString *const kReachabilityChangedNotification = @"kReachabilityChangedNotification";
 

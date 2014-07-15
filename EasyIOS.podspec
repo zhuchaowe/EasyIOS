@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = "10.6"
   s.requires_arc          = true
   s.framework             = "CoreFoundation","Foundation","CoreGraphics","Security","UIKit"
-  s.library		= "z.1.1.3","stdc++"
+  s.library		= "z.1.1.3","stdc++”,”sqlite3”
   s.subspec 'Easy' do |sp|
     sp.source_files = 'EasyIOS/Easy/**/*.{h,m,mm}'
     sp.requires_arc = true
