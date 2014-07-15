@@ -3,7 +3,7 @@
 //
 
 #import "Bee_Singleton.h"
-
+#import <UIKit/UIKit.h>
 #pragma mark -
 
 #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)

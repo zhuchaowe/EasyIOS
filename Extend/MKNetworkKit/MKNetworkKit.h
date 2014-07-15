@@ -26,9 +26,9 @@
 #ifndef MKNetworkKit_MKNetworkKit_h
 #define MKNetworkKit_MKNetworkKit_h
 
-#ifndef __IPHONE_4_0
-#error "MKNetworkKit uses features only available in iOS SDK 4.0 and later."
-#endif
+//#ifndef __IPHONE_4_0
+//#error "MKNetworkKit uses features only available in iOS SDK 4.0 and later."
+//#endif
 
 #if TARGET_OS_IPHONE
 #import <Foundation/Foundation.h>

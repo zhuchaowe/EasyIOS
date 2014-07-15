@@ -6,6 +6,7 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
+#import "Easy.h"
 #import "EzUILabel.h"
 typedef enum
 {
