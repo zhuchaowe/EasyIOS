@@ -33,4 +33,5 @@ typedef enum
 - (void)rightButtonTouch;
 - (void)initAction;
 - (void)setTitleText:(NSString *)str;
+- (void)setTitleText:(NSString *)str hidden:(BOOL)flag;
 @end
