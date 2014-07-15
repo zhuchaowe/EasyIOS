@@ -100,9 +100,15 @@
 }
 
 -(void)setTitleText:(NSString *)str{
-    if(self.navigationItem.titleView == nil && ![self.title isEqualToString:@""]){
+    if(self.navigationItem.titleView != nil){
+        [self.navigationItem.titleView removeFromSuperview];
+        self.navigationItem.titleView = nil;
+    }
+    
+    if(![self.title isEqualToString:@""]){
         UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
         EzUILabel *titleLabel = [[EzUILabel alloc]initWithFrame:CGRectMake(0, 0, titleView.width, 44)];
+        titleLabel.tag = 100;
         titleLabel.text = str;
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.textColor = [UIColor blackColor];
@@ -110,6 +116,29 @@
         titleLabel.frame = CGRectMake(0, 0, titleLabel.autoSize.width, 44);
         titleView.frame = titleLabel.frame;
         [titleView addSubview:titleLabel];
+        self.navigationItem.titleView = titleView;
+    }
+}
+
+-(void)setTitleText:(NSString *)str hidden:(BOOL)flag{
+    if(self.navigationItem.titleView != nil){
+        [self.navigationItem.titleView removeFromSuperview];
+        self.navigationItem.titleView = nil;
+    }
+    
+    if(![self.title isEqualToString:@""]){
+        UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+        titleView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+        titleView.autoresizesSubviews = YES;
+        EzUILabel *titleLabel = [[EzUILabel alloc]initWithFrame:CGRectMake(0, 0, titleView.width, 44)];
+        titleLabel.text = str;
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        titleLabel.autoresizingMask = titleView.autoresizingMask;
+        titleLabel.textColor = [UIColor blackColor];
+        titleLabel.font = [UIFont systemFontOfSize:18.0f];
+        titleView.hidden = flag;
+        [titleView addSubview:titleLabel];
+        
         self.navigationItem.titleView = titleView;
     }
 }

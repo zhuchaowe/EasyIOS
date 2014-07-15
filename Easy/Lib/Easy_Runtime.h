@@ -3,8 +3,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "/usr/include/objc/runtime.h"
-#import "/usr/include/execinfo.h"
+#import <objc/runtime.h>
+#import "execinfo.h"
 #import "NSObject+EasyProperty.h"
 #import "Bee_Singleton.h"
 #pragma mark -
