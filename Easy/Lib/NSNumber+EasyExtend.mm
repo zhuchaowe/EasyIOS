@@ -4,7 +4,6 @@
 
 #import "NSNumber+EasyExtend.h"
 #import "NSDate+EasyExtend.h"
-#import "NSString+EasyExtend.h"
 
 // ----------------------------------
 // Source code
