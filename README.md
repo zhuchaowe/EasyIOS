@@ -59,7 +59,7 @@ EasyIOS官方qq群 :340906744 欢迎大家加入讨论
 ##1.0.2版本更新
 
 *  fix一些头文件的引用关系，增加了swift头文件支持。
-*  用swift的同学，要设置Objective-C Bridging Header为${PODS_ROOT}/Headers/EasyIOS/swift-bridge.h
+*  用swift的同学，要设置`Objective-C Bridging Header`为`${PODS_ROOT}/Headers/EasyIOS/swift-bridge.h`
 *  1.0.2版本发布到了CocoaPods
 
 ##1.0.1版本更新
