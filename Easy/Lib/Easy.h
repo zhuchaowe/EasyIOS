@@ -20,7 +20,7 @@
 #import "NSURL+EasyExtend.h"
 #import "UILabel+EasyExtend.h"
 #import "UIButton+EasyExtend.h"
-#import "UIImageView+MKNetworkKitAdditions.h"
+#import "MKNetworkKit.h"
 #import "UIImage+EasyExtend.h"
 #import "UITabBarController+EasyExtend.h"
 #import "Bee_SystemInfo.h"

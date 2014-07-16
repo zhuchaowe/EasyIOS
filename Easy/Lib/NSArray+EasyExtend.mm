@@ -4,8 +4,7 @@
 
 #import "NSArray+EasyExtend.h"
 #import "pinyin.h"
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+
 // ----------------------------------
 // Source code
 // ----------------------------------

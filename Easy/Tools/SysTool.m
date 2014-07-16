@@ -11,7 +11,7 @@
 #include <dirent.h>
 #include <sys/socket.h>
 #include <sys/sysctl.h>
-#import "Easy.h"
+
 @implementation SysTool
 + (SysTool *)sharedInstance
 {
