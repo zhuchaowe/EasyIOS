@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = "EasyIOS"
-  s.version               = "1.0.2"
+  s.version               = “1.0.3”
   s.summary               = "EasyIOS is a frameWork base on MKNetworkKit and MJRefresh"
   s.homepage              = "https://github.com/zhuchaowe"
   s.social_media_url      = "https://swift.08dream.com"
