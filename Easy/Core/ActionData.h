@@ -19,7 +19,7 @@ typedef enum
 
 @interface ActionData : NSObject
 @property(nonatomic,strong)NSString *key;
-@property(nonatomic,strong)id output;
+@property(nonatomic,strong)NSDictionary * output;
 @property(nonatomic,strong)NSString *responseString;
 @property(nonatomic,strong)NSError *error;
 @property(nonatomic,assign)NSInteger state;

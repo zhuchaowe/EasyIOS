@@ -10,14 +10,6 @@
 #import "ActionData.h"
 #import "ActionDelegate.h"
 
-#define HOST_URL @"test-leway.zjseek.com.cn:8000"
-//#define HOST_URL @"leway.com"
-#define CLIENT   @"easyIOS"
-#define BASE_URL @"/api/"
-#define CODE_KEY @"code"
-#define RIGHT_CODE 0
-#define MSG_KEY  @"msg"
-
 @interface Action : MKNetworkEngine
 typedef Action *	(^ActionBlockN)(id first ,id second,id third,... );
 typedef Action *	(^ActionBlockTN)(id first ,id second,... );

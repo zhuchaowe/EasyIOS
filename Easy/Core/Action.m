@@ -179,7 +179,7 @@ DEF_SINGLETON(Action)
 
 
 -(void)checkCode:(ActionData *)msg{
-    if([msg.output objectForKey:CODE_KEY] && [[msg.output objectForKey:CODE_KEY] intValue] == RIGHT_CODE){
+    if([msg.output objectAtPath:CODE_KEY] && [[msg.output objectAtPath:CODE_KEY] intValue] == RIGHT_CODE){
         [self success:msg];
     }else{
         [self error:msg];
@@ -194,7 +194,7 @@ DEF_SINGLETON(Action)
 }
 
 - (void)success:(ActionData *)msg{
-    msg.discription = [msg.output objectForKey:MSG_KEY];
+    msg.discription = [msg.output objectAtPath:MSG_KEY];
     if (msg.state != SuccessState) {
         msg.state = SuccessState;
         if([self.aDelegaete respondsToSelector:@selector(handleActionMsg:)]){
@@ -215,8 +215,8 @@ DEF_SINGLETON(Action)
 }
 
 - (void)error:(ActionData *)msg{
-    if([msg.output objectForKey:MSG_KEY]){
-        msg.discription = [msg.output objectForKey:MSG_KEY];
+    if([msg.output objectAtPath:MSG_KEY]){
+        msg.discription = [msg.output objectAtPath:MSG_KEY];
         NSLog(@"Error:%@",msg.discription);
     }
     msg.state = ErrorState;

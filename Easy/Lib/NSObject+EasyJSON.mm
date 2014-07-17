@@ -117,8 +117,7 @@
 	{
 		return nil;
 	}
-	
-	return [(NSDictionary *)dict objectForClass:[self class]];
+	return (NSDictionary *)dict;
 }
 
 + (id)objectFromString:(id)str
@@ -144,7 +143,7 @@
 	
 	if ( [obj isKindOfClass:[NSDictionary class]] )
 	{
-		return [(NSDictionary *)obj objectForClass:[self class]];
+		return [self objectFromDictionary:obj];
 	}
 	else if ( [obj isKindOfClass:[NSArray class]] )
 	{
@@ -154,10 +153,10 @@
 		{
 			if ( [elem isKindOfClass:[NSDictionary class]] )
 			{
-				NSObject * result = [(NSDictionary *)elem objectForClass:[self class]];
+				NSDictionary * result = [self objectFromDictionary:elem];
 				if ( result )
 				{
-					[array addObject:result];
+					[array addObject:elem];
 				}
 			}
 		}
@@ -194,11 +193,11 @@
 	{
 		if ( [obj isKindOfClass:[NSDictionary class]] )
 		{
-			return [(NSDictionary *)obj objectForClass:[self class]];
+            return [self objectFromDictionary:obj];
 		}
 		else if ( [obj isKindOfClass:[NSArray class]] )
 		{
-			return [self objectsFromAny:obj];
+            return [self objectsFromArray:obj];
 		}
 	}
 
