@@ -1,0 +1,16 @@
+PODS:
+  - EasyIOS (1.0.2):
+    - EasyIOS/Easy
+  - EasyIOS/Easy (1.0.2)
+
+DEPENDENCIES:
+  - EasyIOS (from `~/Desktop/podspec/EasyIOS.podspec`)
+
+EXTERNAL SOURCES:
+  EasyIOS:
+    :podspec: ~/Desktop/podspec/EasyIOS.podspec
+
+SPEC CHECKSUMS:
+  EasyIOS: a90f0461725464dd9c646b1e322ae415cf9f1b5f
+
+COCOAPODS: 0.33.1

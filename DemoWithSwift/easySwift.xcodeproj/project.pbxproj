@@ -1,0 +1,463 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5F805AD919751CA000B5A921 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F805AD819751CA000B5A921 /* AppDelegate.swift */; };
+		5F805ADB19751CA000B5A921 /* AwesomeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F805ADA19751CA000B5A921 /* AwesomeScene.swift */; };
+		5F805ADE19751CA000B5A921 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F805ADC19751CA000B5A921 /* Main.storyboard */; };
+		5F805AE019751CA000B5A921 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F805ADF19751CA000B5A921 /* Images.xcassets */; };
+		5FAB64481977BB4B00801CCF /* IconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAB64471977BB4B00801CCF /* IconCell.swift */; };
+		5FBE8F6C1977D53A00C125CE /* FoundationScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBE8F6B1977D53A00C125CE /* FoundationScene.swift */; };
+		5FBE8F6E1977D55100C125CE /* IonIconScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBE8F6D1977D55100C125CE /* IonIconScene.swift */; };
+		5FBE8F701977D58900C125CE /* ZocialScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBE8F6F1977D58900C125CE /* ZocialScene.swift */; };
+		5FBE8F721977D84B00C125CE /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBE8F711977D84B00C125CE /* TabView.swift */; };
+		F2B28247889A4F6B858B86C0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 448A9AC1DCA94EA290E67519 /* libPods.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5F805AE619751CA100B5A921 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5F805ACB19751CA000B5A921 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5F805AD219751CA000B5A921;
+			remoteInfo = easySwift;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		448A9AC1DCA94EA290E67519 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F805AD319751CA000B5A921 /* easySwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = easySwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F805AD719751CA000B5A921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F805AD819751CA000B5A921 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5F805ADA19751CA000B5A921 /* AwesomeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwesomeScene.swift; sourceTree = "<group>"; };
+		5F805ADD19751CA000B5A921 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5F805ADF19751CA000B5A921 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		5F805AE519751CA100B5A921 /* easySwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = easySwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5FAB64471977BB4B00801CCF /* IconCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconCell.swift; sourceTree = "<group>"; };
+		5FBE8F6B1977D53A00C125CE /* FoundationScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationScene.swift; sourceTree = "<group>"; };
+		5FBE8F6D1977D55100C125CE /* IonIconScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IonIconScene.swift; sourceTree = "<group>"; };
+		5FBE8F6F1977D58900C125CE /* ZocialScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZocialScene.swift; sourceTree = "<group>"; };
+		5FBE8F711977D84B00C125CE /* TabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
+		B2BFE39613644745AA0B5A1E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5F805AD019751CA000B5A921 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2B28247889A4F6B858B86C0 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5F805AE219751CA100B5A921 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5F805ACA19751CA000B5A921 = {
+			isa = PBXGroup;
+			children = (
+				5F805AD519751CA000B5A921 /* easySwift */,
+				5F805AD419751CA000B5A921 /* Products */,
+				B2BFE39613644745AA0B5A1E /* Pods.xcconfig */,
+				8C9735FC8C194B7F8E2F1030 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		5F805AD419751CA000B5A921 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5F805AD319751CA000B5A921 /* easySwift.app */,
+				5F805AE519751CA100B5A921 /* easySwiftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5F805AD519751CA000B5A921 /* easySwift */ = {
+			isa = PBXGroup;
+			children = (
+				5F805AD819751CA000B5A921 /* AppDelegate.swift */,
+				5F805ADA19751CA000B5A921 /* AwesomeScene.swift */,
+				5FBE8F6B1977D53A00C125CE /* FoundationScene.swift */,
+				5FBE8F6D1977D55100C125CE /* IonIconScene.swift */,
+				5FBE8F6F1977D58900C125CE /* ZocialScene.swift */,
+				5FAB64471977BB4B00801CCF /* IconCell.swift */,
+				5FBE8F711977D84B00C125CE /* TabView.swift */,
+				5F805ADC19751CA000B5A921 /* Main.storyboard */,
+				5F805ADF19751CA000B5A921 /* Images.xcassets */,
+				5F805AD619751CA000B5A921 /* Supporting Files */,
+			);
+			path = easySwift;
+			sourceTree = "<group>";
+		};
+		5F805AD619751CA000B5A921 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5F805AD719751CA000B5A921 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8C9735FC8C194B7F8E2F1030 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				448A9AC1DCA94EA290E67519 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5F805AD219751CA000B5A921 /* easySwift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5F805AEF19751CA100B5A921 /* Build configuration list for PBXNativeTarget "easySwift" */;
+			buildPhases = (
+				671B88881A764A1DB9F7D0B3 /* Check Pods Manifest.lock */,
+				5F805ACF19751CA000B5A921 /* Sources */,
+				5F805AD019751CA000B5A921 /* Frameworks */,
+				5F805AD119751CA000B5A921 /* Resources */,
+				16F45EA1028D4327A9873F2D /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = easySwift;
+			productName = easySwift;
+			productReference = 5F805AD319751CA000B5A921 /* easySwift.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5F805AE419751CA100B5A921 /* easySwiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5F805AF219751CA100B5A921 /* Build configuration list for PBXNativeTarget "easySwiftTests" */;
+			buildPhases = (
+				5F805AE119751CA100B5A921 /* Sources */,
+				5F805AE219751CA100B5A921 /* Frameworks */,
+				5F805AE319751CA100B5A921 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5F805AE719751CA100B5A921 /* PBXTargetDependency */,
+			);
+			name = easySwiftTests;
+			productName = easySwiftTests;
+			productReference = 5F805AE519751CA100B5A921 /* easySwiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5F805ACB19751CA000B5A921 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = zhuchao;
+				TargetAttributes = {
+					5F805AD219751CA000B5A921 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					5F805AE419751CA100B5A921 = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = 5F805AD219751CA000B5A921;
+					};
+				};
+			};
+			buildConfigurationList = 5F805ACE19751CA000B5A921 /* Build configuration list for PBXProject "easySwift" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5F805ACA19751CA000B5A921;
+			productRefGroup = 5F805AD419751CA000B5A921 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5F805AD219751CA000B5A921 /* easySwift */,
+				5F805AE419751CA100B5A921 /* easySwiftTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5F805AD119751CA000B5A921 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F805ADE19751CA000B5A921 /* Main.storyboard in Resources */,
+				5F805AE019751CA000B5A921 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5F805AE319751CA100B5A921 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		16F45EA1028D4327A9873F2D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		671B88881A764A1DB9F7D0B3 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5F805ACF19751CA000B5A921 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F805ADB19751CA000B5A921 /* AwesomeScene.swift in Sources */,
+				5F805AD919751CA000B5A921 /* AppDelegate.swift in Sources */,
+				5FBE8F701977D58900C125CE /* ZocialScene.swift in Sources */,
+				5FBE8F6C1977D53A00C125CE /* FoundationScene.swift in Sources */,
+				5FBE8F721977D84B00C125CE /* TabView.swift in Sources */,
+				5FBE8F6E1977D55100C125CE /* IonIconScene.swift in Sources */,
+				5FAB64481977BB4B00801CCF /* IconCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5F805AE119751CA100B5A921 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5F805AE719751CA100B5A921 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5F805AD219751CA000B5A921 /* easySwift */;
+			targetProxy = 5F805AE619751CA100B5A921 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5F805ADC19751CA000B5A921 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5F805ADD19751CA000B5A921 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5F805AED19751CA100B5A921 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "${PODS_ROOT}/Headers/EasyIOS/swift-bridge.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5F805AEE19751CA100B5A921 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "${PODS_ROOT}/Headers/EasyIOS/swift-bridge.h";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5F805AF019751CA100B5A921 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2BFE39613644745AA0B5A1E /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = easySwift/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		5F805AF119751CA100B5A921 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2BFE39613644745AA0B5A1E /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = easySwift/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		5F805AF319751CA100B5A921 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/easySwift.app/easySwift";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = easySwiftTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Debug;
+		};
+		5F805AF419751CA100B5A921 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/easySwift.app/easySwift";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = easySwiftTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5F805ACE19751CA000B5A921 /* Build configuration list for PBXProject "easySwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5F805AED19751CA100B5A921 /* Debug */,
+				5F805AEE19751CA100B5A921 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5F805AEF19751CA100B5A921 /* Build configuration list for PBXNativeTarget "easySwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5F805AF019751CA100B5A921 /* Debug */,
+				5F805AF119751CA100B5A921 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5F805AF219751CA100B5A921 /* Build configuration list for PBXNativeTarget "easySwiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5F805AF319751CA100B5A921 /* Debug */,
+				5F805AF419751CA100B5A921 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5F805ACB19751CA000B5A921 /* Project object */;
+}

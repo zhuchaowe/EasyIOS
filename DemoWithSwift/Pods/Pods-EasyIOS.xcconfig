@@ -1,0 +1,5 @@
+PODS_EASYIOS_CLANG_CXX_LANGUAGE_STANDARD = gnu++0x
+PODS_EASYIOS_CLANG_CXX_LIBRARY = libstdc++
+PODS_EASYIOS_CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES
+PODS_EASYIOS_HEADER_SEARCH_PATHS = $(SDKROOT)/usr/include/libz, $(SDKROOT)/usr/include/libxml2
+PODS_EASYIOS_OTHER_LDFLAGS = -lsqlite3 -lstdc++ -lz.1.1.3 -framework CoreFoundation -framework CoreGraphics -framework Foundation -framework Security -framework UIKit
