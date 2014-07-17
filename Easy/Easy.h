@@ -32,7 +32,6 @@
 #import "UIGridView.h"
 #import "EzUITapGestureRecognizer.h"
 #import "SVProgressHUD.h"
-#import "DialogUtil.h"
 #import "SysTool.h"
 #import "TimeTool.h"
 #import "ImageTool.h"

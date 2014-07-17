@@ -16,6 +16,7 @@
 #import "EzMiButton.h"
 #import "EzUITapGestureRecognizer.h"
 #import "RTLabel.h"
+#import "DialogUtil.h"
 
 //以下配置为调用Action 类必须 配置
 #define HOST_URL @"test-leway.zjseek.com.cn:8000" //服务端域名:端口
