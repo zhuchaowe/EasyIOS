@@ -56,6 +56,7 @@
                 iconColor:(UIColor*)iconColor
                  iconSize:(CGFloat)iconSize;
 
++(void)loadFontList;
 /*! Create a UIImage with a FontAwesome icon, and specify a square size for the icon, which will be centered within the CGSize specified for the image itself.
  */
 + (UIImage*)imageWithIcon:(NSString*)fa_icon
