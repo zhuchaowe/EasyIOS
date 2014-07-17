@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
   s.name                  = "EasyIOS"
-  s.version               = “1.0.3”
+  s.version               = "1.0.3"
   s.summary               = "EasyIOS is a frameWork base on MKNetworkKit and MJRefresh"
   s.homepage              = "https://github.com/zhuchaowe"
   s.social_media_url      = "https://swift.08dream.com"
   s.platform     = :ios,'6.0'
   s.license               = { :type => "MIT", :file => "LICENSE" }
   s.author                = { "zhuchao" => "zhuchaowe@163.com" }
-  s.source                = { :git => "https://github.com/zhuchaowe/EasyIOS.git",:tag=>"1.0.2"}
+  s.source                = { :git => "https://github.com/zhuchaowe/EasyIOS.git",:tag=>"1.0.3"}
   s.ios.deployment_target = "6.0"
   s.requires_arc          = true
   s.framework             = "CoreFoundation","Foundation","CoreGraphics","Security","UIKit"
