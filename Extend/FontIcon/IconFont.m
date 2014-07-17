@@ -24,18 +24,31 @@
     CGFontRelease(newFont);
 }
 
-+ (UIFont*)font:(NSString *)fontName withSize:(CGFloat)size
-{
++(NSString *)icon:(NSString *)iconName fromFont:(NSString *)fontName{
+    NSDictionary *fontDict = [NSDictionary objectFromData:[NSData fromResource:@"fontIconConfig.json"]];
 #ifndef DISABLE_FOUNDATIONICONS_AUTO_REGISTRATION
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        for (NSString *resName in fontList) {
+        NSArray *fontList = [fontDict allValues];
+        for (NSDictionary *resDict in fontList) {
+            NSString *  resName = [resDict objectForKey:@"ttf"];
             NSString *	extension = [resName pathExtension];
             NSString *	fullName = [resName substringToIndex:(resName.length - extension.length - 1)];
             [self registerIconFontWithURL: [[NSBundle mainBundle] URLForResource:fullName withExtension:extension]];
         }
     });
 #endif
+    NSString *json = [[fontDict objectForKey:fontName] objectForKey:@"json"];
+    NSDictionary *dict = [NSDictionary objectFromData:[NSData fromResource:json]];
+    NSString *icon = nil;
+    if([dict objectForKey:iconName]){
+        icon = [dict objectForKey:iconName];
+    }
+    return icon;
+}
+
++ (UIFont*)font:(NSString *)fontName withSize:(CGFloat)size
+{
     return [UIFont fontWithName:fontName size:size];
 }
 

@@ -53,7 +53,7 @@
 	}
 }
 
-+ (NSString *)fromResource:(NSString *)resName
++ (NSData *)fromResource:(NSString *)resName
 {
 	NSString *	extension = [resName pathExtension];
 	NSString *	fullName = [resName substringToIndex:(resName.length - extension.length - 1)];

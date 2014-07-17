@@ -13,6 +13,6 @@
 @property (nonatomic, readonly) NSData *	MD5;
 @property (nonatomic, readonly) NSString *	MD5String;
 
-+ (NSString *)fromResource:(NSString *)resName;
++ (NSData *)fromResource:(NSString *)resName;
 
 @end

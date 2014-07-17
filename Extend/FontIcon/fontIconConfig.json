@@ -1,0 +1,18 @@
+{
+    "FontAwesome": {
+        "ttf":"fontAwesome.otf",
+        "json":"fontAwesome.json"
+    },
+    "Zocial-Regular": {
+        "ttf":"zocialRegularWebfont.ttf",
+        "json":"zocialRegularWebfont.json"
+    },
+    "Ionicons": {
+        "ttf":"ionIcons.ttf",
+        "json":"ionIcons.json"
+    },
+    "fontcustom": {
+        "ttf":"foundationIcons.ttf",
+        "json":"foundationIcons.json"
+    },
+}

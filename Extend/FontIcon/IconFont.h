@@ -13,6 +13,8 @@
 // Font and Label Methods
 //================================
 
++(NSString *)icon:(NSString *)iconName fromFont:(NSString *)fontName;
+
 /*! Get the FontAwesome font.
  */
 + (UIFont*)font:(NSString *)fontName withSize:(CGFloat)size;
