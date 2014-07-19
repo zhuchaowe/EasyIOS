@@ -5,6 +5,7 @@
 //  Created by zhuchao on 14-7-15.
 //  Copyright (c) 2014 year zhuchao. All rights reserved.
 //
+
 #import "Action.h"
 #import "Scene.h"
 #import "CacheAction.h"
@@ -25,5 +26,3 @@
 #define CODE_KEY @"code"                          //错误码key,支持路径 如 data/code
 #define RIGHT_CODE 0                              //正确校验码
 #define MSG_KEY  @"msg"                           //消息提示msg,支持路径 如 data/msg
-
-

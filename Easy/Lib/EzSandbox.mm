@@ -2,7 +2,7 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
-#import "Bee_Sandbox.h"
+#import "EzSandbox.h"
 
 // ----------------------------------
 // Source code
@@ -10,7 +10,7 @@
 
 #pragma mark -
 
-@interface BeeSandbox()
+@interface EzSandbox()
 {
 	NSString *	_appPath;
 	NSString *	_docPath;
@@ -26,9 +26,9 @@
 
 #pragma mark -
 
-@implementation BeeSandbox
+@implementation EzSandbox
 
-DEF_SINGLETON( BeeSandbox )
+DEF_SINGLETON( EzSandbox )
 
 @dynamic appPath;
 @dynamic docPath;
@@ -38,7 +38,7 @@ DEF_SINGLETON( BeeSandbox )
 
 + (NSString *)appPath
 {
-	return [[BeeSandbox sharedInstance] appPath];
+	return [[EzSandbox sharedInstance] appPath];
 }
 
 - (NSString *)appPath
@@ -63,7 +63,7 @@ DEF_SINGLETON( BeeSandbox )
 
 + (NSString *)docPath
 {
-	return [[BeeSandbox sharedInstance] docPath];
+	return [[EzSandbox sharedInstance] docPath];
 }
 
 - (NSString *)docPath
@@ -79,7 +79,7 @@ DEF_SINGLETON( BeeSandbox )
 
 + (NSString *)libPrefPath
 {
-	return [[BeeSandbox sharedInstance] libPrefPath];
+	return [[EzSandbox sharedInstance] libPrefPath];
 }
 
 - (NSString *)libPrefPath
@@ -99,7 +99,7 @@ DEF_SINGLETON( BeeSandbox )
 
 + (NSString *)libCachePath
 {
-	return [[BeeSandbox sharedInstance] libCachePath];
+	return [[EzSandbox sharedInstance] libCachePath];
 }
 
 - (NSString *)libCachePath
@@ -119,7 +119,7 @@ DEF_SINGLETON( BeeSandbox )
 
 + (NSString *)tmpPath
 {
-	return [[BeeSandbox sharedInstance] tmpPath];
+	return [[EzSandbox sharedInstance] tmpPath];
 }
 
 - (NSString *)tmpPath
@@ -139,7 +139,7 @@ DEF_SINGLETON( BeeSandbox )
 
 + (BOOL)touch:(NSString *)path
 {
-	return [[BeeSandbox sharedInstance] touch:path];
+	return [[EzSandbox sharedInstance] touch:path];
 }
 
 - (BOOL)touch:(NSString *)path
@@ -157,7 +157,7 @@ DEF_SINGLETON( BeeSandbox )
 
 + (BOOL)touchFile:(NSString *)file
 {
-	return [[BeeSandbox sharedInstance] touchFile:file];
+	return [[EzSandbox sharedInstance] touchFile:file];
 }
 
 - (BOOL)touchFile:(NSString *)file

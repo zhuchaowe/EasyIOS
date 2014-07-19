@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Easy.h"
 @interface EzUILabel : UILabel
 @property(nonatomic,assign)BOOL isWithStrikeThrough;
 @end

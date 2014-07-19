@@ -5,18 +5,13 @@
 
 #import <Foundation/Foundation.h>
 
-#pragma mark -
-
-@protocol BeeCacheProtocol<NSObject>
+@protocol EzCacheProtocol<NSObject>
 
 - (BOOL)hasObjectForKey:(id)key;
-
 - (id)objectForKey:(id)key;
 - (void)setObject:(id)object forKey:(id)key;
-
 - (void)removeObjectForKey:(id)key;
 - (void)removeAllObjects;
-
 - (id)objectForKeyedSubscript:(id)key;
 - (void)setObject:(id)obj forKeyedSubscript:(id)key;
 

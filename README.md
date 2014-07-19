@@ -67,7 +67,7 @@ EasyIOS官方qq群 :340906744 欢迎大家加入讨论
 *  [Zocial Contains](http://zocial.smcllns.com/) 字体库, 包含99 个图标
 *  [ionicons 1.5.2](http://ionicons.com/) 字体库, 包含601 个图标,大部分是 IOS7 style
 
-![image](http://08dream-08dream.stor.sinaapp.com/100003535548847.gif)
+![image](http://08dream-08dream.stor.sinaapp.com/1000035355488spec47.gif)
 ##1.0.2版本更新
 
 *  fix一些头文件的引用关系，增加了swift头文件支持。

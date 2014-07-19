@@ -2,11 +2,11 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
-#import "Bee_Singleton.h"
+#import "EzSingleton.h"
 
 #pragma mark -
 
-@interface BeeSandbox : NSObject
+@interface EzSandbox : NSObject
 
 @property (nonatomic, readonly) NSString *	appPath;
 @property (nonatomic, readonly) NSString *	docPath;
@@ -14,7 +14,7 @@
 @property (nonatomic, readonly) NSString *	libCachePath;
 @property (nonatomic, readonly) NSString *	tmpPath;
 
-AS_SINGLETON( BeeSandbox )
+AS_SINGLETON( EzSandbox )
 
 + (NSString *)appPath;		// 程序目录，不能存任何东西
 + (NSString *)docPath;		// 文档目录，需要ITUNES同步备份的数据存这里

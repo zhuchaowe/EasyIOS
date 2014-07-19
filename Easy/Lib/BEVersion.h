@@ -1,10 +1,9 @@
 
 
-#import "Bee_Singleton.h"
+#import "EzSingleton.h"
 
-#define APP_VERSION [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
-#define APP_BULID [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]
-#pragma mark -
+extern NSString* const APP_VERSION;
+extern NSString* const APP_BULID;
 
 @interface BEVersion : NSObject
 
