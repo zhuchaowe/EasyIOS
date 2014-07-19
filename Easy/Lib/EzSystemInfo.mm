@@ -1,7 +1,7 @@
 //  Created by EasyIOS on 14-4-10.
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
-#import "Bee_SystemInfo.h"
+#import "EzSystemInfo.h"
 
 // ----------------------------------
 // Source code
@@ -10,9 +10,43 @@
 
 #pragma mark -
 
-@implementation BeeSystemInfo
+#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
+const BOOL IOS8_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] compare:@"8.0"] != NSOrderedAscending );
+const BOOL IOS7_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending );
+const BOOL IOS6_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] compare:@"6.0"] != NSOrderedAscending );
+const BOOL IOS5_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] compare:@"5.0"] != NSOrderedAscending );
+const BOOL IOS4_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] compare:@"4.0"] != NSOrderedAscending );
+const BOOL IOS3_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] compare:@"3.0"] != NSOrderedAscending );
 
-DEF_SINGLETON( BeeSystemInfo );
+const BOOL IOS7_OR_EARLIER = !IOS8_OR_LATER;
+const BOOL IOS6_OR_EARLIER = !IOS7_OR_LATER;
+const BOOL IOS5_OR_EARLIER = !IOS6_OR_LATER;
+const BOOL IOS4_OR_EARLIER = !IOS5_OR_LATER;
+const BOOL IOS3_OR_EARLIER = !IOS4_OR_LATER;
+
+const BOOL IS_SCREEN_4_INCH = ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO);
+const BOOL IS_SCREEN_35_INCH = ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO);
+#else
+const BOOL IOS8_OR_LATER = NO;
+const BOOL IOS7_OR_LATER = NO;
+const BOOL IOS6_OR_LATER = NO;
+const BOOL IOS5_OR_LATER = NO;
+const BOOL IOS4_OR_LATER = NO;
+const BOOL IOS3_OR_LATER = NO;
+
+const BOOL IOS7_OR_EARLIER = NO;
+const BOOL IOS6_OR_EARLIER = NO;
+const BOOL IOS5_OR_EARLIER = NO;
+const BOOL IOS4_OR_EARLIER = NO;
+const BOOL IOS3_OR_EARLIER = NO;
+
+const BOOL IS_SCREEN_4_INCH = NO;
+const BOOL IS_SCREEN_35_INCH = NO;
+
+#endif
+@implementation EzSystemInfo
+
+DEF_SINGLETON( EzSystemInfo );
 
 + (NSString *)OSVersion
 {
@@ -226,7 +260,7 @@ static const char * __jb_app = NULL;
 	}
 	else
 	{
-		return [BeeSystemInfo isScreenSize:CGSizeMake(320, 480)];
+		return [EzSystemInfo isScreenSize:CGSizeMake(320, 480)];
 	}
 #else	// #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
 	return NO;
@@ -247,7 +281,7 @@ static const char * __jb_app = NULL;
 	}
 	else
 	{
-		return [BeeSystemInfo isScreenSize:CGSizeMake(640, 960)];
+		return [EzSystemInfo isScreenSize:CGSizeMake(640, 960)];
 	}
 #else	// #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
 	return NO;
@@ -263,7 +297,7 @@ static const char * __jb_app = NULL;
 	}
 	else
 	{
-		return [BeeSystemInfo isScreenSize:CGSizeMake(640, 1136)];
+		return [EzSystemInfo isScreenSize:CGSizeMake(640, 1136)];
 	}
 #else	// #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
 	return NO;
@@ -273,7 +307,7 @@ static const char * __jb_app = NULL;
 + (BOOL)isPad
 {
 #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
-	return [BeeSystemInfo isScreenSize:CGSizeMake(768, 1024)];
+	return [EzSystemInfo isScreenSize:CGSizeMake(768, 1024)];
 #else	// #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
 	return NO;
 #endif	// #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
@@ -282,7 +316,7 @@ static const char * __jb_app = NULL;
 + (BOOL)isPadRetina
 {
 #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
-	return [BeeSystemInfo isScreenSize:CGSizeMake(1536, 2048)];
+	return [EzSystemInfo isScreenSize:CGSizeMake(1536, 2048)];
 #else	// #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
 	return NO;
 #endif	// #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
@@ -309,55 +343,3 @@ static const char * __jb_app = NULL;
 }
 
 @end
-
-// ----------------------------------
-// Unit test
-// ----------------------------------
-
-#if defined(__BEE_UNITTEST__) && __BEE_UNITTEST__
-
-#pragma mark -
-
-#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
-
-TEST_CASE( BeeSystemInfo_iOS )
-{
-	TIMES( 3 )
-	{
-		EXPECTED( [BeeSystemInfo OSVersion] );
-		EXPECTED( [BeeSystemInfo appVersion] );
-		EXPECTED( [BeeSystemInfo deviceModel] );
-		EXPECTED( [BeeSystemInfo deviceUUID] );
-		
-//		if ( [BeeSystemInfo isJailBroken] )
-//		{
-//			EXPECTED( [BeeSystemInfo jailBreaker] );
-//		}
-	}
-}
-TEST_CASE_END
-
-#else	// #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
-
-TEST_CASE( BeeSystemInfo_MacOS )
-{
-	TIMES( 3 )
-	{
-		EXPECTED( [BeeSystemInfo OSVersion] );
-		EXPECTED( [BeeSystemInfo appVersion] );
-		EXPECTED( [BeeSystemInfo deviceModel] );
-		EXPECTED( [BeeSystemInfo deviceUUID] );
-
-	#if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
-		if ( [BeeSystemInfo isJailBroken] )
-		{
-			EXPECTED( [BeeSystemInfo jailBreaker] );
-		}
-	#endif	// #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
-	}
-}
-TEST_CASE_END
-
-#endif	// #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
-
-#endif	// #if defined(__BEE_UNITTEST__) && __BEE_UNITTEST__

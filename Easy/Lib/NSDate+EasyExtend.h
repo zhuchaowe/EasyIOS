@@ -4,16 +4,13 @@
 
 #import <Foundation/Foundation.h>
 
-#pragma mark -
 
-#define SECOND	(1)
-#define MINUTE	(60 * SECOND)
-#define HOUR	(60 * MINUTE)
-#define DAY		(24 * HOUR)
-#define MONTH	(30 * DAY)
-#define YEAR	(12 * MONTH)
-
-#pragma mark -
+extern const NSInteger SECOND;
+extern const NSInteger MINUTE;
+extern const NSInteger HOUR;
+extern const NSInteger DAY;
+extern const NSInteger MONTH;
+extern const NSInteger YEAR;
 
 @interface NSDate(EasyExtend)
 

@@ -27,6 +27,10 @@
 	return self;
 }
 
+- (BOOL)validate:(NSString *)key{
+   return [self.key isEqualToString:key];
+}
+
 - (BOOL)succeed
 {
     if(self.output == nil){

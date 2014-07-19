@@ -6,10 +6,10 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
-#import "Bee_Singleton.h"
+#import "EzSingleton.h"
 #import "NSString+EasyExtend.h"
 #import "NSData+EasyExtend.h"
-#import "Bee_UserDefaults.h"
+#import "EzUserDefaults.h"
 #import "NSNumber+EasyExtend.h"
 #import "NSDate+EasyExtend.h"
 #import "NSArray+EasyExtend.h"
@@ -24,8 +24,7 @@
 #import "MKNetworkKit.h"
 #import "UIImage+EasyExtend.h"
 #import "UITabBarController+EasyExtend.h"
-#import "Bee_SystemInfo.h"
-#import "Bee_Sandbox.h"
+#import "EzSystemInfo.h"
 #import "EzUILabel.h"
 #import "EzMiButton.h"
 #import "RTLabel.h"
@@ -37,7 +36,7 @@
 #import "ImageTool.h"
 #import "BEVersion.h"
 #import "IconFont.h"
-
+#import "EzSandbox.h"
 #define EZFRAME(frame)     NSLog(@"%.1f,%.1f,%.1f,%.1f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
 
 @interface Easy : NSObject

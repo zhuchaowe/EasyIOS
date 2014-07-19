@@ -2,7 +2,7 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 #import "Easy.h"
-#import "Bee_CacheProtocol.h"
+#import "EzCacheProtocol.h"
 #pragma mark -
 
 #define AS_USERDEFAULT( __name )	AS_STATIC_PROPERTY( __name )
@@ -10,8 +10,8 @@
 
 #pragma mark -
 
-@interface BeeUserDefaults : NSObject<BeeCacheProtocol>
+@interface EzUserDefaults : NSObject<EzCacheProtocol>
 
-AS_SINGLETON( BeeUserDefaults )
+AS_SINGLETON( EzUserDefaults )
 
 @end

@@ -41,6 +41,7 @@
 }
 
 +(NSString *)icon:(NSString *)iconName fromFont:(NSString *)fontName{
+    [self loadFontList];
     NSDictionary *fontDict = [NSDictionary objectFromData:[NSData fromResource:@"fontIconConfig.json"]];
     NSString *json = [[fontDict objectForKey:fontName] objectForKey:@"json"];
     NSDictionary *dict = [NSDictionary objectFromData:[NSData fromResource:json]];

@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "MKNetworkEngine.h"
-#define MSG_FOR_KEY(_msg,_key) [_msg.key isEqualToString:_key]
 typedef enum
 {
     SuccessState                    =0,
@@ -32,7 +31,7 @@ typedef enum
 @property(nonatomic,strong)MKNetworkOperation *op;
 
 +(id)Data;
-
+- (BOOL)validate:(NSString *)key;
 - (BOOL)succeed;
 - (BOOL)sending;
 - (BOOL)failed;

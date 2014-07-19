@@ -2,7 +2,7 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
-#import "Bee_UserDefaults.h"
+#import "EzUserDefaults.h"
 
 // ----------------------------------
 // Source code
@@ -10,9 +10,9 @@
 
 #pragma mark -
 
-@implementation BeeUserDefaults
+@implementation EzUserDefaults
 
-DEF_SINGLETON( BeeUserDefaults )
+DEF_SINGLETON( EzUserDefaults )
 
 - (BOOL)hasObjectForKey:(id)key
 {
