@@ -33,6 +33,7 @@
 #import <arpa/inet.h>
 #import <ifaddrs.h>
 #import <netdb.h>
+#import <Foundation/Foundation.h>
 
 /**
  * Does ARC support support GCD objects?

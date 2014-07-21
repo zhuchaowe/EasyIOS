@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CLLocation.h>
-
+#import "Easy.h"
 typedef enum
 {
     transit         =0,

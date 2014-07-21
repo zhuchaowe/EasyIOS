@@ -7,7 +7,7 @@
 //  http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1
 
 //  No obvious license attached
-
+#import <Foundation/Foundation.h>
 @interface NSDate (RFC1123)
 /**
  Convert a RFC1123 'Full-Date' string
