@@ -270,7 +270,7 @@
     if([argument isKindOfClass:[NSString class]])
       sqlite3_bind_text(statement, i, [argument UTF8String], -1, SQLITE_TRANSIENT);
     else if([argument isKindOfClass:[NSData class]])
-      sqlite3_bind_blob(statement, i, [argument bytes], [argument length], SQLITE_TRANSIENT);
+      sqlite3_bind_blob(statement, i, [argument bytes], (int)[argument length], SQLITE_TRANSIENT);
     else if([argument isKindOfClass:[NSDate class]])
       sqlite3_bind_double(statement, i, [argument timeIntervalSince1970]);
     else if([argument isKindOfClass:[NSNumber class]])

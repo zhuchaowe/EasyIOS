@@ -41,7 +41,7 @@
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 + (int)countWords:(NSString *)s {
-	int i, n = [s length], l = 0, a = 0, b = 0;
+	int i, n = (int)[s length], l = 0, a = 0, b = 0;
 	unichar c;
 	for (i = 0; i < n; i++) {
 		c = [s characterAtIndex:i];
@@ -108,7 +108,7 @@
 	else if (size < 1000 * 1000 * 1000) {
 		return [NSString stringWithFormat:@"%.2fMB", size * 1.0 / 1000 / 1000];
 	}
-	else if (size < 1000 * 1000 * 1000 * 1000) {
+	else if (size < 1000.0 * 1000.0 * 1000.0 * 1000.0) {
 		return [NSString stringWithFormat:@"%.2fGB", size * 1.0 / 1000 / 1000 / 1000];
 	}
 	return @"";
@@ -167,7 +167,7 @@
     
     uint8_t digest[CC_SHA256_DIGEST_LENGTH];
     
-    CC_SHA256(data.bytes, data.length, digest);
+    CC_SHA256(data.bytes, (CC_LONG)data.length, digest);
     
     NSMutableString* result = [NSMutableString stringWithCapacity:CC_SHA256_DIGEST_LENGTH * 2];
     

@@ -116,7 +116,7 @@ static NSMutableDictionary *tableCache = nil;
 -(void)update {
   NSString *setValues = [[[self columnsWithoutPrimaryKey] componentsJoinedByString:@" = ?, "] stringByAppendingString:@" = ?"];
   NSString *sql = [NSString stringWithFormat:@"UPDATE %@ SET %@ WHERE primaryKey = ?", [[self class] tableName], setValues];
-  NSArray *parameters = [[self propertyValues] arrayByAddingObject:[NSNumber numberWithUnsignedInt:primaryKey]];
+  NSArray *parameters = [[self propertyValues] arrayByAddingObject:[NSNumber numberWithUnsignedInt:(unsigned int)primaryKey]];
 
   [database executeSql:sql withParameters:parameters];
   savedInDatabase = YES;
@@ -130,7 +130,7 @@ static NSMutableDictionary *tableCache = nil;
   [self beforeDelete];
 
   NSString *sql = [NSString stringWithFormat:@"DELETE FROM %@ WHERE primaryKey = ?", [[self class] tableName]];
-  [database executeSqlWithParameters:sql, [NSNumber numberWithUnsignedInt:primaryKey], nil];
+  [database executeSqlWithParameters:sql, [NSNumber numberWithUnsignedInt:(unsigned int)primaryKey], nil];
   savedInDatabase = NO;
   primaryKey = 0;
 }

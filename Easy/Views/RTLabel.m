@@ -214,7 +214,7 @@
 
 	CFMutableDictionaryRef styleDict = ( CFDictionaryCreateMutable( (0), 0, (0), (0) ) );
 	
-	[self applyParagraphStyleToText:attrString attributes:nil atPosition:0 withLength:CFAttributedStringGetLength(attrString)];
+	[self applyParagraphStyleToText:attrString attributes:nil atPosition:0 withLength:(int)CFAttributedStringGetLength(attrString)];
 
 	
 	CTFontRef thisFont = CTFontCreateWithName ((CFStringRef)[self.font fontName], [self.font pointSize], NULL); 
@@ -224,22 +224,22 @@
 	
 	for (RTLabelComponent *component in self._textComponents)
 	{
-		int index = [self._textComponents indexOfObject:component];
+		int index = (int)[self._textComponents indexOfObject:component];
 		component.componentIndex = index;
 		
 		if ([component.tagLabel isEqualToString:@"i"])
 		{
 			// make font italic
-			[self applyItalicStyleToText:attrString atPosition:component.position withLength:[component.text length]];
+			[self applyItalicStyleToText:attrString atPosition:component.position withLength:(int)[component.text length]];
 		}
 		else if ([component.tagLabel isEqualToString:@"b"])
 		{
 			// make font bold
-			[self applyBoldStyleToText:attrString atPosition:component.position withLength:[component.text length]];
+			[self applyBoldStyleToText:attrString atPosition:component.position withLength:(int)[component.text length]];
 		}
         else if ([component.tagLabel isEqualToString:@"bi"])
         {
-            [self applyBoldItalicStyleToText:attrString atPosition:component.position withLength:[component.text length]];
+            [self applyBoldItalicStyleToText:attrString atPosition:component.position withLength:(int)[component.text length]];
         }
 		else if ([component.tagLabel isEqualToString:@"a"])
 		{
@@ -247,24 +247,24 @@
 			{
 				if (self.selectedLinkAttributes)
 				{
-					[self applyFontAttributes:self.selectedLinkAttributes toText:attrString atPosition:component.position withLength:[component.text length]];
+					[self applyFontAttributes:self.selectedLinkAttributes toText:attrString atPosition:component.position withLength:(int)[component.text length]];
 				}
 				else
 				{
-					[self applyBoldStyleToText:attrString atPosition:component.position withLength:[component.text length]];
-					[self applyColor:@"#FF0000" toText:attrString atPosition:component.position withLength:[component.text length]];
+					[self applyBoldStyleToText:attrString atPosition:component.position withLength:(int)[component.text length]];
+					[self applyColor:@"#FF0000" toText:attrString atPosition:component.position withLength:(int)[component.text length]];
 				}
 			}
 			else
 			{
 				if (self.linkAttributes)
 				{
-					[self applyFontAttributes:self.linkAttributes toText:attrString atPosition:component.position withLength:[component.text length]];
+					[self applyFontAttributes:self.linkAttributes toText:attrString atPosition:component.position withLength:(int)[component.text length]];
 				}
 				else
 				{
-					[self applyBoldStyleToText:attrString atPosition:component.position withLength:[component.text length]];
-					[self applySingleUnderlineText:attrString atPosition:component.position withLength:[component.text length]];
+					[self applyBoldStyleToText:attrString atPosition:component.position withLength:(int)[component.text length]];
+					[self applySingleUnderlineText:attrString atPosition:component.position withLength:(int)[component.text length]];
 				}
 			}
 			
@@ -279,26 +279,26 @@
 			// underline
 			if ([component.tagLabel isEqualToString:@"u"])
 			{
-				[self applySingleUnderlineText:attrString atPosition:component.position withLength:[component.text length]];
+				[self applySingleUnderlineText:attrString atPosition:component.position withLength:(int)[component.text length]];
 			}
 			else if ([component.tagLabel isEqualToString:@"uu"])
 			{
-				[self applyDoubleUnderlineText:attrString atPosition:component.position withLength:[component.text length]];
+				[self applyDoubleUnderlineText:attrString atPosition:component.position withLength:(int)[component.text length]];
 			}
 			
 			if ([component.attributes objectForKey:@"color"])
 			{
 				NSString *value = [component.attributes objectForKey:@"color"];
-				[self applyUnderlineColor:value toText:attrString atPosition:component.position withLength:[component.text length]];
+				[self applyUnderlineColor:value toText:attrString atPosition:component.position withLength:(int)[component.text length]];
 			}
 		}
 		else if ([component.tagLabel isEqualToString:@"font"])
 		{
-			[self applyFontAttributes:component.attributes toText:attrString atPosition:component.position withLength:[component.text length]];
+			[self applyFontAttributes:component.attributes toText:attrString atPosition:component.position withLength:(int)[component.text length]];
 		}
 		else if ([component.tagLabel isEqualToString:@"p"])
 		{
-			[self applyParagraphStyleToText:attrString attributes:component.attributes atPosition:component.position withLength:[component.text length]];
+			[self applyParagraphStyleToText:attrString attributes:component.attributes atPosition:component.position withLength:(int)[component.text length]];
 		}
 
 	}
@@ -838,7 +838,7 @@
 			if (position!=NSNotFound)
 			{
 				
-				for (int i=[components count]-1; i>=0; i--)
+				for (int i=(int)[components count]-1; i>=0; i--)
 				{
 					RTLabelComponent *component = [components objectAtIndex:i];
 					if (component.text==nil && [component.tagLabel isEqualToString:tag])
@@ -870,11 +870,11 @@
 			//NSLog(@"%@", attributes);
 			
 			RTLabelComponent *component = [RTLabelComponent componentWithString:nil tag:tag attributes:attributes];
-			component.position = position;
+			component.position = (int)position;
 			[components addObject:component];
 		}
 		
-		last_position = position;
+		last_position = (int)position;
 		
 	}
 	
@@ -936,7 +936,7 @@
 		if([valid_tags containsObject:tag] == NO)
 		{
 			NSString *delimiter = [NSString stringWithFormat:@"%@>", text];
-			int position = [data rangeOfString:delimiter].location;
+			NSUInteger position = [data rangeOfString:delimiter].location;
 			BOOL isEnd = [delimiter rangeOfString:@"</"].location!=NSNotFound;
 			if (position!=NSNotFound)
 			{
@@ -957,7 +957,7 @@
 				//NSLog(@".......... %i %i %i %@", [data length], last_position, position, [data stringByReplacingOccurrencesOfString:delimiter withString:@"" options:NULL range:NSMakeRange(last_position, position+delimiter.length)]);
 				data = [data stringByReplacingOccurrencesOfString:delimiter withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(last_position, position+delimiter.length-last_position)];
 				
-				last_position = position;
+				last_position = (int)position;
 				
 			}
 			else
