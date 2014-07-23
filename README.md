@@ -61,6 +61,7 @@ EasyIOS官方qq群 :340906744 欢迎大家加入讨论
 Add below to Podfile and run pod install
 
     platform :ios
+
     pod 'EasyIOS', :head
 
 ##2.0版本更新
