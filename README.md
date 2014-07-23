@@ -57,12 +57,11 @@ EasyIOS官方qq群 :340906744 欢迎大家加入讨论
 * [git on github ](https://github.com/zhuchaowe/EasyIOS)
 
 ###How To Install
-*Import from CocoaPods 
-
+* Import from CocoaPods 
 Add below to Podfile and run pod install
 
-platform :ios
-pod 'EasyIOS', :head
+    platform :ios
+    pod 'EasyIOS', :head
 
 ##2.0版本更新
 
