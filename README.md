@@ -6,7 +6,7 @@ a easy way to program objective-c
 ##2.0 MVVM update
 全新基于MVVM(Model-View-ViewModel)编程模式架构，开启EasyIOS开发函数式编程新篇章。
 
-关于有疑问什么是MVVM，以及为什么IOS开发需要MVVM思想编程的，请看CocoaChina得一篇文章[用Model-View-ViewModel构建iOS App](http://www.cocoachina.com/applenews/devnews/2014/0716/9152.html)有详细介绍.
+关于有疑问什么是MVVM，以及为什么IOS开发需要MVVM思想编程的，请看CocoaChina得一篇文章[用Model-View-ViewModel构建iOS App](http://my.oschina.net/EasyIOS/blog/294176)有详细介绍.
 
 EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,Model，Action四种模型来对IOS进行开发，4种模型的定义解决了IOS开发中ViewController承担了过多角色而造成的代码质量低下，使得结构思路更加清晰。
 
@@ -58,17 +58,16 @@ EasyIOS官方qq群 :340906744 欢迎大家加入讨论
 
 ###How To Install
 * Import from CocoaPods 
-Add below to Podfile and run pod install
+* Add below to Podfile and run pod install
 
-    platform :ios
-
-    pod 'EasyIOS', :head
+    	platform :ios
+    	pod 'EasyIOS', :head
 
 ##2.0版本更新
 
 * 架构修改，基于MVVM架构
 * 把SceneModel从Scene中剥离出来，并且加入响应式编程框架ReactiveCocoa
-* ReactiveCocoa中文使用说明教程 [ReactiveCocoa2实战](http://limboy.me/tech/2014/06/06/deep-into-reactivecocoa2.html)
+* ReactiveCocoa中文使用说明教程 [ReactiveCocoa2实战](http://my.oschina.net/EasyIOS/blog/294178)
 * ReactiveCocoa 在github上有开源项目[ReactiveCocoa2](https://github.com/ReactiveCocoa/ReactiveCocoa)
 
 ##1.0.3版本更新
