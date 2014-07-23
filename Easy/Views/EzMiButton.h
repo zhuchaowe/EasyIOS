@@ -7,6 +7,7 @@
 //
 
 #import "EzUILabel.h"
+
 typedef enum
 {
     IMAGE_LEFT_FLOAT                    =0,
@@ -17,9 +18,10 @@ typedef enum
     IMAGE_BOTTOM                  =5,
 } EzMiButtonImagePosition;
 
+
 @interface EzMiButton : UIButton
 @property(nonatomic,retain)UIImageView *miImageView;
-@property(nonatomic,retain)EzUILabel *miTextLabel;
+@property(nonatomic,retain)UILabel *miTextLabel;
 @property (nonatomic,assign) EzMiButtonImagePosition miPosition;
 @property(nonatomic,assign) NSUInteger spaceing;
 -(void)setImage:(UIImage *)image;

@@ -10,6 +10,7 @@
 #import "Scene.h"
 #import "CacheAction.h"
 #import "Model.h"
+#import "SceneModel.h"
 #import "SceneCollectionView.h"
 #import "SceneGridView.h"
 #import "SceneScrollView.h"
@@ -19,6 +20,7 @@
 #import "RTLabel.h"
 #import "DialogUtil.h"
 
+#define HOST_CONFIG 1
 //以下配置为调用Action 类必须 配置
 #define HOST_URL @"test-leway.zjseek.com.cn:8000" //服务端域名:端口
 #define CLIENT   @"easyIOS"                       //自定义客户端识别

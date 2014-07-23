@@ -2,7 +2,7 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 #pragma mark -
 
 typedef NSMutableArray *	(^NSArrayAppendBlock)( id obj );

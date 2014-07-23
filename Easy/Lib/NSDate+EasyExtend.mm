@@ -126,40 +126,40 @@ const NSInteger YEAR = 12 * MONTH;
     if ( delta >= YEAR )
     {
 		NSInteger years = ( delta / YEAR );
-        [result appendFormat:@"%d年", years];
+        [result appendFormat:@"%ld年", (long)years];
         delta -= years * YEAR ;
     }
     
 	if ( delta >= MONTH )
 	{
         NSInteger months = ( delta / MONTH );
-        [result appendFormat:@"%d月", months];
+        [result appendFormat:@"%ld月", (long)months];
         delta -= months * MONTH ;
 	}
     
     if ( delta >= DAY )
     {
         NSInteger days = ( delta / DAY );
-        [result appendFormat:@"%d天", days];
+        [result appendFormat:@"%ld天", (long)days];
         delta -= days * DAY ;
     }
     
     if ( delta >= HOUR )
     {
         NSInteger hours = ( delta / HOUR );
-        [result appendFormat:@"%d小时", hours];
+        [result appendFormat:@"%ld小时", (long)hours];
         delta -= hours * HOUR ;
     }
     
     if ( delta >= MINUTE )
     {
         NSInteger minutes = ( delta / MINUTE );
-        [result appendFormat:@"%d分钟", minutes];
+        [result appendFormat:@"%ld分钟", (long)minutes];
         delta -= minutes * MINUTE ;
     }
 
 	NSInteger seconds = ( delta / SECOND );
-	[result appendFormat:@"%d秒", seconds];
+	[result appendFormat:@"%ld秒", (long)seconds];
 
 	return result;
 }

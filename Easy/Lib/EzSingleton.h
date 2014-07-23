@@ -5,7 +5,7 @@
 //  Created by 朱潮 on 14-7-19.
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
-
+#import <UIKit/UIKit.h>
 #undef	AS_SINGLETON
 #define AS_SINGLETON( __class ) \
 - (__class *)sharedInstance; \
