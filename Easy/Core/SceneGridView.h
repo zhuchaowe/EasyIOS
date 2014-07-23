@@ -14,9 +14,9 @@
 @interface SceneGridView : UIGridView<UIScrollViewDelegate>
 @property(nonatomic,strong)MJRefreshHeaderView *header;
 @property(nonatomic,strong)MJRefreshFooterView *footer;
-@property(nonatomic,assign)NSUInteger page;
-@property(nonatomic,assign)NSUInteger pageSize;
-@property(nonatomic,assign)NSUInteger total;
+@property(nonatomic,strong)NSNumber *page;
+@property(nonatomic,strong)NSNumber *pageSize;
+@property(nonatomic,strong)NSNumber *total;
 @property(strong,nonatomic)NSMutableArray *dataArray;
 @property(strong,nonatomic)NSString *cacheDataString;
 @property(nonatomic,strong)UILabel *msgLabel;

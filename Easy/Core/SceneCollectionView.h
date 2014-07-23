@@ -11,9 +11,9 @@
 @interface SceneCollectionView : UICollectionView
 @property(nonatomic,strong)MJRefreshHeaderView *header;
 @property(nonatomic,strong)MJRefreshFooterView *footer;
-@property(nonatomic,assign)NSUInteger page;
-@property(nonatomic,assign)NSUInteger pageSize;
-@property(nonatomic,assign)NSUInteger total;
+@property(nonatomic,retain)NSNumber *page;
+@property(nonatomic,retain)NSNumber *pageSize;
+@property(nonatomic,retain)NSNumber *total;
 @property(strong,nonatomic)NSMutableArray *dataArray;
 @property(nonatomic,strong)NSString *cacheDataString;
 @property(nonatomic,strong)UILabel *msgLabel;

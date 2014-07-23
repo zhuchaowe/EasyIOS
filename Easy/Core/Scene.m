@@ -30,11 +30,6 @@
     // Do any additional setup after loading the view.
 }
 
--(void)initAction{
-    self.action = [Action Action];
-    self.action.aDelegaete = self;
-}
-
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 }
@@ -42,30 +37,8 @@
     [super viewWillDisappear:animated];
 }
 
--(void)handleActionMsg:(ActionData *)msg{
-    if(msg.sending){
-        NSLog(@"sending:%@",msg.op.url);
-    }else if(msg.succeed){
-        NSLog(@"success:%@",msg.output);
-    }else if(msg.failed){
-        NSLog(@"failed:%@",msg.error);
-    }
-}
 -(void)handlePullLoader:(MJRefreshBaseView *)view state:(NSInteger)state{
     
-}
-- (void)SEND_ACTION:(NSDictionary *)dict{
-}
-- (void)SEND_ACTION{
-    
-}
-- (void)SEND_CACHE_ACTION{
-    [self.action readFromCache];
-    [self SEND_ACTION];
-}
-- (void)SEND_NO_CACHE_ACTION{
-    [self.action notReadFromCache];
-    [self SEND_ACTION];
 }
 
 - (void)showBarButton:(EzNavigationBar)position title:(NSString *)name fontColor:(UIColor *)color{
