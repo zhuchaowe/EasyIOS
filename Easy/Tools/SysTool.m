@@ -129,7 +129,7 @@
                                         (child->d_name[0] == '.' && child->d_name[1] == '.' && child->d_name[2] == 0)                         // 忽略目录 ..
                                         )) continue;
         
-		int folderPathLength = strlen(folderPath);
+		NSUInteger folderPathLength = strlen(folderPath);
 		char childPath[1024]; // 子文件的路径地址
 		stpcpy(childPath, folderPath);
 		if (folderPath[folderPathLength - 1] != '/') {
