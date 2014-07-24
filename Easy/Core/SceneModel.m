@@ -17,9 +17,13 @@
 - (id)initModel{
     self = [super init];
     if(self){
-        self.action = [Action Action];
+        [self loadSceneModel];
     }
     return self;
+}
+
+- (void)loadSceneModel{
+    self.action = [Action Action];
 }
 
 - (void)handleActionMsg:(ActionData *)msg{

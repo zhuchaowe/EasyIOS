@@ -17,5 +17,5 @@
 - (void)SEND_ACTION:(Request *)req;
 - (void)SEND_CACHE_ACTION:(Request *)req;
 - (void)SEND_NO_CACHE_ACTION:(Request *)req;
-- (id)initModel;
+- (void)loadSceneModel;
 @end
