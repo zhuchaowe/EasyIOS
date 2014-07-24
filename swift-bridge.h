@@ -19,6 +19,7 @@
 #import "EzUITapGestureRecognizer.h"
 #import "RTLabel.h"
 #import "DialogUtil.h"
+#import "Request.h"
 
 #define HOST_CONFIG 1
 //以下配置为调用Action 类必须 配置
