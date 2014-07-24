@@ -23,7 +23,7 @@ typedef enum
 @property(nonatomic,assign)NSInteger state;
 @property(nonatomic,strong)NSString *discription;
 @property(nonatomic,assign)double progress;
-@property(nonatomic,strong)BOOL freezable;
+@property(nonatomic,assign)BOOL freezable;
 @property(nonatomic,strong)MKNetworkOperation *op;
 
 @property(nonatomic,retain)NSString *HOST;
