@@ -23,7 +23,6 @@
 }
 
 -(void)loadRequest{
-    self.state = SendingState;
     self.output = nil;
     self.discription = @"";
     self.progress = 0.0f;

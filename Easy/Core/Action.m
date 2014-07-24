@@ -85,7 +85,6 @@ DEF_SINGLETON(Action)
                                                    params:msg.requestParams
                                                httpMethod:msg.METHOD];
     msg.op = op;
-    [self sending:msg];
     NSDictionary *file = msg.requestFiles;
     for (NSString *key in [file allKeys]) {
         [op addFile:[file objectForKey:key] forKey:key];

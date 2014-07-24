@@ -36,9 +36,6 @@
 
 - (void)addHeader
 {
-    _page = @1;
-    _pageSize = @10;
-    _total = @0;
     MJRefreshHeaderView *header = [MJRefreshHeaderView header];
     header.scrollView = self;
     header.refreshStateChangeBlock =^(MJRefreshBaseView *refreshView,MJRefreshState state) {
