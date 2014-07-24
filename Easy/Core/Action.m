@@ -86,10 +86,12 @@ DEF_SINGLETON(Action)
                                                httpMethod:msg.METHOD];
     msg.op = op;
     NSDictionary *file = msg.requestFiles;
-    for (NSString *key in [file allKeys]) {
-        [op addFile:[file objectForKey:key] forKey:key];
+    if([file count]>0){
+        for (NSString *key in [file allKeys]) {
+            [op addFile:[file objectForKey:key] forKey:key];
+        }
+        [op setFreezable:msg.freezable];
     }
-    [op setFreezable:NO];
     [self sending:msg];
     NSLog(@"%@",op.url);
     [op addCompletionHandler:^(MKNetworkOperation* completedOperation) {
@@ -107,10 +109,12 @@ DEF_SINGLETON(Action)
         msg.error = error;
         [self failed:msg];
     }];
-    [op onUploadProgressChanged:^(double progress) {
-        msg.progress = progress;
-        [self progressing:msg];
-    }];
+    if([file count]>0){
+        [op onUploadProgressChanged:^(double progress) {
+            msg.progress = progress;
+            [self progressing:msg];
+        }];
+    }
     [self enqueueOperation:op];
     return op;
 }
