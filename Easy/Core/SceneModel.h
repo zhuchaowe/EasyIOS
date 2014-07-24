@@ -13,7 +13,7 @@
 @interface SceneModel : NSObject
 @property(nonatomic,strong)Action *action;
 + (id)SceneModel;
-- (void)handleActionMsg:(ActionData *)msg;
+- (void)handleActionMsg:(Request *)msg;
 - (void)SEND_ACTION:(Request *)req;
 - (void)SEND_CACHE_ACTION:(Request *)req;
 - (void)SEND_NO_CACHE_ACTION:(Request *)req;

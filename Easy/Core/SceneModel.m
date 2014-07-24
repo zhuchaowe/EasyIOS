@@ -26,7 +26,7 @@
     self.action = [Action Action];
 }
 
-- (void)handleActionMsg:(ActionData *)msg{
+- (void)handleActionMsg:(Request *)msg{
     if(msg.sending){
         NSLog(@"sending:%@",msg.op.url);
     }else if(msg.succeed){
@@ -36,14 +36,13 @@
     }
 }
 
-- (void)handleProgressMsg:(ActionData *)msg{
+- (void)handleProgressMsg:(Request *)msg{
 
 }
 
 - (void)SEND_ACTION:(Request *)req{
     if(req !=nil){
-        NSString *path = [NSString stringWithFormat:@"%@%@",req.HOST,req.PATH];
-        self.action.GET_MSG(req.requestKey,path,req.requestParams);
+        [self.action Send:req];
     }
 }
 

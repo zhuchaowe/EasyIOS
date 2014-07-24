@@ -23,9 +23,29 @@
 }
 
 -(void)loadRequest{
+    self.state = SendingState;
+    self.output = nil;
+    self.discription = @"";
+    self.progress = 0.0f;
     self.HOST = @"";
     self.PATH = @"";
     self.METHOD = @"GET";
+}
+
+- (BOOL)succeed
+{
+    if(self.output == nil){
+        return NO;
+    }
+    return SuccessState == _state ? YES : NO;
+}
+- (BOOL)failed
+{
+    return FailState == _state || ErrorState == _state ? YES : NO;
+}
+- (BOOL)sending
+{
+    return SendingState == _state ? YES : NO;
 }
 
 +(NSString *)requestKey{
@@ -43,6 +63,10 @@
         }
     }
     return dict;
+}
+
+-(NSDictionary *)requestFiles{
+    return [NSDictionary dictionary];
 }
 
 -(NSArray *)getPropertyList:(Class)klass{

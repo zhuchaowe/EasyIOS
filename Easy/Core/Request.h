@@ -7,7 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MKNetworkEngine.h"
+typedef enum
+{
+    SuccessState                    =0,
+    FailState                       =1,
+    SendingState                    =2,
+    ErrorState                      =3
+} RequestState;
+
 @interface Request : NSObject
+@property(nonatomic,strong)NSDictionary * output;
+@property(nonatomic,strong)NSString *responseString;
+@property(nonatomic,strong)NSError *error;
+@property(nonatomic,assign)NSInteger state;
+@property(nonatomic,strong)NSString *discription;
+@property(nonatomic,assign)double progress;
+@property(nonatomic,strong)MKNetworkOperation *op;
+
 @property(nonatomic,retain)NSString *HOST;
 @property(nonatomic,retain)NSString *PATH;
 @property(nonatomic,retain)NSString *METHOD;
@@ -16,4 +33,9 @@
 -(NSString *)requestKey;
 +(NSString *)requestKey;
 -(NSDictionary *)requestParams;
+-(NSDictionary *)requestFiles;
+
+- (BOOL)succeed;
+- (BOOL)sending;
+- (BOOL)failed;
 @end

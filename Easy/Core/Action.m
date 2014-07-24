@@ -12,76 +12,6 @@
 
 DEF_SINGLETON(Action)
 
-//1、params
-//2、key params
-
-- (ActionBlockTN)GET_MSG
-{
-	ActionBlockTN block = ^ Action * ( id first,id second,... )
-	{
-        if ( first && second)
-		{
-            if ( [second isKindOfClass:[NSDictionary class]] )
-			{
-                NSString * path = (NSString *)first;
-				NSDictionary *	params = (NSDictionary *)second;
-                [self GET:path params:params key:@""];
-                
-            }else{
-                va_list args;
-				va_start( args, second );
-				
-				NSString *	key = (NSString *)first;
-                NSString * path = (NSString *)second;
-				NSDictionary *	params = va_arg( args, NSDictionary * );
-                
-				if ( key && params )
-				{
-                    [self GET:path params:params key:key];
-				}
-				va_end( args );
-            }
-        }
-        return self;
-	};
-	return [block copy];
-}
-
-//1、path params
-//2、key path params
-- (ActionBlockN)POST_MSG
-{
-	ActionBlockN block = ^ Action * ( id first,id second,id third,... )
-	{
-        if ( first && second && third)
-		{
-            if ( [second isKindOfClass:[NSDictionary class]] )
-			{
-                NSString * path = (NSString *)first;
-                NSDictionary *files = (NSDictionary *)second;
-				NSDictionary *params = (NSDictionary *)third;
-                [self POST:path file:files params:params key:@""];
-            }else{
-                va_list args;
-				va_start( args, third );
-				
-				NSString *key = (NSString *)first;
-                NSString *path = (NSString *)second;
-                NSDictionary *files = (NSDictionary *)third;
-				NSDictionary *params = va_arg( args, NSDictionary * );
-                
-				if ( key && path)
-				{
-                    [self POST:path file:files params:params key:key];
-				}
-				va_end( args );
-            }
-        }
-        return self;
-	};
-	return [block copy];
-}
-
 +(id)Action{
     return [[[self class] alloc] init];
 }
@@ -99,24 +29,27 @@ DEF_SINGLETON(Action)
 	return self;
 }
 
--(MKNetworkOperation*) GET:(NSString*) path
-                    params:(NSDictionary *) params
-                       key:(NSString *)key
-{
-    NSURL *url = [NSURL URLWithString:path];
-    
-    if([url scheme] == nil){
-        path = [NSString stringWithFormat:@"http://%@%@",HOST_URL,path];
+-(MKNetworkOperation*)Send:(Request *)msg{
+    if([msg.METHOD isEqualToString:@"GET"]){
+        return [self GET:msg];
+    }else{
+        return [self POST:msg];
     }
-    MKNetworkOperation *op = [self operationWithURLString:path
-                                              params:params
-                                          httpMethod:@"GET"];
-    ActionData *msg = [ActionData Data];
+}
+
+-(MKNetworkOperation*) GET:(Request *)msg
+{
+    NSURL *host = [NSURL URLWithString:msg.HOST];
+    NSString *url = nil;
+    if([host scheme] != nil){
+        url = [NSString stringWithFormat:@"http://%@%@",host,msg.PATH];
+    }else{
+        url = [NSString stringWithFormat:@"http://%@%@",HOST_URL,msg.PATH];
+    }
+    MKNetworkOperation *op = [self operationWithURLString:url
+                                              params:msg.requestParams
+                                          httpMethod:msg.METHOD];
     msg.op = op;
-    msg.method = @"GET";
-    msg.params = params;
-    msg.path = path;
-    msg.key = key;
     [self sending:msg];
     
     NSLog(@"%@",msg.op.url);
@@ -139,25 +72,21 @@ DEF_SINGLETON(Action)
     return op;
 }
 
--(MKNetworkOperation*) POST:(NSString*) path
-                       file:(NSDictionary *) file
-                     params:(NSDictionary *) params
-                        key:(NSString *)key
+-(MKNetworkOperation*) POST:(Request *)msg
 {
-    NSURL *url = [NSURL URLWithString:path];
-    if([url scheme] == nil){
-        path = [NSString stringWithFormat:@"http://%@%@",HOST_URL,path];
+    NSURL *host = [NSURL URLWithString:msg.HOST];
+    NSString *url = nil;
+    if([host scheme] != nil){
+        url = [NSString stringWithFormat:@"http://%@%@",host,msg.PATH];
+    }else{
+        url = [NSString stringWithFormat:@"http://%@%@",HOST_URL,msg.PATH];
     }
-    MKNetworkOperation *op = [self operationWithURLString:path
-                                              params:params
-                                          httpMethod:@"POST"];
-    ActionData *msg = [ActionData Data];
+    MKNetworkOperation *op = [self operationWithURLString:url
+                                                   params:msg.requestParams
+                                               httpMethod:msg.METHOD];
     msg.op = op;
-    msg.params = params;
-    msg.path = path;
-    msg.method = @"POST";
-    msg.key = key;
-    msg.files = file;
+    [self sending:msg];
+    NSDictionary *file = msg.requestFiles;
     for (NSString *key in [file allKeys]) {
         [op addFile:[file objectForKey:key] forKey:key];
     }
@@ -188,7 +117,7 @@ DEF_SINGLETON(Action)
 }
 
 
--(void)checkCode:(ActionData *)msg{
+-(void)checkCode:(Request *)msg{
     if([msg.output objectAtPath:CODE_KEY] && [[msg.output objectAtPath:CODE_KEY] intValue] == RIGHT_CODE){
         [self success:msg];
     }else{
@@ -196,14 +125,14 @@ DEF_SINGLETON(Action)
     }
 }
 
--(void)sending:(ActionData *)msg{
+-(void)sending:(Request *)msg{
     msg.state = SendingState;
     if([self.aDelegaete respondsToSelector:@selector(handleActionMsg:)]){
         [self.aDelegaete handleActionMsg:msg];
     }
 }
 
-- (void)success:(ActionData *)msg{
+- (void)success:(Request *)msg{
     msg.discription = [msg.output objectAtPath:MSG_KEY];
     if (msg.state != SuccessState) {
         msg.state = SuccessState;
@@ -213,7 +142,7 @@ DEF_SINGLETON(Action)
     }
 }
 
-- (void)failed:(ActionData *)msg{
+- (void)failed:(Request *)msg{
     if(msg.error.userInfo!= nil && [msg.error.userInfo objectForKey:@"NSLocalizedDescription"]){
         msg.discription = [msg.error.userInfo objectForKey:@"NSLocalizedDescription"];
     }
@@ -224,7 +153,7 @@ DEF_SINGLETON(Action)
     }
 }
 
-- (void)error:(ActionData *)msg{
+- (void)error:(Request *)msg{
     if([msg.output objectAtPath:MSG_KEY]){
         msg.discription = [msg.output objectAtPath:MSG_KEY];
         NSLog(@"Error:%@",msg.discription);
@@ -235,7 +164,7 @@ DEF_SINGLETON(Action)
     }
 }
 
--(void)progressing:(ActionData *)msg{
+-(void)progressing:(Request *)msg{
     if([self.aDelegaete respondsToSelector:@selector(handleProgressMsg:)]){
         [self.aDelegaete handleProgressMsg:msg];
     }
