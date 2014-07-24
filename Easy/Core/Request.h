@@ -10,9 +10,10 @@
 @interface Request : NSObject
 @property(nonatomic,retain)NSString *HOST;
 @property(nonatomic,retain)NSString *PATH;
-
+@property(nonatomic,retain)NSString *METHOD;
 +(id)Request;
--(id)initRequest;
 -(void)loadRequest;
+-(NSString *)requestKey;
++(NSString *)requestKey;
 -(NSDictionary *)requestParams;
 @end

@@ -36,18 +36,21 @@
 
 }
 
-- (void)SEND_ACTION:(NSDictionary *)dict{
-    
+- (void)SEND_ACTION:(Request *)req{
+    if(req !=nil){
+        NSString *path = [NSString stringWithFormat:@"%@%@",req.HOST,req.PATH];
+        self.action.GET_MSG(req.requestKey,path,req.requestParams);
+    }
 }
 
-- (void)SEND_CACHE_ACTION:(NSDictionary *)dict{
+- (void)SEND_CACHE_ACTION:(Request *)req{
     [self.action readFromCache];
-    [self SEND_ACTION:dict];
+    [self SEND_ACTION:req];
 }
 
-- (void)SEND_NO_CACHE_ACTION:(NSDictionary *)dict{
+- (void)SEND_NO_CACHE_ACTION:(Request *)req{
     [self.action notReadFromCache];
-    [self SEND_ACTION:dict];
+    [self SEND_ACTION:req];
 }
 
 @end

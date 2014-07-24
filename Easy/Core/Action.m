@@ -85,6 +85,7 @@ DEF_SINGLETON(Action)
 +(id)Action{
     return [[[self class] alloc] init];
 }
+
 - (id)init
 {
     self = [super initWithHostName:HOST_URL customHeaderFields:@{@"x-client-identifier" : CLIENT}];
@@ -102,7 +103,12 @@ DEF_SINGLETON(Action)
                     params:(NSDictionary *) params
                        key:(NSString *)key
 {
-    MKNetworkOperation *op = [self operationWithPath:[NSString stringWithFormat:@"%@%@",BASE_URL,path]
+    NSURL *url = [NSURL URLWithString:path];
+    
+    if([url scheme] == nil){
+        path = [NSString stringWithFormat:@"http://%@%@",HOST_URL,path];
+    }
+    MKNetworkOperation *op = [self operationWithURLString:path
                                               params:params
                                           httpMethod:@"GET"];
     ActionData *msg = [ActionData Data];
@@ -138,7 +144,11 @@ DEF_SINGLETON(Action)
                      params:(NSDictionary *) params
                         key:(NSString *)key
 {
-    MKNetworkOperation *op = [self operationWithPath:[NSString stringWithFormat:@"%@%@",BASE_URL,path]
+    NSURL *url = [NSURL URLWithString:path];
+    if([url scheme] == nil){
+        path = [NSString stringWithFormat:@"http://%@%@",HOST_URL,path];
+    }
+    MKNetworkOperation *op = [self operationWithURLString:path
                                               params:params
                                           httpMethod:@"POST"];
     ActionData *msg = [ActionData Data];
