@@ -18,11 +18,13 @@
     return self;
 }
 
-- (void)addFooter
-{
+-(void)initPage{
     _page = @1;
     _pageSize = @10;
     _total = @0;
+}
+- (void)addFooter
+{
     MJRefreshFooterView *footer = [MJRefreshFooterView footer];
     footer.scrollView = self;
     footer.refreshStateChangeBlock =^(MJRefreshBaseView *refreshView,MJRefreshState state) {
