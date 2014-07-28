@@ -1,7 +1,7 @@
 EasyIOS 2.0 - program on MVVM
 =======
 
-a easy way to program objective-c 
+EasyIOS is a new generation of development framework based on `Model-View-ViewModel` which makes faster and easier app development, Build your app by geek's way.
 
 
 ##2.0 The MVVM(Model-View-ViewModel)
