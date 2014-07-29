@@ -63,6 +63,7 @@ EasyIOS官方qq群 :340906744 欢迎大家加入讨论
 
     	platform :ios
     	pod 'EasyIOS', :head
+* If you use swift ,do not forget to set the `Objective-C Bridging Header` as `${PODS_ROOT}/Headers/EasyIOS/swift-bridge.h`
 
 ##2.0版本更新
 
