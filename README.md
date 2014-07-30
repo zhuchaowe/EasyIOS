@@ -15,7 +15,7 @@ EasyIOS 2.0类似`AngularJs`，最为核心的是：`MVVM`、`ORM`、模块化�
 
 EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,Model，Action四种模型来对IOS进行开发，4种模型的定义解决了IOS开发中ViewController承担了过多角色而造成的代码质量低下，使得结构思路更加清晰。
 
-* 1.其中`Scene`就是`ViewController`的子类，负责仅仅负责界面的展示逻辑
+* 1.其中`Scene`就是`ViewController`的子类，仅仅负责界面的展示逻辑
 * 2.`Model`数据模型，父类实现了ORM，可以实现json、object、sqlite三者之间的一键转换,
 * 3.`SceneModel` 视图-数据模型，主要负责 视图与模型的绑定工作，其中binding的工作交给了`ReactiveCocoa`。
 * 4.`SceneModel`包含`Action`成员，`Action`类主要负责网络数据的请求,数据缓存，数据解析工作
