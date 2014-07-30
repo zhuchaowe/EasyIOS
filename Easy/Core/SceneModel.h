@@ -9,13 +9,13 @@
 #import "Action.h"
 #import "RACEXTScope.h"
 #import "ReactiveCocoa.h"
-
+#import "Request.h"
 @interface SceneModel : NSObject
 @property(nonatomic,strong)Action *action;
 + (id)SceneModel;
-- (void)handleActionMsg:(ActionData *)msg;
-- (void)SEND_ACTION:(NSDictionary *)dict;
-- (void)SEND_CACHE_ACTION:(NSDictionary *)dict;
-- (void)SEND_NO_CACHE_ACTION:(NSDictionary *)dict;
-- (id)initModel;
+- (void)handleActionMsg:(Request *)msg;
+- (void)SEND_ACTION:(Request *)req;
+- (void)SEND_CACHE_ACTION:(Request *)req;
+- (void)SEND_NO_CACHE_ACTION:(Request *)req;
+- (void)loadSceneModel;
 @end

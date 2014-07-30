@@ -17,12 +17,16 @@
 - (id)initModel{
     self = [super init];
     if(self){
-        self.action = [Action Action];
+        [self loadSceneModel];
     }
     return self;
 }
 
-- (void)handleActionMsg:(ActionData *)msg{
+- (void)loadSceneModel{
+    self.action = [Action Action];
+}
+
+- (void)handleActionMsg:(Request *)msg{
     if(msg.sending){
         NSLog(@"sending:%@",msg.op.url);
     }else if(msg.succeed){
@@ -32,22 +36,24 @@
     }
 }
 
-- (void)handleProgressMsg:(ActionData *)msg{
+- (void)handleProgressMsg:(Request *)msg{
 
 }
 
-- (void)SEND_ACTION:(NSDictionary *)dict{
-    
+- (void)SEND_ACTION:(Request *)req{
+    if(req !=nil){
+        [self.action Send:req];
+    }
 }
 
-- (void)SEND_CACHE_ACTION:(NSDictionary *)dict{
+- (void)SEND_CACHE_ACTION:(Request *)req{
     [self.action readFromCache];
-    [self SEND_ACTION:dict];
+    [self SEND_ACTION:req];
 }
 
-- (void)SEND_NO_CACHE_ACTION:(NSDictionary *)dict{
+- (void)SEND_NO_CACHE_ACTION:(Request *)req{
     [self.action notReadFromCache];
-    [self SEND_ACTION:dict];
+    [self SEND_ACTION:req];
 }
 
 @end

@@ -1,8 +1,8 @@
 //
-//  ActionData.h
-//  fastSign
+//  Request.h
+//  NewEasy
 //
-//  Created by EasyIOS on 14-4-11.
+//  Created by 朱潮 on 14-7-24.
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
@@ -14,26 +14,29 @@ typedef enum
     FailState                       =1,
     SendingState                    =2,
     ErrorState                      =3
-} ActionState;
+} RequestState;
 
-@interface ActionData : NSObject
-@property(nonatomic,strong)NSString *key;
+@interface Request : NSObject
 @property(nonatomic,strong)NSDictionary * output;
 @property(nonatomic,strong)NSString *responseString;
 @property(nonatomic,strong)NSError *error;
 @property(nonatomic,assign)NSInteger state;
-@property(nonatomic,strong)NSString *path;
-@property(nonatomic,strong)NSString *method;
 @property(nonatomic,strong)NSString *discription;
-@property(nonatomic,strong)NSDictionary *params;
-@property(nonatomic,strong)NSDictionary *files;
 @property(nonatomic,assign)double progress;
+@property(nonatomic,assign)BOOL freezable;
 @property(nonatomic,strong)MKNetworkOperation *op;
 
-+(id)Data;
-- (BOOL)validate:(NSString *)key;
+@property(nonatomic,retain)NSString *HOST;
+@property(nonatomic,retain)NSString *PATH;
+@property(nonatomic,retain)NSString *METHOD;
++(id)Request;
+-(void)loadRequest;
+-(NSString *)requestKey;
++(NSString *)requestKey;
+-(NSDictionary *)requestParams;
+-(NSDictionary *)requestFiles;
+
 - (BOOL)succeed;
 - (BOOL)sending;
 - (BOOL)failed;
-
 @end

@@ -1,11 +1,15 @@
 EasyIOS 2.0 - program on MVVM
 =======
 
-a easy way to program objective-c 
+EasyIOS is a new generation of development framework based on `Model-View-ViewModel` which makes faster and easier app development, Build your app by geek's way.
 
 
 ##2.0 The MVVM(Model-View-ViewModel)
 全新基于`MVVM(Model-View-ViewModel)`编程模式架构，开启EasyIOS开发函数式编程新篇章。
+
+EasyIOS 2.0类似`AngularJs`，最为核心的是：`MVVM`、`ORM`、模块化、自动化双向数据绑定、等等
+
+2.0的demo在这里[MVVM Demo for EasyIOS](https://github.com/zhuchaowe/MVVM-Demo--EasyIOS-)，供大家学习。
 
 关于有疑问什么是MVVM，以及为什么IOS开发需要MVVM思想编程的，请看文章[用Model-View-ViewModel构建iOS App](http://swift.08dream.com/index.php?s=/Home/Article/detail/id/10036.html)有详细介绍.
 
@@ -61,6 +65,8 @@ EasyIOS官方qq群 :340906744 欢迎大家加入讨论
 
     	platform :ios
     	pod 'EasyIOS', :head
+    	
+* If you use swift ,do not forget to set the `Objective-C Bridging Header` as `${PODS_ROOT}/Headers/EasyIOS/swift-bridge.h`
 
 ##2.0版本更新
 

@@ -23,6 +23,7 @@
 @property (strong, nonatomic) id <SceneGridViewDelegate> SceneDelegate;
 -(void)addHeader;
 -(void)addFooter;
+-(void)initPage;
 -(void)flashMessage:(NSString *)msg;
 -(void)successWithNewArray:(NSArray *)array;
 -(void)endAllRefreshing;

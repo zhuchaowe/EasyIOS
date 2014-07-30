@@ -7,7 +7,7 @@
 //
 #import "Easy.h"
 #import "MKNetworkEngine.h"
-#import "ActionData.h"
+#import "Request.h"
 #import "ActionDelegate.h"
 
 //以下配置为调用Action 类必须 配置
@@ -22,25 +22,14 @@
 
 
 @interface Action : MKNetworkEngine
-typedef Action *	(^ActionBlockN)(id first ,id second,id third,... );
-typedef Action *	(^ActionBlockTN)(id first ,id second,... );
-
-@property (nonatomic, readonly) ActionBlockTN GET_MSG;
-@property (nonatomic, readonly) ActionBlockN POST_MSG;
 @property(nonatomic,strong)id<ActionDelegate> aDelegaete;
 + (id)Action;
 - (id)initWithCache;
-- (void)success:(ActionData *)msg;
-- (void)error:(ActionData *)msg;
-- (void)failed:(ActionData *)msg;
--(MKNetworkOperation*) GET:(NSString*) path
-                    params:(NSDictionary *) params
-                       key:(NSString *)key;
+- (void)success:(Request *)msg;
+- (void)error:(Request *)msg;
+- (void)failed:(Request *)msg;
 
--(MKNetworkOperation*) POST:(NSString*) path
-                       file:(NSDictionary *) file
-                     params:(NSDictionary *) params
-                        key:(NSString *)key;
+-(MKNetworkOperation*)Send:(Request *) msg;
 
 AS_SINGLETON(Action)
 @end

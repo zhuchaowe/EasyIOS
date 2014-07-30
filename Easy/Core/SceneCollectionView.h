@@ -17,9 +17,10 @@
 @property(strong,nonatomic)NSMutableArray *dataArray;
 @property(nonatomic,strong)NSString *cacheDataString;
 @property(nonatomic,strong)UILabel *msgLabel;
-@property (strong, nonatomic) id <SceneCollectionViewDelegate> SceneDelegate;
+@property(strong, nonatomic)id <SceneCollectionViewDelegate> SceneDelegate;
 -(void)addHeader;
 -(void)addFooter;
+-(void)initPage;
 -(void)flashMessage:(NSString *)msg;
 -(void)successWithNewArray:(NSArray *)array;
 -(void)endAllRefreshing;

@@ -20,6 +20,7 @@
 @property (strong, nonatomic) id <SceneTableViewDelegate> SceneDelegate;
 -(void)addHeader;
 -(void)addFooter;
+-(void)initPage;
 -(void)flashMessage:(NSString *)msg;
 -(void)successWithNewArray:(NSArray *)array;
 -(void)endAllRefreshing;
