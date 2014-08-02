@@ -57,7 +57,10 @@ typedef NSDictionary *	(^NSDictionaryAppendBlock)( NSString * key, id value );
 
 - (NSMutableDictionary *)mutableDictAtPath:(NSString *)path;
 - (NSMutableDictionary *)mutableDictAtPath:(NSString *)path otherwise:(NSMutableDictionary *)other;
-
+- (NSDictionary *)each:(void (^)(id key, id value))block;
+- (NSDictionary *)eachWithStop:(void (^)(id key, id value, BOOL *stop))block;
+- (NSDictionary *)eachKey:(void (^)(id key))block;
+- (NSDictionary *)eachValue:(void (^)(id value))block;
 @end
 
 #pragma mark -
