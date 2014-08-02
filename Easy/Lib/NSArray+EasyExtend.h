@@ -24,6 +24,14 @@ typedef NSComparisonResult	(^NSMutableArrayCompareBlock)( id left, id right );
 
 - (NSString *)join:(NSString *)delimiter;
 - (NSString *)stringByWords;
+- (NSArray *)map:(id (^)(id obj))block;
+- (NSArray *)mapWithIndex:(id (^)(id obj, NSUInteger idx))block;
+- (NSArray *)each:(void (^)(id obj))block;
+- (NSArray *)eachWithIndex:(void (^)(id obj, NSUInteger idx))block;
+- (NSArray *)eachWithStop:(void (^)(id obj, BOOL *stop))block;
+- (NSArray *)eachWithIndexAndStop:(void (^)(id obj, NSUInteger idx, BOOL *stop))block;
+- (NSArray *)filter:(BOOL(^)(id obj))block;
+- (id)find:(BOOL(^)(id obj))block;
 /**
  *	通过需要按【首字母分类】的 【姓名数组】 调用此函数
  *
