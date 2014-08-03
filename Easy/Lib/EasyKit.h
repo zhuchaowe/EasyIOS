@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-
+#import "ReactiveCocoa.h"
 @interface EasyKit : NSObject {}
 
 + (NSString *)homePath;
