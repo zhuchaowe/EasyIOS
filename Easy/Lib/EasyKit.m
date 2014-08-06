@@ -88,14 +88,6 @@
   }
 }
 
-+ (RACSignal*)RACObserve:(id)target key:(NSString *)keyPath{
-    return [target rac_valuesForKeyPath:keyPath observer:target];
-}
-
-+ (RACDisposable*)RAC:(id)target key:(NSString *)keyPath signal:(RACSignal *)signal{
-    return [signal setKeyPath:keyPath onObject:target];
-}
-
 @end
 
 @implementation $

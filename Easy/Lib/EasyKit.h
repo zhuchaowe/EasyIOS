@@ -16,8 +16,6 @@
 + (void)waitUntil:(BOOL (^)(void))condition;
 + (void)waitUntil:(BOOL (^)(void))condition timeOut:(NSTimeInterval)timeOut;
 + (void)waitUntil:(BOOL (^)(void))condition timeOut:(NSTimeInterval)timeOut interval:(NSTimeInterval)interval;
-+ (RACSignal*)RACObserve:(id)target key:(NSString *)keyPath;
-+ (RACDisposable*)RAC:(id)target key:(NSString *)keyPath signal:(RACSignal *)signal;
 @end
 
 @interface $ : EasyKit {}
