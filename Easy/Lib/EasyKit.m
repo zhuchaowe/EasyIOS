@@ -88,8 +88,8 @@
   }
 }
 
-+ (RACSignal*)RACObserve:(id)target key:(NSString *)keyPath observer:(id)iself{
-    return [target rac_valuesForKeyPath:keyPath observer:iself];
++ (RACSignal*)RACObserve:(id)target key:(NSString *)keyPath{
+    return [target rac_valuesForKeyPath:keyPath observer:target];
 }
 
 + (RACDisposable*)RAC:(id)target key:(NSString *)keyPath signal:(RACSignal *)signal{
