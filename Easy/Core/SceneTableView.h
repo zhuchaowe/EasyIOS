@@ -29,6 +29,6 @@
 @protocol SceneTableViewDelegate <NSObject>
 
 @required
--(void)handlePullLoader:(MJRefreshBaseView *)view state:(NSInteger)state;
+-(void)handlePullLoader:(MJRefreshBaseView *)view state:(PullLoaderState)state;
 
 @end

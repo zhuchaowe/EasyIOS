@@ -36,7 +36,7 @@
     [super viewWillDisappear:animated];
 }
 
--(void)handlePullLoader:(MJRefreshBaseView *)view state:(NSInteger)state{
+-(void)handlePullLoader:(MJRefreshBaseView *)view state:(PullLoaderState)state{
     
 }
 
