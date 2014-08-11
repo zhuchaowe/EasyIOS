@@ -10,7 +10,7 @@ import UIKit
 
 class FoundationScene: Scene {
 
-    @IBOutlet strong var collectionView: SceneCollectionView!
+    @IBOutlet  var collectionView: SceneCollectionView!
     var dict:NSDictionary!
     var showFont:String!
     override func viewDidLoad() {

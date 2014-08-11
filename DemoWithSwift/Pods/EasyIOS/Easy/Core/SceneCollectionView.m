@@ -14,16 +14,17 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
     }
     return self;
 }
 
+-(void)initPage{
+    _page = @1;
+    _pageSize = @10;
+    _total = @0;
+}
 - (void)addFooter
 {
-    _page = 1;
-    _pageSize = 10;
-    _total = 0;
     MJRefreshFooterView *footer = [MJRefreshFooterView footer];
     footer.scrollView = self;
     footer.refreshStateChangeBlock =^(MJRefreshBaseView *refreshView,MJRefreshState state) {
@@ -36,9 +37,6 @@
 
 - (void)addHeader
 {
-    _page = 1;
-    _pageSize = 10;
-    _total = 0;
     MJRefreshHeaderView *header = [MJRefreshHeaderView header];
     header.scrollView = self;
     header.refreshStateChangeBlock =^(MJRefreshBaseView *refreshView,MJRefreshState state) {
@@ -79,7 +77,7 @@
 	}];
 }
 -(void)successWithNewArray:(NSArray *)array{
-    if (_page == 1) {
+    if ([_page integerValue] == 1) {
         [_dataArray removeAllObjects];
         _dataArray = [NSMutableArray array];
     }
@@ -93,10 +91,10 @@
         [_header endRefreshing];
     }
     if(_footer !=nil){
-        if(_page == 1){
+        if([_page integerValue] == 1){
             _footer.isEnd = NO;
         }
-        if(_total >0 && _total == [self.dataArray count] &&         _footer.isEnd == NO){
+        if([_total integerValue] >0 && [_total integerValue] == [self.dataArray count] && _footer.isEnd == NO){
             [self.footer setState:MJRefreshStateEnd];
         }else {
             if(_footer.isEnd == NO){

@@ -32,13 +32,13 @@
 	NSDateComponents *gap = [cal components:unitFlag fromDate:today toDate:todate options:0]; //计算时间差
     
 	if (ABS([gap day]) > 0) {
-		return [NSString stringWithFormat:@"%d天前", ABS([gap day])];
+		return [NSString stringWithFormat:@"%ld天前", (long)(ABS([gap day]))];
 	}
 	else if (ABS([gap hour]) > 0) {
-		return [NSString stringWithFormat:@"%d小时前", ABS([gap hour])];
+		return [NSString stringWithFormat:@"%ld小时前", (long)(ABS([gap hour]))];
 	}
 	else {
-		return [NSString stringWithFormat:@"%d分钟前",  ABS([gap minute])];
+		return [NSString stringWithFormat:@"%ld分钟前",  (long)(ABS([gap minute]))];
 	}
 }
 +(NSTimeInterval)formatTimeSinceNow:(NSTimeInterval)timestamp{
@@ -159,7 +159,7 @@
 	NSDateComponents *comps = [cal
 	                           components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit | NSWeekdayCalendarUnit
                                fromDate:now];
-	NSLog(@"%d,%d,%d,%d", comps.year, comps.month, comps.week, comps.weekday);
+	NSLog(@"%ld,%ld,%ld,%ld", (long)comps.year, (long)comps.month, (long)comps.week, (long)comps.weekday);
 	if (comps.weekday < 2) {
 		comps.week = comps.week - 1;
 	}

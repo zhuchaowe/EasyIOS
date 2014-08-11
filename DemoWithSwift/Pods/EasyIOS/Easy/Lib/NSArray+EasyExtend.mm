@@ -187,6 +187,72 @@
     return mutDic;
 }
 
+- (NSArray *)map:(id (^)(id obj))block {
+    __block NSMutableArray *array = [NSMutableArray arrayWithCapacity:[self count]];
+    [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [array addObject:block(obj)];
+    }];
+    return array;
+}
+
+- (NSArray *)mapWithIndex:(id (^)(id obj, NSUInteger idx))block {
+    __block NSMutableArray *array = [NSMutableArray arrayWithCapacity:[self count]];
+    [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [array addObject:block(obj, idx)];
+    }];
+    return array;
+}
+
+- (NSArray *)each:(void (^)(id obj))block {
+    [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        block(obj);
+    }];
+    return self;
+}
+
+- (NSArray *)eachWithIndex:(void (^)(id obj, NSUInteger idx))block {
+    [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        block(obj, idx);
+    }];
+    return self;
+}
+
+- (NSArray *)eachWithStop:(void (^)(id obj, BOOL *stop))block {
+    [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        block(obj, stop);
+    }];
+    return self;
+}
+
+- (NSArray *)eachWithIndexAndStop:(void (^)(id obj, NSUInteger idx, BOOL *stop))block {
+    [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        block(obj, idx, stop);
+    }];
+    return self;
+}
+
+- (NSArray *)filter:(BOOL(^)(id obj))block {
+    __block NSMutableArray *array = [NSMutableArray arrayWithCapacity:[self count]];
+    [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if (block(obj)) {
+            [array addObject:obj];
+        }
+    }];
+    return [NSArray arrayWithArray:array];
+}
+
+- (id)find:(BOOL(^)(id obj))block {
+    __block id ret = nil;
+    [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if (block(obj)) {
+            *stop = YES;
+            ret = obj;
+        }
+    }];
+    return ret;
+}
+
+
 @end
 
 #pragma mark -

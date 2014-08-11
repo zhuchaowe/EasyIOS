@@ -2,9 +2,8 @@
 
 #import "BEVersion.h"
 
-// ----------------------------------
-// Source code
-// ----------------------------------
+NSString* const APP_VERSION = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+NSString* const APP_BULID = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
 
 #pragma mark -
 

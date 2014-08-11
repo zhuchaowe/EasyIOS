@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Bee_SystemInfo.h"
+#import "EzSystemInfo.h"
 @interface UIButton (EasyExtend)
 -(UIButton *)initNavigationButton:(UIImage *)image;
 -(UIButton *)initNavigationButtonWithTitle:(NSString *)str color:(UIColor *)color;

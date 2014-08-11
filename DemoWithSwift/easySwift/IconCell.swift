@@ -11,7 +11,11 @@ import UIKit
 class IconCell: UICollectionViewCell {
 
     var iconMainView:EzUILabel!
-    init(frame: CGRect) {
+    
+    required init(coder aDecoder: NSCoder!) {
+        super.init(coder: aDecoder)
+    }
+    override init(frame: CGRect) {
         super.init(frame: frame)
         iconMainView = EzUILabel(frame: CGRectMake(0, 0, 50, 50))
         iconMainView.textAlignment = NSTextAlignment.Center

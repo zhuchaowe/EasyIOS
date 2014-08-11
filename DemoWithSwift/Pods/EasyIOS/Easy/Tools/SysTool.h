@@ -6,8 +6,7 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
+#import "Easy.h"
 @interface SysTool : NSObject
 + (SysTool *)sharedInstance;
 ///////////////////////
