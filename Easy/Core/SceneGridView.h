@@ -32,7 +32,7 @@
 @protocol SceneGridViewDelegate <NSObject>
 
 @required
--(void)handlePullLoader:(MJRefreshBaseView *)view state:(NSInteger)state;
+-(void)handlePullLoader:(MJRefreshBaseView *)view state:(PullLoaderState)state;
 @optional
 - (void) sceneGridViewDidScroll:(UIScrollView *)scrollView;
 @end

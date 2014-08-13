@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol ActionDelegate <NSObject>
--(void)handleActionMsg:(ActionData *)msg;
+-(void)handleActionMsg:(Request *)msg;
 @optional
--(void)handleProgressMsg:(ActionData *)msg;
+-(void)handleProgressMsg:(Request *)msg;
 @end

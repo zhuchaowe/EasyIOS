@@ -26,7 +26,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitleText:self.title];
     // Do any additional setup after loading the view.
 }
 
@@ -37,7 +36,7 @@
     [super viewWillDisappear:animated];
 }
 
--(void)handlePullLoader:(MJRefreshBaseView *)view state:(NSInteger)state{
+-(void)handlePullLoader:(MJRefreshBaseView *)view state:(PullLoaderState)state{
     
 }
 
@@ -92,28 +91,4 @@
         self.navigationItem.titleView = titleView;
     }
 }
-
--(void)setTitleText:(NSString *)str hidden:(BOOL)flag{
-    if(self.navigationItem.titleView != nil){
-        [self.navigationItem.titleView removeFromSuperview];
-        self.navigationItem.titleView = nil;
-    }
-    
-    if(![self.title isEqualToString:@""]){
-        UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
-        titleView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        titleView.autoresizesSubviews = YES;
-        EzUILabel *titleLabel = [[EzUILabel alloc]initWithFrame:CGRectMake(0, 0, titleView.width, 44)];
-        titleLabel.text = str;
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.autoresizingMask = titleView.autoresizingMask;
-        titleLabel.textColor = [UIColor blackColor];
-        titleLabel.font = [UIFont systemFontOfSize:18.0f];
-        titleView.hidden = flag;
-        [titleView addSubview:titleLabel];
-        
-        self.navigationItem.titleView = titleView;
-    }
-}
-
 @end

@@ -6,7 +6,7 @@
 #import <objc/runtime.h>
 #import "execinfo.h"
 #import "NSObject+EasyProperty.h"
-#import "Bee_Singleton.h"
+#import "EzSingleton.h"
 #pragma mark -
 
 #undef	PRINT_CALLSTACK

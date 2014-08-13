@@ -19,12 +19,11 @@ typedef enum
 @interface Scene : UIViewController
 @property(nonatomic,retain)Scene *parentScene;
 
-- (void)handlePullLoader:(MJRefreshBaseView *)view state:(NSInteger)state;
+- (void)handlePullLoader:(MJRefreshBaseView *)view state:(PullLoaderState)state;
 - (void)showBarButton:(EzNavigationBar)position title:(NSString *)name fontColor:(UIColor *)color;
 - (void)showBarButton:(EzNavigationBar)position imageName:(NSString *)imageName;
 - (void)showBarButton:(EzNavigationBar)position button:(UIButton *)button;
 - (void)leftButtonTouch;
 - (void)rightButtonTouch;
 - (void)setTitleText:(NSString *)str;
-- (void)setTitleText:(NSString *)str hidden:(BOOL)flag;
 @end

@@ -1,16 +1,21 @@
 PODS:
-  - EasyIOS (1.0.2):
+  - EasyIOS (HEAD based on 2.0):
     - EasyIOS/Easy
-  - EasyIOS/Easy (1.0.2)
+  - EasyIOS/Easy (HEAD based on 2.0):
+    - ReactiveCocoa
+  - ReactiveCocoa (2.3.1):
+    - ReactiveCocoa/UI
+  - ReactiveCocoa/Core (2.3.1):
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/no-arc (2.3.1)
+  - ReactiveCocoa/UI (2.3.1):
+    - ReactiveCocoa/Core
 
 DEPENDENCIES:
-  - EasyIOS (from `~/Desktop/podspec/EasyIOS.podspec`)
-
-EXTERNAL SOURCES:
-  EasyIOS:
-    :podspec: ~/Desktop/podspec/EasyIOS.podspec
+  - EasyIOS (HEAD)
 
 SPEC CHECKSUMS:
-  EasyIOS: a90f0461725464dd9c646b1e322ae415cf9f1b5f
+  EasyIOS: 31d4643af90147fef9341ea63e720cf3ff80af66
+  ReactiveCocoa: dca75777b9d18990c8714a3a6f2149f29b4d1462
 
 COCOAPODS: 0.33.1

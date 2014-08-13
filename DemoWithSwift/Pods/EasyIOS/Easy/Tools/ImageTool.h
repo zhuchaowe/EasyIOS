@@ -6,8 +6,7 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 @interface ImageTool : NSObject
 + (ImageTool *)sharedInstance;
 //压缩图片

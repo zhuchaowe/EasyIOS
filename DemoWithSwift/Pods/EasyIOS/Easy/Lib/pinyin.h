@@ -6,7 +6,7 @@
  *  Copyright 2010 RED/SAFI. All rights reserved.
  *
  */
-
+#import <Foundation/Foundation.h>
 @interface HTFirstLetter : NSObject
 
 + (char)pinyinFirstLetter:(unsigned short )hanzi;

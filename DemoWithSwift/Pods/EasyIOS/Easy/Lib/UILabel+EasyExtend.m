@@ -10,11 +10,6 @@
 
 @implementation UILabel (EasyExtend)
 
-//- (id)initWithFrame:(CGRect)frame{
-//    self = [super initWithFrame:frame];
-//    self.backgroundColor = [UIColor clearColor];
-//    return self;
-//}
 -(CGSize)autoSize{
     return [self.text sizeWithFont:self.font constrainedToSize:self.frame.size lineBreakMode:NSLineBreakByWordWrapping];
 }

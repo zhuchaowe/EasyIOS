@@ -2,7 +2,7 @@ CLANG_CXX_LANGUAGE_STANDARD = gnu++0x
 CLANG_CXX_LIBRARY = libstdc++
 CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/EasyIOS" $(SDKROOT)/usr/include/libz, $(SDKROOT)/usr/include/libxml2
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers" -isystem "${PODS_ROOT}/Headers/EasyIOS"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/EasyIOS" "${PODS_ROOT}/Headers/ReactiveCocoa" "${PODS_ROOT}/Headers/ReactiveCocoa/ReactiveCocoa" $(SDKROOT)/usr/include/libz, $(SDKROOT)/usr/include/libxml2
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers" -isystem "${PODS_ROOT}/Headers/EasyIOS" -isystem "${PODS_ROOT}/Headers/ReactiveCocoa" -isystem "${PODS_ROOT}/Headers/ReactiveCocoa/ReactiveCocoa"
 OTHER_LDFLAGS = -ObjC -lsqlite3 -lstdc++ -lz.1.1.3 -framework CoreFoundation -framework CoreGraphics -framework Foundation -framework Security -framework UIKit
 PODS_ROOT = ${SRCROOT}/Pods
