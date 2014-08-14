@@ -12,7 +12,6 @@
 #import "Model.h"
 #import "SceneModel.h"
 #import "SceneCollectionView.h"
-#import "SceneGridView.h"
 #import "SceneScrollView.h"
 #import "SceneTableView.h"
 #import "EzMiButton.h"
