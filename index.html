@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Easyios by zhuchaowe</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/zhuchaowe/EasyIOS">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/zhuchaowe/EasyIOS/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/zhuchaowe/EasyIOS/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Easyios</h1>
+          <p>A new generation of development framework based on Model-View-ViewModel</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/zhuchaowe">zhuchaowe</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a name="easyios-20---program-on-mvvm" class="anchor" href="#easyios-20---program-on-mvvm"><span class="octicon octicon-link"></span></a>EasyIOS 2.0 - program on MVVM</h1>
+
+<p>EasyIOS is a new generation of development framework based on <code>Model-View-ViewModel</code> which makes faster and easier app development, Build your app by geek's way.</p>
+
+<p><a href="https://github.com/zhuchaowe/EasyIOS/wiki">教程在Wiki Paper</a></p>
+
+<h2>
+<a name="20-the-mvvmmodel-view-viewmodel" class="anchor" href="#20-the-mvvmmodel-view-viewmodel"><span class="octicon octicon-link"></span></a>2.0 The MVVM(Model-View-ViewModel)</h2>
+
+<p>全新基于<code>MVVM(Model-View-ViewModel)</code>编程模式架构，开启EasyIOS开发函数式编程新篇章。</p>
+
+<p>EasyIOS 2.0类似<code>AngularJs</code>，最为核心的是：<code>MVVM</code>、<code>ORM</code>、模块化、自动化双向数据绑定、等等</p>
+
+<p>2.0的demo在这里<a href="https://github.com/zhuchaowe/MVVM-Demo--EasyIOS-">MVVM Demo for EasyIOS</a>，供大家学习。</p>
+
+<p>喜欢<code>swift</code>的同学，同样有<code>swift</code>的2.0 demo <a href="https://github.com/zhuchaowe/RACSwift">RACSwift for EasyIOS</a>，供大家学习。</p>
+
+<p>关于有疑问什么是MVVM，以及为什么IOS开发需要MVVM思想编程的，请看文章<a href="http://swift.08dream.com/index.php?s=/Home/Article/detail/id/10036.html">用Model-View-ViewModel构建iOS App</a>有详细介绍.</p>
+
+<p>EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,Model，Action四种模型来对IOS进行开发，4种模型的定义解决了IOS开发中ViewController承担了过多角色而造成的代码质量低下，使得结构思路更加清晰。</p>
+
+<ul>
+<li>1.其中<code>Scene</code>就是<code>ViewController</code>的子类，仅仅负责界面的展示逻辑</li>
+<li>2.<code>Model</code>数据模型，父类实现了ORM，可以实现json、object、sqlite三者之间的一键转换,</li>
+<li>3.<code>SceneModel</code> 视图-数据模型，主要负责 视图与模型的绑定工作，其中binding的工作交给了<code>ReactiveCocoa</code>。</li>
+<li>4.<code>SceneModel</code>包含<code>Action</code>成员，<code>Action</code>类主要负责网络数据的请求,数据缓存，数据解析工作</li>
+</ul><p>如果你有看Github的Trending Objective-C榜单，那你肯定是见过<code>ReactiveCocoa</code>了。如果你在微博上关注唐巧、onevcat等国内开发者。那也应该听说过<code>ReactiveCocoa</code>了。 
+<code>ReactiveCocoa</code>简称RAC，就是基于响应式编程思想的Objective-C实践，它是Github的一个开源项目，你可以在<a href="https://github.com/ReactiveCocoa/ReactiveCocoa">这里</a>找到它。</p>
+
+<p>采用<code>MKNetworkKit</code> 网络框架，修改了部分功能，底层支持网络缓存，轻松控制是否启用缓存。</p>
+
+<p>采用<code>ReactiveCocoa</code> 框架，实现响应式编程，减少代码复杂度。</p>
+
+<p>集成了开源代码<code>UIGridView</code> 网格视图</p>
+
+<p>集成了开源代码<code>RTLabel</code> 富文本Label</p>
+
+<p>集成<code>MJRefresh</code>下拉刷新，有删改</p>
+
+<p><code>Model</code>类整合<code>Jastor</code>的类库和<code>MojoDataBase</code>类库</p>
+
+<p>整合了很多开源的优秀代码</p>
+
+<p>部分函数借鉴了<code>BeeFramework</code></p>
+
+<p>常用类库：</p>
+
+<p><code>Action</code> 负责网络数据请求</p>
+
+<p><code>Model</code> 负责数据存储</p>
+
+<p><code>SceneModel</code> 负责<code>Scene</code>与<code>Model</code>的绑定，调用action进行数据请求</p>
+
+<p><code>Scene</code> 一个视图相当于<code>UIViewController</code>,提供了快速集成网络请求和下拉刷新上拉加载的方法。</p>
+
+<p><code>SceneTableView</code>  一个<code>TableView</code>，配合<code>Scene</code>提供了集成下拉刷新上拉加载的方法</p>
+
+<p><code>SceneCollectionView</code> 一个<code>CollectionView</code>，配合<code>Scene</code>提供了集成下拉刷新上拉加载的方法</p>
+
+<p>EasyIOS官方qq群 :340906744 欢迎大家加入讨论</p>
+
+<ul>
+<li><a href="http://git.oschina.net/zhuchaowe/EasyIOS">git on oschina </a></li>
+<li><a href="https://github.com/zhuchaowe/EasyIOS">git on github </a></li>
+</ul><h3>
+<a name="how-to-install" class="anchor" href="#how-to-install"><span class="octicon octicon-link"></span></a>How To Install</h3>
+
+<ul>
+<li>Import from CocoaPods </li>
+<li>
+<p>Add below to Podfile and run pod install</p>
+
+<pre><code>platform :ios
+pod 'EasyIOS', :head
+</code></pre>
+</li>
+<li><p>If you use swift , please click <a href="https://github.com/zhuchaowe/RACSwift">here</a></p></li>
+</ul><h2>
+<a name="20%E7%89%88%E6%9C%AC%E6%9B%B4%E6%96%B0" class="anchor" href="#20%E7%89%88%E6%9C%AC%E6%9B%B4%E6%96%B0"><span class="octicon octicon-link"></span></a>2.0版本更新</h2>
+
+<ul>
+<li>架构修改，基于MVVM架构</li>
+<li>把<code>SceneModel</code>从<code>Scene</code>中剥离出来，并且加入响应式编程框架<code>ReactiveCocoa</code>
+</li>
+<li>
+<code>ReactiveCocoa</code>中文使用说明教程 <a href="http://swift.08dream.com/index.php?s=/Home/Article/detail/id/10035.html">ReactiveCocoa2实战</a>
+</li>
+<li>
+<code>ReactiveCocoa</code> 在github上有开源项目<a href="https://github.com/ReactiveCocoa/ReactiveCocoa">ReactiveCocoa2</a>
+</li>
+</ul><h2>
+<a name="103%E7%89%88%E6%9C%AC%E6%9B%B4%E6%96%B0" class="anchor" href="#103%E7%89%88%E6%9C%AC%E6%9B%B4%E6%96%B0"><span class="octicon octicon-link"></span></a>1.0.3版本更新</h2>
+
+<ul>
+<li> 再也不用担心奇葩的图文混排了</li>
+<li> 新增字体图片支持 资源里的demo 就是一个基于 <code>swift</code>和<code>easyios</code>的字体图片演示,可以用来作为图片字典查阅</li>
+<li> 可扩展的字体库，字需要添加<code>ttf</code>和<code>json</code>文件就可以轻松扩展特殊字体</li>
+<li> 目前支持4种图片字体 <code>FontAwesome</code>、<code>Zocial-Regular</code>、<code>Ionicons</code>、<code>Foundation</code>
+</li>
+<li> <a href="http://fortawesome.github.io/Font-Awesome/">FontAwesome 4.1</a> 字体库, 包含 439 个图标</li>
+<li> <a href="http://zurb.com/playground/foundation-icon-fonts-3">Foundation icons</a> 字体库, 包含283 个图标</li>
+<li> <a href="http://zocial.smcllns.com/">Zocial Contains</a> 字体库, 包含99 个图标</li>
+<li> <a href="http://ionicons.com/">ionicons 1.5.2</a> 字体库, 包含601 个图标,大部分是 IOS7 style</li>
+</ul><p><img src="http://08dream-08dream.stor.sinaapp.com/100003535548847.gif" alt="image"></p>
+
+<h2>
+<a name="102%E7%89%88%E6%9C%AC%E6%9B%B4%E6%96%B0" class="anchor" href="#102%E7%89%88%E6%9C%AC%E6%9B%B4%E6%96%B0"><span class="octicon octicon-link"></span></a>1.0.2版本更新</h2>
+
+<ul>
+<li> fix一些头文件的引用关系，增加了swift头文件支持。</li>
+<li> 用swift的同学，要设置<code>Objective-C Bridging Header</code>为<code>${PODS_ROOT}/Headers/EasyIOS/swift-bridge.h</code>
+</li>
+<li> 1.0.2版本发布到了CocoaPods</li>
+</ul><h2>
+<a name="101%E7%89%88%E6%9C%AC%E6%9B%B4%E6%96%B0" class="anchor" href="#101%E7%89%88%E6%9C%AC%E6%9B%B4%E6%96%B0"><span class="octicon octicon-link"></span></a>1.0.1版本更新</h2>
+
+<ul>
+<li>1.增加了ORM支持，从此可以实现json、object、sqlite三者之间的一键转换,可以节省很多代码,是不是很酷。</li>
+</ul><p>model类整合了Jastor的类库和MojoDataBase类库</p>
+
+<ul>
+<li>2.修改了Action类中的post的参数，增加了files参数，</li>
+</ul><p>因此，action.POST_MSG的时候现在至少要3个参数哦</p>
+
+<ul>
+<li><p>3.借鉴了beeframework的消息通知机制。。.默默给郭大点个赞。。</p></li>
+<li><p>4.修复了一个下拉刷新的bug</p></li>
+<li><p>5.提供了一键打开百度地图、苹果地图、google地图、高德地图发起调用的接口，再也不用担心看地图文档了</p></li>
+</ul>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
