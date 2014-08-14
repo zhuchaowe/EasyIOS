@@ -30,8 +30,6 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 
 采用`ReactiveCocoa` 框架，实现响应式编程，减少代码复杂度。
 
-集成了开源代码`UIGridView` 网格视图
-
 集成了开源代码`RTLabel` 富文本Label
 
 集成`MJRefresh`下拉刷新，有删改
@@ -69,6 +67,15 @@ EasyIOS官方qq群 :340906744 欢迎大家加入讨论
     	pod 'EasyIOS', :head
     	
 * If you use swift , please click [here](https://github.com/zhuchaowe/RACSwift)
+
+
+##2.0.1版本更新
+
+* 修改pod依赖
+* [FontIcon](https://github.com/zhuchaowe/FontIcon)剥离独立项目
+* [MojoDatabase+Jastor](https://github.com/zhuchaowe/mojo-database)剥离独立项目
+* 移除部分非必要类库，代码整合
+* 本着引导大家编程更easy的原则,增加Easykit、FLKAutoLayout、CSStickyHeaderFlowLayout类
 
 ##2.0版本更新
 

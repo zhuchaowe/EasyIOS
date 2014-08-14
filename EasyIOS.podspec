@@ -24,6 +24,7 @@ Pod::Spec.new do |s|
     sp.dependency 'MojoDatabase'
     sp.dependency 'FLKAutoLayout'
     sp.dependency 'CSStickyHeaderFlowLayout'
+    sp.dependency 'RTLabel'
     sp.prefix_header_contents = '#import "swift-bridge.h"'
   end
 end
