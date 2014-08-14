@@ -72,10 +72,11 @@ EasyIOS官方qq群 :340906744 欢迎大家加入讨论
 ##2.0.1版本更新
 
 * 修改pod依赖
-* [FontIcon](https://github.com/zhuchaowe/FontIcon)剥离独立项目
-* [MojoDatabase+Jastor](https://github.com/zhuchaowe/mojo-database)剥离独立项目
+* [FontIcon](https://github.com/zhuchaowe/FontIcon)剥离项目，单独维护
+* [MojoDatabase+Jastor](https://github.com/zhuchaowe/mojo-database)剥离项目，单独维护
 * 移除部分非必要类库，代码整合
-* 本着引导大家编程更easy的原则,增加Easykit、FLKAutoLayout、CSStickyHeaderFlowLayout类
+* 本着引导大家编程更easy的原则,增加`Easykit`、`FLKAutoLayout`、`CSStickyHeaderFlowLayout`类
+
 
 ##2.0版本更新
 
