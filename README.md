@@ -5,6 +5,8 @@ EasyIOS is a new generation of development framework based on `Model-View-ViewMo
 
 [教程在Wiki Paper](https://github.com/zhuchaowe/EasyIOS/wiki)
 
+[json转Model工具 ModelCoder](https://github.com/zhuchaowe/ModelCoder) 
+
 ##2.0 The MVVM(Model-View-ViewModel)
 全新基于`MVVM(Model-View-ViewModel)`编程模式架构，开启EasyIOS开发函数式编程新篇章。
 
@@ -59,7 +61,6 @@ EasyIOS官方qq群 :340906744 欢迎大家加入讨论
 
 * [git on oschina ](http://git.oschina.net/zhuchaowe/EasyIOS)
 * [git on github ](https://github.com/zhuchaowe/EasyIOS)
-* [ModelCoder](https://github.com/zhuchaowe/ModelCoder)json转EasyIOS的Model类工具
 
 ###How To Install
 * Import from CocoaPods 
