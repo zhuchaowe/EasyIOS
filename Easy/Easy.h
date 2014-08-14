@@ -36,5 +36,5 @@
 #import "IconFont.h"
 #import "EzSandbox.h"
 #import "EasyKit.h"
-#define EZFRAME(frame)     NSLog(@"%.1f,%.1f,%.1f,%.1f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+
 
