@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 @interface ImageTool : NSObject
 + (ImageTool *)sharedInstance;
++ (UIImage*)gaussBlur:(CGFloat)blurLevel andImage:(UIImage*)originImage;
 //压缩图片
 + (UIImage*)imageWithImageSimple:(UIImage*)image scaledToWidth:(CGFloat)newWidth;
 + (void)saveImage:(UIImage *)tempImage WithName:(NSString *)imageName;
