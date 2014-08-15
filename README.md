@@ -1,9 +1,14 @@
+![image](https://raw.githubusercontent.com/zhuchaowe/EasyIOS/gh-pages/images/logo.png)
+
 EasyIOS 2.0 - program on MVVM
 =======
 
 EasyIOS is a new generation of development framework based on `Model-View-ViewModel` which makes faster and easier app development, Build your app by geek's way.
 
 [教程在Wiki Paper](https://github.com/zhuchaowe/EasyIOS/wiki)
+
+[json转Model工具 ModelCoder](https://github.com/zhuchaowe/ModelCoder) 
+
 ##2.0 The MVVM(Model-View-ViewModel)
 全新基于`MVVM(Model-View-ViewModel)`编程模式架构，开启EasyIOS开发函数式编程新篇章。
 
@@ -29,8 +34,6 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 采用`MKNetworkKit` 网络框架，修改了部分功能，底层支持网络缓存，轻松控制是否启用缓存。
 
 采用`ReactiveCocoa` 框架，实现响应式编程，减少代码复杂度。
-
-集成了开源代码`UIGridView` 网格视图
 
 集成了开源代码`RTLabel` 富文本Label
 
@@ -69,6 +72,17 @@ EasyIOS官方qq群 :340906744 欢迎大家加入讨论
     	pod 'EasyIOS', :head
     	
 * If you use swift , please click [here](https://github.com/zhuchaowe/RACSwift)
+
+
+##2.0.1版本更新
+
+* 修改pod依赖
+* [FontIcon](https://github.com/zhuchaowe/FontIcon)剥离项目，单独维护
+* Model层修改：移除Jastor，添加JsonModel[MojoDatabase+JsonModel](https://github.com/zhuchaowe/mojo-database)剥离项目，单独维护。
+* 增加懒人程序代码生成工具[ModelCoder](https://github.com/zhuchaowe/ModelCoder) 
+* 移除部分非必要类库，代码整合
+* 本着引导大家编程更easy的原则,增加`Easykit`、`FLKAutoLayout`类
+
 
 ##2.0版本更新
 

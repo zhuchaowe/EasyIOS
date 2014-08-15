@@ -20,6 +20,16 @@
 #import "DialogUtil.h"
 #import "Request.h"
 #import "UIView+FLKAutoLayout.h"
+#import "UICKeyChainStore.h"
+
+#ifdef DEBUG
+#define EZLog(...) NSLog(__VA_ARGS__)
+#else
+#define EZLog(...)
+#endif
+
+#define EZFRAME(frame)     EZLog(@"%.1f,%.1f,%.1f,%.1f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+
 
 #define HOST_CONFIG 1
 //以下配置为调用Action 类必须 配置

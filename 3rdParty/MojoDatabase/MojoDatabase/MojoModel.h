@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Jastor.h"
+#import "JSONModelLib.h"
 @class MojoDatabase;
 
-@interface MojoModel : Jastor {
+@interface MojoModel : JSONModel {
 	NSUInteger primaryKey;
 	BOOL savedInDatabase;
 }

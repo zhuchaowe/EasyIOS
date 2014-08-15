@@ -27,7 +27,6 @@
 #import "EzSystemInfo.h"
 #import "EzUILabel.h"
 #import "EzMiButton.h"
-#import "RTLabel.h"
 #import "EzUITapGestureRecognizer.h"
 #import "SysTool.h"
 #import "TimeTool.h"
@@ -36,5 +35,5 @@
 #import "IconFont.h"
 #import "EzSandbox.h"
 #import "EasyKit.h"
-#define EZFRAME(frame)     NSLog(@"%.1f,%.1f,%.1f,%.1f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+
 

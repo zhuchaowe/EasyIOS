@@ -6,11 +6,6 @@
 //  Copyright (c) 2014年 itcast. All rights reserved.
 //
 
-#ifdef DEBUG
-#define MJLog(...) NSLog(__VA_ARGS__)
-#else
-#define MJLog(...)
-#endif
 #import <UIKit/UIKit.h>
 // 文字颜色
 #define MJRefreshLabelTextColor [UIColor colorWithRed:150/255.0 green:150/255.0 blue:150/255.0 alpha:1.0]
