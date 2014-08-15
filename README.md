@@ -1,3 +1,5 @@
+![image](https://raw.githubusercontent.com/zhuchaowe/EasyIOS/gh-pages/images/logo.png)
+
 EasyIOS 2.0 - program on MVVM
 =======
 
