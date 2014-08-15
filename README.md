@@ -5,6 +5,14 @@ EasyIOS 2.0 - program on MVVM
 
 EasyIOS is a new generation of development framework based on `Model-View-ViewModel` which makes faster and easier app development, Build your app by geek's way.
 
+
+
+[EasyIOS论坛](http://easyios.08dream.com)
+
+[源码下载](https://github.com/zhuchaowe/EasyIOS/archive/master.zip)
+
+EasyIOS官方qq群 :[340906744](http://shang.qq.com/wpa/qunwpa?idkey=562d002e275a8199081313b00580fb7111a4faf694216a239064d29f5238bc91) 欢迎大家加入讨论
+
 [教程在Wiki Paper](https://github.com/zhuchaowe/EasyIOS/wiki)
 
 [json转Model工具 ModelCoder](https://github.com/zhuchaowe/ModelCoder) 
@@ -59,7 +67,7 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 
 `SceneCollectionView` 一个`CollectionView`，配合`Scene`提供了集成下拉刷新上拉加载的方法
 
-EasyIOS官方qq群 :340906744 欢迎大家加入讨论
+
 
 * [git on oschina ](http://git.oschina.net/zhuchaowe/EasyIOS)
 * [git on github ](https://github.com/zhuchaowe/EasyIOS)
