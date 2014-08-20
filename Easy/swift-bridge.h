@@ -22,6 +22,7 @@
 #import "UIView+FLKAutoLayout.h"
 #import "UICKeyChainStore.h"
 #import "GCDObjC.h"
+#import "RegExCategories.h"
 
 #ifdef DEBUG
 #define EZLog(...) NSLog(__VA_ARGS__)
