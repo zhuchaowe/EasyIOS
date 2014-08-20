@@ -361,6 +361,10 @@
     return string;
 }
 
+-(BOOL)isEmpty{
+    return self == nil || [self isEqualToString:@""];
+}
+
 @end
 
 
