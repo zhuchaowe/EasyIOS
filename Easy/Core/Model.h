@@ -10,8 +10,6 @@
 #import "NSDictionary+EasyExtend.h"
 #import "MojoModel.h"
 @interface Model : MojoModel
-+(id)ModelWithTable;
 +(id)Model;
--(id)initWithTable;
 -(id)initModel;
 @end

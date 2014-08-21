@@ -362,8 +362,8 @@
 }
 
 -(BOOL)isEmpty{
-    NSString* str = [self trim];
-    return str == nil || [str isEqualToString:@""];
+    
+    return self == nil || [self isKindOfClass:[NSNull class]] || [[self trim] isEqualToString:@""];
 }
 
 @end

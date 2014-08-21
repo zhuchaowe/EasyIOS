@@ -10,20 +10,9 @@
 
 @implementation Model
 
-+(id)ModelWithTable{
-    return [[self alloc]initWithTable];
-}
 
 +(id)Model{
     return [[self alloc]initModel];
-}
-
--(id)initWithTable{
-    self = [self initModel];
-    if(self){
-        [self createTable];
-    }
-    return self;
 }
 
 -(id)initModel{
