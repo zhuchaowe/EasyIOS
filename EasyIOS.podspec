@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
   s.name                  = "EasyIOS"
-  s.version               = "2.0.1"
-  s.summary               = "EasyIOS is a new generation of development framework based on Model-View-ViewModel "
-  s.homepage              = "https://github.com/zhuchaowe"
-  s.social_media_url      = "https://swift.08dream.com"
+  s.version               = "2.0.2"
+  s.summary               = "EasyIOS is a MVVM frameWork base on MKNetworkKit and ReactiveCocoa"
+  s.homepage              = "http://easyios.08dream.com"
+  s.social_media_url      = "http://easyios.08dream.com"
   s.platform     = :ios,'6.0'
   s.license               = { :type => "MIT", :file => "LICENSE" }
   s.author                = { "zhuchao" => "zhuchaowe@163.com" }
-  s.source                = { :git => "https://github.com/zhuchaowe/EasyIOS.git",:tag=>"2.0.1"}
+  s.source                = { :git => "https://github.com/zhuchaowe/EasyIOS.git",:tag=>"2.0.2"}
   s.ios.deployment_target = "6.0"
   s.requires_arc          = true
   s.framework             = "CoreFoundation","Foundation","CoreGraphics","Security","UIKit"
@@ -23,7 +23,11 @@ Pod::Spec.new do |s|
     sp.dependency 'FontIcon'
     sp.dependency 'MojoDatabase'
     sp.dependency 'FLKAutoLayout'
+    sp.dependency 'CSStickyHeaderFlowLayout'
     sp.dependency 'RTLabel'
+    sp.dependency 'GCDObjC'
+    sp.dependency 'RegExCategories'
+    sp.dependency 'TMCache'
     sp.prefix_header_contents = '#import "swift-bridge.h"'
   end
 end
