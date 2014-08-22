@@ -88,6 +88,7 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 * 新增正则表达式封装`RegExCategories`,可以轻松的开始码正则表达式了
 * 新增缓存处理封装`TMCache`,方便手动操作数据缓存(MK的自动缓存没有采用TMCache)
 * Model层升级：[MojoDatabase+JsonModel](https://github.com/zhuchaowe/mojo-database)新增自动检测、自动创建数据表，新增查询方法 ，order by、group by、limit等等方法 
+* 新增功能[教程在Wiki Paper](https://github.com/zhuchaowe/EasyIOS/wiki)
 
 ##2.0.1版本更新
 
