@@ -5,6 +5,14 @@ EasyIOS 2.0 - program on MVVM
 
 EasyIOS is a new generation of development framework based on `Model-View-ViewModel` which makes faster and easier app development, Build your app by geek's way.
 
+
+
+[EasyIOS论坛](http://easyios.08dream.com)
+
+[源码下载](https://github.com/zhuchaowe/EasyIOS/archive/master.zip)
+
+EasyIOS官方qq群 :[340906744](http://shang.qq.com/wpa/qunwpa?idkey=562d002e275a8199081313b00580fb7111a4faf694216a239064d29f5238bc91) 欢迎大家加入讨论
+
 [教程在Wiki Paper](https://github.com/zhuchaowe/EasyIOS/wiki)
 
 [json转Model工具 ModelCoder](https://github.com/zhuchaowe/ModelCoder) 
@@ -39,7 +47,7 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 
 集成`MJRefresh`下拉刷新，有删改
 
-`Model`类整合`Jastor`的类库和`MojoDataBase`类库
+`Model`类整合`JsonModel`的类库和`MojoDataBase`类库
 
 整合了很多开源的优秀代码
 
@@ -59,7 +67,7 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 
 `SceneCollectionView` 一个`CollectionView`，配合`Scene`提供了集成下拉刷新上拉加载的方法
 
-EasyIOS官方qq群 :340906744 欢迎大家加入讨论
+
 
 * [git on oschina ](http://git.oschina.net/zhuchaowe/EasyIOS)
 * [git on github ](https://github.com/zhuchaowe/EasyIOS)
@@ -73,6 +81,14 @@ EasyIOS官方qq群 :340906744 欢迎大家加入讨论
     	
 * If you use swift , please click [here](https://github.com/zhuchaowe/RACSwift)
 
+
+##2.0.2版本更新
+
+* 新增gcd封装`GCDObjC`,告别CocoaTouch原生难记的gcd调用方法
+* 新增正则表达式封装`RegExCategories`,可以轻松的开始码正则表达式了
+* 新增缓存处理封装`TMCache`,方便手动操作数据缓存(MK的自动缓存没有采用TMCache)
+* Model层升级：[MojoDatabase+JsonModel](https://github.com/zhuchaowe/mojo-database)新增自动检测、自动创建数据表，新增查询方法 ，order by、group by、limit等等方法 
+* 新增功能[教程在Wiki Paper](https://github.com/zhuchaowe/EasyIOS/wiki)
 
 ##2.0.1版本更新
 

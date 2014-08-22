@@ -361,6 +361,11 @@
     return string;
 }
 
+-(BOOL)isEmpty{
+    
+    return self == nil || [self isKindOfClass:[NSNull class]] || [[self trim] isEqualToString:@""];
+}
+
 @end
 
 

@@ -10,7 +10,8 @@
 
 @implementation UILabel (EasyExtend)
 
+//ios6 later
 -(CGSize)autoSize{
-    return [self.text sizeWithFont:self.font constrainedToSize:self.frame.size lineBreakMode:NSLineBreakByWordWrapping];
+    return [self.text boundingRectWithSize:self.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.font} context:nil].size;
 }
 @end

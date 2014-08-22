@@ -11,4 +11,16 @@
 @implementation Model
 
 
++(id)Model{
+    return [[self alloc]initModel];
+}
+
+-(id)initModel{
+    self = [super init];
+    if(self){
+        
+    }
+    return self;
+}
+
 @end
