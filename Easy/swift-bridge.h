@@ -23,6 +23,7 @@
 #import "UICKeyChainStore.h"
 #import "GCDObjC.h"
 #import "RegExCategories.h"
+#import "TMCache.h"
 
 #ifdef DEBUG
 #define EZLog(...) NSLog(__VA_ARGS__)

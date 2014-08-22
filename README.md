@@ -47,7 +47,7 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 
 集成`MJRefresh`下拉刷新，有删改
 
-`Model`类整合`Jastor`的类库和`MojoDataBase`类库
+`Model`类整合`JsonModel`的类库和`MojoDataBase`类库
 
 整合了很多开源的优秀代码
 
@@ -81,6 +81,13 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
     	
 * If you use swift , please click [here](https://github.com/zhuchaowe/RACSwift)
 
+
+##2.0.2版本更新
+
+* 新增gcd封装`GCDObjC`,告别CocoaTouch原生难记的gcd调用方法
+* 新增正则表达式封装`RegExCategories`,可以轻松的开始码正则表达式了
+* 新增缓存处理封装`TMCache`,方便手动操作数据缓存(MK的自动缓存没有采用TMCache)
+* Model层升级：[MojoDatabase+JsonModel](https://github.com/zhuchaowe/mojo-database)新增自动检测、自动创建数据表，新增查询方法 ，order by、group by、limit等等方法 
 
 ##2.0.1版本更新
 
