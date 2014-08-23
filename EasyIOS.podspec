@@ -23,7 +23,6 @@ Pod::Spec.new do |s|
     sp.dependency 'FontIcon'
     sp.dependency 'MojoDatabase'
     sp.dependency 'FLKAutoLayout'
-    sp.dependency 'CSStickyHeaderFlowLayout'
     sp.dependency 'RTLabel'
     sp.dependency 'GCDObjC'
     sp.dependency 'RegExCategories'
