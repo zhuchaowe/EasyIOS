@@ -28,12 +28,11 @@
 + (NSString *)jsonStringWithString:(NSString *) string;
 + (NSString *)jsonStringWithObject:(id) object;
 -(NSString *)safeString;
--(BOOL)isEmpty;
 @end
 
 @interface NSMutableString (EasyExtend)
 
 typedef NSMutableString *	(^NSMutableStringAppendBlock)( id format, ... );
 @property(nonatomic,readonly) NSMutableStringAppendBlock APPEND;
-
++(NSMutableString *)stringFromResFile:(NSString *)name encoding:(NSStringEncoding)encode;
 @end

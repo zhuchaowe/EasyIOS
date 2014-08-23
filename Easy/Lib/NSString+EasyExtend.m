@@ -361,15 +361,17 @@
     return string;
 }
 
--(BOOL)isEmpty{
-    
-    return self == nil || [self isKindOfClass:[NSNull class]] || [[self trim] isEqualToString:@""];
-}
+
 
 @end
 
 
 @implementation NSMutableString (EasyExtend)
+
++(NSMutableString *)stringFromResFile:(NSString *)name encoding:(NSStringEncoding)encode{
+    return [NSMutableString stringWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:name] encoding:encode error:nil];
+}
+
 
 - (NSMutableStringAppendBlock)APPEND
 {

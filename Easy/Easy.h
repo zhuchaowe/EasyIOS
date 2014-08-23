@@ -23,6 +23,7 @@
 #import "UIButton+EasyExtend.h"
 #import "MKNetworkKit.h"
 #import "UIImage+EasyExtend.h"
+#import "UIAlertView+Blocks.h"
 #import "UITabBarController+EasyExtend.h"
 #import "EzSystemInfo.h"
 #import "EzUILabel.h"
