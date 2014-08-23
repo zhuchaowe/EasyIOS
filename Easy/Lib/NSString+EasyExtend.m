@@ -357,19 +357,20 @@
 
 //获取安全字符串
 -(NSString *)safeString{
-    NSString *string = self !=nil ? self :@"";
-    return string;
+    return [self isEmpty] ? @"": self;
 }
 
--(BOOL)isEmpty{
-    
-    return self == nil || [self isKindOfClass:[NSNull class]] || [[self trim] isEqualToString:@""];
-}
+
 
 @end
 
 
 @implementation NSMutableString (EasyExtend)
+
++(NSMutableString *)stringFromResFile:(NSString *)name encoding:(NSStringEncoding)encode{
+    return [NSMutableString stringWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:name] encoding:encode error:nil];
+}
+
 
 - (NSMutableStringAppendBlock)APPEND
 {

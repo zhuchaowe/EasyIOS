@@ -28,6 +28,6 @@
 
 - (id)serializeObject;
 + (id)unserializeObject:(id)obj;
-
+-(BOOL)isEmpty;
 
 @end

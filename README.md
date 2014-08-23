@@ -5,7 +5,7 @@ EasyIOS 2.0 - program on MVVM
 
 EasyIOS is a new generation of development framework based on `Model-View-ViewModel` which makes faster and easier app development, Build your app by geek's way.
 
-
+[EasyRSS](https://github.com/zhuchaowe/EasyRSS):基于EasyIOS 2.0 的开源项目
 
 [EasyIOS论坛](http://easyios.08dream.com)
 
