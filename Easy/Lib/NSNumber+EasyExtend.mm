@@ -60,8 +60,7 @@
 
 //获取安全字符串归零
 -(NSString *)safeString{
-    NSString *string = self !=nil ? [NSString stringWithFormat:@"%@",self] :@"0";
-    return string;
+    return [self isEmpty] ?@"0": [NSString stringWithFormat:@"%@",self];
 }
 
 //获取安全数字串归零

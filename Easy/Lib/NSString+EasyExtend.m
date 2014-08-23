@@ -357,8 +357,7 @@
 
 //获取安全字符串
 -(NSString *)safeString{
-    NSString *string = self !=nil ? self :@"";
-    return string;
+    return [self isEmpty] ? @"": self;
 }
 
 
