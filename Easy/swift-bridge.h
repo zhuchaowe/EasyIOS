@@ -15,7 +15,6 @@
 #import "SceneScrollView.h"
 #import "SceneTableView.h"
 #import "EzMiButton.h"
-#import "EzUITapGestureRecognizer.h"
 #import "RTLabel.h"
 #import "DialogUtil.h"
 #import "Request.h"
@@ -24,6 +23,7 @@
 #import "GCDObjC.h"
 #import "RegExCategories.h"
 #import "TMCache.h"
+#import "SHGestureRecognizerBlocks.h"
 
 #ifdef DEBUG
 #define EZLog(...) NSLog(__VA_ARGS__)
