@@ -7,7 +7,6 @@
 //
 
 #import "EzMiButton.h"
-#import "EzUITapGestureRecognizer.h"
 
 @implementation EzMiButton
 
@@ -98,11 +97,5 @@
     _miTextLabel.frame = CGRectMake(0, 0, cgsize.width, cgsize.height);
     [self addSubview:_miTextLabel];
 }
-
-//- (void)addTarget:(id)target action:(SEL)action object:(id)object{
-//    EzUITapGestureRecognizer *gesture = [[EzUITapGestureRecognizer alloc]initWithTarget:target action:action];
-//    gesture.object = object;
-//    [self addGestureRecognizer:gesture];
-//}
 
 @end
