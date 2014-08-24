@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "JSONModelLib.h"
+
 
 @class MojoDatabase;
 
-@interface MojoModel : JSONModel {
+@interface MojoModel : NSObject {
 	NSUInteger primaryKey;
 	BOOL savedInDatabase;
 }
@@ -41,8 +41,14 @@
 -(void)beforeSave;
 -(void)afterSave;
 
+-(void)deleteSelf;
+-(void)beforeDeleteSelf;
+-(void)afterDeleteSelf;
+
 -(void)delete;
 -(void)beforeDelete;
+-(void)afterDelete;
+
 
 +(void)afterFind:(NSArray **)results;
 +(void)beforeFindSql:(NSString **)sql parameters:(NSArray **)parameters;
@@ -56,7 +62,6 @@
 +(id)find:(NSUInteger)primaryKey;
 +(NSArray *)findAll;
 +(void)deleteAll;
-+(void)deleteWhere:(NSString *)where;
 -(BOOL)isTableExist;
 -(void)createTable;
 @end

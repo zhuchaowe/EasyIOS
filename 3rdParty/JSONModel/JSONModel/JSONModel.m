@@ -521,6 +521,7 @@ static JSONKeyMapper* globalKeyMapper = nil;
 //returns a list of the model's properties
 -(NSArray*)__properties__
 {
+    
     //fetch the associated object
     NSDictionary* classProperties = objc_getAssociatedObject(self.class, &kClassPropertiesKey);
     if (classProperties) return [classProperties allValues];

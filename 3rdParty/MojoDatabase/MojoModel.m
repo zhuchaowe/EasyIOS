@@ -75,7 +75,7 @@ static NSMutableDictionary *tableCache = nil;
 -(void)resetAll{
     self.table = NSStringFromClass([self class]);
     self.field = @"*";
-    self.where = @"primaryKey = ?";
+    self.where = @" WHERE primaryKey = ?";
     self.map = [NSMutableDictionary dictionaryWithObject:[NSNumber numberWithInteger:self.primaryKey] forKey:@"primaryKey"];
     self.order = @"";
     self.group = @"";
@@ -143,13 +143,19 @@ static NSMutableDictionary *tableCache = nil;
 
 -(void)update:(NSDictionary *)data{
     [self beforeUpdate:data];
-    if(savedInDatabase == YES){
-        NSString *setValues = [[[data allKeys] componentsJoinedByString:@" = ?, "] stringByAppendingString:@" = ?"];
-        NSString *sql = [NSString stringWithFormat:@"UPDATE %@ SET %@ WHERE %@", self.table, setValues,self.where];
-        NSArray *parameters = [[data allValues] arrayByAddingObjectsFromArray:[self.map allValues]];
-        [database executeSql:sql withParameters:parameters];
-    }
+    NSString *setValues = [[[data allKeys] componentsJoinedByString:@" = ?, "] stringByAppendingString:@" = ?"];
+    NSString *sql = [NSString stringWithFormat:@"UPDATE %@ SET %@ %@", self.table, setValues,self.where];
+    NSArray *parameters = [[data allValues] arrayByAddingObjectsFromArray:[self.map allValues]];
+    [database executeSql:sql withParameters:parameters];
     [self afterUpdate:data];
+}
+
+-(void)delete{
+    [[self class] assertDatabaseExists];
+    [self beforeDelete];
+    NSString *sql = [NSString stringWithFormat:@"DELETE FROM %@ %@", self.table,self.where];
+    [database executeSql:sql withParameters:[self.map allValues]];
+    [self afterDelete];
 }
 
 -(NSUInteger)getCount{
@@ -222,7 +228,6 @@ static NSMutableDictionary *tableCache = nil;
 -(void)createTable{
     if(!self.isTableExist){
         NSArray *propertyList = [self getPropertyList];
-        
         NSString *sql = [NSString stringWithFormat:@"CREATE TABLE %@ (primaryKey integer primary key autoincrement, %@)", [[self class] tableName], [propertyList componentsJoinedByString:@","]];
         [database executeSql:sql];
     }
@@ -352,23 +357,21 @@ static NSMutableDictionary *tableCache = nil;
   savedInDatabase = YES;
 }
 
-+(void)deleteWhere:(NSString *)where{
-    [[self class] assertDatabaseExists];
-    NSString *sql = [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@", [[self class] tableName],where];
-    [database executeSql:sql];
-}
 
--(void)delete {
+
+-(void)deleteSelf {
   [[self class] assertDatabaseExists];
   if (!savedInDatabase) {
     return;
   }
-  [self beforeDelete];
+  [self beforeDeleteSelf];
 
   NSString *sql = [NSString stringWithFormat:@"DELETE FROM %@ WHERE primaryKey = ?", [[self class] tableName]];
   [database executeSqlWithParameters:sql, [NSNumber numberWithUnsignedInt:(unsigned int)primaryKey], nil];
   savedInDatabase = NO;
   primaryKey = 0;
+  [self afterDeleteSelf];
+    
 }
 
 +(void)deleteAll {
@@ -439,9 +442,16 @@ static NSMutableDictionary *tableCache = nil;
 
 -(void)beforeSave {}
 -(void)afterSave {}
+
 -(void)beforeDelete {}
+-(void)afterDelete{}
+
+-(void)beforeDeleteSelf{}
+-(void)afterDeleteSelf{}
+
 -(void)beforeUpdate:(NSDictionary *)data{}
 -(void)afterUpdate:(NSDictionary *)data{}
+
 +(void)afterFind:(NSArray **)results{}
 +(void)beforeFindSql:(NSString **)sql parameters:(NSArray **)parameters{}
 
