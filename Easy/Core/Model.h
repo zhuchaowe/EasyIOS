@@ -11,5 +11,5 @@
 #import "JSONModelLib.h"
 @interface Model : JSONModel
 +(id)Model;
--(id)initModel;
+-(void)loadModel;
 @end

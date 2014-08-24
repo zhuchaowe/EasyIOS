@@ -10,17 +10,20 @@
 
 @implementation Model
 
-
-+(id)Model{
-    return [[self alloc]initModel];
-}
-
--(id)initModel{
+-(instancetype)init{
     self = [super init];
     if(self){
-        
+        [self loadModel];
     }
     return self;
+}
+
++(id)Model{
+    return [[self alloc]init];
+}
+
+-(void)loadModel{
+
 }
 
 @end
