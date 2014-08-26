@@ -81,6 +81,10 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
     	
 * If you use swift , please click [here](https://github.com/zhuchaowe/RACSwift)
 
+##2.0.3版本更新
+* 紧急修复2.0.2 model层初始化数据为nil的bug
+* 移除`EUIGestureRecognizer`
+* 增加`SHGestureRecognizerBlocks`
 
 ##2.0.2版本更新
 

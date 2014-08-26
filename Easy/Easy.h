@@ -27,7 +27,6 @@
 #import "EzSystemInfo.h"
 #import "EzUILabel.h"
 #import "EzMiButton.h"
-#import "EzUITapGestureRecognizer.h"
 #import "SysTool.h"
 #import "TimeTool.h"
 #import "ImageTool.h"
