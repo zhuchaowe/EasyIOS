@@ -7,7 +7,7 @@
 //
 
 #import "Action.h"
-
+#import "RACEXTScope.h"
 @implementation Action
 
 DEF_SINGLETON(Action)
@@ -53,8 +53,10 @@ DEF_SINGLETON(Action)
     [self sending:msg];
     
     NSLog(@"%@",msg.op.url);
+    @weakify(msg,self);
     [op addCompletionHandler:^(MKNetworkOperation* completedOperation) {
         [completedOperation responseJSONWithCompletionHandler:^(id jsonObject) {
+            @strongify(msg,self);
             msg.responseString = completedOperation.responseString;
             msg.output = jsonObject;
             [self checkCode:msg];
@@ -65,6 +67,7 @@ DEF_SINGLETON(Action)
             }
         }];
     } errorHandler:^(MKNetworkOperation *errorOp, NSError* error) {
+        @strongify(msg,self);
         msg.error = error;
         [self failed:msg];
     }];
@@ -94,8 +97,10 @@ DEF_SINGLETON(Action)
     }
     [self sending:msg];
     NSLog(@"%@",op.url);
+    @weakify(msg,self);
     [op addCompletionHandler:^(MKNetworkOperation* completedOperation) {
         [completedOperation responseJSONWithCompletionHandler:^(id jsonObject) {
+            @strongify(msg,self);
             msg.responseString = completedOperation.responseString;
             msg.output = jsonObject;
             [self checkCode:msg];
@@ -106,6 +111,7 @@ DEF_SINGLETON(Action)
             }
         }];
     } errorHandler:^(MKNetworkOperation *errorOp, NSError* error) {
+        @strongify(msg,self);
         msg.error = error;
         [self failed:msg];
     }];
