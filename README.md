@@ -2,6 +2,9 @@
 
 EasyIOS 2.0 - program on MVVM
 =======
+[![Pod Version](http://img.shields.io/cocoapods/v/EasyIOS.svg)](http://cocoadocs.org/docsets/EasyIOS/)
+[![Pod Version](http://img.shields.io/cocoapods/p/EasyIOS.svg)](http://cocoadocs.org/docsets/EasyIOS/)
+[![License](http://img.shields.io/cocoapods/l/EasyIOS.svg)](http://cocoadocs.org/docsets/EasyIOS/)
 
 EasyIOS is a new generation of development framework based on `Model-View-ViewModel` which makes faster and easier app development, Build your app by geek's way.
 
