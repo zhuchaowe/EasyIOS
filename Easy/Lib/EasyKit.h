@@ -16,6 +16,8 @@
 + (void)waitUntil:(BOOL (^)(void))condition;
 + (void)waitUntil:(BOOL (^)(void))condition timeOut:(NSTimeInterval)timeOut;
 + (void)waitUntil:(BOOL (^)(void))condition timeOut:(NSTimeInterval)timeOut interval:(NSTimeInterval)interval;
+
++ (RACSignal*) rac_didNetworkChanges;
 @end
 
 @interface $ : EasyKit {}

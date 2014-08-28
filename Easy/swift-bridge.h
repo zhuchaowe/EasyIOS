@@ -24,7 +24,6 @@
 #import "RegExCategories.h"
 #import "TMCache.h"
 #import "SHGestureRecognizerBlocks.h"
-#import "Reachability+RACExtensions.h"
 
 #ifdef DEBUG
 #define EZLog(...) NSLog(__VA_ARGS__)

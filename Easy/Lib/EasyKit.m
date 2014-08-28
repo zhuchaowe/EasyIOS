@@ -88,6 +88,25 @@
   }
 }
 
++ (RACSignal*) rac_didNetworkChanges {
+    Reachability* reach = [Reachability reachabilityForInternetConnection];
+    @weakify(reach);
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(reach);
+        reach.reachableBlock = ^(Reachability* r){
+            [subscriber sendNext:r];
+        };
+        reach.unreachableBlock = ^(Reachability* r){
+            [subscriber sendNext:r];
+        };
+        [reach startNotifier];
+        [subscriber sendNext:reach];
+        return [RACDisposable disposableWithBlock:^{
+            [reach stopNotifier];
+        }];
+    }];
+}
+
 @end
 
 @implementation $
