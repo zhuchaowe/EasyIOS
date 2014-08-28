@@ -27,6 +27,7 @@
     self.discription = @"";
     self.progress = 0.0f;
     self.freezable = NO;
+    self.SCHEME = @"";
     self.HOST = @"";
     self.PATH = @"";
     self.METHOD = @"GET";

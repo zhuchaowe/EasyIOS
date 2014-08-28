@@ -26,6 +26,7 @@ typedef enum
 @property(nonatomic,assign)BOOL freezable;
 @property(nonatomic,strong)MKNetworkOperation *op;
 
+@property(nonatomic,retain)NSString *SCHEME;
 @property(nonatomic,retain)NSString *HOST;
 @property(nonatomic,retain)NSString *PATH;
 @property(nonatomic,retain)NSString *METHOD;

@@ -39,12 +39,11 @@ DEF_SINGLETON(Action)
 
 -(MKNetworkOperation*) GET:(Request *)msg
 {
-    NSURL *host = [NSURL URLWithString:msg.HOST];
-    NSString *url = nil;
-    if([host scheme] != nil){
-        url = [NSString stringWithFormat:@"http://%@%@",host,msg.PATH];
-    }else{
+    NSString *url = @"";
+    if([msg.SCHEME isEmpty] || [msg.HOST isEmpty]){
         url = [NSString stringWithFormat:@"http://%@%@",HOST_URL,msg.PATH];
+    }else{
+        url = [NSString stringWithFormat:@"%@://%@%@",msg.SCHEME,msg.HOST,msg.PATH];
     }
     MKNetworkOperation *op = [self operationWithURLString:url
                                               params:msg.requestParams
@@ -77,12 +76,11 @@ DEF_SINGLETON(Action)
 
 -(MKNetworkOperation*) POST:(Request *)msg
 {
-    NSURL *host = [NSURL URLWithString:msg.HOST];
-    NSString *url = nil;
-    if([host scheme] != nil){
-        url = [NSString stringWithFormat:@"http://%@%@",host,msg.PATH];
-    }else{
+    NSString *url = @"";
+    if([msg.SCHEME isEmpty] || [msg.HOST isEmpty]){
         url = [NSString stringWithFormat:@"http://%@%@",HOST_URL,msg.PATH];
+    }else{
+        url = [NSString stringWithFormat:@"%@://%@%@",msg.SCHEME,msg.HOST,msg.PATH];
     }
     MKNetworkOperation *op = [self operationWithURLString:url
                                                    params:msg.requestParams
