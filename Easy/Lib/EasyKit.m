@@ -15,6 +15,18 @@
   return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 }
 
++ (NSString *)libPrePath{
+    return [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)objectAtIndex:0] stringByAppendingFormat:@"/Preference"];
+}
+
++ (NSString *)libCachePath{
+    return [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)objectAtIndex:0];
+}
+
++ (NSString *)tmpPath{
+    return [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)objectAtIndex:0] stringByAppendingFormat:@"/tmp"];
+}
+
 + (NSString *)appPath {
   return [[NSBundle mainBundle] bundlePath];
 }
@@ -22,6 +34,31 @@
 + (NSString *)resourcePath {
   return [[NSBundle mainBundle] resourcePath];
 }
+
++ (BOOL)touchPath:(NSString *)path
+{
+    if ( NO == [[NSFileManager defaultManager] fileExistsAtPath:path] )
+    {
+        return [[NSFileManager defaultManager] createDirectoryAtPath:path
+                                         withIntermediateDirectories:YES
+                                                          attributes:nil
+                                                               error:NULL];
+    }
+    return YES;
+}
+
+
++ (BOOL)touchFile:(NSString *)file
+{
+    if ( NO == [[NSFileManager defaultManager] fileExistsAtPath:file] )
+    {
+        return [[NSFileManager defaultManager] createFileAtPath:file
+                                                       contents:[NSData data]
+                                                     attributes:nil];
+    }
+    return YES;
+}
+
 
 + (BOOL)swizzleMethod:(SEL)originalSelector with:(SEL)anotherSelector in:(Class)klass {
   return [self swizzleMethod:originalSelector in:klass with:anotherSelector in:klass];
@@ -86,6 +123,25 @@
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:interval]];
     sleptSoFar += interval;
   }
+}
+
++ (RACSignal*) rac_didNetworkChanges {
+    Reachability* reach = [Reachability reachabilityForInternetConnection];
+    @weakify(reach);
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(reach);
+        reach.reachableBlock = ^(Reachability* r){
+            [subscriber sendNext:r];
+        };
+        reach.unreachableBlock = ^(Reachability* r){
+            [subscriber sendNext:r];
+        };
+        [reach startNotifier];
+        [subscriber sendNext:reach];
+        return [RACDisposable disposableWithBlock:^{
+            [reach stopNotifier];
+        }];
+    }];
 }
 
 @end

@@ -6,7 +6,7 @@
 
 #pragma mark -
 
-@interface NSObject(BeeJSON)
+@interface NSObject(EasyJSON)
 
 + (id)objectsFromArray:(id)arr;
 + (id)objectsFromAny:(id)any;
