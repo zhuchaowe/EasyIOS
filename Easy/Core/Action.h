@@ -22,7 +22,7 @@
 
 
 @interface Action : MKNetworkEngine
-@property(nonatomic,strong)id<ActionDelegate> aDelegaete;
+@property(nonatomic,weak)id<ActionDelegate> aDelegaete;
 + (id)Action;
 - (id)initWithCache;
 - (void)success:(Request *)msg;

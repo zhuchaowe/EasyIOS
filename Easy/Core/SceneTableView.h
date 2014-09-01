@@ -17,7 +17,7 @@
 @property(strong,nonatomic)NSMutableArray *dataArray;
 @property(strong,nonatomic)NSString *cacheDataString;
 @property(nonatomic,strong)UILabel *msgLabel;
-@property (strong, nonatomic) id <SceneTableViewDelegate> SceneDelegate;
+@property (weak, nonatomic) id <SceneTableViewDelegate> SceneDelegate;
 -(void)addHeader;
 -(void)addFooter;
 -(void)initPage;
