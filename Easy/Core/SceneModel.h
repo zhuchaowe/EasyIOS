@@ -12,10 +12,13 @@
 #import "Request.h"
 @interface SceneModel : NSObject
 @property(nonatomic,strong)Action *action;
+@property(nonatomic,assign)BOOL active;
 + (id)SceneModel;
 - (void)handleActionMsg:(Request *)msg;
 - (void)SEND_ACTION:(Request *)req;
 - (void)SEND_CACHE_ACTION:(Request *)req;
 - (void)SEND_NO_CACHE_ACTION:(Request *)req;
 - (void)loadSceneModel;
+- (void)loadActive;
+- (void)activeRequest;
 @end

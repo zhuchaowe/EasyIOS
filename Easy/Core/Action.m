@@ -45,9 +45,17 @@ DEF_SINGLETON(Action)
     }else{
         url = [NSString stringWithFormat:@"%@://%@%@",msg.SCHEME,msg.HOST,msg.PATH];
     }
+    
+    NSDictionary *requestParams = nil;
+    if([msg.appendPathInfo isEmpty]){
+        requestParams = msg.requestParams;
+    }else{
+        url = [url stringByAppendingString:msg.appendPathInfo];
+    }
     MKNetworkOperation *op = [self operationWithURLString:url
-                                              params:msg.requestParams
+                                              params:requestParams
                                           httpMethod:msg.METHOD];
+    
     msg.op = op;
     [self sending:msg];
     
@@ -82,8 +90,14 @@ DEF_SINGLETON(Action)
     }else{
         url = [NSString stringWithFormat:@"%@://%@%@",msg.SCHEME,msg.HOST,msg.PATH];
     }
+    NSDictionary *requestParams = nil;
+    if([msg.appendPathInfo isEmpty]){
+        requestParams = msg.requestParams;
+    }else{
+        url = [url stringByAppendingString:msg.appendPathInfo];
+    }
     MKNetworkOperation *op = [self operationWithURLString:url
-                                                   params:msg.requestParams
+                                                   params:requestParams
                                                httpMethod:msg.METHOD];
     msg.op = op;
     NSDictionary *file = msg.requestFiles;

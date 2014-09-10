@@ -1,1 +1,0 @@
-../../EasyIOS/Easy/Views/EzUITapGestureRecognizer.h

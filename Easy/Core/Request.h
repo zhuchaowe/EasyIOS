@@ -25,7 +25,7 @@ typedef enum
 @property(nonatomic,assign)double progress;
 @property(nonatomic,assign)BOOL freezable;
 @property(nonatomic,strong)MKNetworkOperation *op;
-
+@property(nonatomic,strong)NSDictionary *requestFiles;
 @property(nonatomic,retain)NSString *SCHEME;
 @property(nonatomic,retain)NSString *HOST;
 @property(nonatomic,retain)NSString *PATH;
@@ -35,8 +35,8 @@ typedef enum
 -(NSString *)requestKey;
 +(NSString *)requestKey;
 -(NSDictionary *)requestParams;
--(NSDictionary *)requestFiles;
-
+-(NSString *)pathInfo;
+-(NSString *)appendPathInfo;
 - (BOOL)succeed;
 - (BOOL)sending;
 - (BOOL)failed;
