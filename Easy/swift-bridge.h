@@ -8,7 +8,6 @@
 
 #import "Action.h"
 #import "Scene.h"
-#import "CacheAction.h"
 #import "Model.h"
 #import "SceneModel.h"
 #import "SceneCollectionView.h"
