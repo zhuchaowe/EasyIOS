@@ -22,6 +22,7 @@
 #import "UILabel+EasyExtend.h"
 #import "UIButton+EasyExtend.h"
 #import "UIImage+EasyExtend.h"
+#import "UIImageView+EasyExtend.h"
 #import "UITabBarController+EasyExtend.h"
 #import "EzSystemInfo.h"
 #import "EzUILabel.h"

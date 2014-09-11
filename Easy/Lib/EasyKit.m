@@ -125,6 +125,11 @@
   }
 }
 
++ (RACSignal*) rac_didNetworkChanges{
+    AFHTTPRequestOperationManager* httpClient = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:[NSURL URLWithString:HOST_URL]];
+    httpClient.responseSerializer = [AFJSONResponseSerializer serializer];
+    return httpClient.networkReachabilityStatusSignal;
+}
 
 @end
 
