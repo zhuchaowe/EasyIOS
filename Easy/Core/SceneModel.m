@@ -46,7 +46,7 @@
 
 - (void)handleActionMsg:(Request *)msg{
     if(msg.sending){
-        NSLog(@"sending:%@",msg.op.url);
+        NSLog(@"sending:%@",msg.url);
     }else if(msg.succeed){
         NSLog(@"success:%@",msg.output);
     }else if(msg.failed){
