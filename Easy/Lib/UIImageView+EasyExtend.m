@@ -25,7 +25,7 @@
 
 #import "UIImageView+EasyExtend.h"
 
-@implementation UIImageView (MKNetworkKitAdditions)
+@implementation UIImageView (EasyExtend)
 -(void) setImageFromURL:(NSString*) url {
    [self setImageFromURL:url placeHolderImage:nil];
 }
