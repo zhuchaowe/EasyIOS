@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 #import "Easy.h"
-#import "MKNetworkEngine.h"
+#import "RACAFNetworking.h"
 #import "Request.h"
 #import "ActionDelegate.h"
 
@@ -21,15 +21,17 @@
 #endif
 
 
-@interface Action : MKNetworkEngine
+@interface Action : NSObject
 @property(nonatomic,weak)id<ActionDelegate> aDelegaete;
 + (id)Action;
 - (id)initWithCache;
 - (void)success:(Request *)msg;
 - (void)error:(Request *)msg;
 - (void)failed:(Request *)msg;
-
--(MKNetworkOperation*)Send:(Request *) msg;
+- (void)useCache;
+- (void)readFromCache;
+- (void)notReadFromCache;
+-(void)Send:(Request *) msg;
 
 AS_SINGLETON(Action)
 @end
