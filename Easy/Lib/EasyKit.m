@@ -125,26 +125,10 @@
   }
 }
 
-
-/**
-     [[$ rac_didNetworkChanges]
-     subscribeNext:^(NSNumber *status) {
-         AFNetworkReachabilityStatus networkStatus = [status intValue];
-         switch (networkStatus) {
-         case AFNetworkReachabilityStatusUnknown:
-         case AFNetworkReachabilityStatusNotReachable:
-         [self.statusSignal sendNext:@"Cannot Reach Host"];
-         [self cancelTheShow];
-         break;
-         case AFNetworkReachabilityStatusReachableViaWWAN:
-         case AFNetworkReachabilityStatusReachableViaWiFi:
-         break;
-     }]
- */
 + (RACSignal*) rac_didNetworkChanges{
-    AFHTTPRequestOperationManager* httpClient = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:[NSURL URLWithString:HOST_URL]];
-    httpClient.responseSerializer = [AFJSONResponseSerializer serializer];
-    return RACObserve(httpClient.reachabilityManager, networkReachabilityStatus);
+    AFNetworkReachabilityManager * manager = [AFNetworkReachabilityManager sharedManager];
+    [manager startMonitoring];
+    return RACObserve(manager, networkReachabilityStatus);
 }
 
 @end

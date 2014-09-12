@@ -22,6 +22,24 @@
 + (void)waitUntil:(BOOL (^)(void))condition timeOut:(NSTimeInterval)timeOut;
 + (void)waitUntil:(BOOL (^)(void))condition timeOut:(NSTimeInterval)timeOut interval:(NSTimeInterval)interval;
 
+/**
+ 直接复制代码。
+ [[$ rac_didNetworkChanges]
+ subscribeNext:^(NSNumber *status) {
+     AFNetworkReachabilityStatus networkStatus = [status intValue];
+     switch (networkStatus) {
+     case AFNetworkReachabilityStatusUnknown:
+     case AFNetworkReachabilityStatusNotReachable:
+     [[DialogUtil sharedInstance] showDlg:self.window textOnly:@"网络连接不给力"];
+     break;
+     case AFNetworkReachabilityStatusReachableViaWWAN:
+     [[DialogUtil sharedInstance] showDlg:self.window textOnly:@"正在使用移动数据网络"];
+     break;
+     case AFNetworkReachabilityStatusReachableViaWiFi:
+     break;
+     }
+ }];
+ */
 + (RACSignal*) rac_didNetworkChanges;
 @end
 
