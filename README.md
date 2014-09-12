@@ -44,7 +44,7 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 `ReactiveCocoa`简称RAC，就是基于响应式编程思想的Objective-C实践，它是Github的一个开源项目，你可以在[这里](https://github.com/ReactiveCocoa/ReactiveCocoa)找到它。
 
 
-采用`MKNetworkKit` 网络框架，修改了部分功能，底层支持网络缓存，轻松控制是否启用缓存。
+二次封装`AFNetworking`，集成到Action，增加了网络缓存功能，轻松控制是否启用缓存。
 
 采用`ReactiveCocoa` 框架，实现响应式编程，减少代码复杂度。
 
@@ -55,8 +55,6 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 `Model`类整合`JsonModel`的类库和`MojoDataBase`类库
 
 整合了很多开源的优秀代码
-
-部分函数借鉴了`BeeFramework`
 
 常用类库：
 
@@ -85,6 +83,12 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
     	pod 'EasyIOS', :head
     	
 * If you use swift , please click [here](https://github.com/zhuchaowe/RACSwift)
+
+##2.1版本更新
+* 多谢各位小伙伴们的支持以及不断的提出Issues，清晰的指出了了EasyIOS的优化项
+* 因大家对`MKNetWorkKit`接触不多，开发中需要自己写网络逻辑的小伙伴纠结了，应各位的要求，2.1版本移除了`MKNetWorkKit`，基于现有的api重新封装了`AFNetworking`，并且加入了缓存控制。如果利用`Action`类来发起请求的小伙伴可以体验到无痛升级的快感。。
+* 同时移除`UIImageView+MKNetWorkKit`替换为大家熟悉的`SDWebImage`，解决图片闪烁问题。
+* 修复部分循环引用的bug
 
 ##2.0.3版本更新
 * 紧急修复2.0.2 model层初始化数据为nil的bug
