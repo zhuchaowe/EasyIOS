@@ -24,6 +24,8 @@ typedef enum
 @property(nonatomic,retain)NSString *url;
 @property(nonatomic,strong)NSString *discription;
 @property(nonatomic,assign)double progress;
+@property(nonatomic,assign)long long totalBytesWritten;
+@property(nonatomic,assign)long long totalBytesExpectedToWrite;
 @property(nonatomic,assign)BOOL freezable;
 @property(nonatomic,strong)NSDictionary *requestFiles;
 @property(nonatomic,retain)NSString *SCHEME;

@@ -31,7 +31,7 @@
 - (void)useCache;
 - (void)readFromCache;
 - (void)notReadFromCache;
--(void)Send:(Request *) msg;
+- (AFHTTPRequestOperation *)Send:(Request *) msg;
 
 AS_SINGLETON(Action)
 @end

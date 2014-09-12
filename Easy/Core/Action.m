@@ -31,43 +31,42 @@ DEF_SINGLETON(Action)
 -(void)notReadFromCache{
 
 }
--(void)Send:(Request *)msg{
+
+-(AFHTTPRequestOperation *)Send:(Request *)msg{
     if([msg.METHOD isEqualToString:@"GET"]){
-         [self GET:msg];
+         return [self GET:msg];
     }else{
-         [self POST:msg];
+         return [self POST:msg];
     }
 }
 
--(void) GET:(Request *)msg
+-(AFHTTPRequestOperation *) GET:(Request *)msg
 {
-    NSString *baseUrl = @"";
+    NSString *url = @"";
     if([msg.SCHEME isEmpty] || [msg.HOST isEmpty]){
-        baseUrl = [NSString stringWithFormat:@"http://%@",HOST_URL];
+        url = [NSString stringWithFormat:@"http://%@%@",HOST_URL,msg.PATH];
     }else{
-        baseUrl = [NSString stringWithFormat:@"%@://%@",msg.SCHEME,msg.HOST];
+        url = [NSString stringWithFormat:@"%@://%@%@",msg.SCHEME,msg.HOST,msg.PATH];
     }
-    
     NSDictionary *requestParams = nil;
-    NSString *path = @"";
     if([msg.appendPathInfo isEmpty]){
         requestParams = msg.requestParams;
     }else{
-        path = [msg.PATH stringByAppendingString:msg.appendPathInfo];
+        url = [url stringByAppendingString:msg.appendPathInfo];
     }
     
-    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:[NSURL URLWithString:baseUrl]];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:[NSURL URLWithString:url]];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
     [self sending:msg];
     @weakify(msg,self);
-    [[manager rac_GET:path parameters:requestParams]
-    subscribeNext:^(NSDictionary* jsonObject) {
-         @strongify(msg,self);
+    
+    return [manager GET:url parameters:requestParams success:^(AFHTTPRequestOperation *operation, NSDictionary* jsonObject) {
+        @strongify(msg,self);
         msg.output = jsonObject;
         [self checkCode:msg];
-    } error:^(NSError *error) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         @strongify(msg,self);
         msg.error = error;
         [self failed:msg];
@@ -75,96 +74,54 @@ DEF_SINGLETON(Action)
 }
 
 
-
--(void)POST:(Request *)msg{
-    NSString *baseUrl = @"";
+-(AFHTTPRequestOperation *)POST:(Request *)msg{
+    NSString *url = @"";
     if([msg.SCHEME isEmpty] || [msg.HOST isEmpty]){
-        baseUrl = [NSString stringWithFormat:@"http://%@",HOST_URL];
+        url = [NSString stringWithFormat:@"http://%@%@",HOST_URL,msg.PATH];
     }else{
-        baseUrl = [NSString stringWithFormat:@"%@://%@",msg.SCHEME,msg.HOST];
+        url = [NSString stringWithFormat:@"%@://%@%@",msg.SCHEME,msg.HOST,msg.PATH];
     }
-    
     NSDictionary *requestParams = nil;
-    NSString *path = @"";
     if([msg.appendPathInfo isEmpty]){
         requestParams = msg.requestParams;
     }else{
-        path = [msg.PATH stringByAppendingString:msg.appendPathInfo];
+        url = [url stringByAppendingString:msg.appendPathInfo];
     }
     
-    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:[NSURL URLWithString:baseUrl]];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
     [self sending:msg];
     @weakify(msg,self);
-    [[manager rac_POST :path parameters:requestParams]
-     subscribeNext:^(NSDictionary* jsonObject) {
-         @strongify(msg,self);
-         msg.output = jsonObject;
-         [self checkCode:msg];
-     } error:^(NSError *error) {
-         @strongify(msg,self);
-         msg.error = error;
-         [self failed:msg];
-     }];
+    
+    NSDictionary *file = msg.requestFiles;
+    AFHTTPRequestOperation *op = [manager POST:url parameters:requestParams constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        if([file count]>0){
+            for (NSString *key in [file allKeys]) {
+                [formData appendPartWithFileURL:[file objectForKey:key] name:key error:nil];
+            }
+        }
+    } success:^(AFHTTPRequestOperation *operation, NSDictionary* jsonObject) {
+        @strongify(msg,self);
+        msg.output = jsonObject;
+        [self checkCode:msg];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        @strongify(msg,self);
+        msg.error = error;
+        [self failed:msg];
+    }];
+    if(file.count >0){
+        [op setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+            @strongify(msg,self);
+            msg.totalBytesWritten = totalBytesWritten;
+            msg.totalBytesExpectedToWrite = totalBytesExpectedToWrite;
+            msg.progress = totalBytesExpectedToWrite/totalBytesWritten;
+            [self progressing:msg];
+        }];
+    }
+    return op;
 }
-
-//-(void) POST:(Request *)msg
-//{
-//    NSString *url = @"";
-//    if([msg.SCHEME isEmpty] || [msg.HOST isEmpty]){
-//        url = [NSString stringWithFormat:@"http://%@%@",HOST_URL,msg.PATH];
-//    }else{
-//        url = [NSString stringWithFormat:@"%@://%@%@",msg.SCHEME,msg.HOST,msg.PATH];
-//    }
-//    NSDictionary *requestParams = nil;
-//    if([msg.appendPathInfo isEmpty]){
-//        requestParams = msg.requestParams;
-//    }else{
-//        url = [url stringByAppendingString:msg.appendPathInfo];
-//    }
-//    MKNetworkOperation *op = [self operationWithURLString:url
-//                                                   params:requestParams
-//                                               httpMethod:msg.METHOD];
-//    msg.op = op;
-//    NSDictionary *file = msg.requestFiles;
-//    if([file count]>0){
-//        for (NSString *key in [file allKeys]) {
-//            [op addFile:[file objectForKey:key] forKey:key];
-//        }
-//        [op setFreezable:msg.freezable];
-//    }
-//    [self sending:msg];
-//    NSLog(@"%@",op.url);
-//    @weakify(msg,self);
-//    [op addCompletionHandler:^(MKNetworkOperation* completedOperation) {
-//        [completedOperation responseJSONWithCompletionHandler:^(id jsonObject) {
-//            @strongify(msg,self);
-//            msg.responseString = completedOperation.responseString;
-//            msg.output = jsonObject;
-//            [self checkCode:msg];
-//            if([completedOperation isCachedResponse]){
-//                NSLog(@"iscache:YES");
-//            }else{
-//                NSLog(@"iscache:NO");
-//            }
-//        }];
-//    } errorHandler:^(MKNetworkOperation *errorOp, NSError* error) {
-//        @strongify(msg,self);
-//        msg.error = error;
-//        [self failed:msg];
-//    }];
-//    if([file count]>0){
-//        [op onUploadProgressChanged:^(double progress) {
-//            msg.progress = progress;
-//            [self progressing:msg];
-//        }];
-//    }
-//    [self enqueueOperation:op];
-//    return op;
-//}
-
 
 -(void)checkCode:(Request *)msg{
     if([msg.output objectAtPath:CODE_KEY] && [[msg.output objectAtPath:CODE_KEY] intValue] == RIGHT_CODE){
