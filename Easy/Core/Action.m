@@ -74,10 +74,7 @@ DEF_SINGLETON(Action)
 
     [self sending:msg];
     
-    msg.output = [[TMCache sharedCache] objectForKey:url.MD5];
-    if(msg.output !=nil){
-        [self checkCode:msg];
-    }
+
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:[NSURL URLWithString:url]];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -86,7 +83,6 @@ DEF_SINGLETON(Action)
     @weakify(msg,self);
     AFHTTPRequestOperation *op =  [manager GET:url parameters:requestParams success:^(AFHTTPRequestOperation *operation, NSDictionary* jsonObject) {
         @strongify(msg,self);
-        msg.url = operation.response.URL.absoluteString;
         if(_cacheEnable){
             [[TMCache sharedCache] setObject:jsonObject forKey:url.MD5 block:^(TMCache *cache, NSString *key, id object) {
                 EZLog(@"%@ has cached",url);
@@ -96,12 +92,16 @@ DEF_SINGLETON(Action)
         [self checkCode:msg];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         @strongify(msg,self);
-        msg.url = operation.response.URL.absoluteString;
         if(msg.output !=nil){
             msg.error = error;
             [self failed:msg];
         }
     }];
+    msg.url = op.request.URL.absoluteString;
+    msg.output = [[TMCache sharedCache] objectForKey:msg.url.MD5];
+    if(msg.output !=nil){
+        [self checkCode:msg];
+    }
     return op;
 }
 
@@ -136,15 +136,14 @@ DEF_SINGLETON(Action)
         }
     } success:^(AFHTTPRequestOperation *operation, NSDictionary* jsonObject) {
         @strongify(msg,self);
-        msg.url = operation.response.URL.absoluteString;
         msg.output = jsonObject;
         [self checkCode:msg];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         @strongify(msg,self);
-        msg.url = operation.response.URL.absoluteString;
         msg.error = error;
         [self failed:msg];
     }];
+    msg.url = op.request.URL.absoluteString;
     if(file.count >0){
         [op setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
             @strongify(msg,self);
