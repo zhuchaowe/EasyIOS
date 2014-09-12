@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
     sp.dependency 'RegExCategories'
     sp.dependency 'TMCache'
     sp.dependency 'SHGestureRecognizerBlocks'
-    sp.dependency 'SGImageCache'
+    sp.dependency 'SGImageCache'UIActivityIndicator-for-SDWebImage'
     sp.dependency 'AFNetworking-RACExtensions'
     sp.prefix_header_contents = '#import "swift-bridge.h"'
   end
