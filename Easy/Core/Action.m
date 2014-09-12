@@ -75,7 +75,9 @@ DEF_SINGLETON(Action)
     [self sending:msg];
     
     msg.output = [[TMCache sharedCache] objectForKey:url.MD5];
-    
+    if(msg.output !=nil){
+        [self checkCode:msg];
+    }
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:[NSURL URLWithString:url]];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -96,8 +98,6 @@ DEF_SINGLETON(Action)
         if(_dataFromCache && msg.output !=nil){
             msg.error = error;
             [self failed:msg];
-        }else{
-            [self checkCode:msg];
         }
     }];
 }

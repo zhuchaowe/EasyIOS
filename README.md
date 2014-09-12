@@ -1,6 +1,6 @@
 ![image](https://raw.githubusercontent.com/zhuchaowe/EasyIOS/gh-pages/images/logo.png)
 
-EasyIOS 2.0 - program on MVVM
+EasyIOS  - program on MVVM
 =======
 [![Pod Version](http://img.shields.io/cocoapods/v/EasyIOS.svg)](http://easyios.08dream.com)
 [![Pod Version](http://img.shields.io/cocoapods/p/EasyIOS.svg)](http://cocoadocs.org/docsets/EasyIOS/)
@@ -22,7 +22,7 @@ EasyIOS官方qq群 :[340906744](http://shang.qq.com/wpa/qunwpa?idkey=562d002e275
 
 [json转Model工具 ModelCoder](https://github.com/zhuchaowe/ModelCoder) 
 
-##2.0 The MVVM(Model-View-ViewModel)
+##The MVVM(Model-View-ViewModel)
 全新基于`MVVM(Model-View-ViewModel)`编程模式架构，开启EasyIOS开发函数式编程新篇章。
 
 EasyIOS 2.0类似`AngularJs`，最为核心的是：`MVVM`、`ORM`、模块化、自动化双向数据绑定、等等
