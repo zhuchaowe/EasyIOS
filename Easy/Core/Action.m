@@ -102,7 +102,6 @@ DEF_SINGLETON(Action)
             [self failed:msg];
         }
     }];
-    msg.url = op.response.URL.absoluteString;
     return op;
 }
 
@@ -137,14 +136,15 @@ DEF_SINGLETON(Action)
         }
     } success:^(AFHTTPRequestOperation *operation, NSDictionary* jsonObject) {
         @strongify(msg,self);
+        msg.url = operation.response.URL.absoluteString;
         msg.output = jsonObject;
         [self checkCode:msg];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         @strongify(msg,self);
+        msg.url = operation.response.URL.absoluteString;
         msg.error = error;
         [self failed:msg];
     }];
-    msg.url = op.response.URL.absoluteString;
     if(file.count >0){
         [op setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
             @strongify(msg,self);
