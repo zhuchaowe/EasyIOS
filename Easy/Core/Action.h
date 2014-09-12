@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 #import "Easy.h"
-#import "RACAFNetworking.h"
+#import "AFNetworking.h"
 #import "Request.h"
 #import "ActionDelegate.h"
 
