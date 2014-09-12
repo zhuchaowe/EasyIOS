@@ -8,6 +8,12 @@
 
 #import "Action.h"
 #import "RACEXTScope.h"
+#import "TMCache.h"
+
+@interface Action()
+@property(nonatomic,assign)BOOL cacheEnable;
+@property(nonatomic,assign)BOOL dataFromCache;
+@end
 @implementation Action
 
 DEF_SINGLETON(Action)
@@ -15,21 +21,32 @@ DEF_SINGLETON(Action)
 +(id)Action{
     return [[[self class] alloc] init];
 }
+- (id)init
+{
+    self = [super init];
+    if(self){
+        _cacheEnable = NO;
+        _dataFromCache = NO;
+    }
+    return self;
+}
 
 - (id)initWithCache
 {
     self = [self init];
-    [self useCache];
+    _cacheEnable = YES;
 	return self;
 }
+
 -(void)useCache{
-
+    _cacheEnable = YES;
 }
--(void)readFromCache{
 
+-(void)readFromCache{
+    _dataFromCache = YES;
 }
 -(void)notReadFromCache{
-
+    _dataFromCache = NO;
 }
 
 -(AFHTTPRequestOperation *)Send:(Request *)msg{
@@ -54,22 +71,34 @@ DEF_SINGLETON(Action)
     }else{
         url = [url stringByAppendingString:msg.appendPathInfo];
     }
+
+    [self sending:msg];
+    
+    msg.output = [[TMCache sharedCache] objectForKey:url.MD5];
     
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:[NSURL URLWithString:url]];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-    [self sending:msg];
+
     @weakify(msg,self);
-    
     return [manager GET:url parameters:requestParams success:^(AFHTTPRequestOperation *operation, NSDictionary* jsonObject) {
         @strongify(msg,self);
+        if(_cacheEnable){
+            [[TMCache sharedCache] setObject:jsonObject forKey:url.MD5 block:^(TMCache *cache, NSString *key, id object) {
+                EZLog(@"%@ has cached",url);
+            }];
+        }
         msg.output = jsonObject;
         [self checkCode:msg];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         @strongify(msg,self);
-        msg.error = error;
-        [self failed:msg];
+        if(_dataFromCache && msg.output !=nil){
+            msg.error = error;
+            [self failed:msg];
+        }else{
+            [self checkCode:msg];
+        }
     }];
 }
 
