@@ -66,7 +66,7 @@ DEF_SINGLETON(Action)
         url = [NSString stringWithFormat:@"%@://%@%@",msg.SCHEME,msg.HOST,msg.PATH];
     }
     NSDictionary *requestParams = nil;
-    if([msg.appendPathInfo isEmpty]){
+    if([msg.appendPathInfo isEmpty] || msg.appendPathInfo ==nil){
         requestParams = msg.requestParams;
     }else{
         url = [url stringByAppendingString:msg.appendPathInfo];
