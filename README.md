@@ -85,8 +85,9 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 * If you use swift , please click [here](https://github.com/zhuchaowe/RACSwift)
 
 ##2.1版本更新
-* 多谢各位小伙伴们的支持以及不断的提出Issues，清晰的指出了了EasyIOS的优化项
-* 因大家对`MKNetWorkKit`接触不多，开发中需要自己写网络逻辑的小伙伴纠结了，应各位的要求，2.1版本移除了`MKNetWorkKit`，基于现有的api重新封装了`AFNetworking`，并且加入了缓存控制。如果利用`Action`类来发起请求的小伙伴可以体验到无痛升级的快感。。
+* 多谢各位小伙伴们的支持以及不断的提出Issues，清晰的指出了了EasyIOS的优化项,本次更新主要针对网络访问Action类
+* 因大家对`MKNetWorkKit`接触不多，开发中需要自己写网络逻辑的小伙伴纠结了，应各位的要求，2.1版本移除了`MKNetWorkKit`，基于现有的api重新封装了`AFNetworking`，并且加入了缓存控制。
+* 如果利用`Action`类来发起请求的小伙伴可以体验到无痛升级的快感。。
 * 同时移除`UIImageView+MKNetWorkKit`替换为大家熟悉的`SDWebImage`，解决图片闪烁问题。
 * 修复部分循环引用的bug
 
