@@ -84,8 +84,9 @@ DEF_SINGLETON(Action)
     
 
     @weakify(msg,self);
-    return [manager GET:url parameters:requestParams success:^(AFHTTPRequestOperation *operation, NSDictionary* jsonObject) {
+    AFHTTPRequestOperation *op =  [manager GET:url parameters:requestParams success:^(AFHTTPRequestOperation *operation, NSDictionary* jsonObject) {
         @strongify(msg,self);
+        msg.url = operation.response.URL.absoluteString;
         if(_cacheEnable){
             [[TMCache sharedCache] setObject:jsonObject forKey:url.MD5 block:^(TMCache *cache, NSString *key, id object) {
                 EZLog(@"%@ has cached",url);
@@ -95,11 +96,14 @@ DEF_SINGLETON(Action)
         [self checkCode:msg];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         @strongify(msg,self);
-        if(_dataFromCache && msg.output !=nil){
+        msg.url = operation.response.URL.absoluteString;
+        if(msg.output !=nil){
             msg.error = error;
             [self failed:msg];
         }
     }];
+    msg.url = op.response.URL.absoluteString;
+    return op;
 }
 
 
@@ -140,6 +144,7 @@ DEF_SINGLETON(Action)
         msg.error = error;
         [self failed:msg];
     }];
+    msg.url = op.response.URL.absoluteString;
     if(file.count >0){
         [op setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
             @strongify(msg,self);
