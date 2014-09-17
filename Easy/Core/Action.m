@@ -93,15 +93,14 @@ DEF_SINGLETON(Action)
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         @strongify(msg,self);
         if(msg.output !=nil){
-            msg.error = error;
-            [self failed:msg];
+            [self checkCode:msg];
         }
+        msg.error = error;
+        [self failed:msg];
     }];
     msg.url = op.request.URL.absoluteString;
     msg.output = [[TMCache sharedCache] objectForKey:msg.url.MD5];
-    if(msg.output !=nil){
-        [self checkCode:msg];
-    }
+
     return op;
 }
 

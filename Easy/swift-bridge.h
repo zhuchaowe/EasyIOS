@@ -5,7 +5,6 @@
 //  Created by zhuchao on 14-7-15.
 //  Copyright (c) 2014 year zhuchao. All rights reserved.
 //
-#define MAS_SHORTHAND
 
 #import "Action.h"
 #import "Scene.h"
@@ -37,7 +36,7 @@
 
 #define HOST_CONFIG 1
 //以下配置为调用Action 类必须 配置
-#define HOST_URL @"local.maichong.com:8080" //服务端域名:端口
+#define HOST_URL @"admin.maichong.me" //服务端域名:端口
 #define CLIENT   @"easyIOS"                       //自定义客户端识别
 #define CODE_KEY @"code"                          //错误码key,支持路径 如 data/code
 #define RIGHT_CODE 0                              //正确校验码
