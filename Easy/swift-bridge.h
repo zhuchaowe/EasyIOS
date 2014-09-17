@@ -5,6 +5,7 @@
 //  Created by zhuchao on 14-7-15.
 //  Copyright (c) 2014 year zhuchao. All rights reserved.
 //
+#define MAS_SHORTHAND
 
 #import "Action.h"
 #import "Scene.h"
@@ -17,7 +18,7 @@
 #import "RTLabel.h"
 #import "DialogUtil.h"
 #import "Request.h"
-#import "UIView+FLKAutoLayout.h"
+#import "Masonry.h"
 #import "UICKeyChainStore.h"
 #import "GCDObjC.h"
 #import "RegExCategories.h"
