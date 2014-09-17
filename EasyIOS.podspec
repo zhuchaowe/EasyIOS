@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
     sp.dependency 'MBProgressHUD'
     sp.dependency 'FontIcon'
     sp.dependency 'MojoDatabase'
-    sp.dependency 'Masonry'
+    sp.dependency 'FLKAutoLayout'
     sp.dependency 'RTLabel'
     sp.dependency 'GCDObjC'
     sp.dependency 'RegExCategories'
