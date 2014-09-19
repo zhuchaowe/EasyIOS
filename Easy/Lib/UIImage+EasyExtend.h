@@ -11,5 +11,5 @@
 - (UIImage *) toGrayscale;
 - (UIImage *) tintWithColor:(UIColor *)tintColor;
 + (UIImage *) imageWithUrl:(NSString *)url;
-
++ (UIImage *)imageWithColor:( UIColor  *)color size:( CGSize )size;
 @end

@@ -50,8 +50,23 @@
 		self.backgroundColor = [UIColor clearColor];
 		self.lineBreakMode = NSLineBreakByTruncatingTail;
 		self.isWithStrikeThrough = NO;
+        self.letterSpacing = 0;
         _inited = YES;
 	}
+}
+
+-(void)setEzText:(NSString *)text{
+    @weakify(self);
+    [self setText:text afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+        @strongify(self);
+        if(self.letterSpacing>0){
+            long number = self.letterSpacing;
+            CFNumberRef num = CFNumberCreate(kCFAllocatorDefault, kCFNumberSInt8Type, &number);
+            [mutableAttributedString addAttribute:(NSString *)kCTKernAttributeName value:(__bridge id)num range:NSMakeRange(0, [mutableAttributedString length])];
+            CFRelease(num);
+        }
+        return mutableAttributedString;
+    }];
 }
 
 - (void)drawRect:(CGRect)rect

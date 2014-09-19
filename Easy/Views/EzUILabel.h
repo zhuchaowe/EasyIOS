@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Easy.h"
-@interface EzUILabel : UILabel
+#import "TTTAttributedLabel.h"
+@interface EzUILabel : TTTAttributedLabel
+@property(nonatomic,assign)CGFloat letterSpacing;
 @property(nonatomic,assign)BOOL isWithStrikeThrough;
+-(void)setEzText:(NSString *)text;
 @end
