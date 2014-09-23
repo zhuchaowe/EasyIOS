@@ -28,7 +28,7 @@ extern const NSInteger YEAR;
 
 + (long long)timeStamp;
 
-+ (NSDate *)dateWithString:(NSString *)string;
++ (NSDate *)dateWithString:(NSString *)string format:(NSString*)format;
 + (NSDate *)now;
 
 @end

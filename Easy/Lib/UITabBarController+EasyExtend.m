@@ -33,8 +33,8 @@ NSString *const UITabItemsNormalImage = @"normalImage";
                                 [settingDict objectForKey:UITabSelectedTextColor],UITextAttributeTextColor,nil]
                                 forState:UIControlStateSelected];
         }
-        if([easyTabImageConfig objectAtIndex:i]){
-            NSDictionary *config = [easyTabImageConfig objectAtIndex:i];
+        if([easyTabImageConfig safeObjectAtIndex:i]){
+            NSDictionary *config = [easyTabImageConfig safeObjectAtIndex:i];
             if ([config objectForKey:UITabItemsSelectedImage] && [config objectForKey:UITabItemsNormalImage]) {
                 [item setFinishedSelectedImage:[UIImage imageNamed:[config objectForKey:UITabItemsSelectedImage]]
                    withFinishedUnselectedImage:[UIImage imageNamed:[config objectForKey:UITabItemsNormalImage]]];

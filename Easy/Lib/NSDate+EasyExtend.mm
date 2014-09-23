@@ -169,9 +169,11 @@ const NSInteger YEAR = 12 * MONTH;
 	return (long long)[[NSDate date] timeIntervalSince1970];
 }
 
-+ (NSDate *)dateWithString:(NSString *)string
++ (NSDate *)dateWithString:(NSString *)string format:(NSString*)format
 {
-    return nil;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:format];
+    return [dateFormatter dateFromString:string];
 }
 
 + (NSDate *)now
