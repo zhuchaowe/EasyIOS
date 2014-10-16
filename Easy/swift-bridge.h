@@ -17,6 +17,7 @@
 #import "DialogUtil.h"
 #import "Request.h"
 #import "UIView+FLKAutoLayout.h"
+#import "UIScrollView+CoverView.h"
 #import "UICKeyChainStore.h"
 #import "GCDObjC.h"
 #import "RegExCategories.h"
