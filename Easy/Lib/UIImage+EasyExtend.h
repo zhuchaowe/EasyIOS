@@ -12,4 +12,6 @@
 - (UIImage *) tintWithColor:(UIColor *)tintColor;
 + (UIImage *) imageWithUrl:(NSString *)url;
 + (UIImage *)imageWithColor:( UIColor  *)color size:( CGSize )size;
+- (UIImage *)imageByScalingToMaxSize;
+- (UIImage *)imageByScalingAndCroppingToSize:(CGSize)targetSize;
 @end
