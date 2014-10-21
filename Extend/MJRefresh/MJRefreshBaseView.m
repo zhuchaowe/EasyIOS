@@ -99,20 +99,18 @@
     CGFloat h = frame.size.height;
     if (w == 0 || _arrowImage.center.y == h * 0.5) return;
     
-    CGFloat statusX = 0;
     CGFloat statusY = 5;
     CGFloat statusHeight = 20;
     CGFloat statusWidth = w;
     // 1.状态标签
-    _statusLabel.frame = CGRectMake(statusX, statusY, statusWidth, statusHeight);
-
+    _statusLabel.frame = CGRectMake(0, 0, statusWidth, statusHeight);
+    _statusLabel.center = CGPointMake(statusWidth/2, statusY + statusHeight/2);
     // 2.时间标签
     CGFloat lastUpdateY = statusY + statusHeight + 5;
-    _lastUpdateTimeLabel.frame = CGRectMake(statusX, lastUpdateY, statusWidth, statusHeight);
-    
+    _lastUpdateTimeLabel.frame = CGRectMake(0, 0, statusWidth, statusHeight);
+    _lastUpdateTimeLabel.center = CGPointMake(statusWidth/2, lastUpdateY + statusHeight/2);
     // 3.箭头
-    CGFloat arrowX = w * 0.5 - 100;
-    _arrowImage.center = CGPointMake(arrowX, h * 0.5);
+    _arrowImage.center = CGPointMake(_lastUpdateTimeLabel.center.x*0.3, h * 0.5);
     
     // 4.指示器
     _activityView.center = _arrowImage.center;
