@@ -22,22 +22,25 @@ NSString *const UITabItemsNormalImage = @"normalImage";
         easyTabImageConfig = [settingDict objectForKey:UITabItemsImageArray];
     }
     NSInteger i =0;
+    
     for (UITabBarItem *item in self.tabBar.items) {
         if([settingDict objectForKey:UITabNormalTextColor]){
             [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                [settingDict objectForKey:UITabNormalTextColor],UITextAttributeTextColor,nil]
+                                [settingDict objectForKey:UITabNormalTextColor],NSForegroundColorAttributeName,nil]
                                 forState:UIControlStateNormal];
         }
         if([settingDict objectForKey:UITabSelectedTextColor]){
             [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                [settingDict objectForKey:UITabSelectedTextColor],UITextAttributeTextColor,nil]
+                                [settingDict objectForKey:UITabSelectedTextColor],NSForegroundColorAttributeName,nil]
                                 forState:UIControlStateSelected];
         }
         if([easyTabImageConfig safeObjectAtIndex:i]){
             NSDictionary *config = [easyTabImageConfig safeObjectAtIndex:i];
             if ([config objectForKey:UITabItemsSelectedImage] && [config objectForKey:UITabItemsNormalImage]) {
-                [item setFinishedSelectedImage:[UIImage imageNamed:[config objectForKey:UITabItemsSelectedImage]]
-                   withFinishedUnselectedImage:[UIImage imageNamed:[config objectForKey:UITabItemsNormalImage]]];
+                UIImage * normalImage = [[UIImage imageNamed:[config objectForKey:UITabItemsNormalImage]]  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                UIImage * selectImage = [[UIImage imageNamed:[config objectForKey:UITabItemsSelectedImage]]  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                [item setImage:normalImage];
+                [item setSelectedImage:selectImage];
             }
         }
         i++;
