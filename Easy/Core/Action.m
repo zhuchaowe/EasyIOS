@@ -13,10 +13,23 @@
 @interface Action()
 @property(nonatomic,assign)BOOL cacheEnable;
 @property(nonatomic,assign)BOOL dataFromCache;
+
+@property(nonatomic,retain)NSString *HOST_URL;//服务端域名:端口
+@property(nonatomic,retain)NSString *CLIENT;//自定义客户端识别
+@property(nonatomic,retain)NSString *CODE_KEY;//错误码key,支持路径 如 data/code
+@property(nonatomic,assign)NSUInteger RIGHT_CODE;//正确校验码
+@property(nonatomic,retain)NSString *MSG_KEY;//消息提示msg,支持路径 如 data/msg
 @end
 @implementation Action
 
 DEF_SINGLETON(Action)
++(void)actionConfigHost:(NSString *)host client:(NSString *)client codeKey:(NSString *)codeKey rightCode:(NSInteger)rightCode msgKey:(NSString *)msgKey{
+    [Action sharedInstance].HOST_URL = host;
+    [Action sharedInstance].CLIENT = client;
+    [Action sharedInstance].CODE_KEY = codeKey;
+    [Action sharedInstance].RIGHT_CODE = rightCode;
+    [Action sharedInstance].MSG_KEY = msgKey;
+}
 
 +(id)Action{
     return [[[self class] alloc] init];
@@ -35,7 +48,7 @@ DEF_SINGLETON(Action)
 {
     self = [self init];
     _cacheEnable = YES;
-	return self;
+    return self;
 }
 
 -(void)useCache{
@@ -51,9 +64,9 @@ DEF_SINGLETON(Action)
 
 -(AFHTTPRequestOperation *)Send:(Request *)msg{
     if([msg.METHOD isEqualToString:@"GET"]){
-         return [self GET:msg];
+        return [self GET:msg];
     }else{
-         return [self POST:msg];
+        return [self POST:msg];
     }
 }
 
@@ -61,7 +74,7 @@ DEF_SINGLETON(Action)
 {
     NSString *url = @"";
     if([msg.SCHEME isEmpty] || [msg.HOST isEmpty]){
-        url = [NSString stringWithFormat:@"http://%@%@",HOST_URL,msg.PATH];
+        url = [NSString stringWithFormat:@"http://%@%@",[Action sharedInstance].HOST_URL,msg.PATH];
     }else{
         url = [NSString stringWithFormat:@"%@://%@%@",msg.SCHEME,msg.HOST,msg.PATH];
     }
@@ -71,15 +84,15 @@ DEF_SINGLETON(Action)
     }else{
         url = [url stringByAppendingString:msg.appendPathInfo];
     }
-
+    
     [self sending:msg];
     
-
+    
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:[NSURL URLWithString:url]];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-
+    
     @weakify(msg,self);
     AFHTTPRequestOperation *op =  [manager GET:url parameters:requestParams success:^(AFHTTPRequestOperation *operation, NSDictionary* jsonObject) {
         @strongify(msg,self);
@@ -100,7 +113,7 @@ DEF_SINGLETON(Action)
     }];
     msg.url = op.request.URL.absoluteString;
     msg.output = [[TMCache sharedCache] objectForKey:msg.url.MD5];
-
+    
     return op;
 }
 
@@ -108,7 +121,7 @@ DEF_SINGLETON(Action)
 -(AFHTTPRequestOperation *)POST:(Request *)msg{
     NSString *url = @"";
     if([msg.SCHEME isEmpty] || [msg.HOST isEmpty]){
-        url = [NSString stringWithFormat:@"http://%@%@",HOST_URL,msg.PATH];
+        url = [NSString stringWithFormat:@"http://%@%@",[Action sharedInstance].HOST_URL,msg.PATH];
     }else{
         url = [NSString stringWithFormat:@"%@://%@%@",msg.SCHEME,msg.HOST,msg.PATH];
     }
@@ -156,7 +169,7 @@ DEF_SINGLETON(Action)
 }
 
 -(void)checkCode:(Request *)msg{
-    if([msg.output objectAtPath:CODE_KEY] && [[msg.output objectAtPath:CODE_KEY] intValue] == RIGHT_CODE){
+    if([msg.output objectAtPath:[Action sharedInstance].CODE_KEY] && [[msg.output objectAtPath:[Action sharedInstance].CODE_KEY] intValue] == [Action sharedInstance].RIGHT_CODE){
         [self success:msg];
     }else{
         [self error:msg];
@@ -171,7 +184,7 @@ DEF_SINGLETON(Action)
 }
 
 - (void)success:(Request *)msg{
-    msg.discription = [msg.output objectAtPath:MSG_KEY];
+    msg.discription = [msg.output objectAtPath:[Action sharedInstance].MSG_KEY];
     if (msg.state != SuccessState) {
         msg.state = SuccessState;
         if([self.aDelegaete respondsToSelector:@selector(handleActionMsg:)]){
@@ -192,8 +205,8 @@ DEF_SINGLETON(Action)
 }
 
 - (void)error:(Request *)msg{
-    if([msg.output objectAtPath:MSG_KEY]){
-        msg.discription = [msg.output objectAtPath:MSG_KEY];
+    if([msg.output objectAtPath:[Action sharedInstance].MSG_KEY]){
+        msg.discription = [msg.output objectAtPath:[Action sharedInstance].MSG_KEY];
         NSLog(@"Error:%@",msg.discription);
     }
     msg.state = ErrorState;
