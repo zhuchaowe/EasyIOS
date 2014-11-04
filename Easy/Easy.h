@@ -33,5 +33,6 @@
 #import "BEVersion.h"
 #import "IconFont.h"
 #import "EasyKit.h"
+#import "EZNavigationController.h"
 
 
