@@ -11,21 +11,25 @@ EasyIOS  - When IOS Fall In Love With MVVM
 
 EasyIOS is a new generation of development framework based on `Model-View-ViewModel` which makes faster and easier app development, Build your app by geek's way.
 
-[EasyRSS](https://github.com/zhuchaowe/EasyRSS):基于EasyIOS 2.0 的开源项目
+* [EasyIOS官方主页](http://easyios.08dream.com)
 
-[EasyIOS主页](http://easyios.08dream.com)
+* [EasyIOS官方论坛-IOSX](http://www.iosx.me)
 
-有问题可以到[IOSX论坛](http://www.iosx.me)提出
+* EasyIOS官方qq群 :[340906744](http://shang.qq.com/wpa/qunwpa?idkey=562d002e275a8199081313b00580fb7111a4faf694216a239064d29f5238bc91) 欢迎大家加入讨论
 
-[源码下载](https://github.com/zhuchaowe/EasyIOS/archive/master.zip)
 
-EasyIOS官方qq群 :[340906744](http://shang.qq.com/wpa/qunwpa?idkey=562d002e275a8199081313b00580fb7111a4faf694216a239064d29f5238bc91) 欢迎大家加入讨论
+* [EasyRSS](https://github.com/zhuchaowe/EasyRSS):基于EasyIOS 2.0 的开源项目
 
-[教程在Wiki Paper](https://github.com/zhuchaowe/EasyIOS/wiki)
+* [MVVM Demo for EasyIOS](https://github.com/zhuchaowe/MVVM-Demo-EasyIOS):EasyIOS swift 版本Demo
 
-[json转Model工具 ModelCoder](https://github.com/zhuchaowe/ModelCoder) 
+* [RACSwift for EasyIOS](https://github.com/zhuchaowe/RACSwift):EasyIOS swift 版本Demo
 
-##EasyIOS 以提升开发效率为宗旨
+
+* [教程在Wiki Paper](https://github.com/zhuchaowe/EasyIOS/wiki)
+
+* [json转Model工具 ModelCoder](https://github.com/zhuchaowe/ModelCoder) 
+
+>EasyIOS 以提升开发效率为宗旨
 
 * 代码分离 -`Model-View-ViewModel`- 分离ViewController中的大量逻辑代码，解决ViewController承担了过多角色而造成的代码质量低下。增加视图与模型的绑定特性。
 
@@ -45,7 +49,7 @@ EasyIOS官方qq群 :[340906744](http://shang.qq.com/wpa/qunwpa?idkey=562d002e275
 
 EasyIOS 2.0类似`AngularJs`，最为核心的是：`MVVM`、`ORM`、模块化、自动化双向数据绑定、等等
 
-2.0的demo在这里[MVVM Demo for EasyIOS](https://github.com/zhuchaowe/MVVM-Demo--EasyIOS-)，供大家学习。
+2.0的demo在这里[MVVM Demo for EasyIOS](https://github.com/zhuchaowe/MVVM-Demo-EasyIOS)，供大家学习。
 
 喜欢`swift`的同学，同样有`swift`的2.0 demo [RACSwift for EasyIOS](https://github.com/zhuchaowe/RACSwift)，供大家学习。
 
