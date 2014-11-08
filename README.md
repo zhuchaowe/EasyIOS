@@ -49,7 +49,7 @@ EasyIOS 2.0类似`AngularJs`，最为核心的是：`MVVM`、`ORM`、模块化�
 
 喜欢`swift`的同学，同样有`swift`的2.0 demo [RACSwift for EasyIOS](https://github.com/zhuchaowe/RACSwift)，供大家学习。
 
-关于有疑问什么是MVVM，以及为什么IOS开发需要MVVM思想编程的，请看文章[用Model-View-ViewModel构建iOS App](http://swift.08dream.com/index.php?s=/Home/Article/detail/id/10036.html)有详细介绍.
+关于有疑问什么是MVVM，以及为什么IOS开发需要MVVM思想编程的，请看文章[用Model-View-ViewModel构建iOS App](http://easyios.08dream.com/index.php?s=/Home/Article/detail/id/10036.html)有详细介绍.
 
 EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,Model，Action四种模型来对IOS进行开发，4种模型的定义解决了IOS开发中ViewController承担了过多角色而造成的代码质量低下，使得结构思路更加清晰。
 
