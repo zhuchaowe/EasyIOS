@@ -17,7 +17,6 @@ EasyIOS is a new generation of development framework based on `Model-View-ViewMo
 
 有问题可以到[IOSX论坛](http://www.iosx.me)提出
 
-
 [源码下载](https://github.com/zhuchaowe/EasyIOS/archive/master.zip)
 
 EasyIOS官方qq群 :[340906744](http://shang.qq.com/wpa/qunwpa?idkey=562d002e275a8199081313b00580fb7111a4faf694216a239064d29f5238bc91) 欢迎大家加入讨论
@@ -25,6 +24,21 @@ EasyIOS官方qq群 :[340906744](http://shang.qq.com/wpa/qunwpa?idkey=562d002e275
 [教程在Wiki Paper](https://github.com/zhuchaowe/EasyIOS/wiki)
 
 [json转Model工具 ModelCoder](https://github.com/zhuchaowe/ModelCoder) 
+
+##EasyIOS 懒惰特性
+
+* 代码分离 -`Model-View-ViewModel`- 分离ViewController中的大量逻辑代码，解决ViewController承担了过多角色而造成的代码质量低下。增加视图与模型的绑定特性。
+
+* 自动持久化 -`Model to Db`– 我再也不想思考如何实现持久化了。在我的想法里，将模型对象直接扔到一个bucket里，然后它就能自动的对数据进行存储、缓存、合并以及唯一化。我应当关注于描述对象间的属性和联系，以及我希望它们分组的方式。其他的实现细节都应该是不可见的。 
+
+* 自动RESTful API –`Json to Model`- 一旦我给程序发出指令，将一个API响应对应到一个数据对象，网络和JSON转换应该被自动完成。我只想关注如何将JSON中那些项目展示给用户。 
+
+* 有表现力的触发器和响应 -`ReactiveCocoa`– 我想用源于响应意图（Intent）的语法来描述事件的响应和触发器，我不关心它们间的连接是如何实现的，并且这些连接也不应该在重构时出错。
+
+* 简洁明了的网络请求 -`Action` and `Request`- 对于简单的GET、POST请求，可以进行对象化操作，我只想告诉程序，链接在哪里，有哪些参数，接下来就自动拉取到想要的数据，顺便帮我把缓存也做齐了，也是极好的。
+
+* UI布局 – 不管你使用springs & struts或者AutoLayout，每种方法都需要你明确相关视图如何排列。你需要花大量的时间编写和修正这些排列，特别是现在有这么多设备需要适配 的情况下。没有什么是自动写好的，UI布局依赖于对细节的不断调整。推荐开发期间Debug工具[FLEX](!https://github.com/Flipboard/FLEX),`pod 'FLEX', '~> 1.1.1'`需要手动集成，发布release版本时请删除。
+
 
 ##The MVVM(Model-View-ViewModel)
 全新基于`MVVM(Model-View-ViewModel)`编程模式架构，开启EasyIOS开发函数式编程新篇章。
@@ -88,9 +102,16 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
     	
 * If you use swift , please click [here](https://github.com/zhuchaowe/RACSwift)
 
+##2.2版本更新
+* 修改Action类中的配置方式：由原来的宏调用改为类方法配置
+* 针对IOS8优化
+* 为UIScrollView增加下拉放大效果
+* 新增`EZNavigationController`类，解决ios7中快速push容易crash的问题
+* 
+
 ##2.1版本更新
 * 多谢各位小伙伴们的支持以及不断的提出Issues，清晰的指出了了EasyIOS的优化项,本次更新主要针对网络访问Action类
-* 因大家对`MKNetWorkKit`接触不多，开发中需要自己写网络逻辑的小伙伴纠结了，应各位的要求，2.1版本移除了`MKNetWorkKit`，基于现有的api重新封装了`AFNetworking`，并且加入了缓存控制。
+* 2.1版本移除了`MKNetWorkKit`，基于现有的api重新封装了`AFNetworking`，并且加入了缓存控制。
 * 如果利用`Action`类来发起请求的小伙伴可以体验到无痛升级的快感。。
 * 同时移除`UIImageView+MKNetWorkKit`替换为大家熟悉的`SDWebImage`，解决图片闪烁问题。
 * 修复部分循环引用的bug
