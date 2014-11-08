@@ -102,12 +102,13 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
     	
 * If you use swift , please click [here](https://github.com/zhuchaowe/RACSwift)
 
-##master版本更新
+##master版本正在更新中……
 * 修改Action类中的配置方式：由原来的宏调用改为类方法配置
 * 针对IOS8优化
 * 为UIScrollView增加下拉放大效果
 * 新增`EZNavigationController`类，解决ios7中快速push容易crash的问题
 * 修复部分bug
+* ……
 
 
 ##2.1版本更新
