@@ -1,6 +1,6 @@
 ![image](https://raw.githubusercontent.com/zhuchaowe/EasyIOS/gh-pages/images/logo.png)
 
-EasyIOS  - program on MVVM
+EasyIOS  - When IOS Fall In Love With MVVM
 =======
 
 [![Pod Version](http://img.shields.io/cocoapods/v/EasyIOS.svg)](http://easyios.08dream.com)
