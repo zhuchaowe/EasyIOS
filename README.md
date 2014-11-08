@@ -41,8 +41,11 @@ EasyIOS is a new generation of development framework based on `Model-View-ViewMo
 
 * 简洁明了的网络请求 -`Action` and `Request`- 对于简单的GET、POST请求，可以进行对象化操作，我只想告诉程序，链接在哪里，有哪些参数，接下来就自动拉取到想要的数据，顺便帮我把缓存也做齐了，也是极好的。
 
-* UI布局 – 不管你使用springs & struts或者AutoLayout，每种方法都需要你明确相关视图如何排列。你需要花大量的时间编写和修正这些排列，特别是现在有这么多设备需要适配 的情况下。没有什么是自动写好的，UI布局依赖于对细节的不断调整。推荐开发期间Debug工具[FLEX](!https://github.com/Flipboard/FLEX),`pod 'FLEX', '~> 1.1.1'`需要手动集成，发布release版本时请删除。
-
+* 便捷的UI布局 – `FLKAutolayout`-更加便捷的进行autolayout布局,不管你使用springs & struts或者AutoLayout，每种方法都需要你明确相关视图如何排列。你需要花大量的时间编写和修正这些排列，特别是现在有这么多设备需要适配 的情况下。没有什么是自动写好的，UI布局依赖于对细节的不断调整。推荐开发期间Debug工具[FLEX](!https://github.com/Flipboard/FLEX),`pod 'FLEX', '~> 1.1.1'`需要手动集成，发布release版本时请删除。
+* 友好的线程控制 -`GCDObjC`-
+* 便捷的正则匹配 
+* 富文本的Label
+* and so on……
 
 ##The MVVM(Model-View-ViewModel)
 全新基于`MVVM(Model-View-ViewModel)`编程模式架构，开启EasyIOS开发函数式编程新篇章。
