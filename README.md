@@ -29,7 +29,7 @@ EasyIOS is a new generation of development framework based on `Model-View-ViewMo
 
 * [json转Model工具 ModelCoder](https://github.com/zhuchaowe/ModelCoder) 
 
->EasyIOS 以提升开发效率为宗旨
+##EasyIOS 以提升开发效率为宗旨
 
 * 代码分离 -`Model-View-ViewModel`- 分离ViewController中的大量逻辑代码，解决ViewController承担了过多角色而造成的代码质量低下。增加视图与模型的绑定特性。
 
