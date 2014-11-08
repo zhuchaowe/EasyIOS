@@ -25,7 +25,7 @@ EasyIOS官方qq群 :[340906744](http://shang.qq.com/wpa/qunwpa?idkey=562d002e275
 
 [json转Model工具 ModelCoder](https://github.com/zhuchaowe/ModelCoder) 
 
-##EasyIOS 懒惰特性
+##EasyIOS 以提升开发效率为宗旨
 
 * 代码分离 -`Model-View-ViewModel`- 分离ViewController中的大量逻辑代码，解决ViewController承担了过多角色而造成的代码质量低下。增加视图与模型的绑定特性。
 
@@ -102,12 +102,13 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
     	
 * If you use swift , please click [here](https://github.com/zhuchaowe/RACSwift)
 
-##2.2版本更新
+##master版本更新
 * 修改Action类中的配置方式：由原来的宏调用改为类方法配置
 * 针对IOS8优化
 * 为UIScrollView增加下拉放大效果
 * 新增`EZNavigationController`类，解决ios7中快速push容易crash的问题
-* 
+* 修复部分bug
+
 
 ##2.1版本更新
 * 多谢各位小伙伴们的支持以及不断的提出Issues，清晰的指出了了EasyIOS的优化项,本次更新主要针对网络访问Action类
