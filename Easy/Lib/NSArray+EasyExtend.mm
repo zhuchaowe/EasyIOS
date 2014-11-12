@@ -112,7 +112,7 @@
 	}
 	else if ( 1 == self.count )
 	{
-		return [[self objectAtIndex:0] stringValue];
+		return [NSString stringWithFormat:@"%@",[self objectAtIndex:0]];
 	}
 	else
 	{
@@ -120,7 +120,8 @@
 		
 		for ( NSUInteger i = 0; i < self.count; ++i )
 		{
-			[result appendString:[[self objectAtIndex:i] stringValue]];
+            [result appendString:[NSString stringWithFormat:@"%@",[self objectAtIndex:i]]];
+			
 			
 			if ( i + 1 < self.count )
 			{
