@@ -15,40 +15,11 @@
     self = [super initWithFrame:frame];
     if (self) {
 
+        self.pagination = [Pagination Model];
+        
     }
     return self;
 }
-
--(void)initPage{
-    _page = @1;
-    _pageSize = @10;
-    _total = @0;
-}
-
-- (void)addFooter
-{
-    MJRefreshFooterView *footer = [MJRefreshFooterView footer];
-    footer.scrollView = self;
-    footer.refreshStateChangeBlock =^(MJRefreshBaseView *refreshView,MJRefreshState state) {
-        if(state == MJRefreshStateRefreshing){
-            [_SceneDelegate handlePullLoader:refreshView state:REACH_BOTTOM];
-        }
-    };
-    _footer = footer;
-}
-
-- (void)addHeader
-{
-    MJRefreshHeaderView *header = [MJRefreshHeaderView header];
-    header.scrollView = self;
-    header.refreshStateChangeBlock =^(MJRefreshBaseView *refreshView,MJRefreshState state) {
-        if(state == MJRefreshStateRefreshing){
-            [_SceneDelegate handlePullLoader:refreshView state:HEADER_REFRESH];
-        }
-    };
-    _header = header;
-}
-
 
 - (void)flashMessage:(NSString *)msg {
 	//Show message
@@ -79,6 +50,7 @@
 		}];
 	}];
 }
+
 -(void)successWithNewArray:(NSArray *)array{
     if ([_page integerValue] == 1) {
         [_dataArray removeAllObjects];
@@ -89,22 +61,23 @@
     }
     [self endAllRefreshing];
 }
--(void)endAllRefreshing{
-    if(_header !=nil){
-        [_header endRefreshing];
-    }
-    if(_footer !=nil){
-        if([_page integerValue] == 1){
-            _footer.isEnd = NO;
-        }
-        if([_total integerValue] >0 && [_total integerValue] == [self.dataArray count] && _footer.isEnd == NO){
-            [self.footer setState:MJRefreshStateEnd];
-        }else {
-            if(_footer.isEnd == NO){
-                [_footer endRefreshing];
-            }
-        }
-    }
-}
+
+//-(void)endAllRefreshing{
+//    if(_header !=nil){
+//        [_header endRefreshing];
+//    }
+//    if(_footer !=nil){
+//        if([_page integerValue] == 1){
+//            _footer.isEnd = NO;
+//        }
+//        if([_total integerValue] >0 && [_total integerValue] == [self.dataArray count] && _footer.isEnd == NO){
+//            [self.footer setState:MJRefreshStateEnd];
+//        }else {
+//            if(_footer.isEnd == NO){
+//                [_footer endRefreshing];
+//            }
+//        }
+//    }
+//}
 
 @end

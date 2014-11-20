@@ -34,6 +34,14 @@
     }
 }
 
+-(NSNumber *)increase:(NSNumber *)number{
+    return @(self.integerValue + number.integerValue);
+}
+
+-(NSNumber *)decrease:(NSNumber *)number{
+    return @(self.integerValue - number.integerValue);
+}
+
 - (BOOL)numberIsFloat{
     return ![self numberIsInt];
 }

@@ -6,29 +6,15 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
-#import "MJRefresh.h"
-@protocol SceneTableViewDelegate;
+#import "SVPullToRefresh.h"
+#import "Pagination.h"
+
 @interface SceneTableView : UITableView
-@property(nonatomic,strong)MJRefreshHeaderView *header;
-@property(nonatomic,strong)MJRefreshFooterView *footer;
-@property(nonatomic,strong)NSNumber *page;
-@property(nonatomic,strong)NSNumber *pageSize;
-@property(nonatomic,strong)NSNumber *total;
-@property(strong,nonatomic)NSMutableArray *dataArray;
-@property(strong,nonatomic)NSString *cacheDataString;
+@property(nonatomic,retain)NSMutableArray *dataArray;
 @property(nonatomic,strong)UILabel *msgLabel;
-@property (weak, nonatomic) id <SceneTableViewDelegate> SceneDelegate;
--(void)addHeader;
--(void)addFooter;
--(void)initPage;
+@property(nonatomic,strong) Pagination *pagination;
+
 -(void)flashMessage:(NSString *)msg;
 -(void)successWithNewArray:(NSArray *)array;
 -(void)endAllRefreshing;
-@end
-
-@protocol SceneTableViewDelegate <NSObject>
-
-@required
--(void)handlePullLoader:(MJRefreshBaseView *)view state:(PullLoaderState)state;
-
 @end

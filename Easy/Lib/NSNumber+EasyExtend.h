@@ -37,5 +37,6 @@
 -(double)safeDouble;
 -(BOOL)numberIsFloat;
 -(BOOL)numberIsInt;
-
+-(NSNumber *)increase:(NSNumber *)number;
+-(NSNumber *)decrease:(NSNumber *)number;
 @end
