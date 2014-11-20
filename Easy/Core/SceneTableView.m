@@ -14,7 +14,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.pagination = [Pagination Model];
     }
     return self;
 }
@@ -49,25 +48,13 @@
 	}];
 }
 
--(void)successWithNewArray:(NSArray *)array pagination:(Pagination *)pagination{
-    self.pagination = pagination;
-    if (self.pagination.page.integerValue == 1) {
-        [_dataArray removeAllObjects];
-        _dataArray = [NSMutableArray array];
-    }
-    if([array count]>0){
-        [_dataArray addObjectsFromArray:array];
-    }
-    [self endAllRefreshing];
-}
-
 -(void)endAllRefreshing{
     if(self.pullToRefreshView !=nil){
         [self.pullToRefreshView stopAnimating];
     }
     if(self.infiniteScrollingView !=nil){
         if(self.pagination.isEnd.integerValue == 1){
-          [self.infiniteScrollingView stopAnimating];
+          [self.infiniteScrollingView setEnded];
         }else{
            [self.infiniteScrollingView stopAnimating];
         }

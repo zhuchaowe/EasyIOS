@@ -10,4 +10,15 @@
 
 @implementation Pagination
 
+-(NSMutableArray *)success:(NSMutableArray *)originArray
+                  newArray:(NSArray *)newArray{
+    if (self.page.integerValue == 1) {
+        [originArray removeAllObjects];
+        originArray = [NSMutableArray array];
+    }
+    if([newArray count]>0){
+        [originArray addObjectsFromArray:newArray];
+    }
+    return originArray;
+}
 @end

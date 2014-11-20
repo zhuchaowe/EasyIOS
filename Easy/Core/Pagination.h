@@ -13,4 +13,6 @@
 @property(nonatomic,retain)NSNumber *pageSize;
 @property(nonatomic,retain)NSNumber *total;
 @property(nonatomic,retain)NSNumber *isEnd;
+-(NSMutableArray *)success:(NSMutableArray *)originArray
+                  newArray:(NSArray *)newArray;
 @end

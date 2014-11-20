@@ -18,12 +18,9 @@
     return self;
 }
 
-
-
 - (void)flashMessage:(NSString *)msg {
 	//Show message
 	__block CGRect rect = CGRectMake(0, - 20, self.bounds.size.width, 20);
-    
 	if (_msgLabel == nil) {
 		_msgLabel = [[UILabel alloc] init];
 		_msgLabel.frame = rect;
@@ -35,9 +32,9 @@
 		[self addSubview:_msgLabel];
 	}
 	_msgLabel.text = msg;
-    
 	rect.origin.y += 20;
-	[UIView animateWithDuration:.4f animations: ^{
+    
+	[UIView animateWithDuration:0.4f animations: ^{
 	    _msgLabel.frame = rect;
 	} completion: ^(BOOL finished) {
 	    rect.origin.y -= 20;
@@ -49,17 +46,6 @@
 		}];
 	}];
 }
--(void)successWithNewArray:(NSArray *)array pagination:(Pagination *)pagination{
-    self.pagination = pagination;
-    if (self.pagination.page.integerValue == 1) {
-        [_dataArray removeAllObjects];
-        _dataArray = [NSMutableArray array];
-    }
-    if([array count]>0){
-        [_dataArray addObjectsFromArray:array];
-    }
-    [self endAllRefreshing];
-}
 
 -(void)endAllRefreshing{
     if(self.pullToRefreshView !=nil){
@@ -67,12 +53,10 @@
     }
     if(self.infiniteScrollingView !=nil){
         if(self.pagination.isEnd.integerValue == 1){
-            [self.infiniteScrollingView stopAnimating];
+            [self.infiniteScrollingView setEnded];
         }else{
             [self.infiniteScrollingView stopAnimating];
         }
     }
 }
-
-
 @end

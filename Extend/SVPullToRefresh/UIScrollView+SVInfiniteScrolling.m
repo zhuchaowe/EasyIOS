@@ -289,6 +289,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
         switch (newState) {
             case SVInfiniteScrollingStateEnded:
                 [self resetScrollViewContentInset];
+                [self.activityIndicatorView stopAnimating];
                 break;
             case SVInfiniteScrollingStateStopped:
                 [self.activityIndicatorView stopAnimating];
