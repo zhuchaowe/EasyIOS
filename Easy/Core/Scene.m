@@ -36,10 +36,6 @@
     [super viewWillDisappear:animated];
 }
 
--(void)handlePullLoader:(MJRefreshBaseView *)view state:(PullLoaderState)state{
-    
-}
-
 - (void)showBarButton:(EzNavigationBar)position title:(NSString *)name fontColor:(UIColor *)color{
     UIButton *button = [[UIButton alloc] initNavigationButtonWithTitle:name color:color];
     [self showBarButton:position button:button];

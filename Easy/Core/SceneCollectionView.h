@@ -10,7 +10,8 @@
 #import "Pagination.h"
 
 @interface SceneCollectionView : UICollectionView
-@property(strong,nonatomic)NSMutableArray *dataArray;=
+@property(strong,nonatomic)NSMutableArray *dataArray;
+@property(strong,nonatomic)Pagination *pagination;
 @property(nonatomic,strong)UILabel *msgLabel;
 
 -(void)flashMessage:(NSString *)msg;

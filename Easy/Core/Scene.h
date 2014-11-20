@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Easy.h"
-#import "MJRefresh.h"
 typedef enum
 {
     NAV_LEFT                    =0,
@@ -19,7 +18,6 @@ typedef enum
 @interface Scene : UIViewController
 @property(nonatomic,retain)Scene *parentScene;
 
-- (void)handlePullLoader:(MJRefreshBaseView *)view state:(PullLoaderState)state;
 - (void)showBarButton:(EzNavigationBar)position title:(NSString *)name fontColor:(UIColor *)color;
 - (void)showBarButton:(EzNavigationBar)position imageName:(NSString *)imageName;
 - (void)showBarButton:(EzNavigationBar)position button:(UIButton *)button;
