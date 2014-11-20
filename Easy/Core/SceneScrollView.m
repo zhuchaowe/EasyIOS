@@ -19,17 +19,6 @@
     return self;
 }
 
-- (void)addHeader
-{
-    MJRefreshHeaderView *header = [MJRefreshHeaderView header];
-    header.scrollView = self;
-    header.refreshStateChangeBlock =^(MJRefreshBaseView *refreshView,MJRefreshState state) {
-        if(state == MJRefreshStateRefreshing){
-            [_SceneDelegate handlePullLoader:refreshView state:HEADER_REFRESH];
-        }
-    };
-    _header = header;
-}
 
 - (void)flashMessage:(NSString *)msg {
 	//Show message
@@ -62,8 +51,8 @@
 }
 
 -(void)endAllRefreshing{
-    if(_header !=nil){
-        [_header endRefreshing];
+    if(self.pullToRefreshView !=nil){
+        [self.pullToRefreshView stopAnimating];
     }
 }
 

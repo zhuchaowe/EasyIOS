@@ -15,6 +15,6 @@
 @property(nonatomic,strong) Pagination *pagination;
 
 -(void)flashMessage:(NSString *)msg;
--(void)successWithNewArray:(NSArray *)array;
+-(void)successWithNewArray:(NSArray *)array pagination:(Pagination *)pagination;
 -(void)endAllRefreshing;
 @end

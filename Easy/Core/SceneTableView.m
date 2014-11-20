@@ -14,9 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-
         self.pagination = [Pagination Model];
-        
     }
     return self;
 }
@@ -51,8 +49,9 @@
 	}];
 }
 
--(void)successWithNewArray:(NSArray *)array{
-    if ([_page integerValue] == 1) {
+-(void)successWithNewArray:(NSArray *)array pagination:(Pagination *)pagination{
+    self.pagination = pagination;
+    if (self.pagination.page.integerValue == 1) {
         [_dataArray removeAllObjects];
         _dataArray = [NSMutableArray array];
     }
@@ -62,22 +61,16 @@
     [self endAllRefreshing];
 }
 
-//-(void)endAllRefreshing{
-//    if(_header !=nil){
-//        [_header endRefreshing];
-//    }
-//    if(_footer !=nil){
-//        if([_page integerValue] == 1){
-//            _footer.isEnd = NO;
-//        }
-//        if([_total integerValue] >0 && [_total integerValue] == [self.dataArray count] && _footer.isEnd == NO){
-//            [self.footer setState:MJRefreshStateEnd];
-//        }else {
-//            if(_footer.isEnd == NO){
-//                [_footer endRefreshing];
-//            }
-//        }
-//    }
-//}
-
+-(void)endAllRefreshing{
+    if(self.pullToRefreshView !=nil){
+        [self.pullToRefreshView stopAnimating];
+    }
+    if(self.infiniteScrollingView !=nil){
+        if(self.pagination.isEnd.integerValue == 1){
+          [self.infiniteScrollingView stopAnimating];
+        }else{
+           [self.infiniteScrollingView stopAnimating];
+        }
+    }
+}
 @end

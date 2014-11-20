@@ -6,20 +6,9 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
-#import "MJRefresh.h"
-@protocol SceneScrollViewDelegate;
+#import "SVPullToRefresh.h"
 @interface SceneScrollView : UIScrollView
-@property(nonatomic,strong)MJRefreshHeaderView *header;
-@property(strong,nonatomic)NSString *cacheDataString;
 @property(nonatomic,strong)UILabel *msgLabel;
-@property (weak, nonatomic) id <SceneScrollViewDelegate> SceneDelegate;
--(void)addHeader;
 -(void)flashMessage:(NSString *)msg;
 -(void)endAllRefreshing;
-@end
-
-@protocol SceneScrollViewDelegate <NSObject>
-
-@required
--(void)handlePullLoader:(MJRefreshBaseView *)view state:(PullLoaderState)state;
 @end
