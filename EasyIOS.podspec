@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios,'6.0'
   s.license               = { :type => "MIT", :file => "LICENSE" }
   s.author                = { "zhuchao" => "zhuchaowe@163.com" }
-  s.source                = { :git => "https://github.com/zhuchaowe/EasyIOS.git"}
+  s.source                = { :git => "https://github.com/zhuchaowe/EasyIOS.git",:tag=>"2.2"}
   s.ios.deployment_target = "6.0"
   s.requires_arc          = true
   s.framework             = "CoreFoundation","Foundation","CoreGraphics","Security","UIKit"

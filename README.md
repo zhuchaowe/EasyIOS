@@ -114,6 +114,8 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 * 针对IOS8优化
 * 为UIScrollView增加下拉放大效果
 * 新增`EZNavigationController`类，解决ios7中快速push容易crash的问题
+* 重写下拉刷新，与上拉加载，完全解耦，支持自定义UI。
+* 智能键盘，防止键盘遮盖输入框
 * 修复部分bug
 * ……
 
