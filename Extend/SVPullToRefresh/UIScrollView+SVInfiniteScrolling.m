@@ -132,7 +132,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         self.state = SVInfiniteScrollingStateStopped;
         self.enabled = YES;
-        
+        self.extendBottom = 0.0f;
         self.viewForState = [NSMutableArray arrayWithObjects:@"", @"", @"", @"", nil];
     }
     
@@ -160,13 +160,13 @@ UIEdgeInsets scrollViewOriginalContentInsets;
 
 - (void)resetScrollViewContentInset {
     UIEdgeInsets currentInsets = self.scrollView.contentInset;
-    currentInsets.bottom = self.originalBottomInset;
+    currentInsets.bottom = self.originalBottomInset + self.extendBottom;
     [self setScrollViewContentInset:currentInsets];
 }
 
 - (void)setScrollViewContentInsetForInfiniteScrolling {
     UIEdgeInsets currentInsets = self.scrollView.contentInset;
-    currentInsets.bottom = self.originalBottomInset + SVInfiniteScrollingViewHeight;
+    currentInsets.bottom = self.originalBottomInset + self.extendBottom + SVInfiniteScrollingViewHeight;
     [self setScrollViewContentInset:currentInsets];
 }
 
@@ -192,7 +192,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
 }
 
 - (void)scrollViewDidScroll:(CGPoint)contentOffset {
-    if(self.state != SVInfiniteScrollingStateLoading && self.enabled) {
+    if(self.state != SVInfiniteScrollingStateLoading && self.state !=SVInfiniteScrollingStateEnded && self.enabled) {
         CGFloat scrollViewContentHeight = self.scrollView.contentSize.height;
         CGFloat scrollOffsetThreshold = scrollViewContentHeight-self.scrollView.bounds.size.height;
         
@@ -255,6 +255,10 @@ UIEdgeInsets scrollViewOriginalContentInsets;
     self.state = SVInfiniteScrollingStateStopped;
 }
 
+- (void)setEnded{
+    self.state = SVInfiniteScrollingStateEnded;
+}
+
 - (void)setState:(SVInfiniteScrollingState)newState {
     
     if(_state == newState)
@@ -283,15 +287,20 @@ UIEdgeInsets scrollViewOriginalContentInsets;
         [self.activityIndicatorView setFrame:CGRectMake(origin.x, origin.y, viewBounds.size.width, viewBounds.size.height)];
         
         switch (newState) {
+            case SVInfiniteScrollingStateEnded:
+                [self resetScrollViewContentInset];
+                break;
             case SVInfiniteScrollingStateStopped:
                 [self.activityIndicatorView stopAnimating];
                 break;
                 
             case SVInfiniteScrollingStateTriggered:
+                [self setScrollViewContentInsetForInfiniteScrolling];
                 [self.activityIndicatorView startAnimating];
                 break;
                 
             case SVInfiniteScrollingStateLoading:
+                [self setScrollViewContentInsetForInfiniteScrolling];
                 [self.activityIndicatorView startAnimating];
                 break;
         }
