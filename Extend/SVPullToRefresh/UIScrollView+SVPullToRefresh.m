@@ -69,7 +69,7 @@ static char UIScrollViewPullToRefreshView;
                 CGFloat pullNum = self.contentOffset.y + self.pullToRefreshView.originalTopInset;
                 if(!self.isDragging && self.pullToRefreshView.state == SVPullToRefreshStateTriggered)
                     self.pullToRefreshView.state = SVPullToRefreshStateLoading;
-                else if(!self.isDragging && pullNum < -SVPullToRefreshViewHeight  && self.pullToRefreshView.state == SVPullToRefreshStatePulling)
+                else if(self.isDragging && pullNum < -SVPullToRefreshViewHeight  && self.pullToRefreshView.state == SVPullToRefreshStatePulling)
                     self.pullToRefreshView.state = SVPullToRefreshStateTriggered;
                 else if(pullNum < 0 && pullNum > -SVPullToRefreshViewHeight){
                     self.pullToRefreshView.state = SVPullToRefreshStatePulling;
@@ -187,8 +187,6 @@ static char UIScrollViewPullToRefreshView;
         [self.viewForState replaceObjectsInRange:NSMakeRange(0, 4) withObjectsFromArray:@[viewPlaceholder, viewPlaceholder, viewPlaceholder,viewPlaceholder]];
     else
         [self.viewForState replaceObjectAtIndex:state withObject:viewPlaceholder];
-    
-    [self setNeedsLayout];
 }
 
 #pragma mark -
@@ -227,14 +225,13 @@ static char UIScrollViewPullToRefreshView;
             break;
     }
     
-    
     for(id otherView in self.viewForState) {
         if([otherView isKindOfClass:[UIView class]])
             [otherView removeFromSuperview];
     }
     
     id customView = [self.viewForState objectAtIndex:self.state];
-    if (customView) {
+    if (customView && [customView isKindOfClass:[UIView class]]) {
         [self addSubview:customView];
         CGRect viewBounds = [customView bounds];
         CGPoint origin = CGPointMake(roundf((self.bounds.size.width-viewBounds.size.width)/2), roundf((self.bounds.size.height-viewBounds.size.height)/2));

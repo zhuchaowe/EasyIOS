@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UIScrollView+SVInfiniteScrolling.h"
 
+//#import "PullHeader.h"
 
 
 
@@ -61,9 +62,9 @@ UIEdgeInsets scrollViewOriginalContentInsets;
                 CGFloat scrollOffsetThreshold = scrollViewContentHeight - self.bounds.size.height + self.infiniteScrollingView.extendBottom;
                 if(!self.isDragging && self.infiniteScrollingView.state == SVInfiniteScrollingStateTriggered)
                     self.infiniteScrollingView.state = SVInfiniteScrollingStateLoading;
-                else if(!self.isDragging && self.infiniteScrollingView.state == SVInfiniteScrollingStatePulling && self.contentOffset.y - scrollOffsetThreshold > SVInfiniteScrollingViewHeight)
+                else if(self.isDragging && self.infiniteScrollingView.state == SVInfiniteScrollingStatePulling && self.contentOffset.y - scrollOffsetThreshold > SVInfiniteScrollingViewHeight)
                     self.infiniteScrollingView.state = SVInfiniteScrollingStateTriggered;
-                else if(self.contentOffset.y > scrollOffsetThreshold)
+                else if(self.contentOffset.y - scrollOffsetThreshold >0 && self.contentOffset.y - scrollOffsetThreshold<SVInfiniteScrollingViewHeight )
                     self.infiniteScrollingView.state = SVInfiniteScrollingStatePulling;
                 else if(self.contentOffset.y < scrollOffsetThreshold && self.infiniteScrollingView.state != SVInfiniteScrollingStateStopped)
                     self.infiniteScrollingView.state = SVInfiniteScrollingStateStopped;
@@ -173,13 +174,25 @@ UIEdgeInsets scrollViewOriginalContentInsets;
         [self.viewForState replaceObjectsInRange:NSMakeRange(0, 4) withObjectsFromArray:@[viewPlaceholder, viewPlaceholder, viewPlaceholder,viewPlaceholder,viewPlaceholder]];
     else
         [self.viewForState replaceObjectAtIndex:state withObject:viewPlaceholder];
-    
-    self.state = self.state;
 }
 
+-(BOOL)hasLoadView{
+    for(id view in self.viewForState) {
+        if(![view isKindOfClass:[UIView class]])
+            return NO;
+    }
+    return YES;
+}
 #pragma mark -
 
 - (void)triggerRefresh {
+    
+    if (![self hasLoadView]) {
+//        PullHeader *header = [[PullHeader alloc]initWithFrame:CGRectMake(0, 0, self.view.width, SVPullToRefreshViewHeight) with:self.tableView];
+//        [self.tableView.pullToRefreshView setCustomView:header forState:SVPullToRefreshStateAll];
+//    
+    }
+
     self.state = SVInfiniteScrollingStateTriggered;
     self.state = SVInfiniteScrollingStateLoading;
 }
@@ -222,7 +235,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
     }
     
     id customView = [self.viewForState objectAtIndex:newState];
-    if (customView) {
+    if (customView && [customView isKindOfClass:[UIView class]]) {
         [self addSubview:customView];
         CGRect viewBounds = [customView bounds];
         CGPoint origin = CGPointMake(roundf((self.bounds.size.width-viewBounds.size.width)/2), roundf((self.bounds.size.height-viewBounds.size.height)/2));
