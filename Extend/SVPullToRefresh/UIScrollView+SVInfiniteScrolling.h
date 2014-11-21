@@ -9,13 +9,15 @@
 
 #import <UIKit/UIKit.h>
 
+static CGFloat const SVInfiniteScrollingViewHeight = 60;
+
 @class SVInfiniteScrollingView;
 
 @interface UIScrollView (SVInfiniteScrolling)
 
 - (void)addInfiniteScrollingWithActionHandler:(void (^)(void))actionHandler;
 - (void)triggerInfiniteScrolling;
-
+- (CGFloat)MoveYForInfinite;
 @property (nonatomic, strong, readonly) SVInfiniteScrollingView *infiniteScrollingView;
 @property (nonatomic, assign) BOOL showsInfiniteScrolling;
 
@@ -23,10 +25,11 @@
 
 
 enum {
-	SVInfiniteScrollingStateStopped = 0,
-    SVInfiniteScrollingStateTriggered,
-    SVInfiniteScrollingStateLoading,
-    SVInfiniteScrollingStateEnded,
+	SVInfiniteScrollingStateStopped = 0, //停止
+    SVInfiniteScrollingStateTriggered, //触发
+    SVInfiniteScrollingStateLoading, //loading
+    SVInfiniteScrollingStateEnded, //到达底部
+    SVInfiniteScrollingStatePulling, //下拉中
     SVInfiniteScrollingStateAll = 10
 };
 
@@ -34,13 +37,11 @@ typedef NSUInteger SVInfiniteScrollingState;
 
 @interface SVInfiniteScrollingView : UIView
 
-@property (nonatomic, readwrite) UIActivityIndicatorViewStyle activityIndicatorViewStyle;
 @property (nonatomic, readonly) SVInfiniteScrollingState state;
 @property (nonatomic, readwrite) CGFloat extendBottom;
 @property (nonatomic, readwrite) BOOL enabled;
 
 - (void)setCustomView:(UIView *)view forState:(SVInfiniteScrollingState)state;
-
 - (void)startAnimating;
 - (void)stopAnimating;
 - (void)setEnded;

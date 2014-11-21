@@ -51,7 +51,7 @@
 }
 
 -(void)endAllRefreshing{
-    if(self.pullToRefreshView !=nil){
+    if(self.pullToRefreshView !=nil && self.pullToRefreshView.state == SVInfiniteScrollingStateLoading){
         [self.pullToRefreshView stopAnimating];
     }
 }
