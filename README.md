@@ -75,7 +75,7 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 
 集成了开源代码`RTLabel` 富文本Label
 
-集成`MJRefresh`下拉刷新，有删改
+集成`SVPullRefresh`下拉刷新，有删改
 
 `Model`类整合`JsonModel`的类库和`MojoDataBase`类库
 
