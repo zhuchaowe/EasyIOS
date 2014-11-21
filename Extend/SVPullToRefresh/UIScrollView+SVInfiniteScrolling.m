@@ -9,8 +9,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "UIScrollView+SVInfiniteScrolling.h"
-
-//#import "PullHeader.h"
+#import "PullFooter.h"
 
 
 
@@ -40,8 +39,8 @@ UIEdgeInsets scrollViewOriginalContentInsets;
 
 @dynamic infiniteScrollingView;
 
-- (void)addInfiniteScrollingWithActionHandler:(void (^)(void))actionHandler {
-    
+- (void)addInfiniteScrollingWithActionHandler:(void (^)(void))actionHandler customer:(BOOL)customer{
+
     if(!self.infiniteScrollingView) {
         SVInfiniteScrollingView *view = [[SVInfiniteScrollingView alloc] init];
         view.infiniteScrollingHandler = actionHandler;
@@ -80,14 +79,21 @@ UIEdgeInsets scrollViewOriginalContentInsets;
             self.infiniteScrollingView.frame = CGRectMake(0, self.contentSize.height, self.bounds.size.width, SVInfiniteScrollingViewHeight);
         }];
     }
+    
+    if (customer == NO) {
+        PullFooter *infiniteView = [[PullFooter alloc] initWithFrame:CGRectMake(0, 0, self.width, SVInfiniteScrollingViewHeight)  with:self];
+        [self.infiniteScrollingView setCustomView:infiniteView forState:SVInfiniteScrollingStateAll];
+    }
+}
+
+- (void)addInfiniteScrollingWithActionHandler:(void (^)(void))actionHandler{
+    [self addInfiniteScrollingWithActionHandler:actionHandler customer:NO];
 }
 
 - (void)triggerInfiniteScrolling {
     self.infiniteScrollingView.state = SVInfiniteScrollingStateTriggered;
     [self.infiniteScrollingView startAnimating];
 }
-
-
 
 -(CGFloat)MoveYForInfinite{
     return fabsf(self.contentSize.height - self.bounds.size.height + self.infiniteScrollingView.extendBottom - self.contentOffset.y);
@@ -176,26 +182,8 @@ UIEdgeInsets scrollViewOriginalContentInsets;
         [self.viewForState replaceObjectAtIndex:state withObject:viewPlaceholder];
 }
 
--(BOOL)hasLoadView{
-    for(id view in self.viewForState) {
-        if(![view isKindOfClass:[UIView class]])
-            return NO;
-    }
-    return YES;
-}
+
 #pragma mark -
-
-- (void)triggerRefresh {
-    
-    if (![self hasLoadView]) {
-//        PullHeader *header = [[PullHeader alloc]initWithFrame:CGRectMake(0, 0, self.view.width, SVPullToRefreshViewHeight) with:self.tableView];
-//        [self.tableView.pullToRefreshView setCustomView:header forState:SVPullToRefreshStateAll];
-//    
-    }
-
-    self.state = SVInfiniteScrollingStateTriggered;
-    self.state = SVInfiniteScrollingStateLoading;
-}
 
 - (void)startAnimating{
     self.state = SVInfiniteScrollingStateLoading;
@@ -217,17 +205,22 @@ UIEdgeInsets scrollViewOriginalContentInsets;
     _state = newState;
     
     
-    if(previousState == SVInfiniteScrollingStateTriggered &&
-       newState == SVInfiniteScrollingStateLoading &&
-       self.infiniteScrollingHandler && self.enabled)
-        self.infiniteScrollingHandler();
+    switch (newState) {
+        case SVInfiniteScrollingStateEnded:
+        case SVInfiniteScrollingStateStopped:
+            [self resetScrollViewContentInset];
+            break;
+        case SVPullToRefreshStateTriggered:
+            break;
+        case SVInfiniteScrollingStateLoading:
+             [self setScrollViewContentInsetForInfiniteScrolling];
+            if(previousState == SVInfiniteScrollingStateTriggered && self.infiniteScrollingHandler && self.enabled)
+                self.infiniteScrollingHandler();
+            break;
+        default:
+            break;
+    }
     
-    if (newState == SVInfiniteScrollingStateStopped || newState == SVInfiniteScrollingStateEnded) {
-        [self resetScrollViewContentInset];
-    }
-    if (newState == SVInfiniteScrollingStateLoading) {
-        [self setScrollViewContentInsetForInfiniteScrolling];
-    }
     
     for(id otherView in self.viewForState) {
         if([otherView isKindOfClass:[UIView class]])

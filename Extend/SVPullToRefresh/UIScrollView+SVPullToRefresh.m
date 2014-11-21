@@ -9,6 +9,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "UIScrollView+SVPullToRefresh.h"
+#import "PullHeader.h"
 
 //fequal() and fequalzro() from http://stackoverflow.com/a/1614761/184130
 #define fequal(a,b) (fabs((a) - (b)) < FLT_EPSILON)
@@ -43,8 +44,8 @@ static char UIScrollViewPullToRefreshView;
 
 @dynamic pullToRefreshView, showsPullToRefresh;
 
-- (void)addPullToRefreshWithActionHandler:(void (^)(void))actionHandler {
-    
+- (void)addPullToRefreshWithActionHandler:(void (^)(void))actionHandler customer:(BOOL)customer{
+
     if(!self.pullToRefreshView) {
         
         SVPullToRefreshView *view = [[SVPullToRefreshView alloc] init];
@@ -93,6 +94,15 @@ static char UIScrollViewPullToRefreshView;
             self.showsPullToRefresh = YES;
         }];
     }
+    
+    if (customer == NO) {
+        PullHeader *header = [[PullHeader alloc]initWithFrame:CGRectMake(0, 0, self.width, SVPullToRefreshViewHeight) with:self];
+        [self.pullToRefreshView setCustomView:header forState:SVPullToRefreshStateAll];
+    }
+}
+
+- (void)addPullToRefreshWithActionHandler:(void (^)(void))actionHandler{
+    [self addPullToRefreshWithActionHandler:actionHandler customer:NO];
 }
 
 - (void)triggerPullToRefresh {

@@ -16,6 +16,7 @@ static CGFloat const SVInfiniteScrollingViewHeight = 60;
 @interface UIScrollView (SVInfiniteScrolling)
 
 - (void)addInfiniteScrollingWithActionHandler:(void (^)(void))actionHandler;
+- (void)addInfiniteScrollingWithActionHandler:(void (^)(void))actionHandler customer:(BOOL)customer;
 - (void)triggerInfiniteScrolling;
 - (CGFloat)MoveYForInfinite;
 @property (nonatomic, strong, readonly) SVInfiniteScrollingView *infiniteScrollingView;

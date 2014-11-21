@@ -17,6 +17,7 @@ static CGFloat const SVPullToRefreshViewHeight = 60;
 @interface UIScrollView (SVPullToRefresh)
 
 - (void)addPullToRefreshWithActionHandler:(void (^)(void))actionHandler;
+- (void)addPullToRefreshWithActionHandler:(void (^)(void))actionHandler customer:(BOOL)customer;
 - (void)triggerPullToRefresh;
 - (CGFloat)MoveYForPullToRefresh;
 @property (nonatomic, strong, readonly) SVPullToRefreshView *pullToRefreshView;
