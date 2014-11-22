@@ -33,18 +33,18 @@
 - (void)setScrollView:(UIScrollView *)scrollView
 {
     _scrollView = scrollView;
+    
     @weakify(self);
-    [[RACObserve(self.scrollView, contentOffset)
-     filter:^BOOL(id value) {
-         return scrollView.isDragging;
-     }]
+    
+    [RACObserve(scrollView, contentOffset)
+    
      subscribeNext:^(id x) {
          @strongify(self);
          if (self.scrollView.contentOffset.y < - self.rect.size.height) {
              CGFloat offset = - self.rect.size.height - self.scrollView.contentOffset.y;
              NSLog(@"%f",offset);
              self.frame = CGRectMake(self.rect.origin.x-offset,self.rect.origin.y - offset, self.rect.size.width+ offset * 2, self.rect.size.height + offset);
-         }else {
+         }else{
              self.frame = self.rect;
          }
      }];
@@ -69,10 +69,11 @@ static char UIScrollViewCover;
 
 - (void)addCover:(UIView*)view size:(CGSize)size
 {
-    CoverView *coverView = [[CoverView alloc] initWithFrame:CGRectMake(0,-size.height, size.width, size.height)];
+    CoverView *coverView = [[CoverView alloc] init];
     coverView.scrollView = self;
     coverView.rect = CGRectMake(0,-size.height, size.width, size.height);
     [coverView addSubview:view];
+    
     [view alignToView:coverView];
     
     self.coverView = coverView;

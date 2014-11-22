@@ -19,13 +19,7 @@
 
 @property (nonatomic, readwrite) SVInfiniteScrollingState state;
 @property (nonatomic, strong) NSMutableArray *viewForState;
-@property (nonatomic, weak) UIScrollView *scrollView;
-@property (nonatomic, readwrite) CGFloat originalBottomInset;
 @property (nonatomic, assign) BOOL wasTriggeredByUser;
-
-- (void)resetScrollViewContentInset;
-- (void)setScrollViewContentInsetForInfiniteScrolling;
-- (void)setScrollViewContentInset:(UIEdgeInsets)insets;
 
 @end
 
@@ -39,34 +33,32 @@ UIEdgeInsets scrollViewOriginalContentInsets;
 
 @dynamic infiniteScrollingView;
 
-- (void)addInfiniteScrollingWithActionHandler:(void (^)(void))actionHandler customer:(BOOL)customer{
-
+- (void)initInfiniteScrollingWithActionHandler:(void (^)(void))actionHandler{
     if(!self.infiniteScrollingView) {
         SVInfiniteScrollingView *view = [[SVInfiniteScrollingView alloc] init];
         view.infiniteScrollingHandler = actionHandler;
-        view.scrollView = self;
-        [self addSubview:view];
-        
         view.originalBottomInset = self.contentInset.bottom;
         self.infiniteScrollingView = view;
         self.showsInfiniteScrolling = NO;
+        
+        
         @weakify(self);
         [[RACObserve(self, contentOffset) filter:^BOOL(id value) {
             @strongify(self);
             return self.showsInfiniteScrolling;
         }] subscribeNext:^(id x) {
-             @strongify(self);
-            if(self.infiniteScrollingView.state != SVInfiniteScrollingStateLoading && self.infiniteScrollingView.state !=SVInfiniteScrollingStateEnded && self.infiniteScrollingView.enabled && self.contentSize.height >0) {
+            @strongify(self);
+            if(view.state != SVInfiniteScrollingStateLoading && view.state !=SVInfiniteScrollingStateEnded && view.enabled && self.contentSize.height >0) {
                 CGFloat scrollViewContentHeight = self.contentSize.height;
-                CGFloat scrollOffsetThreshold = scrollViewContentHeight - self.bounds.size.height + self.infiniteScrollingView.extendBottom;
-                if(!self.isDragging && self.infiniteScrollingView.state == SVInfiniteScrollingStateTriggered)
-                    self.infiniteScrollingView.state = SVInfiniteScrollingStateLoading;
-                else if(self.isDragging && self.infiniteScrollingView.state == SVInfiniteScrollingStatePulling && self.contentOffset.y - scrollOffsetThreshold > SVInfiniteScrollingViewHeight)
-                    self.infiniteScrollingView.state = SVInfiniteScrollingStateTriggered;
+                CGFloat scrollOffsetThreshold = scrollViewContentHeight - self.bounds.size.height + view.extendBottom;
+                if(!self.isDragging && view.state == SVInfiniteScrollingStateTriggered)
+                    view.state = SVInfiniteScrollingStateLoading;
+                else if(self.isDragging && view.state == SVInfiniteScrollingStatePulling && self.contentOffset.y - scrollOffsetThreshold > SVInfiniteScrollingViewHeight)
+                    view.state = SVInfiniteScrollingStateTriggered;
                 else if(self.contentOffset.y - scrollOffsetThreshold >0 && self.contentOffset.y - scrollOffsetThreshold<SVInfiniteScrollingViewHeight )
-                    self.infiniteScrollingView.state = SVInfiniteScrollingStatePulling;
-                else if(self.contentOffset.y < scrollOffsetThreshold && self.infiniteScrollingView.state != SVInfiniteScrollingStateStopped)
-                    self.infiniteScrollingView.state = SVInfiniteScrollingStateStopped;
+                    view.state = SVInfiniteScrollingStatePulling;
+                else if(self.contentOffset.y < scrollOffsetThreshold && view.state != SVInfiniteScrollingStateStopped)
+                    view.state = SVInfiniteScrollingStateStopped;
             }
         }];
         
@@ -77,6 +69,15 @@ UIEdgeInsets scrollViewOriginalContentInsets;
             @strongify(self);
             self.showsInfiniteScrolling = YES;
         }];
+    }
+
+}
+
+- (void)addInfiniteScrollingWithActionHandler:(void (^)(void))actionHandler customer:(BOOL)customer{
+    [self initInfiniteScrollingWithActionHandler:actionHandler];
+    
+    if (self.infiniteScrollingView) {
+        [self addSubview:self.infiniteScrollingView];
     }
     
     if (customer == NO) {
@@ -123,7 +124,6 @@ UIEdgeInsets scrollViewOriginalContentInsets;
 @implementation SVInfiniteScrollingView
 @synthesize infiniteScrollingHandler;
 @synthesize state = _state;
-@synthesize scrollView = _scrollView;
 
 - (id)initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
@@ -137,35 +137,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
     return self;
 }
 
-#pragma mark - Scroll View
 
-- (void)resetScrollViewContentInset {
-    UIEdgeInsets currentInsets = self.scrollView.contentInset;
-    CGFloat newBottom  = self.originalBottomInset + self.extendBottom;
-    if (newBottom != currentInsets.bottom) {
-        currentInsets.bottom = newBottom;
-        [self setScrollViewContentInset:currentInsets];
-    }
-}
-
-- (void)setScrollViewContentInsetForInfiniteScrolling {
-    UIEdgeInsets currentInsets = self.scrollView.contentInset;
-    CGFloat newBottom  = self.originalBottomInset + self.extendBottom + SVInfiniteScrollingViewHeight;
-    if (newBottom != currentInsets.bottom) {
-        currentInsets.bottom = newBottom;
-        [self setScrollViewContentInset:currentInsets];
-    }
-}
-
-- (void)setScrollViewContentInset:(UIEdgeInsets)contentInset {
-    [UIView animateWithDuration:0.3
-                          delay:0
-                        options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionBeginFromCurrentState
-                     animations:^{
-                         self.scrollView.contentInset = contentInset;
-                     }
-                     completion:NULL];
-}
 
 #pragma mark - Setters
 
@@ -203,23 +175,8 @@ UIEdgeInsets scrollViewOriginalContentInsets;
     SVInfiniteScrollingState previousState = _state;
     _state = newState;
     
-    
-    switch (newState) {
-        case SVInfiniteScrollingStateEnded:
-        case SVInfiniteScrollingStateStopped:
-            [self resetScrollViewContentInset];
-            break;
-        case SVPullToRefreshStateTriggered:
-            break;
-        case SVInfiniteScrollingStateLoading:
-             [self setScrollViewContentInsetForInfiniteScrolling];
-            if(previousState == SVInfiniteScrollingStateTriggered && self.infiniteScrollingHandler && self.enabled)
-                self.infiniteScrollingHandler();
-            break;
-        default:
-            break;
-    }
-    
+    if(newState == SVInfiniteScrollingStateLoading && previousState == SVInfiniteScrollingStateTriggered && self.infiniteScrollingHandler && self.enabled)
+        self.infiniteScrollingHandler();
     
     for(id otherView in self.viewForState) {
         if([otherView isKindOfClass:[UIView class]])

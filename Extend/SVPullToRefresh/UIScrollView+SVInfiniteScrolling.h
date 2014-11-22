@@ -17,6 +17,7 @@ static CGFloat const SVInfiniteScrollingViewHeight = 60;
 
 - (void)addInfiniteScrollingWithActionHandler:(void (^)(void))actionHandler;
 - (void)addInfiniteScrollingWithActionHandler:(void (^)(void))actionHandler customer:(BOOL)customer;
+- (void)initInfiniteScrollingWithActionHandler:(void (^)(void))actionHandler;
 - (void)triggerInfiniteScrolling;
 - (CGFloat)MoveYForInfinite;
 @property (nonatomic, strong, readonly) SVInfiniteScrollingView *infiniteScrollingView;
@@ -40,6 +41,7 @@ typedef NSUInteger SVInfiniteScrollingState;
 
 @property (nonatomic, readonly) SVInfiniteScrollingState state;
 @property (nonatomic, readwrite) CGFloat extendBottom;
+@property (nonatomic, readwrite) CGFloat originalBottomInset;
 @property (nonatomic, readwrite) BOOL enabled;
 
 - (void)setCustomView:(UIView *)view forState:(SVInfiniteScrollingState)state;

@@ -48,6 +48,7 @@
                 switch (scrollView.pullToRefreshView.state) {
                     case SVPullToRefreshStateAll:
                     case SVPullToRefreshStateStopped:
+                        [self resetScrollViewContentInset:scrollView];
                         self.arrowImage.hidden = NO;
                         self.statusLabel.text = @"下拉可以刷新";
                         self.arrowImage.transform = CGAffineTransformIdentity;
@@ -59,11 +60,13 @@
                         self.arrowImage.transform = CGAffineTransformIdentity;
                         break;
                     case SVPullToRefreshStateTriggered:
+                        [self pullContentOffset:scrollView];
                         self.arrowImage.hidden = NO;
                         self.statusLabel.text = @"释放可以刷新";
                         self.arrowImage.transform = CGAffineTransformMakeRotation(M_PI);
                         break;
                     case SVPullToRefreshStateLoading:
+                         [self setScrollViewContentInsetForLoading:scrollView];
                         self.arrowImage.hidden = YES;
                         self.statusLabel.text = @"正在刷新...";
                         break;

@@ -10,4 +10,6 @@
 
 @interface Footer : UIView
 - (id)initWithFrame:(CGRect)frame with:(UIScrollView *)scrollView;
+- (void)resetScrollViewContentInset:(UIScrollView *)scrollView;
+- (void)setScrollViewContentInsetForInfiniteScrolling:(UIScrollView *)scrollView;
 @end

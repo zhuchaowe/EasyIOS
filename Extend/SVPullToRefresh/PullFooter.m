@@ -63,6 +63,7 @@
                         break;
                     case SVInfiniteScrollingStateAll:
                     case SVInfiniteScrollingStateStopped:
+                        [self resetScrollViewContentInset:scrollView];
                         self.arrowImage.hidden = NO;
                         self.statusLabel.text = @"上拉加载";
                         self.arrowImage.transform = CGAffineTransformMakeRotation(M_PI);
@@ -78,6 +79,7 @@
                         self.arrowImage.transform = CGAffineTransformMakeRotation(M_PI);
                         break;
                     case SVInfiniteScrollingStateLoading:
+                        [self setScrollViewContentInsetForInfiniteScrolling:scrollView];
                         self.arrowImage.hidden = YES;
                         self.statusLabel.text = @"正在加载...";
                         

@@ -11,4 +11,7 @@
 @interface Header : UIView
 @property(nonatomic,assign) BOOL alignInset;
 - (id)initWithFrame:(CGRect)frame with:(UIScrollView *)scrollView;
+- (void)resetScrollViewContentInset:(UIScrollView *)scrollView;
+- (void)setScrollViewContentInsetForLoading:(UIScrollView *)scrollView;
+- (void)pullContentOffset:(UIScrollView *)scrollView;
 @end

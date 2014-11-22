@@ -10,14 +10,19 @@
 #import <UIKit/UIKit.h>
 #import <AvailabilityMacros.h>
 
+#define fequal(a,b) (fabs((a) - (b)) < FLT_EPSILON)
+#define fequalzero(a) (fabs(a) < FLT_EPSILON)
+
 static CGFloat const SVPullToRefreshViewHeight = 60;
 
 @class SVPullToRefreshView;
 
 @interface UIScrollView (SVPullToRefresh)
 
+
 - (void)addPullToRefreshWithActionHandler:(void (^)(void))actionHandler;
 - (void)addPullToRefreshWithActionHandler:(void (^)(void))actionHandler customer:(BOOL)customer;
+- (void)initPullToRefreshWithActionHandler:(void (^)(void))actionHandler;
 - (void)triggerPullToRefresh;
 - (CGFloat)MoveYForPullToRefresh;
 @property (nonatomic, strong, readonly) SVPullToRefreshView *pullToRefreshView;
@@ -37,6 +42,7 @@ typedef NS_ENUM(NSUInteger, SVPullToRefreshState) {
 @property (nonatomic, readonly) SVPullToRefreshState state;
 @property (nonatomic, readwrite) CGFloat originalTopInset;
 @property (nonatomic, readwrite) CGFloat originalBottomInset;
+@property (nonatomic, readwrite) CGFloat originalOffset;
 - (void)setCustomView:(UIView *)view forState:(SVPullToRefreshState)state;
 - (void)startAnimating;
 - (void)stopAnimating;
