@@ -34,7 +34,6 @@ typedef NS_ENUM(NSUInteger, SVPullToRefreshState) {
 };
 @interface SVPullToRefreshView : UIView
 
-@property (nonatomic, assign) BOOL alignToInset;
 @property (nonatomic, readonly) SVPullToRefreshState state;
 @property (nonatomic, readwrite) CGFloat originalTopInset;
 @property (nonatomic, readwrite) CGFloat originalBottomInset;

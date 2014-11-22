@@ -34,7 +34,10 @@
 {
     _scrollView = scrollView;
     @weakify(self);
-    [RACObserve(self.scrollView, contentOffset)
+    [[RACObserve(self.scrollView, contentOffset)
+     filter:^BOOL(id value) {
+         return scrollView.isDragging;
+     }]
      subscribeNext:^(id x) {
          @strongify(self);
          if (self.scrollView.contentOffset.y < - self.rect.size.height) {

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface Header : UIView
+@property(nonatomic,assign) BOOL alignInset;
 - (id)initWithFrame:(CGRect)frame with:(UIScrollView *)scrollView;
 @end

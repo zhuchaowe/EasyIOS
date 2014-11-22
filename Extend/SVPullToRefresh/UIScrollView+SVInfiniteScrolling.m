@@ -76,7 +76,6 @@ UIEdgeInsets scrollViewOriginalContentInsets;
         }] subscribeNext:^(id x) {
             @strongify(self);
             self.showsInfiniteScrolling = YES;
-            self.infiniteScrollingView.frame = CGRectMake(0, self.contentSize.height, self.bounds.size.width, SVInfiniteScrollingViewHeight);
         }];
     }
     

@@ -69,11 +69,19 @@
                         break;
                 }
             }];
-            
-
         }];
 
         
+        [RACObserve(self, alignInset)
+         subscribeNext:^(NSNumber* alignInset) {
+             CGFloat yOrigin =0;
+             if (alignInset.boolValue) {
+                 yOrigin = - SVPullToRefreshViewHeight;
+             }else{
+                 yOrigin = - scrollView.pullToRefreshView.originalTopInset -SVPullToRefreshViewHeight;
+             }
+             scrollView.pullToRefreshView.frame = CGRectMake(0, yOrigin, scrollView.bounds.size.width, SVPullToRefreshViewHeight);
+         }];
     }
     return self;
 }

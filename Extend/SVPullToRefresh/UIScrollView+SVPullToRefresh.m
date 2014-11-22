@@ -84,13 +84,6 @@ static char UIScrollViewPullToRefreshView;
             return self.contentSize.width >0;
         }] subscribeNext:^(id x) {
             @strongify(self);
-            CGFloat yOrigin =0;
-            if (self.pullToRefreshView.alignToInset) {
-                yOrigin = - SVPullToRefreshViewHeight;
-            }else{
-                yOrigin = - self.pullToRefreshView.originalTopInset -SVPullToRefreshViewHeight;
-            }
-            self.pullToRefreshView.frame = CGRectMake(0, yOrigin, self.bounds.size.width, SVPullToRefreshViewHeight);
             self.showsPullToRefresh = YES;
         }];
     }
@@ -151,7 +144,6 @@ static char UIScrollViewPullToRefreshView;
         
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         self.state = SVPullToRefreshStateStopped;
-        self.alignToInset = YES;
         self.viewForState = [NSMutableArray arrayWithObjects:@"", @"", @"", @"", nil];
     }
     
@@ -177,7 +169,7 @@ static char UIScrollViewPullToRefreshView;
 - (void)setScrollViewContentInset:(UIEdgeInsets)contentInset {
     [UIView animateWithDuration:0.3
                           delay:0
-                        options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionBeginFromCurrentState
+                        options:UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          self.scrollView.contentInset = contentInset;
                      }
