@@ -46,7 +46,7 @@
             
             [UIView animateWithDuration:0.25f animations:^{
                 switch (scrollView.pullToRefreshView.state) {
-                    case SVPullToRefreshStateAll:
+                 
                     case SVPullToRefreshStateStopped:
                         [self resetScrollViewContentInset:scrollView];
                         self.arrowImage.hidden = NO;

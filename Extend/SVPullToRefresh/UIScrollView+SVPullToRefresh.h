@@ -34,8 +34,7 @@ typedef NS_ENUM(NSUInteger, SVPullToRefreshState) {
     SVPullToRefreshStateStopped = 0,
     SVPullToRefreshStateTriggered,
     SVPullToRefreshStateLoading,
-    SVPullToRefreshStatePulling,
-    SVPullToRefreshStateAll = 10
+    SVPullToRefreshStatePulling
 };
 @interface SVPullToRefreshView : UIView
 
@@ -43,7 +42,7 @@ typedef NS_ENUM(NSUInteger, SVPullToRefreshState) {
 @property (nonatomic, readwrite) CGFloat originalTopInset;
 @property (nonatomic, readwrite) CGFloat originalBottomInset;
 @property (nonatomic, readwrite) CGFloat originalOffset;
-- (void)setCustomView:(UIView *)view forState:(SVPullToRefreshState)state;
+- (void)setCustomView:(UIView *)view;
 - (void)startAnimating;
 - (void)stopAnimating;
 

@@ -18,7 +18,6 @@
 @property (nonatomic, copy) void (^infiniteScrollingHandler)(void);
 
 @property (nonatomic, readwrite) SVInfiniteScrollingState state;
-@property (nonatomic, strong) NSMutableArray *viewForState;
 @property (nonatomic, assign) BOOL wasTriggeredByUser;
 
 @end
@@ -82,7 +81,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
     
     if (customer == NO) {
         PullFooter *infiniteView = [[PullFooter alloc] initWithFrame:CGRectMake(0, 0, self.width, SVInfiniteScrollingViewHeight)  with:self];
-        [self.infiniteScrollingView setCustomView:infiniteView forState:SVInfiniteScrollingStateAll];
+        [self.infiniteScrollingView setCustomView:infiniteView];
     }
 }
 
@@ -132,25 +131,21 @@ UIEdgeInsets scrollViewOriginalContentInsets;
         self.state = SVInfiniteScrollingStateStopped;
         self.enabled = YES;
         self.extendBottom = 0.0f;
-        self.viewForState = [NSMutableArray arrayWithObjects:@"", @"", @"", @"",  @"",nil];
     }
     return self;
 }
-
-
-
 #pragma mark - Setters
 
-- (void)setCustomView:(UIView *)view forState:(SVInfiniteScrollingState)state {
-    id viewPlaceholder = view;
-    
-    if(!viewPlaceholder)
-        viewPlaceholder = @"";
-    
-    if(state == SVInfiniteScrollingStateAll)
-        [self.viewForState replaceObjectsInRange:NSMakeRange(0, 4) withObjectsFromArray:@[viewPlaceholder, viewPlaceholder, viewPlaceholder,viewPlaceholder,viewPlaceholder]];
-    else
-        [self.viewForState replaceObjectAtIndex:state withObject:viewPlaceholder];
+- (void)setCustomView:(UIView *)customView{
+    if (customView && [customView isKindOfClass:[UIView class]]) {
+        for (UIView *view in self.subviews) {
+            [view removeFromSuperview];
+        }
+        [self addSubview:customView];
+        CGRect viewBounds = [customView bounds];
+        CGPoint origin = CGPointMake(roundf((self.bounds.size.width-viewBounds.size.width)/2), roundf((self.bounds.size.height-viewBounds.size.height)/2));
+        [customView setFrame:CGRectMake(origin.x, origin.y, viewBounds.size.width, viewBounds.size.height)];
+    }
 }
 
 
@@ -177,19 +172,5 @@ UIEdgeInsets scrollViewOriginalContentInsets;
     
     if(newState == SVInfiniteScrollingStateLoading && previousState == SVInfiniteScrollingStateTriggered && self.infiniteScrollingHandler && self.enabled)
         self.infiniteScrollingHandler();
-    
-    for(id otherView in self.viewForState) {
-        if([otherView isKindOfClass:[UIView class]])
-            [otherView removeFromSuperview];
-    }
-    
-    id customView = [self.viewForState objectAtIndex:newState];
-    if (customView && [customView isKindOfClass:[UIView class]]) {
-        [self addSubview:customView];
-        CGRect viewBounds = [customView bounds];
-        CGPoint origin = CGPointMake(roundf((self.bounds.size.width-viewBounds.size.width)/2), roundf((self.bounds.size.height-viewBounds.size.height)/2));
-        [customView setFrame:CGRectMake(origin.x, origin.y, viewBounds.size.width, viewBounds.size.height)];
-    }
-
 }
 @end

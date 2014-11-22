@@ -61,7 +61,6 @@
                         self.activityView.hidden = YES;
                         self.statusLabel.text = @"没有了哦";
                         break;
-                    case SVInfiniteScrollingStateAll:
                     case SVInfiniteScrollingStateStopped:
                         [self resetScrollViewContentInset:scrollView];
                         self.arrowImage.hidden = NO;

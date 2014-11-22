@@ -31,8 +31,7 @@ enum {
     SVInfiniteScrollingStateTriggered, //触发
     SVInfiniteScrollingStateLoading, //loading
     SVInfiniteScrollingStateEnded, //到达底部
-    SVInfiniteScrollingStatePulling, //下拉中
-    SVInfiniteScrollingStateAll = 10
+    SVInfiniteScrollingStatePulling //下拉中
 };
 
 typedef NSUInteger SVInfiniteScrollingState;
@@ -44,7 +43,7 @@ typedef NSUInteger SVInfiniteScrollingState;
 @property (nonatomic, readwrite) CGFloat originalBottomInset;
 @property (nonatomic, readwrite) BOOL enabled;
 
-- (void)setCustomView:(UIView *)view forState:(SVInfiniteScrollingState)state;
+- (void)setCustomView:(UIView *)view;
 - (void)startAnimating;
 - (void)stopAnimating;
 - (void)setEnded;

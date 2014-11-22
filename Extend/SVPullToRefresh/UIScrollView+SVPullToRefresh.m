@@ -16,10 +16,7 @@
 @interface SVPullToRefreshView ()
 
 @property (nonatomic, copy) void (^pullToRefreshActionHandler)(void);
-
 @property (nonatomic, readwrite) SVPullToRefreshState state;
-
-@property (nonatomic, strong) NSMutableArray *viewForState;
 @property (nonatomic, assign) BOOL showsPullToRefresh;
 
 @end
@@ -56,6 +53,8 @@ static char UIScrollViewPullToRefreshView;
                     view.state = SVPullToRefreshStateTriggered;
                 else if(pullNum <= 0 && pullNum > -SVPullToRefreshViewHeight){
                     view.state = SVPullToRefreshStatePulling;
+                }else if(pullNum>0){
+                    view.state = SVPullToRefreshStateStopped;
                 }
             }
         }];
@@ -77,7 +76,7 @@ static char UIScrollViewPullToRefreshView;
     }
     if (customer == NO) {
         PullHeader *header = [[PullHeader alloc]initWithFrame:CGRectMake(0, 0, self.width, SVPullToRefreshViewHeight) with:self];
-        [self.pullToRefreshView setCustomView:header forState:SVPullToRefreshStateAll];
+        [self.pullToRefreshView setCustomView:header];
     }
 }
 
@@ -127,29 +126,24 @@ static char UIScrollViewPullToRefreshView;
 
 - (id)initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]) {
-        
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         self.state = SVPullToRefreshStateStopped;
-        self.viewForState = [NSMutableArray arrayWithObjects:@"", @"", @"", @"", nil];
     }
     
     return self;
 }
 
-
-
 #pragma mark - Getters
-
-- (void)setCustomView:(UIView *)view forState:(SVPullToRefreshState)state {
-    id viewPlaceholder = view;
-    
-    if(!viewPlaceholder)
-        viewPlaceholder = @"";
-    
-    if(state == SVPullToRefreshStateAll)
-        [self.viewForState replaceObjectsInRange:NSMakeRange(0, 4) withObjectsFromArray:@[viewPlaceholder, viewPlaceholder, viewPlaceholder,viewPlaceholder]];
-    else
-        [self.viewForState replaceObjectAtIndex:state withObject:viewPlaceholder];
+- (void)setCustomView:(UIView *)customView{
+    if (customView && [customView isKindOfClass:[UIView class]]) {
+        for (UIView *view in self.subviews) {
+            [view removeFromSuperview];
+        }
+        [self addSubview:customView];
+        CGRect viewBounds = [customView bounds];
+        CGPoint origin = CGPointMake(roundf((self.bounds.size.width-viewBounds.size.width)/2), roundf((self.bounds.size.height-viewBounds.size.height)/2));
+        [customView setFrame:CGRectMake(origin.x, origin.y, viewBounds.size.width, viewBounds.size.height)];
+    }
 }
 
 #pragma mark -
@@ -164,27 +158,12 @@ static char UIScrollViewPullToRefreshView;
 
 - (void)setState:(SVPullToRefreshState)newState {
     
-    if(_state == newState)
-        return;
-    
+    if(_state == newState) return;
     SVPullToRefreshState previousState = _state;
     _state = newState;
     
     if(newState == SVPullToRefreshStateLoading && previousState == SVPullToRefreshStateTriggered && pullToRefreshActionHandler)
         pullToRefreshActionHandler();
-
-    for(id otherView in self.viewForState) {
-        if([otherView isKindOfClass:[UIView class]])
-            [otherView removeFromSuperview];
-    }
-    
-    id customView = [self.viewForState objectAtIndex:self.state];
-    if (customView && [customView isKindOfClass:[UIView class]]) {
-        [self addSubview:customView];
-        CGRect viewBounds = [customView bounds];
-        CGPoint origin = CGPointMake(roundf((self.bounds.size.width-viewBounds.size.width)/2), roundf((self.bounds.size.height-viewBounds.size.height)/2));
-        [customView setFrame:CGRectMake(origin.x, origin.y, viewBounds.size.width, viewBounds.size.height)];
-    }
 }
 
 @end
