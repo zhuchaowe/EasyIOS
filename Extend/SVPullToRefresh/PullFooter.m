@@ -20,7 +20,7 @@
             return scrollView.contentSize.height>=scrollView.bounds.size.height;
         }] subscribeNext:^(id x) {
             @strongify(scrollView);
-            scrollView.infiniteScrollingView.frame = CGRectMake(0, scrollView.contentSize.height, scrollView.bounds.size.width, SVInfiniteScrollingViewHeight);
+            scrollView.infiniteScrollingView.frame = CGRectMake(0, scrollView.contentSize.height, scrollView.superview.width, SVInfiniteScrollingViewHeight);
         }];
         
         
@@ -86,9 +86,6 @@
                 }
             }];
         }];
-
-        
-        
     }
     return self;
 }

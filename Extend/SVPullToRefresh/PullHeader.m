@@ -83,7 +83,7 @@
              }else{
                  yOrigin = - scrollView.pullToRefreshView.originalTopInset -SVPullToRefreshViewHeight;
              }
-             scrollView.pullToRefreshView.frame = CGRectMake(0, yOrigin, scrollView.bounds.size.width, SVPullToRefreshViewHeight);
+             scrollView.pullToRefreshView.frame = CGRectMake(0, yOrigin, scrollView.superview.width, SVPullToRefreshViewHeight);
          }];
     }
     return self;
