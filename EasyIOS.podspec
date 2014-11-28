@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
   s.name                  = "EasyIOS"
-  s.version               = "2.2-RC2"
+  s.version               = "2.2"
   s.summary               = "EasyIOS is a MVVM frameWork base on AFNetworking and ReactiveCocoa"
   s.homepage              = "http://easyios.08dream.com"
   s.social_media_url      = "http://easyios.08dream.com"
   s.platform     = :ios,'6.0'
   s.license               = { :type => "MIT", :file => "LICENSE" }
   s.author                = { "zhuchao" => "zhuchaowe@163.com" }
-  s.source                = { :git => "https://github.com/zhuchaowe/EasyIOS.git",:tag => "2.2-RC2" }
+  s.source                = { :git => "https://github.com/zhuchaowe/EasyIOS.git",:tag => "2.2" }
   s.ios.deployment_target = "6.0"
   s.requires_arc          = true
   s.framework             = "CoreFoundation","Foundation","CoreGraphics","Security","UIKit"
@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
     sp.dependency 'UIActivityIndicator-for-SDWebImage'
     sp.dependency 'AFNetworking'
     sp.dependency 'IQKeyboardManager'
-    sp.dependency 'UIActionSheet-Blocks'
+    sp.dependency 'RMUniversalAlert'
     sp.prefix_header_contents = '#import "swift-bridge.h"'
   end
 end
