@@ -7,7 +7,6 @@
 //
 
 #import "Header.h"
-
 @implementation Header
 
 - (id)initWithFrame:(CGRect)frame with:(UIScrollView *)scrollView{

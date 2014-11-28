@@ -10,6 +10,13 @@
 
 @implementation Pagination
 
+-(void)loadModel{
+    self.page = @1;
+    self.pageSize = @10;
+    self.total = @0;
+    self.isEnd = @1;
+}
+
 -(NSMutableArray *)success:(NSMutableArray *)originArray
                   newArray:(NSArray *)newArray{
     if (self.page.integerValue == 1) {

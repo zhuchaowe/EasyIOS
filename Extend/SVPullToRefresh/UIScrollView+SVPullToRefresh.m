@@ -31,6 +31,7 @@ static char UIScrollViewPullToRefreshView;
 @dynamic pullToRefreshView, showsPullToRefresh;
 
 -(void)initPullToRefreshWithActionHandler:(void (^)(void))actionHandler{
+    
     if(!self.pullToRefreshView) {
         SVPullToRefreshView *view = [[SVPullToRefreshView alloc] init];
         view.pullToRefreshActionHandler = actionHandler;
@@ -47,9 +48,9 @@ static char UIScrollViewPullToRefreshView;
             @strongify(self);
             if(view.state != SVPullToRefreshStateLoading) {
                 CGFloat pullNum = self.contentOffset.y + view.originalTopInset;
-                if(!self.isDragging && view.state == SVPullToRefreshStateTriggered)
+                if(!self.isDragging && view.state == SVPullToRefreshStateTriggered){
                     view.state = SVPullToRefreshStateLoading;
-                else if(self.isDragging && pullNum < -SVPullToRefreshViewHeight  && view.state == SVPullToRefreshStatePulling)
+                }else if(self.isDragging && pullNum < -SVPullToRefreshViewHeight  && view.state == SVPullToRefreshStatePulling)
                     view.state = SVPullToRefreshStateTriggered;
                 else if(pullNum <= 0 && pullNum > -SVPullToRefreshViewHeight){
                     view.state = SVPullToRefreshStatePulling;
@@ -162,8 +163,9 @@ static char UIScrollViewPullToRefreshView;
     SVPullToRefreshState previousState = _state;
     _state = newState;
     
-    if(newState == SVPullToRefreshStateLoading && previousState == SVPullToRefreshStateTriggered && pullToRefreshActionHandler)
+    if(newState == SVPullToRefreshStateLoading && previousState == SVPullToRefreshStateTriggered && pullToRefreshActionHandler){
         pullToRefreshActionHandler();
+    }
 }
 
 @end

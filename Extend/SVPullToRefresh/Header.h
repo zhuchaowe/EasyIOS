@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SVPullToRefresh.h"
 
 @interface Header : UIView
 @property(nonatomic,assign) BOOL alignInset;

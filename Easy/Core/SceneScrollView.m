@@ -10,50 +10,22 @@
 
 @implementation SceneScrollView
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initAutoLayoutAddToView:(UIView *)superView
 {
-    self = [super initWithFrame:frame];
+    self = [super init];
     if (self) {
-        // Initialization code
+        [superView addSubview:self];
+        self.contentView = [[UIView alloc] init];
+        [self addSubview:self.contentView];
+        [self alignToView:superView];
+        [self.contentView alignToView:self];
+        [self.contentView alignLeading:@"0" trailing:@"0" toView:superView];
     }
     return self;
 }
 
-
-- (void)flashMessage:(NSString *)msg {
-	//Show message
-	__block CGRect rect = CGRectMake(0, - 20, self.bounds.size.width, 20);
-    
-	if (_msgLabel == nil) {
-		_msgLabel = [[UILabel alloc] init];
-		_msgLabel.frame = rect;
-		_msgLabel.font = [UIFont systemFontOfSize:14.f];
-		_msgLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		_msgLabel.backgroundColor = [UIColor redColor];
-        _msgLabel.textColor = [UIColor whiteColor];
-		_msgLabel.textAlignment = NSTextAlignmentCenter;
-		[self addSubview:_msgLabel];
-	}
-	_msgLabel.text = msg;
-    
-	rect.origin.y += 20;
-	[UIView animateWithDuration:.4f animations: ^{
-	    _msgLabel.frame = rect;
-	} completion: ^(BOOL finished) {
-	    rect.origin.y -= 20;
-	    [UIView animateWithDuration:.4f delay:1.2f options:UIViewAnimationOptionCurveLinear animations: ^{
-	        _msgLabel.frame = rect;
-		} completion: ^(BOOL finished) {
-	        [_msgLabel removeFromSuperview];
-	        _msgLabel = nil;
-		}];
-	}];
+//结束后必须调用此函数，才可以设置autolayout contentsize
+-(void)endWithView:(UIView *)endview{
+    [endview alignBottomEdgeWithView:endview.superview predicate:@"0"];
 }
-
--(void)endAllRefreshing{
-    if(self.pullToRefreshView !=nil && self.pullToRefreshView.state == SVPullToRefreshStateLoading){
-        [self.pullToRefreshView stopAnimating];
-    }
-}
-
 @end

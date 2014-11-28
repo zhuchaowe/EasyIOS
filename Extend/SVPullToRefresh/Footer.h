@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SVPullToRefresh.h"
 
 @interface Footer : UIView
 - (id)initWithFrame:(CGRect)frame with:(UIScrollView *)scrollView;

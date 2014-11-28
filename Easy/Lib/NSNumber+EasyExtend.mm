@@ -39,7 +39,11 @@
 }
 
 -(NSNumber *)decrease:(NSNumber *)number{
-    return @(self.integerValue - number.integerValue);
+    if (self.integerValue == 1) {
+        return self;
+    }else{
+        return @(self.integerValue - number.integerValue);
+    }
 }
 
 - (BOOL)numberIsFloat{

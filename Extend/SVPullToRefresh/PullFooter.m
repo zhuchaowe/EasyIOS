@@ -14,6 +14,9 @@
 {
     self = [super initWithFrame:frame with:scrollView];
     if (self) {
+        
+        scrollView.infiniteScrollingView.frame = CGRectMake(0, 0, scrollView.superview.width, SVInfiniteScrollingViewHeight);
+        
         @weakify(scrollView);
         [[RACObserve(scrollView, contentSize) filter:^BOOL(id value) {
             @strongify(scrollView);

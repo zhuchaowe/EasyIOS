@@ -101,8 +101,10 @@ DEF_SINGLETON(Action)
                 EZLog(@"%@ has cached",url);
             }];
         }
-        msg.output = jsonObject;
-        [self checkCode:msg];
+        if (_dataFromCache == NO || msg.output ==nil) {
+            msg.output = jsonObject;
+            [self checkCode:msg];
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         @strongify(msg,self);
         if(msg.output !=nil){
@@ -113,7 +115,12 @@ DEF_SINGLETON(Action)
     }];
     msg.url = op.request.URL.absoluteString;
     msg.output = [[TMCache sharedCache] objectForKey:msg.url.MD5];
-    
+    if (_dataFromCache == YES && msg.output !=nil) {
+        [[GCDQueue globalQueue] queueBlock:^{
+            [self checkCode:msg];
+            
+        } afterDelay:0.5f];
+    }
     return op;
 }
 

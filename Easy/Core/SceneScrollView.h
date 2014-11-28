@@ -6,9 +6,10 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
-#import "SVPullToRefresh.h"
+#import <UIKit/UIKit.h>
+
 @interface SceneScrollView : UIScrollView
-@property(nonatomic,strong)UILabel *msgLabel;
--(void)flashMessage:(NSString *)msg;
--(void)endAllRefreshing;
+@property(nonatomic,strong)UIView *contentView;
+- (id)initAutoLayoutAddToView:(UIView *)superView;
+- (void)endWithView:(UIView *)endview;
 @end

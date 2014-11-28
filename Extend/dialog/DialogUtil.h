@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MBProgressHUD.h"
+#import "UIViewController+MBHud.h"
+
 
 @interface DialogUtil : NSObject<MBProgressHUDDelegate> {
 	long long expectedLength;
