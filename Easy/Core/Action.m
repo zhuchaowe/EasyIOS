@@ -191,7 +191,7 @@ DEF_SINGLETON(Action)
 }
 
 - (void)success:(Request *)msg{
-    msg.discription = [msg.output objectAtPath:[Action sharedInstance].MSG_KEY];
+    msg.message = [msg.output objectAtPath:[Action sharedInstance].MSG_KEY];
     if (msg.state != SuccessState) {
         msg.state = SuccessState;
         if([self.aDelegaete respondsToSelector:@selector(handleActionMsg:)]){
@@ -202,7 +202,7 @@ DEF_SINGLETON(Action)
 
 - (void)failed:(Request *)msg{
     if(msg.error.userInfo!= nil && [msg.error.userInfo objectForKey:@"NSLocalizedDescription"]){
-        msg.discription = [msg.error.userInfo objectForKey:@"NSLocalizedDescription"];
+        msg.message = [msg.error.userInfo objectForKey:@"NSLocalizedDescription"];
     }
     msg.state = FailState;
     NSLog(@"Failed:%@",msg.error);
@@ -213,8 +213,8 @@ DEF_SINGLETON(Action)
 
 - (void)error:(Request *)msg{
     if([msg.output objectAtPath:[Action sharedInstance].MSG_KEY]){
-        msg.discription = [msg.output objectAtPath:[Action sharedInstance].MSG_KEY];
-        NSLog(@"Error:%@",msg.discription);
+        msg.message = [msg.output objectAtPath:[Action sharedInstance].MSG_KEY];
+        NSLog(@"Error:%@",msg.message);
     }
     msg.state = ErrorState;
     if([self.aDelegaete respondsToSelector:@selector(handleActionMsg:)]){

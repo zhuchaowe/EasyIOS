@@ -25,7 +25,7 @@
 
 -(void)loadRequest{
     self.output = nil;
-    self.discription = @"";
+    self.message = @"";
     self.progress = 0.0f;
     self.freezable = NO;
     self.SCHEME = @"";

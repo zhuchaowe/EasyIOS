@@ -24,7 +24,8 @@
 }
 
 - (void)setScrollViewContentInsetForLoading:(UIScrollView *)scrollView {
-    CGFloat offset = MAX(scrollView.contentOffset.y * -1, 0);
+    
+    CGFloat offset = MAX(SVPullToRefreshViewHeight, 0);
     UIEdgeInsets currentInsets = scrollView.contentInset;
     currentInsets.top = MIN(offset, scrollView.pullToRefreshView.originalTopInset + scrollView.pullToRefreshView.bounds.size.height);
     [self setScrollViewContentInset:currentInsets scrollView:scrollView];
@@ -40,10 +41,5 @@
                      completion:nil];
 }
 
--(void)pullContentOffset:(UIScrollView *)scrollView{
-    if(fequalzero(scrollView.contentOffset.y + scrollView.pullToRefreshView.originalTopInset)) {
-        [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, scrollView.contentOffset.y-SVPullToRefreshViewHeight) animated:YES];
-    }
-}
 
 @end

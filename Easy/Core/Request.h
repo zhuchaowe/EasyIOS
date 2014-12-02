@@ -22,7 +22,7 @@ typedef enum
 @property(nonatomic,strong)NSError *error;
 @property(nonatomic,assign)NSInteger state;
 @property(nonatomic,retain)NSString *url;
-@property(nonatomic,strong)NSString *discription;
+@property(nonatomic,strong)NSString *message;
 @property(nonatomic,assign)double progress;
 @property(nonatomic,assign)long long totalBytesWritten;
 @property(nonatomic,assign)long long totalBytesExpectedToWrite;

@@ -60,7 +60,6 @@
                         self.arrowImage.transform = CGAffineTransformIdentity;
                         break;
                     case SVPullToRefreshStateTriggered:
-                        [self pullContentOffset:scrollView];
                         self.arrowImage.hidden = NO;
                         self.statusLabel.text = @"释放可以刷新";
                         self.arrowImage.transform = CGAffineTransformMakeRotation(M_PI);
