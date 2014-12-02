@@ -45,7 +45,7 @@
     NSDate *time = [NSDate dateWithTimeIntervalSinceNow:timestamp];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-	[dateFormatter setDateFormat:@"yyy-MM-dd"];
+	[dateFormatter setDateFormat:@"yyy-MM-dd HH:mm:ss"];
 	NSString *thisDayMin = [dateFormatter stringFromDate:time];
     
     return [[dateFormatter dateFromString:thisDayMin] timeIntervalSince1970];
