@@ -38,6 +38,9 @@ static char MBHud;
 }
 
 -(void)showHudIndeterminate:(NSString *)text{
+    if (self.hud.superview) {
+        [self.hud.superview bringSubviewToFront:self.hud];
+    }
     self.hud.mode = MBProgressHUDModeIndeterminate;
     self.hud.labelText = text;
     [self.hud show:YES];

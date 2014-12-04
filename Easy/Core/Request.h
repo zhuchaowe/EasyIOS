@@ -20,7 +20,7 @@ typedef enum
 @property(nonatomic,strong)NSDictionary * output;
 @property(nonatomic,strong)NSString *responseString;
 @property(nonatomic,strong)NSError *error;
-@property(nonatomic,assign)NSInteger state;
+@property(nonatomic,assign)RequestState state;
 @property(nonatomic,retain)NSString *url;
 @property(nonatomic,strong)NSString *message;
 @property(nonatomic,assign)double progress;
