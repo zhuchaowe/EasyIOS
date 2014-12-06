@@ -26,7 +26,7 @@
 #import "AFNetworking.h"
 #import "RTLabel.h"
 #import "ShowCamera.h"
-#import "RMUniversalAlert.h"
+//#import "RMUniversalAlert.h"
 
 #ifdef DEBUG
 #define EZLog(...) NSLog(__VA_ARGS__)
