@@ -19,6 +19,8 @@
     if (self) {
         _parentView = view;
         _cameraDelegate = delegate;
+        _ratio = 0.7f;
+        _scaledToWidth = 320.0f;
     }
     return self;
 }
@@ -56,7 +58,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
         UIImage *portraitImg = [info objectForKey:UIImagePickerControllerOriginalImage];
         portraitImg = [portraitImg imageByScalingToMaxSize];
         // 裁剪
-        VPImageCropperViewController *imgEditorVC = [[VPImageCropperViewController alloc] initWithImage:portraitImg cropFrame:CGRectMake(0, 100.0f, _parentView.frame.size.width, _parentView.frame.size.width) limitScaleRatio:3.0];
+        VPImageCropperViewController *imgEditorVC = [[VPImageCropperViewController alloc] initWithImage:portraitImg cropFrame:CGRectMake(0, 100.0f, _parentView.frame.size.width, _parentView.frame.size.width*_ratio) limitScaleRatio:3.0];
         imgEditorVC.delegate = self;
         [self.cameraDelegate showCropperViewController:imgEditorVC];
     }];
@@ -73,7 +75,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 }
 
 - (void)saveImage:(UIImage *)image {
-    UIImage *midImage = [ImageTool imageWithImageSimple:image scaledToWidth:100.0f];
+    UIImage *midImage = [ImageTool imageWithImageSimple:image scaledToWidth:self.scaledToWidth];
     NSString *imageName = [NSString stringWithFormat:@"%@.jpg",[[NSString stringWithFormat:@"%@",[NSDate date]] MD5]];
     [ImageTool saveImage:midImage WithName:imageName];
     NSString * localPath = [NSString stringWithFormat:@"%@/%@",[$ documentPath],imageName];
