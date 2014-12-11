@@ -61,7 +61,7 @@
 
 - (void)initView {
     self.view.backgroundColor = [UIColor blackColor];
-    self.showImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    self.showImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 480)];
     [self.showImgView setMultipleTouchEnabled:YES];
     [self.showImgView setUserInteractionEnabled:YES];
     [self.showImgView setImage:self.originalImage];
