@@ -21,6 +21,7 @@
 #import "ShowCamera.h"
 #import "MMPickerView.h"
 #import "SVPullToRefresh.h"
+#import "GCDObjC.h"
 
 #ifdef DEBUG
 #define EZLog(...) NSLog(__VA_ARGS__)

@@ -23,6 +23,7 @@ Pod::Spec.new do |s|
     sp.dependency 'TMCache'
     sp.dependency 'UIActivityIndicator-for-SDWebImage'
     sp.dependency 'AFNetworking'
+    sp.dependency 'GCDObjC'
     sp.prefix_header_contents = '#import "swift-bridge.h"'
   end
 end
