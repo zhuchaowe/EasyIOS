@@ -25,13 +25,10 @@
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "UITabBarController+EasyExtend.h"
 #import "EzSystemInfo.h"
-#import "EzUILabel.h"
-#import "EzMiButton.h"
 #import "SysTool.h"
 #import "TimeTool.h"
 #import "ImageTool.h"
 #import "BEVersion.h"
-#import "IconFont.h"
 #import "EasyKit.h"
 #import "EZNavigationController.h"
 

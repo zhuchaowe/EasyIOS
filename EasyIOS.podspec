@@ -18,22 +18,11 @@ Pod::Spec.new do |s|
     sp.requires_arc = true
     sp.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libz, $(SDKROOT)/usr/include/libxml2', 'CLANG_CXX_LANGUAGE_STANDARD' => 'gnu++0x', 'CLANG_CXX_LIBRARY' => 'libstdc++', 'CLANG_WARN_DIRECT_OBJC_ISA_USAGE' => 'YES'}
     sp.dependency 'ReactiveCocoa'
-    sp.dependency 'UICKeyChainStore'
     sp.dependency 'MBProgressHUD'
-    sp.dependency 'FontIcon'
     sp.dependency 'MojoDatabase'
-    sp.dependency 'FLKAutoLayout'
-    sp.dependency 'TTTAttributedLabel'
-    sp.dependency 'GCDObjC'
-    sp.dependency 'RegExCategories'
     sp.dependency 'TMCache'
-    sp.dependency 'SHGestureRecognizerBlocks'
     sp.dependency 'UIActivityIndicator-for-SDWebImage'
     sp.dependency 'AFNetworking'
-    sp.dependency 'IQKeyboardManager'
-    sp.dependency 'RMUniversalAlert'
-    sp.dependency 'AutoLayoutCells'
-    sp.dependency 'XAspect'
     sp.prefix_header_contents = '#import "swift-bridge.h"'
   end
 end
