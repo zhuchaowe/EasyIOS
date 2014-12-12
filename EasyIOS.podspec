@@ -25,6 +25,7 @@ Pod::Spec.new do |s|
     sp.dependency 'AFNetworking'
     sp.dependency 'GCDObjC'
     sp.dependency 'FLKAutoLayout'
+    sp.dependency 'FontIcon'
     sp.prefix_header_contents = '#import "swift-bridge.h"'
   end
 end

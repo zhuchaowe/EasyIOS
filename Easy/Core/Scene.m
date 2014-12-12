@@ -75,7 +75,7 @@
     
     if(![self.title isEqualToString:@""]){
         UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
-        EzUILabel *titleLabel = [[EzUILabel alloc]initWithFrame:CGRectMake(0, 0, titleView.width, 44)];
+        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, titleView.width, 44)];
         titleLabel.tag = 100;
         titleLabel.text = str;
         titleLabel.textAlignment = NSTextAlignmentCenter;
