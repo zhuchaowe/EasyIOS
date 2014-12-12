@@ -19,6 +19,8 @@
 #import "TMCache.h"
 #import "AFNetworking.h"
 #import "ShowCamera.h"
+#import "MMPickerView.h"
+#import "SVPullToRefresh.h"
 
 #ifdef DEBUG
 #define EZLog(...) NSLog(__VA_ARGS__)
