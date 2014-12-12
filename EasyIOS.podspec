@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
     sp.dependency 'UIActivityIndicator-for-SDWebImage'
     sp.dependency 'AFNetworking'
     sp.dependency 'GCDObjC'
-    sp.dependency 'FLKAutoLayout','0.2.0'
+    sp.dependency 'FLKAutoLayout','0.1.1'
     sp.dependency 'FontIcon'
     sp.prefix_header_contents = '#import "swift-bridge.h"'
   end
