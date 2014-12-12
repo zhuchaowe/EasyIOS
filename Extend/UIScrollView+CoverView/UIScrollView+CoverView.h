@@ -26,6 +26,8 @@
 #import <UIKit/UIKit.h>
 
 @interface CoverView : UIView
+
+@property (nonatomic,assign) BOOL enable;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @end
 

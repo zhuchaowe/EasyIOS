@@ -36,8 +36,10 @@
     
     @weakify(self);
     
-    [RACObserve(scrollView, contentOffset)
-    
+    [[RACObserve(scrollView, contentOffset)
+    filter:^BOOL(id value) {
+        return self.enable;
+    }]
      subscribeNext:^(id x) {
          @strongify(self);
          if (self.scrollView.contentOffset.y < - self.rect.size.height) {
@@ -71,6 +73,7 @@ static char UIScrollViewCover;
 {
     CoverView *coverView = [[CoverView alloc] init];
     coverView.scrollView = self;
+    coverView.enable = YES;
     coverView.rect = CGRectMake(0,-size.height, size.width, size.height);
     [coverView addSubview:view];
     
