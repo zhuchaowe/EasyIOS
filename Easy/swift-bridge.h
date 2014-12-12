@@ -27,6 +27,7 @@
 #import "RTLabel.h"
 #import "ShowCamera.h"
 #import "RMUniversalAlert.h"
+#import "AutoLayoutCells.h"
 
 #ifdef DEBUG
 #define EZLog(...) NSLog(__VA_ARGS__)

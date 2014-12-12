@@ -32,6 +32,8 @@ Pod::Spec.new do |s|
     sp.dependency 'AFNetworking'
     sp.dependency 'IQKeyboardManager'
     sp.dependency 'RMUniversalAlert'
+    sp.dependency 'AutoLayoutCells'
+    sp.dependency 'XAspect'
     sp.prefix_header_contents = '#import "swift-bridge.h"'
   end
 end
