@@ -20,4 +20,7 @@
 -(UIImage*)applyDarkEffect;
 -(UIImage*)applyTintEffectWithColor:(UIColor*)tintColor;
 -(UIImage*)applyBlurWithRadius:(CGFloat)blurRadius tintColor:(UIColor*)tintColor saturationDeltaFactor:(CGFloat)saturationDeltaFactor maskImage:(UIImage*)maskImage;
++ (UIImage *) imageFromData: (NSString *) imgSrc;
+- (BOOL) imageHasAlpha;
+- (NSString *) image2DataURL;
 @end

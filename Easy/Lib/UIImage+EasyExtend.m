@@ -360,4 +360,44 @@
     UIGraphicsEndImageContext();
     return outputImage;
 }
+
++ (UIImage *) imageFromData: (NSString *) imgSrc
+{
+    if ([imgSrc hasPrefix:@"data:"]) {
+        NSArray *array = [imgSrc componentsSeparatedByString:@"base64,"];
+        NSData *data = [[NSData alloc]initWithBase64EncodedString:[array objectAtIndex:1] options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        return [UIImage imageWithData:data];
+    }else if([imgSrc hasPrefix:@"http://"] || [imgSrc hasPrefix:@"https://"] ){
+        return [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imgSrc]]];
+    }else if([UIImage imageNamed:imgSrc]){
+        return [UIImage imageNamed:imgSrc];
+    }else{
+        return nil;
+    }
+}
+
+- (BOOL) imageHasAlpha
+{
+    CGImageAlphaInfo alpha = CGImageGetAlphaInfo(self.CGImage);
+    return (alpha == kCGImageAlphaFirst ||
+            alpha == kCGImageAlphaLast ||
+            alpha == kCGImageAlphaPremultipliedFirst ||
+            alpha == kCGImageAlphaPremultipliedLast);
+}
+
+- (NSString *) image2DataURL
+{
+    NSData *imageData = nil;
+    NSString *mimeType = nil;
+    
+    if ([self imageHasAlpha]) {
+        imageData = UIImagePNGRepresentation(self);
+        mimeType = @"image/png";
+    } else {
+        imageData = UIImageJPEGRepresentation(self, 1.0f);
+        mimeType = @"image/jpeg";
+    }
+    return [NSString stringWithFormat:@"data:%@;base64,%@", mimeType,
+            [imageData base64EncodedStringWithOptions:0]];
+}
 @end
