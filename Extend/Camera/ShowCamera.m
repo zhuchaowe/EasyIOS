@@ -10,6 +10,7 @@
 @interface ShowCamera()
 @property(nonatomic,retain)UIView *parentView;
 @property(nonatomic,weak)id<ShowCameraDelegate> cameraDelegate;
+@property(nonatomic,assign)BOOL ifShouldCrop;
 @end
 @implementation ShowCamera
 
@@ -21,8 +22,14 @@
         _cameraDelegate = delegate;
         _ratio = 0.7f;
         _scaledToWidth = 320.0f;
+        self.ifShouldCrop = YES;
     }
     return self;
+}
+
+-(void)showCameraSheetWithOutCrop{
+    self.ifShouldCrop = NO;
+    [self showCameraSheet];
 }
 
 -(void)showCameraSheet{
@@ -30,12 +37,12 @@
         [self openCamera:UIImagePickerControllerSourceTypePhotoLibrary];
         return;
     }
-    UIActionSheet *imageSheet = [[UIActionSheet alloc] initWithTitle:@"修改图片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍摄照片",@"从相册选择", nil];
+    UIActionSheet *imageSheet = [[UIActionSheet alloc] initWithTitle:@"选择图片" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍摄照片",@"从相册选择", nil];
     imageSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     [imageSheet showInView:_parentView];
 }
 
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0) {
         [self openCamera:UIImagePickerControllerSourceTypeCamera];
     }else if (buttonIndex == 1) {
@@ -57,10 +64,13 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker dismissViewControllerAnimated:YES completion:^() {
         UIImage *portraitImg = [info objectForKey:UIImagePickerControllerOriginalImage];
         portraitImg = [portraitImg imageByScalingToMaxSize];
-        // 裁剪
-        VPImageCropperViewController *imgEditorVC = [[VPImageCropperViewController alloc] initWithImage:portraitImg cropFrame:CGRectMake(0, 100.0f, _parentView.frame.size.width, _parentView.frame.size.width*_ratio) limitScaleRatio:3.0];
-        imgEditorVC.delegate = self;
-        [self.cameraDelegate showCropperViewController:imgEditorVC];
+        if (self.ifShouldCrop) {// 裁剪
+            VPImageCropperViewController *imgEditorVC = [[VPImageCropperViewController alloc] initWithImage:portraitImg cropFrame:CGRectMake(0, 100.0f, _parentView.frame.size.width, _parentView.frame.size.width*_ratio) limitScaleRatio:3.0];
+            imgEditorVC.delegate = self;
+            [self.cameraDelegate showCropperViewController:imgEditorVC];
+        }else{
+            [self saveImage:portraitImg];
+        }
     }];
 }
 

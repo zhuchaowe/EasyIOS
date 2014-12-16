@@ -21,4 +21,5 @@
 @property(nonatomic,assign)CGFloat scaledToWidth;//压缩图片宽度
 -(instancetype)initWithParentView:(UIView *)view delegate:(id<ShowCameraDelegate>)delegate;
 -(void)showCameraSheet;
+-(void)showCameraSheetWithOutCrop;
 @end
