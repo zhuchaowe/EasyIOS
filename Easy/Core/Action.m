@@ -176,6 +176,7 @@ DEF_SINGLETON(Action)
 }
 
 -(void)checkCode:(Request *)msg{
+    msg.codeKey = [msg.output objectAtPath:[Action sharedInstance].CODE_KEY];
     if([msg.output objectAtPath:[Action sharedInstance].CODE_KEY] && [[msg.output objectAtPath:[Action sharedInstance].CODE_KEY] intValue] == [Action sharedInstance].RIGHT_CODE){
         [self success:msg];
     }else{

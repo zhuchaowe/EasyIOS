@@ -23,6 +23,7 @@ typedef enum
 @property(nonatomic,assign)RequestState state;
 @property(nonatomic,retain)NSString *url;
 @property(nonatomic,strong)NSString *message;
+@property(nonatomic,strong)NSString *codeKey;
 @property(nonatomic,assign)double progress;
 @property(nonatomic,assign)long long totalBytesWritten;
 @property(nonatomic,assign)long long totalBytesExpectedToWrite;
