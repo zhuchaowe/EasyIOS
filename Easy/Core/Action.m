@@ -101,25 +101,19 @@ DEF_SINGLETON(Action)
                 EZLog(@"%@ has cached",url);
             }];
         }
-        if (_dataFromCache == NO || msg.output ==nil) {
-            msg.output = jsonObject;
-            [self checkCode:msg];
-        }
+        msg.output = jsonObject;
+        [self checkCode:msg];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         @strongify(msg,self);
-        if(msg.output !=nil){
-            [self checkCode:msg];
-        }
         msg.error = error;
         [self failed:msg];
     }];
     msg.url = op.request.URL.absoluteString;
     msg.output = [[TMCache sharedCache] objectForKey:msg.url.MD5];
     if (_dataFromCache == YES && msg.output !=nil) {
-        [[GCDQueue globalQueue] queueBlock:^{
+        [[GCDQueue mainQueue] queueBlock:^{
             [self checkCode:msg];
-            
-        } afterDelay:0.5f];
+        } afterDelay:0.1f];
     }
     return op;
 }
@@ -193,11 +187,9 @@ DEF_SINGLETON(Action)
 
 - (void)success:(Request *)msg{
     msg.message = [msg.output objectAtPath:[Action sharedInstance].MSG_KEY];
-    if (msg.state != SuccessState) {
-        msg.state = SuccessState;
-        if([self.aDelegaete respondsToSelector:@selector(handleActionMsg:)]){
-            [self.aDelegaete handleActionMsg:msg];
-        }
+    msg.state = SuccessState;
+    if([self.aDelegaete respondsToSelector:@selector(handleActionMsg:)]){
+        [self.aDelegaete handleActionMsg:msg];
     }
 }
 

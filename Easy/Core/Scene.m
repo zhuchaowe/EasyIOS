@@ -67,24 +67,4 @@
 - (void)rightButtonTouch{
 }
 
--(void)setTitleText:(NSString *)str{
-    if(self.navigationItem.titleView != nil){
-        [self.navigationItem.titleView removeFromSuperview];
-        self.navigationItem.titleView = nil;
-    }
-    
-    if(![self.title isEqualToString:@""]){
-        UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
-        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, titleView.width, 44)];
-        titleLabel.tag = 100;
-        titleLabel.text = str;
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.textColor = [UIColor blackColor];
-        titleLabel.font = [UIFont systemFontOfSize:18.0f];
-        titleLabel.frame = CGRectMake(0, 0, titleLabel.autoSize.width, 44);
-        titleView.frame = titleLabel.frame;
-        [titleView addSubview:titleLabel];
-        self.navigationItem.titleView = titleView;
-    }
-}
 @end
