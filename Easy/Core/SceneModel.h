@@ -16,6 +16,7 @@
 @property(nonatomic,assign)BOOL active;
 + (id)SceneModel;
 - (void)handleActionMsg:(Request *)msg;
+- (void)DO_DOWNLOAD:(Request *)req;
 - (void)SEND_ACTION:(Request *)req;
 - (void)SEND_CACHE_ACTION:(Request *)req;
 - (void)SEND_NO_CACHE_ACTION:(Request *)req;

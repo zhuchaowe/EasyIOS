@@ -59,6 +59,12 @@
 
 }
 
+-(void)DO_DOWNLOAD:(Request *)req{
+    if(req !=nil){
+        [self.action Download:req];
+    }
+}
+
 - (void)SEND_ACTION:(Request *)req{
     if(req !=nil){
         [self.action Send:req];

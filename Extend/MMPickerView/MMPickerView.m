@@ -29,11 +29,12 @@ NSString * const MMtoolbarBackgroundImage = @"toolbarBackgroundImage";
 @property (nonatomic, strong) UIBarButtonItem *pickerViewBarButtonItem;
 @property (nonatomic, strong) UIButton *pickerDoneButton;
 @property (nonatomic, strong) UIPickerView *pickerView;
-@property (nonatomic, strong) NSArray *pickerViewArray;
+@property (nonatomic, strong) NSMutableArray *pickerViewArray;
 @property (nonatomic, strong) UIColor *pickerViewTextColor;
 @property (nonatomic, strong) UIFont *pickerViewFont;
 @property (nonatomic, assign) CGFloat yValueFromTop;
 @property (copy) void (^onDismissCompletion)(NSArray *);
+@property (copy) void (^onSelectedCompletion)(MMPickerView *mmPickView,NSInteger row,NSInteger component);
 
 @end
 
@@ -50,12 +51,32 @@ NSString * const MMtoolbarBackgroundImage = @"toolbarBackgroundImage";
 }
 
 #pragma mark - Show Methods
+-(void)reloadAllComponentWithPickViewArray:(NSArray *)array{
+    _pickerViewArray = [NSMutableArray arrayWithArray:array];
+    [_pickerView reloadAllComponents];
+}
+
+-(void)reloadComponent:(NSInteger)component withPickViewArray:(NSArray *)array{
+    [_pickerViewArray replaceObjectAtIndex:component withObject:array];
+    [_pickerView reloadComponent:component];
+}
+
++(void)showPickerViewInView: (UIView *)view
+                withStrings: (NSArray *)strings
+                withOptions: (NSDictionary *)options
+                   selected: (void(^)(MMPickerView *mmPickView,NSInteger row,NSInteger component))selected
+                 completion: (void(^)(NSArray *selectedString))completion{
+    [self showPickerViewInView:view withStrings:strings withOptions:options completion:completion];
+    [self sharedView].onSelectedCompletion = selected;
+}
 
 +(void)showPickerViewInView:(UIView *)view
                 withStrings:(NSArray *)strings
                 withOptions:(NSDictionary *)options
                  completion:(void (^)(NSArray *))completion{
     
+    [self sharedView].onDismissCompletion = nil;
+    [self sharedView].onSelectedCompletion = nil;
     [[self sharedView] initializePickerViewInView:view
                                         withArray:strings
                                       withOptions:options];
@@ -111,7 +132,7 @@ NSString * const MMtoolbarBackgroundImage = @"toolbarBackgroundImage";
                         withArray: (NSArray *)array
                       withOptions: (NSDictionary *)options {
     
-    _pickerViewArray = array;
+    _pickerViewArray = [NSMutableArray arrayWithArray:array];
     
     UIColor *pickerViewBackgroundColor = [[UIColor alloc] initWithCGColor:[options[MMbackgroundColor] CGColor]];
     UIColor *pickerViewTextColor = [[UIColor alloc] initWithCGColor:[options[MMtextColor] CGColor]];
@@ -253,20 +274,26 @@ NSString * const MMtoolbarBackgroundImage = @"toolbarBackgroundImage";
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent: (NSInteger)component {
-    return [[_pickerViewArray objectAtIndex:component] count];
+    if (component && _pickerViewArray.count >component) {
+        return [[_pickerViewArray safeObjectAtIndex:component] count];
+    }else{
+        return [[_pickerViewArray safeObjectAtIndex:0] count];
+    }
 }
 
 - (NSString *)pickerView: (UIPickerView *)pickerView
              titleForRow: (NSInteger)row
             forComponent: (NSInteger)component {
-    return [[_pickerViewArray objectAtIndex:component] objectAtIndex:row];
+    return [[_pickerViewArray safeObjectAtIndex:component] objectAtIndex:row];
     
 }
 
 #pragma mark - UIPickerViewDelegate
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    //self.onDismissCompletion ([self selectedObject]);
+    if (self.onSelectedCompletion) {
+        self.onSelectedCompletion(self,row,component);
+    }
 }
 
 - (id)selectedObject {
@@ -318,7 +345,7 @@ NSString * const MMtoolbarBackgroundImage = @"toolbarBackgroundImage";
         }
     }
     
-    [pickerViewLabel setText: [[_pickerViewArray objectAtIndex:component] objectAtIndex:row]];
+    [pickerViewLabel setText: [[_pickerViewArray safeObjectAtIndex:component] objectAtIndex:row]];
     
     return customPickerView;
     

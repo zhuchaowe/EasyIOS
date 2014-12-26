@@ -37,6 +37,16 @@ static char MBHud;
     self.hud = hud;
 }
 
+-(MBProgressHUD *)showHudProgress:(NSString *)text{
+    if (self.hud.superview) {
+        [self.hud.superview bringSubviewToFront:self.hud];
+    }
+    self.hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
+    self.hud.labelText = text;
+    [self.hud show:YES];
+    return self.hud;
+}
+
 -(void)showHudIndeterminate:(NSString *)text{
     if (self.hud.superview) {
         [self.hud.superview bringSubviewToFront:self.hud];

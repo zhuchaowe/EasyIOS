@@ -22,6 +22,6 @@
 - (void)readFromCache;
 - (void)notReadFromCache;
 - (AFHTTPRequestOperation *)Send:(Request *) msg;
-
+- (AFHTTPRequestOperation *)Download:(Request *)msg;
 AS_SINGLETON(Action)
 @end

@@ -11,6 +11,7 @@
 @interface UIViewController (MBHud)
 -(void)loadHudInKeyWindow;
 -(void)loadHud:(UIView *)view;
+-(MBProgressHUD *)showHudProgress:(NSString *)text;
 -(void)showHudIndeterminate:(NSString *)text;
 -(void)hideHud;
 -(void)hideHudSuccess:(NSString *)text;

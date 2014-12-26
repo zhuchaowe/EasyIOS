@@ -62,6 +62,35 @@ DEF_SINGLETON(Action)
     _dataFromCache = NO;
 }
 
+-(AFHTTPRequestOperation *)Download:(Request *)msg{
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:[NSURL URLWithString:msg.downloadUrl]];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+   
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:msg.downloadUrl]];
+    [self sending:msg];
+    @weakify(msg,self);
+    AFHTTPRequestOperation *op = [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        @strongify(msg,self);
+        msg.output = [NSDictionary dictionary];
+        [self successAction:msg];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        @strongify(msg,self);
+        msg.error = error;
+        [self failed:msg];
+    }];
+    op.outputStream = [NSOutputStream outputStreamToFileAtPath:msg.targetPath append:NO];
+    [op setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
+        @strongify(msg,self);
+        msg.totalBytesRead = totalBytesRead;
+        msg.totalBytesExpectedToRead = totalBytesExpectedToRead;
+        msg.progress = (CGFloat)totalBytesRead/(CGFloat)totalBytesExpectedToRead;
+        [self progressing:msg];
+    }];
+    msg.url = op.request.URL.absoluteString;
+    [op start];
+    return op;
+}
+
 -(AFHTTPRequestOperation *)Send:(Request *)msg{
     if([msg.METHOD isEqualToString:@"GET"]){
         return [self GET:msg];
@@ -86,7 +115,6 @@ DEF_SINGLETON(Action)
     }
     
     [self sending:msg];
-    
     
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:[NSURL URLWithString:url]];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -162,7 +190,7 @@ DEF_SINGLETON(Action)
             @strongify(msg,self);
             msg.totalBytesWritten = totalBytesWritten;
             msg.totalBytesExpectedToWrite = totalBytesExpectedToWrite;
-            msg.progress = totalBytesExpectedToWrite/totalBytesWritten;
+            msg.progress = (CGFloat)totalBytesWritten/(CGFloat)totalBytesExpectedToWrite;
             [self progressing:msg];
         }];
     }
@@ -187,6 +215,10 @@ DEF_SINGLETON(Action)
 
 - (void)success:(Request *)msg{
     msg.message = [msg.output objectAtPath:[Action sharedInstance].MSG_KEY];
+    [self successAction:msg];
+}
+
+-(void)successAction:(Request *)msg{
     msg.state = SuccessState;
     if([self.aDelegaete respondsToSelector:@selector(handleActionMsg:)]){
         [self.aDelegaete handleActionMsg:msg];
