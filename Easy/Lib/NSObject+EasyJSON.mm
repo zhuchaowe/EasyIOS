@@ -717,22 +717,15 @@
 	return nil;
 }
 
--(BOOL)isEmpty{
-    if(self == nil){
-        return YES;
-    }
-    if([self isKindOfClass:[NSNull class]]){
-        return YES;
-    }
-    if([self isKindOfClass:[NSString class]] &&  [[(NSString *)self trim] isEqualToString:@""]){
-        return YES;
-    }
-    if([self isKindOfClass:[NSArray class]] && [(NSArray *)self count] ==0){
-        return YES;
-    }
-    return NO;
+-(BOOL)isNotEmpty{
+    return !(self == nil
+             || [self isKindOfClass:[NSNull class]]
+             || ([self respondsToSelector:@selector(length)]
+                 && [(NSData *)self length] == 0)
+             || ([self respondsToSelector:@selector(count)]
+                 && [(NSArray *)self count] == 0));
+    
 }
-
 
 @end
 

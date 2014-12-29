@@ -20,13 +20,11 @@
         @weakify(scrollView);
         [[RACObserve(scrollView, contentSize) filter:^BOOL(id value) {
             @strongify(scrollView);
-            return scrollView.contentSize.height>scrollView.bounds.size.height;
+            return scrollView.contentSize.height>scrollView.bounds.size.height && scrollView.bounds.size.height >0;
         }] subscribeNext:^(id x) {
             @strongify(scrollView);
             scrollView.infiniteScrollingView.frame = CGRectMake(0, scrollView.contentSize.height, scrollView.superview.width, SVInfiniteScrollingViewHeight);
         }];
-        
-        
         
         _arrowImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow-down"]];
         _arrowImage.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;

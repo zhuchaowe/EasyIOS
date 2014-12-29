@@ -72,7 +72,7 @@
 
 //获取安全字符串归零
 -(NSString *)safeString{
-    return [self isEmpty] ?@"0": [NSString stringWithFormat:@"%@",self];
+    return self.isNotEmpty?[NSString stringWithFormat:@"%@",self]:@"";
 }
 
 //获取安全数字串归零

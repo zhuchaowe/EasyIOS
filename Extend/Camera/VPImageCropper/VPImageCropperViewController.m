@@ -270,13 +270,13 @@
         CGFloat newW = self.originalImage.size.width;
         CGFloat newH = newW * (self.cropFrame.size.height / self.cropFrame.size.width);
         x = 0; y = y + (h - newH) / 2;
-        w = newH; h = newH;
+        w = newW; h = newH;
     }
     if (self.latestFrame.size.height < self.cropFrame.size.height) {
         CGFloat newH = self.originalImage.size.height;
         CGFloat newW = newH * (self.cropFrame.size.width / self.cropFrame.size.height);
         x = x + (w - newW) / 2; y = 0;
-        w = newH; h = newH;
+        w = newW; h = newH;
     }
     CGRect myImageRect = CGRectMake(x, y, w, h);
     CGImageRef imageRef = self.originalImage.CGImage;

@@ -80,7 +80,9 @@ static char UIScrollViewCover;
     [view alignToView:coverView];
     
     self.coverView = coverView;
-    self.contentInset = UIEdgeInsetsMake(size.height, 0, 0, 0);
+    UIEdgeInsets insets = self.contentInset;
+    insets.top += size.height;
+    self.contentInset = insets;
     [self addSubview:coverView];
 }
 @end

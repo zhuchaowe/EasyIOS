@@ -69,7 +69,7 @@
 
 -(NSString *)appendPathInfo{
     __block NSString *pathInfo = self.pathInfo;
-    if(![pathInfo isEmpty]){
+    if(pathInfo.isNotEmpty){
         [self.requestParams enumerateKeysAndObjectsUsingBlock:^(NSString* key, id value, BOOL *stop) {
             NSString *par = [NSString stringWithFormat:@"(\\{%@\\})",key];
             NSString *str = [NSString stringWithFormat:@"%@",value];

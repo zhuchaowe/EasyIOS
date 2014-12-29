@@ -102,16 +102,16 @@ DEF_SINGLETON(Action)
 -(AFHTTPRequestOperation *) GET:(Request *)msg
 {
     NSString *url = @"";
-    if([msg.SCHEME isEmpty] || [msg.HOST isEmpty]){
-        url = [NSString stringWithFormat:@"http://%@%@",[Action sharedInstance].HOST_URL,msg.PATH];
-    }else{
+    if(msg.SCHEME.isNotEmpty && msg.HOST.isNotEmpty){
         url = [NSString stringWithFormat:@"%@://%@%@",msg.SCHEME,msg.HOST,msg.PATH];
+    }else{
+        url = [NSString stringWithFormat:@"http://%@%@",[Action sharedInstance].HOST_URL,msg.PATH];
     }
     NSDictionary *requestParams = nil;
-    if([msg.appendPathInfo isEmpty] || msg.appendPathInfo ==nil){
-        requestParams = msg.requestParams;
-    }else{
+    if(msg.appendPathInfo.isNotEmpty){
         url = [url stringByAppendingString:msg.appendPathInfo];
+    }else{
+        requestParams = msg.requestParams;
     }
     
     [self sending:msg];
@@ -149,16 +149,16 @@ DEF_SINGLETON(Action)
 
 -(AFHTTPRequestOperation *)POST:(Request *)msg{
     NSString *url = @"";
-    if([msg.SCHEME isEmpty] || [msg.HOST isEmpty]){
-        url = [NSString stringWithFormat:@"http://%@%@",[Action sharedInstance].HOST_URL,msg.PATH];
-    }else{
+    if(msg.SCHEME.isNotEmpty && msg.HOST.isNotEmpty){
         url = [NSString stringWithFormat:@"%@://%@%@",msg.SCHEME,msg.HOST,msg.PATH];
+    }else{
+        url = [NSString stringWithFormat:@"http://%@%@",[Action sharedInstance].HOST_URL,msg.PATH];
     }
     NSDictionary *requestParams = nil;
-    if([msg.appendPathInfo isEmpty] || msg.appendPathInfo ==nil){
-        requestParams = msg.requestParams;
-    }else{
+    if(msg.appendPathInfo.isNotEmpty){
         url = [url stringByAppendingString:msg.appendPathInfo];
+    }else{
+        requestParams = msg.requestParams;
     }
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
