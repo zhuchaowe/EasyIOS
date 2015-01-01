@@ -48,8 +48,7 @@
 -(UIButton *)initNavigationButtonWithTitle:(NSString *)str color:(UIColor *)color{
     CGRect buttonFrame = CGRectZero;
 
-    CGSize titleSize = [str sizeWithFont:[UIFont boldSystemFontOfSize:16.0f]
-                        constrainedToSize:CGSizeMake(999999.0f, NAV_BAR_HEIGHT)];
+    CGSize titleSize = [str boundingRectWithSize:CGSizeMake(999999.0f, NAV_BAR_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:16]} context:nil].size;
     
     if ( IOS7_OR_LATER )
     {

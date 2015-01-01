@@ -83,6 +83,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [self.cameraDelegate dismissViewController];
 }
+- (void)imageCropperDidCancel:(VPImageCropperViewController *)cropperViewController{
+
+}
 
 - (void)saveImage:(UIImage *)image {
     UIImage *midImage = [ImageTool imageWithImageSimple:image scaledToWidth:self.scaledToWidth];

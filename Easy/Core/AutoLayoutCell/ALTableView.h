@@ -22,7 +22,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-@import UIKit;
+
+#import <UIKit/UIKit.h>
 
 /**
  *  `ALTableView` will automatically call `reloadData` on itself in the event that it receives a `UIContentSizeCategoryDidChangeNotification` notification.

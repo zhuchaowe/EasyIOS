@@ -22,8 +22,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-@import UIKit;
-#import "EzTableViewCell.h";
+#import <UIKit/UIKit.h>
+#import "EzTableViewCell.h"
 /**
  *  This is the base cell class for all table view cells within `AutoLayoutCells`.
  *
