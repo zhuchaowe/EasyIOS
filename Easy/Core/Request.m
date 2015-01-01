@@ -8,7 +8,6 @@
 
 #import "Request.h"
 #import <objc/runtime.h>
-#import "RegExCategories.h"
 @implementation Request
 
 +(id)Request{
@@ -73,7 +72,8 @@
         [self.requestParams enumerateKeysAndObjectsUsingBlock:^(NSString* key, id value, BOOL *stop) {
             NSString *par = [NSString stringWithFormat:@"(\\{%@\\})",key];
             NSString *str = [NSString stringWithFormat:@"%@",value];
-            pathInfo = [pathInfo replace:RX(par) with:str];
+            
+            pathInfo = [[[NSRegularExpression alloc] initWithPattern:par options:0 error:nil] stringByReplacingMatchesInString:pathInfo options:0 range:NSMakeRange(0, pathInfo.length) withTemplate:str];
         }];
     }
     return pathInfo;
