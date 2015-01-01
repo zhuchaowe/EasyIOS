@@ -159,9 +159,9 @@
 	NSDateComponents *comps = [cal
 	                           components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit | NSWeekdayCalendarUnit
                                fromDate:now];
-	NSLog(@"%ld,%ld,%ld,%ld", (long)comps.year, (long)comps.month, (long)comps.week, (long)comps.weekday);
+	NSLog(@"%ld,%ld,%ld,%ld", (long)comps.year, (long)comps.month, (long)comps.weekOfMonth, (long)comps.weekday);
 	if (comps.weekday < 2) {
-		comps.week = comps.week - 1;
+		comps.weekOfMonth = comps.weekOfMonth - 1;
 	}
 	comps.weekday = 2;
 	//   NSLog(@"%d,%d,%d,%d",comps.year,comps.month,comps.week,comps.weekday);

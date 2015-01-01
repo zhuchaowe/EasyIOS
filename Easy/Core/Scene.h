@@ -23,5 +23,4 @@ typedef enum
 - (void)showBarButton:(EzNavigationBar)position button:(UIButton *)button;
 - (void)leftButtonTouch;
 - (void)rightButtonTouch;
-- (void)setTitleText:(NSString *)str;
 @end

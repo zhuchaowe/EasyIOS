@@ -19,7 +19,8 @@ extern const BOOL IOS3_OR_EARLIER;
 
 extern const BOOL IS_SCREEN_4_INCH;
 extern const BOOL IS_SCREEN_35_INCH;
-
+extern const BOOL IS_SCREEN_47_INCH;
+extern const BOOL IS_SCREEN_55_INCH;
 @interface EzSystemInfo : NSObject
 
 AS_SINGLETON( EzSystemInfo )
