@@ -1,6 +1,6 @@
 ![image](https://raw.githubusercontent.com/zhuchaowe/EasyIOS/gh-pages/images/logo.png)
 
-EasyIOS  - When IOS Fall In Love With MVVM
+EasyIOS  - Happy New Year
 =======
 
 [![Pod Version](http://img.shields.io/cocoapods/v/EasyIOS.svg)](http://easyios.08dream.com)
@@ -18,9 +18,7 @@ EasyIOS is a new generation of development framework based on `Model-View-ViewMo
 * EasyIOS官方qq群 :[340906744](http://shang.qq.com/wpa/qunwpa?idkey=562d002e275a8199081313b00580fb7111a4faf694216a239064d29f5238bc91) 欢迎大家加入讨论
 
 
-* [EasyRSS](https://github.com/zhuchaowe/EasyRSS):基于EasyIOS 2.0 的开源项目
-
-* [MVVM Demo for EasyIOS](https://github.com/zhuchaowe/MVVM-Demo-EasyIOS):EasyIOS swift 版本Demo
+* [EasyRSS](https://github.com/zhuchaowe/EasyRSS):基于EasyIOS 2.2-RC2 的开源项目
 
 * [RACSwift for EasyIOS](https://github.com/zhuchaowe/RACSwift):EasyIOS swift 版本Demo
 
@@ -73,10 +71,6 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 
 采用`ReactiveCocoa` 框架，实现响应式编程，减少代码复杂度。
 
-集成了开源代码`RTLabel` 富文本Label
-
-集成`SVPullRefresh`下拉刷新，有删改
-
 `Model`类整合`JsonModel`的类库和`MojoDataBase`类库
 
 整合了很多开源的优秀代码
@@ -104,20 +98,28 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 * Import from CocoaPods 
 * Add below to Podfile and run pod install
 
-    	platform :ios
-    	pod 'EasyIOS', :head
+    	platform :ios, "6.0"
+    	pod 'EasyIOS', '~> 2.2'
+		pod 'EasyIOS-Extention', '~> 1.0'
     	
 * If you use swift , please click [here](https://github.com/zhuchaowe/RACSwift)
 
-##2.2-RC1版本更新
+##2.2版本更新
 * 修改Action类中的配置方式：由原来的宏调用改为类方法配置
 * 针对IOS8优化
 * 为UIScrollView增加下拉放大效果
 * 新增`EZNavigationController`类，解决ios7中快速push容易crash的问题
 * 重写下拉刷新，与上拉加载，完全解耦，支持自定义UI。
+* 新增AutoLayoutCell自适应高度的cell，以及UIScrollView的AutoLayout实现自适应contentSize
 * 智能键盘，防止键盘遮盖输入框
-* 修复部分bug
+* 新增强大的XAspect,完美实现代码解耦，再一次为UIViewController减负
+* 兼容IOS8的`UIAlertController`与IOS7的`UIActionSheet`、`UIAlertView`
+* Action类新增Download下载方法
+* `EasyIOS-Extention`分离可选的第三方类库
+* 移除了`RTLabel`,`EzUILabel`
+* 修复部分bug 
 * ……
+* 新Demo 会尽快放出
 
 
 ##2.1版本更新
