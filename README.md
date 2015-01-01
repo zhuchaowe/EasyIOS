@@ -1,6 +1,6 @@
 ![image](https://raw.githubusercontent.com/zhuchaowe/EasyIOS/gh-pages/images/logo.png)
 
-EasyIOS  - Happy New Year
+EasyIOS  - Happy New Year 2015
 =======
 
 [![Pod Version](http://img.shields.io/cocoapods/v/EasyIOS.svg)](http://easyios.08dream.com)
@@ -17,11 +17,9 @@ EasyIOS is a new generation of development framework based on `Model-View-ViewMo
 
 * EasyIOS官方qq群 :[340906744](http://shang.qq.com/wpa/qunwpa?idkey=562d002e275a8199081313b00580fb7111a4faf694216a239064d29f5238bc91) 欢迎大家加入讨论
 
-
 * [EasyRSS](https://github.com/zhuchaowe/EasyRSS):基于EasyIOS 2.2-RC2 的开源项目
 
 * [RACSwift for EasyIOS](https://github.com/zhuchaowe/RACSwift):EasyIOS swift 版本Demo
-
 
 * [教程在Wiki Paper](https://github.com/zhuchaowe/EasyIOS/wiki)
 
@@ -49,8 +47,6 @@ EasyIOS is a new generation of development framework based on `Model-View-ViewMo
 全新基于`MVVM(Model-View-ViewModel)`编程模式架构，开启EasyIOS开发函数式编程新篇章。
 
 EasyIOS 2.0类似`AngularJs`，最为核心的是：`MVVM`、`ORM`、模块化、自动化双向数据绑定、等等
-
-2.0的demo在这里[MVVM Demo for EasyIOS](https://github.com/zhuchaowe/MVVM-Demo-EasyIOS)，供大家学习。
 
 喜欢`swift`的同学，同样有`swift`的2.0 demo [RACSwift for EasyIOS](https://github.com/zhuchaowe/RACSwift)，供大家学习。
 
