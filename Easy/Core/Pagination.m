@@ -28,4 +28,9 @@
     }
     return originArray;
 }
+
+-(NSMutableArray *)setEndWithOrigin:(NSMutableArray *)originArray newArray:(NSArray *)newArray{
+     self.isEnd = (originArray.count + newArray.count)<self.total.integerValue?@0:@1;
+    return [self success:originArray newArray:newArray];
+}
 @end
