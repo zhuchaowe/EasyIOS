@@ -28,6 +28,8 @@
 + (NSString *)jsonStringWithString:(NSString *) string;
 + (NSString *)jsonStringWithObject:(id) object;
 -(NSString *)safeString;
+- (NSString *)stringByTrimmingLeadingWhitespaceAndNewlineCharacters;
+- (NSString *)stringByTrimmingTrailingWhitespaceAndNewlineCharacters;
 @end
 
 @interface NSMutableString (EasyExtend)

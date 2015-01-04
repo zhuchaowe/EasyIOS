@@ -15,6 +15,4 @@
 @property(nonatomic,retain)NSNumber *isEnd;
 -(NSMutableArray *)success:(NSMutableArray *)originArray
                   newArray:(NSArray *)newArray;
--(NSMutableArray *)setEndWithOrigin:(NSMutableArray *)originArray
-                           newArray:(NSArray *)newArray;
 @end
