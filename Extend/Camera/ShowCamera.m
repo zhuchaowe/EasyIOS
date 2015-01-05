@@ -84,7 +84,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [self.cameraDelegate dismissViewController];
 }
 - (void)imageCropperDidCancel:(VPImageCropperViewController *)cropperViewController{
-
+    [self.cameraDelegate dismissViewController];
 }
 
 - (void)saveImage:(UIImage *)image {
