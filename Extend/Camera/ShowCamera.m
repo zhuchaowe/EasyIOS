@@ -22,6 +22,7 @@
         _cameraDelegate = delegate;
         _ratio = 0.7f;
         _scaledToWidth = 320.0f;
+        _imageCompressionQuality = 0.0f;
         self.ifShouldCrop = YES;
     }
     return self;
@@ -89,9 +90,14 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
 - (void)saveImage:(UIImage *)image {
     UIImage *midImage = [ImageTool imageWithImageSimple:image scaledToWidth:self.scaledToWidth];
+    NSData * data = nil;
+    if (self.imageCompressionQuality > 0.0f && self.imageCompressionQuality <1.0f) {
+        data = UIImageJPEGRepresentation(midImage, self.imageCompressionQuality);
+    }else{
+        data = UIImageJPEGRepresentation(midImage,1.0f);
+    }
     NSString *imageName = [NSString stringWithFormat:@"%@.jpg",[[NSString stringWithFormat:@"%@",[NSDate date]] MD5]];
-    [ImageTool saveImage:midImage WithName:imageName];
-    NSString * localPath = [NSString stringWithFormat:@"%@/%@",[$ documentPath],imageName];
+    NSString * localPath = [ImageTool saveData:data WithName:imageName];
     [self.cameraDelegate callBackPath:localPath];
 }
 

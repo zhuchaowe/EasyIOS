@@ -11,7 +11,8 @@
 + (ImageTool *)sharedInstance;
 //压缩图片
 + (UIImage*)imageWithImageSimple:(UIImage*)image scaledToWidth:(CGFloat)newWidth;
-+ (void)saveImage:(UIImage *)tempImage WithName:(NSString *)imageName;
++ (NSString *)saveImage:(UIImage *)tempImage WithName:(NSString *)imageName;
++ (NSString *)saveData:(NSData *)data WithName:(NSString *)imageName;
 + (void)savePhotosAlbum:(UIImage *)image;
 +(void)deleteFileFromPath:(NSString *)path;
 +(UIImage *)imageFromString:(NSString *)string inRect:(CGRect)rect;

@@ -42,16 +42,23 @@
 }
 
 #pragma mark 保存图片到document
-+(void)saveImage:(UIImage *)tempImage WithName:(NSString *)imageName
++(NSString *)saveImage:(UIImage *)tempImage WithName:(NSString *)imageName
 {
     NSData* imageData = UIImagePNGRepresentation(tempImage);
+    return [self saveData:imageData WithName:imageName];
+}
+
++(NSString *)saveData:(NSData *)data WithName:(NSString *)imageName
+{
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString* documentsDirectory = [paths objectAtIndex:0];
     // Now we get the full path to the file
     NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:imageName];
     // and then we write it out
-    [imageData writeToFile:fullPathToFile atomically:NO];
+    [data writeToFile:fullPathToFile atomically:NO];
+    return [NSString stringWithFormat:@"%@/%@",[$ documentPath],imageName];
 }
+
 
 + (void)savePhotosAlbum:(UIImage *)image {
 	UIImageWriteToSavedPhotosAlbum(image, self, nil, nil);

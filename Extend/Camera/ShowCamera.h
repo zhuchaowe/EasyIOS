@@ -19,6 +19,7 @@
 @interface ShowCamera : NSObject<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,VPImageCropperDelegate>
 @property(nonatomic,assign)CGFloat ratio; //宽高比
 @property(nonatomic,assign)CGFloat scaledToWidth;//压缩图片宽度
+@property(nonatomic,assign)CGFloat imageCompressionQuality;//压缩图片质量
 -(instancetype)initWithParentView:(UIView *)view delegate:(id<ShowCameraDelegate>)delegate;
 -(void)showCameraSheet;
 -(void)showCameraSheetWithOutCrop;
