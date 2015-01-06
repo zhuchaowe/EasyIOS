@@ -91,10 +91,10 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 - (void)saveImage:(UIImage *)image {
     UIImage *midImage = [ImageTool imageWithImageSimple:image scaledToWidth:self.scaledToWidth];
     NSData * data = nil;
-    if (self.imageCompressionQuality > 0.0f && self.imageCompressionQuality <1.0f) {
+    if (self.imageCompressionQuality > 0.0f && self.imageCompressionQuality <=1.0f) {
         data = UIImageJPEGRepresentation(midImage, self.imageCompressionQuality);
     }else{
-        data = UIImageJPEGRepresentation(midImage,1.0f);
+        data = UIImagePNGRepresentation(midImage);
     }
     NSString *imageName = [NSString stringWithFormat:@"%@.jpg",[[NSString stringWithFormat:@"%@",[NSDate date]] MD5]];
     NSString * localPath = [ImageTool saveData:data WithName:imageName];

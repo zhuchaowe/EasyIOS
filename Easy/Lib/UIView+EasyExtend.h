@@ -15,5 +15,5 @@
 -(CGFloat)right;
 -(CGFloat)width;
 -(CGFloat)height;
-
+- (UIImage *)saveImageWithScale:(float)scale;
 @end

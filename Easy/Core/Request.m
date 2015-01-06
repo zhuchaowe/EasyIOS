@@ -31,6 +31,7 @@
     self.HOST = @"";
     self.PATH = @"";
     self.METHOD = @"GET";
+    self.needCheckCode = YES;
 }
 
 - (BOOL)succeed

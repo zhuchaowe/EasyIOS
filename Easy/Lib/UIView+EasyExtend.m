@@ -28,5 +28,12 @@
 -(CGFloat)height{
     return self.frame.size.height;
 }
-
+- (UIImage *)saveImageWithScale:(float)scale
+{
+    UIGraphicsBeginImageContextWithOptions(self.frame.size, NO, scale);
+    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
 @end

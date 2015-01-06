@@ -102,16 +102,20 @@ DEF_SINGLETON(Action)
 -(AFHTTPRequestOperation *) GET:(Request *)msg
 {
     NSString *url = @"";
-    if(msg.SCHEME.isNotEmpty && msg.HOST.isNotEmpty){
-        url = [NSString stringWithFormat:@"%@://%@%@",msg.SCHEME,msg.HOST,msg.PATH];
-    }else{
-        url = [NSString stringWithFormat:@"http://%@%@",[Action sharedInstance].HOST_URL,msg.PATH];
-    }
     NSDictionary *requestParams = nil;
-    if(msg.appendPathInfo.isNotEmpty){
-        url = [url stringByAppendingString:msg.appendPathInfo];
+    if(msg.STATICPATH.isNotEmpty){
+        url = msg.STATICPATH;
     }else{
-        requestParams = msg.requestParams;
+        if(msg.SCHEME.isNotEmpty && msg.HOST.isNotEmpty){
+            url = [NSString stringWithFormat:@"%@://%@%@",msg.SCHEME,msg.HOST,msg.PATH];
+        }else{
+            url = [NSString stringWithFormat:@"http://%@%@",[Action sharedInstance].HOST_URL,msg.PATH];
+        }
+        if(msg.appendPathInfo.isNotEmpty){
+            url = [url stringByAppendingString:msg.appendPathInfo];
+        }else{
+            requestParams = msg.requestParams;
+        }
     }
     
     [self sending:msg];
@@ -119,7 +123,9 @@ DEF_SINGLETON(Action)
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:[NSURL URLWithString:url]];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    
+    if (msg.acceptableContentTypes.isNotEmpty) {
+        manager.responseSerializer.acceptableContentTypes = msg.acceptableContentTypes;
+    }
     
     @weakify(msg,self);
     AFHTTPRequestOperation *op =  [manager GET:url parameters:requestParams success:^(AFHTTPRequestOperation *operation, NSDictionary* jsonObject) {
@@ -149,22 +155,28 @@ DEF_SINGLETON(Action)
 
 -(AFHTTPRequestOperation *)POST:(Request *)msg{
     NSString *url = @"";
-    if(msg.SCHEME.isNotEmpty && msg.HOST.isNotEmpty){
-        url = [NSString stringWithFormat:@"%@://%@%@",msg.SCHEME,msg.HOST,msg.PATH];
-    }else{
-        url = [NSString stringWithFormat:@"http://%@%@",[Action sharedInstance].HOST_URL,msg.PATH];
-    }
     NSDictionary *requestParams = nil;
-    if(msg.appendPathInfo.isNotEmpty){
-        url = [url stringByAppendingString:msg.appendPathInfo];
+    if(msg.STATICPATH.isNotEmpty){
+        url = msg.STATICPATH;
     }else{
-        requestParams = msg.requestParams;
+        if(msg.SCHEME.isNotEmpty && msg.HOST.isNotEmpty){
+            url = [NSString stringWithFormat:@"%@://%@%@",msg.SCHEME,msg.HOST,msg.PATH];
+        }else{
+            url = [NSString stringWithFormat:@"http://%@%@",[Action sharedInstance].HOST_URL,msg.PATH];
+        }
+        if(msg.appendPathInfo.isNotEmpty){
+            url = [url stringByAppendingString:msg.appendPathInfo];
+        }else{
+            requestParams = msg.requestParams;
+        }
     }
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    
+    if (msg.acceptableContentTypes.isNotEmpty) {
+        manager.responseSerializer.acceptableContentTypes = msg.acceptableContentTypes;
+    }
     [self sending:msg];
     @weakify(msg,self);
     
@@ -198,11 +210,15 @@ DEF_SINGLETON(Action)
 }
 
 -(void)checkCode:(Request *)msg{
-    msg.codeKey = [msg.output objectAtPath:[Action sharedInstance].CODE_KEY];
-    if([msg.output objectAtPath:[Action sharedInstance].CODE_KEY] && [[msg.output objectAtPath:[Action sharedInstance].CODE_KEY] intValue] == [Action sharedInstance].RIGHT_CODE){
-        [self success:msg];
+    if (msg.needCheckCode) {
+        msg.codeKey = [msg.output objectAtPath:[Action sharedInstance].CODE_KEY];
+        if([msg.output objectAtPath:[Action sharedInstance].CODE_KEY] && [[msg.output objectAtPath:[Action sharedInstance].CODE_KEY] intValue] == [Action sharedInstance].RIGHT_CODE){
+            [self success:msg];
+        }else{
+            [self error:msg];
+        }
     }else{
-        [self error:msg];
+        [self successAction:msg];
     }
 }
 

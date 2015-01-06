@@ -39,7 +39,10 @@ typedef enum
 @property(nonatomic,retain)NSString *SCHEME;
 @property(nonatomic,retain)NSString *HOST;
 @property(nonatomic,retain)NSString *PATH;
+@property(nonatomic,retain)NSString *STATICPATH;
 @property(nonatomic,retain)NSString *METHOD;
+@property(nonatomic,assign)BOOL needCheckCode;
+@property(nonatomic,retain)NSSet *acceptableContentTypes;
 +(id)Request;
 -(void)loadRequest;
 -(NSString *)requestKey;
