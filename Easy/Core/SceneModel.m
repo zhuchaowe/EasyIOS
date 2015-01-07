@@ -27,23 +27,6 @@
     self.action = [Action Action];
 }
 
-- (void)loadActive{
-    self.active = NO;
-    @weakify(self);
-    [[RACObserve(self,active)
-      filter:^BOOL(NSNumber *active) {
-          return [active boolValue];
-      }]
-     subscribeNext:^(NSNumber *active) {
-         @strongify(self);
-         [self activeRequest];
-         self.active = NO;
-     }];
-}
-
-- (void)activeRequest{
-
-}
 
 - (void)handleActionMsg:(Request *)msg{
     if(msg.sending){

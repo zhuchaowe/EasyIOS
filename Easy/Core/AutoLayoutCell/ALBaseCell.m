@@ -28,26 +28,9 @@
 
 #pragma mark - Object Lifecycle
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-  self = [super initWithCoder:aDecoder];
-  if (self) {
-    [self commonInit];
-  }
-  return self;
-}
-
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-  self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-  if (self) {
-    [self commonInit];
-  }
-  return self;
-}
-
 - (void)commonInit
 {
+  [super commonInit];
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(contentSizeCategoryDidChange:)
                                                name:UIContentSizeCategoryDidChangeNotification
@@ -58,7 +41,6 @@
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 
 #pragma mark - Dynamic Type Text
 

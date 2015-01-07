@@ -22,7 +22,7 @@ typedef enum
 @property(nonatomic,strong)NSString *responseString;
 @property(nonatomic,strong)NSError *error;
 @property(nonatomic,assign)RequestState state;
-@property(nonatomic,retain)NSString *url;
+@property(nonatomic,retain)NSURL *url;
 @property(nonatomic,strong)NSString *message;
 @property(nonatomic,strong)NSString *codeKey;
 @property(nonatomic,assign)double progress;
@@ -43,7 +43,11 @@ typedef enum
 @property(nonatomic,retain)NSString *METHOD;
 @property(nonatomic,assign)BOOL needCheckCode;
 @property(nonatomic,retain)NSSet *acceptableContentTypes;
+@property(nonatomic,assign)BOOL requestNeedActive;
+@property(nonatomic,copy)EZVoidBlock requestInActiveBlock;
+-(NSString *)cacheKey;
 +(id)Request;
++(id)RequestWithBlock:(EZVoidBlock)voidBlock;
 -(void)loadRequest;
 -(NSString *)requestKey;
 +(NSString *)requestKey;

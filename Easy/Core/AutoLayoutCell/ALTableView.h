@@ -24,11 +24,14 @@
 
 
 #import <UIKit/UIKit.h>
-
+#import "ALTableViewCellFactory.h"
+#import "SceneTableView.h"
 /**
  *  `ALTableView` will automatically call `reloadData` on itself in the event that it receives a `UIContentSizeCategoryDidChangeNotification` notification.
  */
-@interface ALTableView : UITableView
+@interface ALTableView :SceneTableView
+@property (strong, nonatomic) ALTableViewCellFactory *cellFactory;
+
 @end
 
 @interface ALTableView (Protected)

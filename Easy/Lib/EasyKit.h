@@ -1,5 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "ReactiveCocoa.h"
+
+typedef void (^EZVoidBlock)(void);
 @interface EasyKit : NSObject {}
 
 + (NSString *)homePath;//应用程序目录的路径，在该目录下有三个文件夹：Documents、Library、temp以及一个.app包！该目录下就是应用程序的沙盒，应用程序只能访问该目录下的文件夹！！！

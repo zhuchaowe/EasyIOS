@@ -86,7 +86,7 @@ DEF_SINGLETON(Action)
         msg.progress = (CGFloat)totalBytesRead/(CGFloat)totalBytesExpectedToRead;
         [self progressing:msg];
     }];
-    msg.url = op.request.URL.absoluteString;
+    msg.url = op.request.URL;
     [op start];
     return op;
 }
@@ -131,7 +131,7 @@ DEF_SINGLETON(Action)
     AFHTTPRequestOperation *op =  [manager GET:url parameters:requestParams success:^(AFHTTPRequestOperation *operation, NSDictionary* jsonObject) {
         @strongify(msg,self);
         if(_cacheEnable){
-            [[TMCache sharedCache] setObject:jsonObject forKey:url.MD5 block:^(TMCache *cache, NSString *key, id object) {
+            [[TMCache sharedCache] setObject:jsonObject forKey:msg.cacheKey block:^(TMCache *cache, NSString *key, id object) {
                 EZLog(@"%@ has cached",url);
             }];
         }
@@ -142,8 +142,8 @@ DEF_SINGLETON(Action)
         msg.error = error;
         [self failed:msg];
     }];
-    msg.url = op.request.URL.absoluteString;
-    msg.output = [[TMCache sharedCache] objectForKey:msg.url.MD5];
+    msg.url = op.request.URL;
+    msg.output = [[TMCache sharedCache] objectForKey:msg.cacheKey];
     if (_dataFromCache == YES && msg.output !=nil) {
         [[GCDQueue mainQueue] queueBlock:^{
             [self checkCode:msg];
@@ -196,7 +196,7 @@ DEF_SINGLETON(Action)
         msg.error = error;
         [self failed:msg];
     }];
-    msg.url = op.request.URL.absoluteString;
+    msg.url = op.request.URL;
     if(file.count >0){
         [op setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
             @strongify(msg,self);

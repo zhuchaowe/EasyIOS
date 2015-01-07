@@ -39,6 +39,6 @@
  *  @param cell      The cell to be displayed or calculate the height.
  *  @param indexPath The index path of the cell in the table view
  */
-- (void)configureCell:(id)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void)tableView:(UITableView *)tableView configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

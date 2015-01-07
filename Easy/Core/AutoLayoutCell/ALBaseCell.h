@@ -55,16 +55,6 @@
 
 @interface ALBaseCell (Protected)
 
-///--------------------------------------------------------------
-/// @name Protected Methods
-///--------------------------------------------------------------
-
-/**
- *  Subclasses should use this method for common setup (`init`) code.
- *  
- * @discussion The default implementation registers for `UIContentSizeCategoryDidChangeNotification` notifications. This method is called by all `init` methods after `self` has already been initialized.
- */
-- (void)commonInit __attribute((objc_requires_super));
 
 /**
  *  Subclasses should use this method to "reset" the font of any dynamic type text labels, text views, etc. This method is called whenever the`UIContentSizeCategoryDidChangeNotification` notification is received.

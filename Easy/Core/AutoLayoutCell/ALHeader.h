@@ -7,7 +7,6 @@
 //
 
 #import "ALBaseCell.h"
-#import "ALLabel.h"
 #import "ALTableView.h"
 #import "ALTableViewCellFactory.h"
 #import "ALTableViewCellFactoryDelegate.h"

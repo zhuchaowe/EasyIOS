@@ -48,6 +48,7 @@
 
 - (void)commonInit
 {
+  self.cellFactory = [[ALTableViewCellFactory alloc] initWithTableView:self identifiersToNibsDictionary:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(contentSizeCategoryDidChange:)
                                                name:UIContentSizeCategoryDidChangeNotification

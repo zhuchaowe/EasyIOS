@@ -61,14 +61,14 @@
 - (UITableViewCell *)cellWithIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath
 {
   UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-  [self.delegate configureCell:cell atIndexPath:indexPath];
+  [self.delegate tableView:self.tableView configureCell:cell forRowAtIndexPath:indexPath];
   return cell;
 }
 
 - (CGFloat)cellHeightForIdentifier:(NSString *)identifier atIndexPath:(NSIndexPath *)indexPath
 {
   UITableViewCell *sizingCell = [self sizingCellForIdentifier:identifier];
-  [self.delegate configureCell:sizingCell atIndexPath:indexPath];
+  [self.delegate tableView:self.tableView configureCell:sizingCell forRowAtIndexPath:indexPath];
   return [self calculateHeightForConfiguredSizingCell:sizingCell];
 }
 

@@ -14,9 +14,22 @@
     return [[self alloc]initRequest];
 }
 
++(id)RequestWithBlock:(EZVoidBlock)voidBlock{
+    return [[self alloc]initRequestWithBlock:voidBlock];
+}
+
 -(id)initRequest{
     self = [self init];
     if(self){
+        [self loadRequest];
+    }
+    return self;
+}
+
+-(id)initRequestWithBlock:(EZVoidBlock)voidBlock{
+    self = [self init];
+    if(self){
+        self.requestInActiveBlock = voidBlock;
         [self loadRequest];
     }
     return self;
@@ -32,6 +45,23 @@
     self.PATH = @"";
     self.METHOD = @"GET";
     self.needCheckCode = YES;
+    [self loadActive];
+}
+
+- (void)loadActive{
+    self.requestNeedActive = NO;
+    @weakify(self);
+    [[RACObserve(self,requestNeedActive)
+      filter:^BOOL(NSNumber *active) {
+          return [active boolValue];
+      }]
+     subscribeNext:^(NSNumber *active) {
+         @strongify(self);
+         if (self.requestInActiveBlock) {
+             self.requestInActiveBlock();
+         }
+         self.requestNeedActive = NO;
+     }];
 }
 
 - (BOOL)succeed
@@ -95,5 +125,10 @@
     }
     free(properties);
     return propertyNamesArray;
+}
+
+-(NSString *)cacheKey{
+    NSAssert(self.url.isNotEmpty, @"url is empty");
+    return self.url.absoluteString.MD5;
 }
 @end
