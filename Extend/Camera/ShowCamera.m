@@ -66,7 +66,11 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
         UIImage *portraitImg = [info objectForKey:UIImagePickerControllerOriginalImage];
         portraitImg = [portraitImg imageByScalingToMaxSize];
         if (self.ifShouldCrop) {// 裁剪
-            VPImageCropperViewController *imgEditorVC = [[VPImageCropperViewController alloc] initWithImage:portraitImg cropFrame:CGRectMake(0, 100.0f, _parentView.frame.size.width, _parentView.frame.size.width*_ratio) limitScaleRatio:3.0];
+            
+            CGFloat width = [UIScreen mainScreen].bounds.size.width;
+            CGFloat height = [UIScreen mainScreen].bounds.size.width*_ratio;
+            CGFloat originY = ([UIScreen mainScreen].bounds.size.height - height - 80)/2;
+            VPImageCropperViewController *imgEditorVC = [[VPImageCropperViewController alloc] initWithImage:portraitImg cropFrame:CGRectMake(0, originY, width, height) limitScaleRatio:3.0];
             imgEditorVC.delegate = self;
             [self.cameraDelegate showCropperViewController:imgEditorVC];
         }else{

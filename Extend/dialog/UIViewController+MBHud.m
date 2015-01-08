@@ -73,4 +73,5 @@ static char MBHud;
     self.hud.labelText = text;
     [self.hud hide:YES afterDelay:1.0f];
 }
+
 @end
