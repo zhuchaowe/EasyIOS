@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
   s.name                  = "EasyIOS"
-  s.version               = "2.2"
+  s.version               = "2.2.1"
   s.summary               = "EasyIOS is a MVVM frameWork base on AFNetworking and ReactiveCocoa"
   s.homepage              = "http://easyios.08dream.com"
   s.social_media_url      = "http://easyios.08dream.com"
   s.platform     = :ios,'6.0'
   s.license               = { :type => "MIT", :file => "LICENSE" }
   s.author                = { "zhuchao" => "zhuchao@iosx.me" }
-  s.source                = { :git => "https://github.com/zhuchaowe/EasyIOS.git",:tag => "2.2" }
+  s.source                = { :git => "https://github.com/zhuchaowe/EasyIOS.git",:tag => "2.2.1" }
   s.ios.deployment_target = "6.0"
   s.requires_arc          = true
   s.framework             = "CoreFoundation","Foundation","CoreGraphics","Security","UIKit"
