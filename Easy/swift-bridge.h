@@ -18,7 +18,6 @@
 #import "UIScrollView+CoverView.h"
 #import "TMCache.h"
 #import "AFNetworking.h"
-#import "ShowCamera.h"
 #import "MMPickerView.h"
 #import "SVPullToRefresh.h"
 #import "GCDObjC.h"
