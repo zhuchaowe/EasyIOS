@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "EasyKit.h"
 
 typedef enum
 {
