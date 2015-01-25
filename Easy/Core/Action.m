@@ -121,7 +121,10 @@ DEF_SINGLETON(Action)
     [self sending:msg];
     
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:[NSURL URLWithString:url]];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [msg.httpHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
+        [requestSerializer setValue:value forHTTPHeaderField:key];
+    }];
+    manager.requestSerializer = requestSerializer;
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     if (msg.acceptableContentTypes.isNotEmpty) {
         manager.responseSerializer.acceptableContentTypes = msg.acceptableContentTypes;
@@ -172,7 +175,10 @@ DEF_SINGLETON(Action)
     }
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [msg.httpHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
+        [requestSerializer setValue:value forHTTPHeaderField:key];
+    }];
+    manager.requestSerializer = requestSerializer;
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     if (msg.acceptableContentTypes.isNotEmpty) {
         manager.responseSerializer.acceptableContentTypes = msg.acceptableContentTypes;
