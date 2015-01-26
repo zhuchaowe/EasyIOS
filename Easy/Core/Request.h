@@ -43,6 +43,7 @@ typedef enum
 @property(nonatomic,retain)NSString *METHOD;
 @property(nonatomic,assign)BOOL needCheckCode;
 @property(nonatomic,retain)NSSet *acceptableContentTypes;
+@property (strong, nonatomic) NSDictionary *httpHeaderFields;
 @property(nonatomic,assign)BOOL requestNeedActive;
 @property(nonatomic,copy)EZVoidBlock requestInActiveBlock;
 -(NSString *)cacheKey;
