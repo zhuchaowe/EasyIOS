@@ -129,6 +129,10 @@
 
 -(NSString *)cacheKey{
     NSAssert(self.url.isNotEmpty, @"url is empty");
-    return self.url.absoluteString.MD5;
+    if([self.METHOD isEqualToString:@"GET"]){
+        return self.url.absoluteString.MD5;
+    }else{
+        return [NSString stringWithFormat:@"%@%@",self.url,[self.requestParams joinToUrl]].MD5;
+    }
 }
 @end

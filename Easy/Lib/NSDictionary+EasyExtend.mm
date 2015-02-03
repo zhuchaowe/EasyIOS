@@ -347,6 +347,15 @@
     return self;
 }
 
+- (NSString *)joinToPath{
+    NSMutableArray *array = [NSMutableArray array];
+    [self each:^(id key, id value) {
+        NSString *str = [NSString stringWithFormat:@"%@=%@",key,value];
+        [array addObject:str];
+    }];
+    return [array componentsJoinedByString:@"&"];
+}
+
 @end
 
 #pragma mark -

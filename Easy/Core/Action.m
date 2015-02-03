@@ -199,6 +199,11 @@ DEF_SINGLETON(Action)
         }
     } success:^(AFHTTPRequestOperation *operation, NSDictionary* jsonObject) {
         @strongify(msg,self);
+        if([file count] == 0 && _cacheEnable){
+            [[TMCache sharedCache] setObject:jsonObject forKey:msg.cacheKey block:^(TMCache *cache, NSString *key, id object) {
+                EZLog(@"%@ has cached",url);
+            }];
+        }
         msg.output = jsonObject;
         [self checkCode:msg];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -215,6 +220,13 @@ DEF_SINGLETON(Action)
             msg.progress = (CGFloat)totalBytesWritten/(CGFloat)totalBytesExpectedToWrite;
             [self progressing:msg];
         }];
+    }else{
+        msg.output = [[TMCache sharedCache] objectForKey:msg.cacheKey];
+        if (_dataFromCache == YES && msg.output !=nil) {
+            [[GCDQueue mainQueue] queueBlock:^{
+                [self checkCode:msg];
+            } afterDelay:0.1f];
+        }
     }
     return op;
 }
