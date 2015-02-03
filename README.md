@@ -100,6 +100,11 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
     	
 * If you use swift , please click [here](https://github.com/zhuchaowe/RACSwift)
 
+##2.2.2 版本更新
+* 指定RAC最高版本号为2.4.4
+* Action类POST方法增加缓存功能
+* Request类增加设置http头信息
+
 ##2.2版本更新
 * 修改Action类中的配置方式：由原来的宏调用改为类方法配置
 * 针对IOS8优化
