@@ -22,7 +22,7 @@
 #import "SVPullToRefresh.h"
 #import "GCDObjC.h"
 #import "UIView+FLKAutoLayout.h"
-#import "UIGestureRecognizer+ReactiveCocoa.h"
+#import "UIView+EzGesture.h"
 
 
 #ifdef DEBUG
