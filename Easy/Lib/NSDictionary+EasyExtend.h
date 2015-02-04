@@ -61,7 +61,7 @@ typedef NSDictionary *	(^NSDictionaryAppendBlock)( NSString * key, id value );
 - (NSDictionary *)eachWithStop:(void (^)(id key, id value, BOOL *stop))block;
 - (NSDictionary *)eachKey:(void (^)(id key))block;
 - (NSDictionary *)eachValue:(void (^)(id value))block;
-- (NSString *)joinToUrl;
+- (NSString *)joinToPath;
 @end
 
 #pragma mark -
