@@ -131,8 +131,10 @@
     NSAssert(self.url.isNotEmpty, @"url is empty");
     if([self.METHOD isEqualToString:@"GET"]){
         return self.url.absoluteString.MD5;
+    }else if(self.requestParams.isNotEmpty){
+        return [NSString stringWithFormat:@"%@%@",self.url,[self.requestParams joinToPath]].MD5;
     }else{
-        return [NSString stringWithFormat:@"%@%@",self.url,[self.requestParams joinToUrl]].MD5;
+        return [NSString stringWithFormat:@"%@",self.url].MD5;
     }
 }
 @end
