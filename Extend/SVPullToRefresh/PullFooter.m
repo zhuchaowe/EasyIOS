@@ -30,26 +30,13 @@
         _arrowImage.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         [self addSubview:_arrowImage];
         
-        
         _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         _activityView.autoresizingMask = _arrowImage.autoresizingMask;
         _activityView.hidden = YES;
         [self addSubview:_activityView];
         
-    
         [self addSubview:_statusLabel = [self labelWithFontSize:13]];
-        
         [self loadAutoLayout];
-        
-        [RACObserve(self.arrowImage, hidden) subscribeNext:^(NSNumber* hidden) {
-            if (hidden.boolValue) {
-                self.activityView.hidden = NO;
-                [self.activityView startAnimating];
-            }else{
-                self.activityView.hidden = YES;
-                [self.activityView stopAnimating];
-            }
-        }];
         
         
         @weakify(self);
@@ -59,30 +46,33 @@
                 switch (scrollView.infiniteScrollingView.state) {
                     case SVInfiniteScrollingStateEnded:
                         self.arrowImage.hidden = YES;
-                        self.activityView.hidden = YES;
+                        [self.activityView stopAnimating];
                         self.statusLabel.text = @"没有了哦";
                         break;
                     case SVInfiniteScrollingStateStopped:
                         [self resetScrollViewContentInset:scrollView];
                         self.arrowImage.hidden = NO;
+                        [self.activityView stopAnimating];
                         self.statusLabel.text = @"上拉加载";
                         self.arrowImage.transform = CGAffineTransformMakeRotation(M_PI);
                         break;
                     case SVInfiniteScrollingStateTriggered:
                         self.arrowImage.hidden = NO;
+                        [self.activityView stopAnimating];
                         self.statusLabel.text = @"释放加载";
                         self.arrowImage.transform = CGAffineTransformIdentity;
                         break;
                     case SVInfiniteScrollingStatePulling:
                         self.arrowImage.hidden = NO;
+                        [self.activityView stopAnimating];
                         self.statusLabel.text = @"上拉加载";
                         self.arrowImage.transform = CGAffineTransformMakeRotation(M_PI);
                         break;
                     case SVInfiniteScrollingStateLoading:
                         [self setScrollViewContentInsetForInfiniteScrolling:scrollView];
                         self.arrowImage.hidden = YES;
+                        [self.activityView startAnimating];
                         self.statusLabel.text = @"正在加载...";
-                        
                         break;
                 }
             }];

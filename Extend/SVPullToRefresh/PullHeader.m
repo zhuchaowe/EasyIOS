@@ -30,15 +30,7 @@
         
         [self loadAutoLayout];
         
-         [RACObserve(self.arrowImage, hidden) subscribeNext:^(NSNumber* hidden) {
-             if (hidden.boolValue) {
-                 self.activityView.hidden = NO;
-                 [self.activityView startAnimating];
-             }else{
-                 self.activityView.hidden = YES;
-                 [self.activityView stopAnimating];
-             }
-         }];
+
         
         @weakify(self);
         [RACObserve(scrollView.pullToRefreshView, state) subscribeNext:^(id x) {
@@ -50,23 +42,27 @@
                     case SVPullToRefreshStateStopped:
                         [self resetScrollViewContentInset:scrollView];
                         self.arrowImage.hidden = NO;
+                        [self.activityView stopAnimating];
                         self.statusLabel.text = @"下拉可以刷新";
                         self.arrowImage.transform = CGAffineTransformIdentity;
                         [self updateTimeLabel:[NSDate date]];
                         break;
                     case SVPullToRefreshStatePulling:
                         self.arrowImage.hidden = NO;
+                        [self.activityView stopAnimating];
                         self.statusLabel.text = @"下拉可以刷新";
                         self.arrowImage.transform = CGAffineTransformIdentity;
                         break;
                     case SVPullToRefreshStateTriggered:
                         self.arrowImage.hidden = NO;
+                        [self.activityView stopAnimating];
                         self.statusLabel.text = @"释放可以刷新";
                         self.arrowImage.transform = CGAffineTransformMakeRotation(M_PI);
                         break;
                     case SVPullToRefreshStateLoading:
                          [self setScrollViewContentInsetForLoading:scrollView];
                         self.arrowImage.hidden = YES;
+                        [self.activityView startAnimating];
                         self.statusLabel.text = @"正在刷新...";
                         break;
                 }
