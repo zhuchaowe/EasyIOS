@@ -17,13 +17,14 @@ EasyIOS is a new generation of development framework based on `Model-View-ViewMo
 
 * EasyIOS官方qq群 :[340906744](http://shang.qq.com/wpa/qunwpa?idkey=562d002e275a8199081313b00580fb7111a4faf694216a239064d29f5238bc91) 欢迎大家加入讨论
 
-* [EasyRSS](https://github.com/zhuchaowe/EasyRSS):基于EasyIOS 2.2-RC2 的开源项目
+* [EasyRSS](https://github.com/zhuchaowe/EasyRSS):基于EasyIOS 2.2.2 的开源项目,EasyIOS的官方Demo
 
 * [RACSwift for EasyIOS](https://github.com/zhuchaowe/RACSwift):EasyIOS swift 版本Demo
 
 * [教程在Wiki Paper](https://github.com/zhuchaowe/EasyIOS/wiki)
 
 * [json转Model工具 ModelCoder](https://github.com/zhuchaowe/ModelCoder) 
+
 
 ##EasyIOS 以提升开发效率为宗旨
 
@@ -120,7 +121,6 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 * 移除了`RTLabel`,`EzUILabel`
 * 修复部分bug 
 * ……
-* 新Demo 会尽快放出
 
 
 ##2.1版本更新
