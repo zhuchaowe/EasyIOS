@@ -87,6 +87,7 @@ DEF_SINGLETON(Action)
         [self progressing:msg];
     }];
     msg.url = op.request.URL;
+    msg.op = op;
     [op start];
     return op;
 }
@@ -148,6 +149,7 @@ DEF_SINGLETON(Action)
         [self failed:msg];
     }];
     msg.url = op.request.URL;
+    msg.op = op;
     msg.output = [[TMCache sharedCache] objectForKey:msg.cacheKey];
     if (_dataFromCache == YES && msg.output !=nil) {
         [[GCDQueue mainQueue] queueBlock:^{
@@ -212,6 +214,7 @@ DEF_SINGLETON(Action)
         [self failed:msg];
     }];
     msg.url = op.request.URL;
+    msg.op = op;
     if(file.count >0){
         [op setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
             @strongify(msg,self);
@@ -245,7 +248,7 @@ DEF_SINGLETON(Action)
 }
 
 -(void)sending:(Request *)msg{
-    msg.state = SendingState;
+    msg.state = RequestStateSending;
     if([self.aDelegaete respondsToSelector:@selector(handleActionMsg:)]){
         [self.aDelegaete handleActionMsg:msg];
     }
@@ -257,7 +260,7 @@ DEF_SINGLETON(Action)
 }
 
 -(void)successAction:(Request *)msg{
-    msg.state = SuccessState;
+    msg.state = RequestStateSuccess;
     if([self.aDelegaete respondsToSelector:@selector(handleActionMsg:)]){
         [self.aDelegaete handleActionMsg:msg];
     }
@@ -267,7 +270,7 @@ DEF_SINGLETON(Action)
     if(msg.error.userInfo!= nil && [msg.error.userInfo objectForKey:@"NSLocalizedDescription"]){
         msg.message = [msg.error.userInfo objectForKey:@"NSLocalizedDescription"];
     }
-    msg.state = FailState;
+    msg.state = RequestStateFailed;
     NSLog(@"Failed:%@",msg.error);
     if([self.aDelegaete respondsToSelector:@selector(handleActionMsg:)]){
         [self.aDelegaete handleActionMsg:msg];
@@ -279,7 +282,7 @@ DEF_SINGLETON(Action)
         msg.message = [msg.output objectAtPath:[Action sharedInstance].MSG_KEY];
         NSLog(@"Error:%@",msg.message);
     }
-    msg.state = ErrorState;
+    msg.state = RequestStateError;
     if([self.aDelegaete respondsToSelector:@selector(handleActionMsg:)]){
         [self.aDelegaete handleActionMsg:msg];
     }

@@ -8,6 +8,14 @@
 
 #import "Request.h"
 #import <objc/runtime.h>
+
+NSString * const RequestStateSuccess = @"RequestDidSuccess";
+NSString * const RequestStateFailed = @"RequestDidFailed";
+NSString * const RequestStateSending = @"RequestDidSending";
+NSString * const RequestStateError = @"RequestDidError";
+NSString * const RequestStateCancle = @"RequestDidCancle";
+
+
 @implementation Request
 
 +(id)Request{
@@ -69,15 +77,27 @@
     if(self.output == nil){
         return NO;
     }
-    return SuccessState == _state ? YES : NO;
+    return RequestStateSuccess == _state ? YES : NO;
 }
 - (BOOL)failed
 {
-    return FailState == _state || ErrorState == _state ? YES : NO;
+    return RequestStateFailed == _state || RequestStateError == _state ? YES : NO;
 }
 - (BOOL)sending
 {
-    return SendingState == _state ? YES : NO;
+    return RequestStateSending == _state ? YES : NO;
+}
+- (BOOL)cancled{
+    return RequestStateCancle == _state ? YES : NO;
+}
+
+- (void)cancle{
+    if(self.op.isNotEmpty && self.op.isExecuting){
+        [self.op cancel];
+        if(self.op.isCancelled){
+            self.state = RequestStateCancle;
+        }
+    }
 }
 
 +(NSString *)requestKey{

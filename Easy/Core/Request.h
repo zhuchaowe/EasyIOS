@@ -8,21 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import "EasyKit.h"
+#import "AFHTTPRequestOperation.h"
 
-typedef enum
-{
-    SuccessState                    =0,
-    FailState                       =1,
-    SendingState                    =2,
-    ErrorState                      =3
-} RequestState;
+extern NSString * const RequestStateSuccess;
+extern NSString * const RequestStateFailed;
+extern NSString * const RequestStateSending;
+extern NSString * const RequestStateError;
+extern NSString * const RequestStateCancle;
 
 @interface Request : NSObject
 @property(nonatomic,strong)NSDictionary * output;
 @property(nonatomic,strong)NSString *responseString;
 @property(nonatomic,strong)NSError *error;
-@property(nonatomic,assign)RequestState state;
-@property(nonatomic,retain)NSURL *url;
+@property(nonatomic,assign)NSString* state; //Request状态
+@property(nonatomic,strong)NSURL *url;  //请求的链接
 @property(nonatomic,strong)NSString *message;
 @property(nonatomic,strong)NSString *codeKey;
 @property(nonatomic,assign)double progress;
@@ -36,15 +35,16 @@ typedef enum
 
 @property(nonatomic,assign)BOOL freezable;
 @property(nonatomic,strong)NSDictionary *requestFiles;
-@property(nonatomic,retain)NSString *SCHEME;
-@property(nonatomic,retain)NSString *HOST;
-@property(nonatomic,retain)NSString *PATH;
-@property(nonatomic,retain)NSString *STATICPATH;
-@property(nonatomic,retain)NSString *METHOD;
+@property(nonatomic,strong)NSString *SCHEME;
+@property(nonatomic,strong)NSString *HOST;
+@property(nonatomic,strong)NSString *PATH;
+@property(nonatomic,strong)NSString *STATICPATH;
+@property(nonatomic,strong)NSString *METHOD;
 @property(nonatomic,assign)BOOL needCheckCode;
-@property(nonatomic,retain)NSSet *acceptableContentTypes;
-@property (strong, nonatomic) NSDictionary *httpHeaderFields;
+@property(nonatomic,strong)NSSet *acceptableContentTypes;
+@property(nonatomic,strong)NSDictionary *httpHeaderFields;
 @property(nonatomic,assign)BOOL requestNeedActive;
+@property(nonatomic,strong)AFHTTPRequestOperation *op;
 @property(nonatomic,copy)EZVoidBlock requestInActiveBlock;
 -(NSString *)cacheKey;
 +(id)Request;
@@ -58,4 +58,6 @@ typedef enum
 - (BOOL)succeed;
 - (BOOL)sending;
 - (BOOL)failed;
+- (BOOL)cancled;
+- (void)cancle;
 @end
