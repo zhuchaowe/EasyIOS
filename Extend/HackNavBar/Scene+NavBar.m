@@ -137,10 +137,16 @@ static char SceneEZNavBar;
             navBar.backgroundColor = [UINavigationBar appearance].barTintColor;
         }
         [self.view addSubview:navBar];
+        
         self.automaticallyAdjustsScrollViewInsets=NO;//禁止自动调整
         [navBar alignTop:@"0" leading:@"0" bottom:nil trailing:@"0" toView:navBar.superview];
         [navBar constrainHeight:@"64"];
         self.navBar = navBar;
+        
+//        [RACObserve(self, title)
+//        subscribeNext:^(NSString* title) {
+//            [self nav_setTitle:title];
+//        }];
         return navBar;
     }
 }
@@ -171,17 +177,6 @@ static char SceneEZNavBar;
     [self.view addSubview:view];
     [view constrainTopSpaceToView:self.navBar predicate:@"0"];
     [view alignTop:nil leading:@"0" bottom:@"0" trailing:@"0" toView:view.superview];
-}
-
-
-- (void)nav_showBarButton:(EzNavigationBar)position title:(NSString *)name fontColor:(UIColor *)color{
-    UIButton *button = [[UIButton alloc] initNavigationButtonWithTitle:name color:color];
-    [self nav_showBarButton:position button:button];
-}
-
-- (void)nav_showBarButton:(EzNavigationBar)position imageName:(NSString *)imageName{
-    UIButton *button = [[UIButton alloc] initNavigationButton:[UIImage imageNamed:imageName]];
-    [self nav_showBarButton:position button:button];
 }
 
 - (void)nav_showBarButton:(EzNavigationBar)position button:(UIButton *)button{
