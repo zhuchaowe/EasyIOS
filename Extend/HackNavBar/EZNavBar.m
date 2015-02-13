@@ -51,8 +51,8 @@
     [_leftContentView alignTop:@"2" leading:@"16" bottom:@"-2" trailing:nil toView:_leftContentView.superview];
     [_rightContentView alignTop:@"2" leading:nil bottom:@"-2" trailing:@"-16" toView:_rightContentView.superview];
     
-    [_centerContentView constrainLeadingSpaceToView:_leftContentView predicate:@"0@1"];
-    [_rightContentView constrainLeadingSpaceToView:_centerContentView predicate:@"0@1"];
+    [_centerContentView constrainLeadingSpaceToView:_leftContentView predicate:@"10@1"];
+    [_rightContentView constrainLeadingSpaceToView:_centerContentView predicate:@"10@1"];
     [_centerContentView alignTop:@"2" bottom:@"-2" toView:_centerContentView.superview];
     [_centerContentView alignCenterXWithView:_centerContentView.superview predicate:@"0"];
 }
