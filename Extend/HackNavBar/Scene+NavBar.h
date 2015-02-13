@@ -18,5 +18,7 @@
 @property(nonatomic,retain)EZNavBar *navBar;
 -(void)addSubViewAlignTopNavBar:(UIView *)view;
 -(void)nav_setTitle:(NSString *)title;
--(void)nav_showBarButton:(EzNavigationBar)position button:(UIButton *)button;
+- (void)nav_showBarButton:(EzNavigationBar)position title:(NSString *)name fontColor:(UIColor *)color;
+- (void)nav_showBarButton:(EzNavigationBar)position imageName:(NSString *)imageName;
+- (void)nav_showBarButton:(EzNavigationBar)position button:(UIButton *)button;
 @end

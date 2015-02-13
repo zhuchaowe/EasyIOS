@@ -173,6 +173,17 @@ static char SceneEZNavBar;
     [view alignTop:nil leading:@"0" bottom:@"0" trailing:@"0" toView:view.superview];
 }
 
+
+- (void)nav_showBarButton:(EzNavigationBar)position title:(NSString *)name fontColor:(UIColor *)color{
+    UIButton *button = [[UIButton alloc] initNavigationButtonWithTitle:name color:color];
+    [self nav_showBarButton:position button:button];
+}
+
+- (void)nav_showBarButton:(EzNavigationBar)position imageName:(NSString *)imageName{
+    UIButton *button = [[UIButton alloc] initNavigationButton:[UIImage imageNamed:imageName]];
+    [self nav_showBarButton:position button:button];
+}
+
 - (void)nav_showBarButton:(EzNavigationBar)position button:(UIButton *)button{
     if (NAV_LEFT == position) {
         [button addTarget:self action:@selector(leftButtonTouch) forControlEvents:UIControlEventTouchUpInside];
