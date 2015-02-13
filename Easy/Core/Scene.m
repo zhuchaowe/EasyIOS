@@ -61,6 +61,10 @@
     }
 }
 
+- (void)setTitleView:(UIView *)titleView{
+    self.navigationItem.titleView = titleView;
+}
+
 - (void)leftButtonTouch{
     [self.navigationController popViewControllerAnimated:YES];
 }

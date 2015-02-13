@@ -142,11 +142,6 @@ static char SceneEZNavBar;
         [navBar alignTop:@"0" leading:@"0" bottom:nil trailing:@"0" toView:navBar.superview];
         [navBar constrainHeight:@"64"];
         self.navBar = navBar;
-        
-//        [RACObserve(self, title)
-//        subscribeNext:^(NSString* title) {
-//            [self nav_setTitle:title];
-//        }];
         return navBar;
     }
 }
@@ -192,4 +187,7 @@ static char SceneEZNavBar;
     }
 }
 
+-(void)nav_setTitleView:(UIView *)titleView{
+    self.navBar.centerView = titleView;
+}
 @end
