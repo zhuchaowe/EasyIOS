@@ -22,7 +22,6 @@
 
 @interface Scene (NavBar)
 @property(nonatomic,retain)EZNavBar *navBar;
--(void)addSubViewAlignTopNavBar:(UIView *)view;
 -(void)nav_setTitle:(NSString *)title;
 -(void)nav_setTitleView:(UIView *)titleView;
 -(void)nav_showBarButton:(EzNavigationBar)position button:(UIButton *)button;

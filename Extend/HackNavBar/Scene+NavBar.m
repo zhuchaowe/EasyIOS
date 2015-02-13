@@ -168,11 +168,6 @@ static char SceneEZNavBar;
     self.navBar.centerView = label;
 }
 
--(void)addSubViewAlignTopNavBar:(UIView *)view{
-    [self.view addSubview:view];
-    [view constrainTopSpaceToView:self.navBar predicate:@"0"];
-    [view alignTop:nil leading:@"0" bottom:@"0" trailing:@"0" toView:view.superview];
-}
 
 - (void)nav_showBarButton:(EzNavigationBar)position button:(UIButton *)button{
     if (NAV_LEFT == position) {
