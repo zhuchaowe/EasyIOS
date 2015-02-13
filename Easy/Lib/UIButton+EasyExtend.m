@@ -30,12 +30,12 @@
     {
         buttonFrame = CGRectMake(0, 0, image.size.width + 10.0f, NAV_BAR_HEIGHT);
     }
-    if ( buttonFrame.size.width >= NAV_BUTTON_MIN_WIDTH )
+    if ( buttonFrame.size.width < NAV_BUTTON_MIN_WIDTH )
     {
         buttonFrame.size.width = NAV_BUTTON_MIN_WIDTH;
     }
     
-    if ( buttonFrame.size.height >= NAV_BUTTON_MIN_HEIGHT )
+    if ( buttonFrame.size.height < NAV_BUTTON_MIN_HEIGHT )
     {
         buttonFrame.size.height = NAV_BUTTON_MIN_HEIGHT;
     }
