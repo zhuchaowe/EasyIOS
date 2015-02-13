@@ -7,9 +7,16 @@
 //
 
 #import "Scene.h"
-#import "EZNavBar.h"
+
+@interface EZNavBar : UIView
+@property(nonatomic,retain)UIView *centerView;
+@property(nonatomic,retain)UIView *leftView;
+@property(nonatomic,retain)UIView *rightView;
+@end
 
 @interface Scene (NavBar)
 @property(nonatomic,retain)EZNavBar *navBar;
 -(void)addSubViewAlignTopNavBar:(UIView *)view;
+-(void)nav_setTitle:(NSString *)title;
+-(void)nav_showBarButton:(EzNavigationBar)position button:(UIButton *)button;
 @end
