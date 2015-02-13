@@ -9,7 +9,6 @@
 #import "UIViewController+URLManage.h"
 #import <objc/runtime.h>
 #import "GCDMacros.h"
-#import "TOWebViewController.h"
 
 @implementation URLManager
 + (URLManager *)sharedInstance{
