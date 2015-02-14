@@ -77,12 +77,15 @@
            extend:(EzAlignExtend)extend{
     [self.view addSubview:view];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.extendedLayoutIncludesOpaqueBars = YES; 
+    self.edgesForExtendedLayout = UIRectEdgeAll;
     [self.view sendSubviewToBack:view];
+    
     [view alignTopEdgeWithView:view.superview predicate:
-     ((extend == EXTEND_TOP||extend == EXTEND_TOP_BOTTOM)?@"64":@"0")];
+         (extend == EXTEND_TOP||extend == EXTEND_TOP_BOTTOM)?@"64":@"0"];
+
     [view alignBottomEdgeWithView:view.superview predicate:
-     ((extend == EXTEND_BOTTOM||extend == EXTEND_TOP_BOTTOM)?@"-49":@"0")];
+     (extend == EXTEND_BOTTOM||extend == EXTEND_TOP_BOTTOM)?@"-49":@"0"];
     [view alignLeading:@"0" trailing:@"0" toView:view.superview];
 }
 
