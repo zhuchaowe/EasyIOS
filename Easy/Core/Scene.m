@@ -76,6 +76,8 @@
 -(void)addSubView:(UIView *)view
            extend:(EzAlignExtend)extend{
     [self.view addSubview:view];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     [self.view sendSubviewToBack:view];
     [view alignTopEdgeWithView:view.superview predicate:
      ((extend == EXTEND_TOP||extend == EXTEND_TOP_BOTTOM)?@"64":@"0")];
