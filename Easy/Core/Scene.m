@@ -76,13 +76,18 @@
 -(void)addSubView:(UIView *)view
            extend:(EzAlignExtend)extend{
     [self.view addSubview:view];
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.extendedLayoutIncludesOpaqueBars = YES; 
-    self.edgesForExtendedLayout = UIRectEdgeAll;
+    if(IOS7_OR_LATER){
+        self.automaticallyAdjustsScrollViewInsets = NO;
+        self.extendedLayoutIncludesOpaqueBars = YES;
+        self.edgesForExtendedLayout = UIRectEdgeAll;
+    }
     [self.view sendSubviewToBack:view];
-    
-    [view alignTopEdgeWithView:view.superview predicate:
+    if(IOS7_OR_LATER){
+        [view alignTopEdgeWithView:view.superview predicate:
          (extend == EXTEND_TOP||extend == EXTEND_TOP_BOTTOM)?@"64":@"0"];
+    }else{
+        [view alignTopEdgeWithView:view.superview predicate:@"0"];
+    }
 
     [view alignBottomEdgeWithView:view.superview predicate:
      (extend == EXTEND_BOTTOM||extend == EXTEND_TOP_BOTTOM)?@"-49":@"0"];
