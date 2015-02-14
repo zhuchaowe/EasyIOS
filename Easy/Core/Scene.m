@@ -88,7 +88,6 @@
     }else{
         [view alignTopEdgeWithView:view.superview predicate:@"0"];
     }
-
     [view alignBottomEdgeWithView:view.superview predicate:
      (extend == EXTEND_BOTTOM||extend == EXTEND_TOP_BOTTOM)?@"-49":@"0"];
     [view alignLeading:@"0" trailing:@"0" toView:view.superview];
@@ -98,7 +97,10 @@
                extend:(EzAlignExtend)extend
                 inset:(EzAlignInset)inset{
     [self addSubView:view extend:extend];
-    short top = (inset == INSET_TOP||inset==INSET_TOP_BOTTOM)?64:0;
+    short top = 0;
+    if(IOS7_OR_LATER && (inset == INSET_TOP||inset==INSET_TOP_BOTTOM)){
+        top = 64;
+    }
     short bottom = (inset == INSET_BOTTOM||inset==INSET_TOP_BOTTOM)?49:0;
     view.contentInset = UIEdgeInsetsMake(top, 0, bottom, 0);
 }
