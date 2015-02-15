@@ -15,6 +15,8 @@ EasyIOS is a new generation of development framework based on `Model-View-ViewMo
 
 * [EasyIOS官方论坛-IOSX](http://www.iosx.me)
 
+* [EasyIOS插件列表](https://github.com/EasyIOS)
+
 * EasyIOS官方qq群 :[340906744](http://shang.qq.com/wpa/qunwpa?idkey=562d002e275a8199081313b00580fb7111a4faf694216a239064d29f5238bc91) 欢迎大家加入讨论
 
 * [EasyRSS](https://github.com/zhuchaowe/EasyRSS):基于EasyIOS 2.2.2 的开源项目,EasyIOS的官方Demo
