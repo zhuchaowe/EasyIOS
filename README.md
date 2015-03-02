@@ -27,6 +27,8 @@ EasyIOS is a new generation of development framework based on `Model-View-ViewMo
 
 * [json转Model工具 ModelCoder](https://github.com/zhuchaowe/ModelCoder) 
 
+* [基于EasyIOS的上线应用](https://github.com/zhuchaowe/EasyIOS/wiki) 
+
 
 ##EasyIOS 以提升开发效率为宗旨
 
