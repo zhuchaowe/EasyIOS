@@ -10,10 +10,11 @@
 
 @implementation PullHeader
 
-- (id)initWithFrame:(CGRect)frame with:(UIScrollView *)scrollView
+- (id)initWithScrollView:(UIScrollView *)scrollView
 {
-    self = [super initWithFrame:frame with:scrollView];
+    self = [super initWithScrollView:scrollView];
     if (self) {
+        
         _arrowImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow-down"]];
         _arrowImage.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         [self addSubview:_arrowImage];
@@ -30,12 +31,9 @@
         
         [self loadAutoLayout];
         
-
-        
         @weakify(self);
         [RACObserve(scrollView.pullToRefreshView, state) subscribeNext:^(id x) {
             @strongify(self);
-            
             [UIView animateWithDuration:0.25f animations:^{
                 switch (scrollView.pullToRefreshView.state) {
                  
@@ -70,18 +68,17 @@
         }];
 
         
-        [RACObserve(self, alignInset)
-         subscribeNext:^(NSNumber* alignInset) {
-             CGFloat yOrigin =0;
-             if (alignInset.boolValue) {
-                 yOrigin = - SVPullToRefreshViewHeight;
-             }else{
-                 yOrigin = - scrollView.pullToRefreshView.originalTopInset -SVPullToRefreshViewHeight;
-             }
-             scrollView.pullToRefreshView.frame = CGRectMake(0, yOrigin, scrollView.superview.width, SVPullToRefreshViewHeight);
-         }];
+        [self setHeaderFrame:scrollView];
     }
     return self;
+}
+
+//这里的pullToRefreshView使用autolayout布局各种出问题，
+//暂时没有完美的解决方案，先用frame顶着，哪位大神看不下去了来改改？
+-(void)setHeaderFrame:(UIScrollView *)scrollView{
+    //yOrigin = - scrollView.pullToRefreshView.originalTopInset -SVPullToRefreshViewHeight;
+    self.frame = CGRectMake(0, 0, scrollView.superview.width, SVPullToRefreshViewHeight);
+    scrollView.pullToRefreshView.frame = CGRectMake(0, - SVPullToRefreshViewHeight, scrollView.superview.width, SVPullToRefreshViewHeight);
 }
 
 -(void)loadAutoLayout{
@@ -95,6 +92,7 @@
     [_lastUpdateTimeLabel constrainLeadingSpaceToView:_arrowImage predicate:@"30"];
     [_lastUpdateTimeLabel alignBottomEdgeWithView:_lastUpdateTimeLabel.superview predicate:@"-10"];
     [_lastUpdateTimeLabel alignCenterXWithView:_lastUpdateTimeLabel.superview predicate:@"0"];
+
 }
 
 - (UILabel *)labelWithFontSize:(CGFloat)size

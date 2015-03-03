@@ -10,8 +10,7 @@
 #import "SVPullToRefresh.h"
 
 @interface Header : UIView
-@property(nonatomic,assign) BOOL alignInset;
-- (id)initWithFrame:(CGRect)frame with:(UIScrollView *)scrollView;
+- (id)initWithScrollView:(UIScrollView *)scrollView;
 - (void)resetScrollViewContentInset:(UIScrollView *)scrollView;
 - (void)setScrollViewContentInsetForLoading:(UIScrollView *)scrollView;
 @end

@@ -81,7 +81,7 @@ UIEdgeInsets scrollViewOriginalContentInsets;
     }
     
     if (customer == NO) {
-        PullFooter *infiniteView = [[PullFooter alloc] initWithFrame:CGRectMake(0, 0, self.width, SVInfiniteScrollingViewHeight)  with:self];
+        PullFooter *infiniteView = [[PullFooter alloc] initWithScrollView:self];
         [self.infiniteScrollingView setCustomView:infiniteView];
     }
 }

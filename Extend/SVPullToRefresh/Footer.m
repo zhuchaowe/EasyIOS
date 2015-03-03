@@ -10,14 +10,13 @@
 
 @implementation Footer
 
-- (id)initWithFrame:(CGRect)frame with:(UIScrollView *)scrollView{
-    self = [super initWithFrame:frame];
+- (id)initWithScrollView:(UIScrollView *)scrollView{
+    self = [super init];
     if (self) {
         
     }
     return self;
 }
-
 
 #pragma mark - Scroll View
 

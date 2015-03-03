@@ -10,7 +10,7 @@
 #import "SVPullToRefresh.h"
 
 @interface Footer : UIView
-- (id)initWithFrame:(CGRect)frame with:(UIScrollView *)scrollView;
+- (id)initWithScrollView:(UIScrollView *)scrollView;
 - (void)resetScrollViewContentInset:(UIScrollView *)scrollView;
 - (void)setScrollViewContentInsetForInfiniteScrolling:(UIScrollView *)scrollView;
 @end

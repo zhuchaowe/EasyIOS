@@ -9,8 +9,8 @@
 #import "Header.h"
 @implementation Header
 
-- (id)initWithFrame:(CGRect)frame with:(UIScrollView *)scrollView{
-    self = [super initWithFrame:frame];
+- (id)initWithScrollView:(UIScrollView *)scrollView{
+    self = [super init];
     if (self) {
         
     }

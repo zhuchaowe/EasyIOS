@@ -21,4 +21,37 @@
 -(void)endWithView:(UIView *)endview{
     [endview alignBottomEdgeWithView:endview.superview predicate:@"0"];
 }
+
+-(void)addHorizontalContentView{
+    self.contentView = [[UIView alloc] init];
+    [self addSubview:self.contentView];
+    [self.contentView alignToView:self];
+}
+
+-(void)addHorizontalSubView:(UIView *)view atIndex:(NSInteger)index{
+    [self.contentView addSubview:view];
+    [view constrainWidthToView:self.superview predicate:@"0"];
+    [view alignTop:@"0" bottom:@"0" toView:view.superview];
+    [view alignLeadingEdgeWithView:view.superview predicate:[NSString stringWithFormat:@"%f",self.superview.width*index]];
+}
+
+-(void)endWithHorizontalView:(UIView *)endview{
+    [endview alignTrailingEdgeWithView:endview.superview predicate:@"0"];
+}
+
+- (void)horizontalConstrainTopSpaceToView:(UIView*)view predicate:(NSString*)predicate{
+    [self constrainTopSpaceToView:view predicate:predicate];
+    [self.contentView constrainTopSpaceToView:view predicate:predicate];
+}
+
+- (void)horizontalAlignTopWithToView:(UIView*)view predicate:(NSString*)predicate{
+    [self alignTopEdgeWithView:view predicate:predicate];
+    [self.contentView alignTopEdgeWithView:view predicate:predicate];
+}
+
+- (void)horizontalAlignBottomWithToView:(UIView*)view predicate:(NSString*)predicate{
+    [self alignBottomEdgeWithView:view predicate:predicate];
+    [self.contentView alignBottomEdgeWithView:view predicate:predicate];
+}
+
 @end

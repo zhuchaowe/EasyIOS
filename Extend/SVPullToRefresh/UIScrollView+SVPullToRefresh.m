@@ -76,7 +76,7 @@ static char UIScrollViewPullToRefreshView;
         [self addSubview:self.pullToRefreshView];
     }
     if (customer == NO) {
-        PullHeader *header = [[PullHeader alloc]initWithFrame:CGRectMake(0, 0, self.width, SVPullToRefreshViewHeight) with:self];
+        PullHeader *header = [[PullHeader alloc]initWithScrollView:self];
         [self.pullToRefreshView setCustomView:header];
     }
 }
@@ -136,6 +136,7 @@ static char UIScrollViewPullToRefreshView;
 
 #pragma mark - Getters
 - (void)setCustomView:(UIView *)customView{
+    
     if (customView && [customView isKindOfClass:[UIView class]]) {
         for (UIView *view in self.subviews) {
             [view removeFromSuperview];

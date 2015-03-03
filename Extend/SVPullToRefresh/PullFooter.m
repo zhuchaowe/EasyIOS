@@ -10,22 +10,11 @@
 
 @implementation PullFooter
 
-- (id)initWithFrame:(CGRect)frame with:(UIScrollView *)scrollView
+- (id)initWithScrollView:(UIScrollView *)scrollView
 {
-    self = [super initWithFrame:frame with:scrollView];
+    self = [super initWithScrollView:scrollView];
     if (self) {
-        
-        scrollView.infiniteScrollingView.frame = CGRectMake(0, scrollView.superview.height, scrollView.superview.width, SVInfiniteScrollingViewHeight);
-        
-        @weakify(scrollView);
-        [[RACObserve(scrollView, contentSize) filter:^BOOL(id value) {
-            @strongify(scrollView);
-            return scrollView.contentSize.height>scrollView.bounds.size.height && scrollView.bounds.size.height >0;
-        }] subscribeNext:^(id x) {
-            @strongify(scrollView);
-            scrollView.infiniteScrollingView.frame = CGRectMake(0, scrollView.contentSize.height, scrollView.superview.width, SVInfiniteScrollingViewHeight);
-        }];
-        
+
         _arrowImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow-down"]];
         _arrowImage.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         [self addSubview:_arrowImage];
@@ -77,15 +66,28 @@
                 }
             }];
         }];
+        
+        [self setFooterFrame:scrollView];
     }
     return self;
 }
 
+-(void)setFooterFrame:(UIScrollView *)scrollView{
+    self.frame = CGRectMake(0, 0, scrollView.superview.width, SVInfiniteScrollingViewHeight);
+    scrollView.infiniteScrollingView.frame = CGRectMake(0, scrollView.superview.height, scrollView.superview.width, SVInfiniteScrollingViewHeight);
+    @weakify(scrollView);
+    [[RACObserve(scrollView, contentSize) filter:^BOOL(id value) {
+        @strongify(scrollView);
+        return scrollView.contentSize.height>scrollView.bounds.size.height && scrollView.bounds.size.height >0;
+    }] subscribeNext:^(id x) {
+        @strongify(scrollView);
+        scrollView.infiniteScrollingView.frame = CGRectMake(0, scrollView.contentSize.height, scrollView.superview.width, SVInfiniteScrollingViewHeight);
+    }];
+}
+
 -(void)loadAutoLayout{
     [_arrowImage alignCenterYWithView:_arrowImage.superview predicate:@"0"];
-    
     [_activityView alignToView:_arrowImage];
-    
     [_statusLabel alignCenterWithView:_statusLabel.superview];
     [_statusLabel constrainLeadingSpaceToView:_arrowImage predicate:@"30"];
 }

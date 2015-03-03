@@ -12,4 +12,12 @@
 @property(nonatomic,strong)UIView *contentView;
 - (void)addContentView;
 - (void)endWithView:(UIView *)endview;
+-(void)addHorizontalContentView;
+-(void)addHorizontalSubView:(UIView *)view atIndex:(NSInteger)index;
+-(void)endWithHorizontalView:(UIView *)endview;
+
+
+- (void)horizontalConstrainTopSpaceToView:(UIView*)view predicate:(NSString*)predicate;
+- (void)horizontalAlignTopWithToView:(UIView*)view predicate:(NSString*)predicate;
+- (void)horizontalAlignBottomWithToView:(UIView*)view predicate:(NSString*)predicate;
 @end
