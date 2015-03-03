@@ -92,7 +92,6 @@
     [_lastUpdateTimeLabel constrainLeadingSpaceToView:_arrowImage predicate:@"30"];
     [_lastUpdateTimeLabel alignBottomEdgeWithView:_lastUpdateTimeLabel.superview predicate:@"-10"];
     [_lastUpdateTimeLabel alignCenterXWithView:_lastUpdateTimeLabel.superview predicate:@"0"];
-
 }
 
 - (UILabel *)labelWithFontSize:(CGFloat)size
