@@ -18,6 +18,6 @@
 
 
 - (void)horizontalConstrainTopSpaceToView:(UIView*)view predicate:(NSString*)predicate;
-- (void)horizontalAlignTopWithToView:(UIView*)view predicate:(NSString*)predicate;
-- (void)horizontalAlignBottomWithToView:(UIView*)view predicate:(NSString*)predicate;
+- (void)horizontalAlignTopWithView:(UIView*)view predicate:(NSString*)predicate;
+- (void)horizontalAlignBottomWithView:(UIView*)view predicate:(NSString*)predicate;
 @end
