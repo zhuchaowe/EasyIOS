@@ -18,6 +18,7 @@ extern NSString * const RequestStateCancle;
 
 @interface Request : NSObject
 @property(nonatomic,strong)NSDictionary * output;// 序列化后的数据
+@property(nonatomic,strong)NSMutableDictionary* params; //使用字典参数
 @property(nonatomic,strong)NSString *responseString; // 获取的字符串数据
 @property(nonatomic,strong)NSError *error; //请求的错误
 @property(nonatomic,assign)NSString* state; //Request状态

@@ -53,6 +53,7 @@ NSString * const RequestStateCancle = @"RequestDidCancle";
     self.PATH = @"";
     self.METHOD = @"GET";
     self.needCheckCode = YES;
+    self.params = [NSMutableDictionary dictionary];
     [self loadActive];
 }
 
@@ -113,6 +114,11 @@ NSString * const RequestStateCancle = @"RequestDidCancle";
         if(![[self valueForKey:key] isKindOfClass:[NSNull class]] && [self valueForKey:key] !=nil){
                 [dict setObject:[self valueForKey:key] forKey:key];
         }
+    }
+    if (self.params.isNotEmpty) {
+        [self.params each:^(id key, id value) {
+            [dict setObject:value forKey:key];
+        }];
     }
     return dict;
 }
