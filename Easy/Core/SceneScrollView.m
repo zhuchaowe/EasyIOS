@@ -44,7 +44,7 @@
     [self.contentView constrainTopSpaceToView:view predicate:predicate];
 }
 
-- (void)horizontalAlignTopView:(UIView*)view predicate:(NSString*)predicate{
+- (void)horizontalAlignTopWithView:(UIView*)view predicate:(NSString*)predicate{
     [self alignTopEdgeWithView:view predicate:predicate];
     [self.contentView alignTopEdgeWithView:view predicate:predicate];
 }
