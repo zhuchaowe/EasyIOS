@@ -15,13 +15,6 @@
     return [self.text boundingRectWithSize:self.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.font} context:nil].size;
 }
 
--(instancetype)init{
-    self = [super init];
-    if (self) {
-        self.preferredMaxLayoutWidth = 300;
-    }
-    return self;
-}
 
 /**
  *  fixes issues with embedding a `UILabel` in a `UIScrollScrollView`.
@@ -29,13 +22,23 @@
  *
  *  @discussion Setting the label's `bounds` will update the `preferredMaxLayoutWidth`.
  */
-- (void)setBounds:(CGRect)bounds
-{
-    [super setBounds:bounds];
-    
-    if (bounds.size.width != self.preferredMaxLayoutWidth) {
-        self.preferredMaxLayoutWidth = self.bounds.size.width;
-        [self setNeedsUpdateConstraints];
+
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+        self.preferredMaxLayoutWidth = 300;
+        @weakify(self);
+        [[RACObserve(self,bounds)
+         filter:^BOOL(id value) {
+             @strongify(self);
+             return self.bounds.size.width != self.preferredMaxLayoutWidth;
+         }]
+        subscribeNext:^(id x) {
+            @strongify(self);
+            self.preferredMaxLayoutWidth = self.bounds.size.width;
+            [self setNeedsUpdateConstraints];
+        }];
     }
+    return self;
 }
 @end
