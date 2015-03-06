@@ -111,12 +111,12 @@ NSString * const RequestStateCancle = @"RequestDidCancle";
 -(NSMutableDictionary *)requestParams{
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     NSArray *propertyList = [self getPropertyList:[self class]];
-    for (NSString *key in propertyList) {
+    [propertyList each:^(NSString *key) {
         NSObject *object = [self valueForKey:key];
         if(object.isNotEmpty){
             [dict setObject:[self valueForKey:key] forKey:key];
         }
-    }
+    }];
     if (self.params.isNotEmpty) {
         [self.params each:^(id key, id value) {
             [dict setObject:value forKey:key];
