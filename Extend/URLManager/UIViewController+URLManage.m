@@ -8,18 +8,6 @@
 
 #import "UIViewController+URLManage.h"
 #import <objc/runtime.h>
-#import "GCDMacros.h"
-
-@implementation URLManager
-+ (URLManager *)sharedInstance{
-    GCDSharedInstance(^{ return [[self alloc] init]; });
-}
-
--(void)loadConfigFromPlist:(NSString *)plistPath{
-    self.config = [NSMutableDictionary dictionaryWithContentsOfFile:plistPath];
-}
-
-@end
 
 static char URLoriginUrl;
 static char URLpath;
@@ -81,22 +69,20 @@ static char URLdictQuery;
     self.dictQuery = dict;
 }
 
-
-+ (UIViewController *)initFromString:(NSString *)aString{
-    return [UIViewController initFromURL:[NSURL URLWithString:aString] withQuery:nil];
++ (UIViewController *)initFromString:(NSString *)aString fromConfig:(NSDictionary *)config{
+    return [UIViewController initFromURL:[NSURL URLWithString:aString] withQuery:nil fromConfig:config];
 }
 
-+ (UIViewController *)initFromURL:(NSURL *)url{
-    return [UIViewController initFromURL:url withQuery:nil];
++ (UIViewController *)initFromURL:(NSURL *)url fromConfig:(NSDictionary *)config{
+    return [UIViewController initFromURL:url withQuery:nil fromConfig:config];
 }
 
-+ (UIViewController *)initFromString:(NSString *)aString withQuery:(NSDictionary *)query{
-    return [UIViewController initFromURL:[NSURL URLWithString:aString] withQuery:query];
++ (UIViewController *)initFromString:(NSString *)aString withQuery:(NSDictionary *)query fromConfig:(NSDictionary *)config{
+    return [UIViewController initFromURL:[NSURL URLWithString:aString] withQuery:query fromConfig:config] ;
 }
 
-+ (UIViewController *)initFromURL:(NSURL *)url withQuery:(NSDictionary *)query
++ (UIViewController *)initFromURL:(NSURL *)url withQuery:(NSDictionary *)query fromConfig:(NSDictionary *)config
 {
-    NSDictionary *config = [URLManager sharedInstance].config;
     UIViewController* scene = nil;
     NSString *home;
     if(url.path ==nil){

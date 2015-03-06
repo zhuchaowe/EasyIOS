@@ -8,24 +8,19 @@
 
 #import "URLNavigation.h"
 
+
+
 @implementation URLNavigation
 
 #pragma mark - Singleton
-+ (instancetype)navigation
-{
-  static URLNavigation *_sharedInstance = nil;
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    _sharedInstance = [URLNavigation new];
-  });
-  
-  return _sharedInstance;
++ (instancetype)navigation{
+    GCDSharedInstance(^{ return [[self alloc] init]; });
 }
 
 #pragma mark - Public Method
 + (void)setRootViewController:(UIViewController *)viewController
 {
-  [HKNavigation navigation].applicationDelegate.window.rootViewController = viewController;
+  [URLNavigation navigation].applicationDelegate.window.rootViewController = viewController;
 }
 
 + (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
@@ -37,10 +32,10 @@
 {
   // Check if viewController is a UINavigationController
   if([viewController isKindOfClass:[UINavigationController class]])
-    [HKNavigation setRootViewController:viewController];
+    [URLNavigation setRootViewController:viewController];
   else {
     // Check if a UINavigationController exists in the view controllers stack.
-    UINavigationController *navigationController = [HKNavigation navigation].currentNavigationViewController;
+    UINavigationController *navigationController = [URLNavigation navigation].currentNavigationViewController;
     if (navigationController) {
       // In case it should replace, look for the last UIViewController on the UINavigationController, if it's of the same class, replace it with a new one.
       if (replace && [navigationController.viewControllers.lastObject isKindOfClass:[viewController class]]) {
@@ -53,7 +48,7 @@
     } else {
       // Create a new UINavigationController to use with the viewController
       navigationController = [[UINavigationController alloc]initWithRootViewController:viewController];
-      [HKNavigation navigation].applicationDelegate.window.rootViewController = navigationController;
+      [URLNavigation navigation].applicationDelegate.window.rootViewController = navigationController;
     }
   }
 }
@@ -61,13 +56,13 @@
 + (void)presentViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
   // Look for the currentViewController
-  UIViewController *currentViewController = [[HKNavigation navigation] currentViewController];
+  UIViewController *currentViewController = [[URLNavigation navigation] currentViewController];
   if (currentViewController) {
     // Present viewController from currentViewcontroller
     [currentViewController presentViewController:viewController animated:animated completion:nil];
   } else {
     // Otherwise set the window rootViewController
-    [HKNavigation navigation].applicationDelegate.window.rootViewController = viewController;
+    [URLNavigation navigation].applicationDelegate.window.rootViewController = viewController;
   }
 }
 
