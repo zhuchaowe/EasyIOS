@@ -56,7 +56,12 @@ extern NSString * const RequestStateCancle;
 -(void)loadRequest;//加载入口
 -(NSString *)requestKey;//请求的唯一识别码
 +(NSString *)requestKey;//请求的唯一识别码
--(NSDictionary *)requestParams;//序列化请求的变量
+/**
+ *  获取requestParams序列化请求的变量
+ *  self.params 覆盖成员属性
+ *  @return NSMutableDictionary requestParams
+ */
+-(NSDictionary *)requestParams;
 -(NSString *)pathInfo;//自定义路由
 -(NSString *)appendPathInfo; //解析路由(为Action设计)
 - (BOOL)succeed;//请求是否成功
