@@ -118,9 +118,7 @@ NSString * const RequestStateCancle = @"RequestDidCancle";
         }
     }];
     if (self.params.isNotEmpty) {
-        [self.params each:^(id key, id value) {
-            [dict setObject:value forKey:key];
-        }];
+        [dict addEntriesFromDictionary:self.params];
     }
     return dict;
 }
