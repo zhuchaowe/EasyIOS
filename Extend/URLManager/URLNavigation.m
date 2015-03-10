@@ -66,6 +66,24 @@
   }
 }
 
+
++(void)dismissCurrentAnimated:(BOOL)animated{
+  UIViewController *currentViewController = [[URLNavigation navigation] currentViewController];
+  if(currentViewController){
+      if(currentViewController.navigationController){
+          if(currentViewController.navigationController.viewControllers.count == 1){
+              if(currentViewController.presentingViewController){
+                  [currentViewController dismissViewControllerAnimated:animated completion:nil];
+              }
+          }else{
+              [currentViewController.navigationController popViewControllerAnimated:animated];
+          }
+      }else if(currentViewController.presentingViewController){
+          [currentViewController dismissViewControllerAnimated:animated completion:nil];
+      }
+  }
+}
+
 #pragma mark - Private Methods
 - (id<UIApplicationDelegate>)applicationDelegate
 {
