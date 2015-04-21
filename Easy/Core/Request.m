@@ -54,6 +54,7 @@ NSString * const RequestStateCancle = @"RequestDidCancle";
     self.METHOD = @"GET";
     self.needCheckCode = YES;
     self.params = [NSMutableDictionary dictionary];
+    self.isFirstRequest = YES;
     [self loadActive];
 }
 

@@ -50,6 +50,8 @@ extern NSString * const RequestStateCancle;
 @property(nonatomic,assign)BOOL requestNeedActive; //是否启动发送请求(为MVVM设计)
 @property(nonatomic,strong)AFHTTPRequestOperation *op; //AFN返回的AFHTTPRequestOperation
 @property(nonatomic,copy)EZVoidBlock requestInActiveBlock;//激活请求后的Block
+
+@property(nonatomic,assign)BOOL isFirstRequest;
 -(NSString *)cacheKey;
 +(id)Request;
 +(id)RequestWithBlock:(EZVoidBlock)voidBlock;//初始化block
