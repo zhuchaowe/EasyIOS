@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     __weak EZNavigationController *weakSelf = self;
+    self.popGestureRecognizerEnabled = YES;
     if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)])
     {
         self.interactivePopGestureRecognizer.delegate = weakSelf;
@@ -32,7 +33,7 @@
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)])
+    if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)] )
         self.interactivePopGestureRecognizer.enabled = NO;
     
     [super pushViewController:viewController animated:animated];
@@ -47,7 +48,7 @@
     // Enable the gesture again once the new controller is shown
     
     if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)])
-        self.interactivePopGestureRecognizer.enabled = YES;
+        self.interactivePopGestureRecognizer.enabled = self.popGestureRecognizerEnabled;
 }
 
 @end
