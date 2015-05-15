@@ -21,7 +21,9 @@
  *
  */
 @interface URLNavigation : NSObject
-
++ (instancetype)navigation;
+- (UIViewController*)currentViewController;
+- (UINavigationController*)currentNavigationViewController;
 /**
  *  setRootViewController: changes the root view controller of the AppDelegate's window.
  *
