@@ -11,6 +11,7 @@ EasyIOS  - Happy New Year 2015
 
 EasyIOS is a new generation of development framework based on `Model-View-ViewModel` which makes faster and easier app development, Build your app by geek's way.
 
+
 * [EasyIOS官方论坛-IOSX](http://www.iosx.me)
 
 * [EasyIOS小组](https://github.com/EasyIOS)
@@ -21,7 +22,7 @@ EasyIOS is a new generation of development framework based on `Model-View-ViewMo
 
 * [EasyRSS](https://github.com/zhuchaowe/EasyRSS):基于EasyIOS 2.2.2 的开源项目,EasyIOS的官方Demo
 
-* [RACSwift for EasyIOS](https://github.com/zhuchaowe/RACSwift):EasyIOS swift 版本Demo
+* [EasyIOS-Swift](https://github.com/EasyIOS/EasyIOS-Swift):EasyIOS swift 版本
 
 * [json转Model工具 ModelCoder](https://github.com/zhuchaowe/ModelCoder) 
 
