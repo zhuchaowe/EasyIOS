@@ -66,4 +66,5 @@
 + (void)presentViewController:(UIViewController *)viewController animated:(BOOL)animated;
 
 +(void)dismissCurrentAnimated:(BOOL)animated;
++(void)dismissToSecondViewAnimated:(BOOL)animated;
 @end
