@@ -50,6 +50,11 @@ extern NSString * const RequestStateCancle;
 @property(nonatomic,assign)BOOL requestNeedActive; //是否启动发送请求(为MVVM设计)
 @property(nonatomic,strong)AFHTTPRequestOperation *op; //AFN返回的AFHTTPRequestOperation
 @property(nonatomic,copy)EZVoidBlock requestInActiveBlock;//激活请求后的Block
+/**
+ * 设置请求超时时间，默认是60S。
+ */
+@property (nonatomic, assign) NSTimeInterval timeoutInterval;
+@property(nonatomic,assign)BOOL isTimeout;//请求是否超时
 
 @property(nonatomic,assign)BOOL isFirstRequest;
 -(NSString *)cacheKey;
