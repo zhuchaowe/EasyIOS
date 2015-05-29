@@ -44,7 +44,6 @@
          @strongify(self);
          if (self.scrollView.contentOffset.y < - self.rect.size.height) {
              CGFloat offset = - self.rect.size.height - self.scrollView.contentOffset.y;
-             NSLog(@"%f",offset);
              self.frame = CGRectMake(self.rect.origin.x-offset,self.rect.origin.y - offset, self.rect.size.width+ offset * 2, self.rect.size.height + offset);
          }else{
              self.frame = self.rect;

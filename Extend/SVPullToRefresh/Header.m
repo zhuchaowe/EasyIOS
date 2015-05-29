@@ -27,7 +27,7 @@
     
     CGFloat offset = MAX(SVPullToRefreshViewHeight, 0);
     UIEdgeInsets currentInsets = scrollView.contentInset;
-    currentInsets.top = MIN(offset, scrollView.pullToRefreshView.originalTopInset + scrollView.pullToRefreshView.bounds.size.height);
+    currentInsets.top = MAX(offset, scrollView.pullToRefreshView.originalTopInset + scrollView.pullToRefreshView.bounds.size.height);
     [self setScrollViewContentInset:currentInsets scrollView:scrollView];
 }
 

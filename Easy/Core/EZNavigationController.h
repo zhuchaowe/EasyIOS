@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface EZNavigationController : UINavigationController
-
+@property(nonatomic,assign) BOOL popGestureRecognizerEnabled;
 @end

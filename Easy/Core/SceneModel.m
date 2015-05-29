@@ -23,7 +23,6 @@
 }
 
 - (void)loadSceneModel{
-    self.isFirstRequest = YES;
     self.action = [Action Action];
 }
 
@@ -65,8 +64,8 @@
 }
 
 - (void)SEND_IQ_ACTION:(Request *)req{
-    if (self.isFirstRequest) {
-        self.isFirstRequest = NO;
+    if (req.isFirstRequest) {
+        req.isFirstRequest = NO;
         [self.action readFromCache];
     }else{
         [self.action notReadFromCache];

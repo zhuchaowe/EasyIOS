@@ -52,9 +52,9 @@ static char UIScrollViewPullToRefreshView;
                     view.state = SVPullToRefreshStateLoading;
                 }else if(self.isDragging && pullNum < -SVPullToRefreshViewHeight  && view.state == SVPullToRefreshStatePulling)
                     view.state = SVPullToRefreshStateTriggered;
-                else if(pullNum <= 0 && pullNum > -SVPullToRefreshViewHeight){
+                else if(pullNum <= -1 && pullNum > -SVPullToRefreshViewHeight){
                     view.state = SVPullToRefreshStatePulling;
-                }else if(pullNum>0){
+                }else if(pullNum> -1){
                     view.state = SVPullToRefreshStateStopped;
                 }
             }

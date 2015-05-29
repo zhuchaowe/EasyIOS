@@ -8,22 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface URLManager : NSObject
-@property(nonatomic,retain)NSMutableDictionary *config;
--(void)loadConfigFromPlist:(NSString *)plistPath;
-+ (URLManager *)sharedInstance;
-@end
-
-
 @interface UIViewController (URLManage)
 @property(nonatomic,retain)NSURL *originUrl;
 @property(nonatomic,retain)NSString *path;
 @property(nonatomic,retain)NSDictionary *params;
 @property(nonatomic,retain)NSDictionary *dictQuery;
 
-+ (UIViewController *)initFromString:(NSString *)aString;
-+ (UIViewController *)initFromURL:(NSURL *)url;
-+ (UIViewController *)initFromString:(NSString *)aString withQuery:(NSDictionary *)query;
-+ (UIViewController *)initFromURL:(NSURL *)url withQuery:(NSDictionary *)query;
++ (UIViewController *)initFromString:(NSString *)aString fromConfig:(NSDictionary *)config;
++ (UIViewController *)initFromURL:(NSURL *)url fromConfig:(NSDictionary *)config;
++ (UIViewController *)initFromString:(NSString *)aString withQuery:(NSDictionary *)query fromConfig:(NSDictionary *)config;
++ (UIViewController *)initFromURL:(NSURL *)url withQuery:(NSDictionary *)query fromConfig:(NSDictionary *)config;
 @end
 

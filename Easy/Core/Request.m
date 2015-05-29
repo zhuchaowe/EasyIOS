@@ -54,6 +54,7 @@ NSString * const RequestStateCancle = @"RequestDidCancle";
     self.METHOD = @"GET";
     self.needCheckCode = YES;
     self.params = [NSMutableDictionary dictionary];
+    self.isFirstRequest = YES;
     [self loadActive];
 }
 
@@ -110,15 +111,15 @@ NSString * const RequestStateCancle = @"RequestDidCancle";
 
 -(NSMutableDictionary *)requestParams{
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    for (NSString *key in [self getPropertyList:[self class]]) {
-        if(![[self valueForKey:key] isKindOfClass:[NSNull class]] && [self valueForKey:key] !=nil){
-                [dict setObject:[self valueForKey:key] forKey:key];
+    NSArray *propertyList = [self getPropertyList:[self class]];
+    [propertyList each:^(NSString *key) {
+        NSObject *object = [self valueForKey:key];
+        if(object.isNotEmpty){
+            [dict setObject:[self valueForKey:key] forKey:key];
         }
-    }
+    }];
     if (self.params.isNotEmpty) {
-        [self.params each:^(id key, id value) {
-            [dict setObject:value forKey:key];
-        }];
+        [dict addEntriesFromDictionary:self.params];
     }
     return dict;
 }

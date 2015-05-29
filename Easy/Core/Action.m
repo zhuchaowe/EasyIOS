@@ -128,6 +128,8 @@ DEF_SINGLETON(Action)
             [manager.requestSerializer setValue:value forHTTPHeaderField:key];
         }];
     }
+    manager.requestSerializer.timeoutInterval = 30.f;
+    
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     if (msg.acceptableContentTypes.isNotEmpty) {
         manager.responseSerializer.acceptableContentTypes = msg.acceptableContentTypes;

@@ -12,7 +12,6 @@
 #import "Request.h"
 @interface SceneModel : NSObject
 @property(nonatomic,strong)Action *action;
-@property(nonatomic,assign)BOOL isFirstRequest;
 + (id)SceneModel;
 - (void)handleActionMsg:(Request *)msg;
 - (void)DO_DOWNLOAD:(Request *)req;

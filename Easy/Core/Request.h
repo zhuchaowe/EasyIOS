@@ -50,13 +50,20 @@ extern NSString * const RequestStateCancle;
 @property(nonatomic,assign)BOOL requestNeedActive; //是否启动发送请求(为MVVM设计)
 @property(nonatomic,strong)AFHTTPRequestOperation *op; //AFN返回的AFHTTPRequestOperation
 @property(nonatomic,copy)EZVoidBlock requestInActiveBlock;//激活请求后的Block
+
+@property(nonatomic,assign)BOOL isFirstRequest;
 -(NSString *)cacheKey;
 +(id)Request;
 +(id)RequestWithBlock:(EZVoidBlock)voidBlock;//初始化block
 -(void)loadRequest;//加载入口
 -(NSString *)requestKey;//请求的唯一识别码
 +(NSString *)requestKey;//请求的唯一识别码
--(NSDictionary *)requestParams;//序列化请求的变量
+/**
+ *  获取requestParams序列化请求的变量
+ *  self.params 覆盖成员属性
+ *  @return NSMutableDictionary requestParams
+ */
+-(NSDictionary *)requestParams;
 -(NSString *)pathInfo;//自定义路由
 -(NSString *)appendPathInfo; //解析路由(为Action设计)
 - (BOOL)succeed;//请求是否成功
