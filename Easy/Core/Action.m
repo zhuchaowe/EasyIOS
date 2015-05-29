@@ -64,6 +64,9 @@ DEF_SINGLETON(Action)
 
 -(AFHTTPRequestOperation *)Download:(Request *)msg{
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:[NSURL URLWithString:msg.downloadUrl]];
+    if (msg.timeoutInterval != 0) {
+        manager.requestSerializer.timeoutInterval = timeoutInterval;
+    }
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
    
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:msg.downloadUrl]];
@@ -128,7 +131,9 @@ DEF_SINGLETON(Action)
             [manager.requestSerializer setValue:value forHTTPHeaderField:key];
         }];
     }
-    manager.requestSerializer.timeoutInterval = 30.f;
+    if (msg.timeoutInterval != 0) {
+        manager.requestSerializer.timeoutInterval = timeoutInterval;
+    }
     
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     if (msg.acceptableContentTypes.isNotEmpty) {
@@ -186,6 +191,9 @@ DEF_SINGLETON(Action)
         [msg.httpHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
             [manager.requestSerializer setValue:value forHTTPHeaderField:key];
         }];
+    }
+    if (msg.timeoutInterval != 0) {
+        manager.requestSerializer.timeoutInterval = timeoutInterval;
     }
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     if (msg.acceptableContentTypes.isNotEmpty) {
@@ -273,6 +281,9 @@ DEF_SINGLETON(Action)
         msg.message = [msg.error.userInfo objectForKey:@"NSLocalizedDescription"];
     }
     msg.state = RequestStateFailed;
+    if (msg.error.code == -1001) {
+        msg.isTimeout = YES;
+    }
     NSLog(@"Failed:%@",msg.error);
     if([self.aDelegaete respondsToSelector:@selector(handleActionMsg:)]){
         [self.aDelegaete handleActionMsg:msg];
