@@ -65,7 +65,7 @@ DEF_SINGLETON(Action)
 -(AFHTTPRequestOperation *)Download:(Request *)msg{
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:[NSURL URLWithString:msg.downloadUrl]];
     if (msg.timeoutInterval != 0) {
-        manager.requestSerializer.timeoutInterval = timeoutInterval;
+        manager.requestSerializer.timeoutInterval = msg.timeoutInterval;
     }
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
    
@@ -132,7 +132,7 @@ DEF_SINGLETON(Action)
         }];
     }
     if (msg.timeoutInterval != 0) {
-        manager.requestSerializer.timeoutInterval = timeoutInterval;
+        manager.requestSerializer.timeoutInterval = msg.timeoutInterval;
     }
     
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -193,7 +193,7 @@ DEF_SINGLETON(Action)
         }];
     }
     if (msg.timeoutInterval != 0) {
-        manager.requestSerializer.timeoutInterval = timeoutInterval;
+        manager.requestSerializer.timeoutInterval = msg.timeoutInterval;
     }
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     if (msg.acceptableContentTypes.isNotEmpty) {
