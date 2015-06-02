@@ -1,6 +1,6 @@
 ![image](https://raw.githubusercontent.com/zhuchaowe/EasyIOS/gh-pages/images/logo.png)
 
-EasyIOS  - Happy New Year 2015
+[EasyIOS-Swift](https://github.com/EasyIOS/EasyIOS-Swift)版本发布!欢迎Star、Fork
 =======
 
 [![Pod Version](http://img.shields.io/cocoapods/v/EasyIOS.svg)](http://easyios.08dream.com)
@@ -21,8 +21,6 @@ EasyIOS is a new generation of development framework based on `Model-View-ViewMo
 * EasyIOS官方qq群 :[340906744](http://shang.qq.com/wpa/qunwpa?idkey=562d002e275a8199081313b00580fb7111a4faf694216a239064d29f5238bc91) 欢迎大家加入讨论
 
 * [EasyRSS](https://github.com/zhuchaowe/EasyRSS):基于EasyIOS 2.2.2 的开源项目,EasyIOS的官方Demo
-
-* [EasyIOS-Swift](https://github.com/EasyIOS/EasyIOS-Swift):EasyIOS swift 版本
 
 * [json转Model工具 ModelCoder](https://github.com/zhuchaowe/ModelCoder) 
 
