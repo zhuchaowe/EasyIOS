@@ -12,7 +12,7 @@
 EasyIOS is a new generation of development framework based on `Model-View-ViewModel` which makes faster and easier app development, Build your app by geek's way.
 
 
-* [EasyIOS官方论坛-IOSX](https://www.iosx.me)
+* [EasyIOS官方论坛-IOSX](http://dev.iosx.me)
 
 * [EasyIOS小组](https://github.com/EasyIOS)
  
