@@ -3,7 +3,7 @@
 [EasyIOS-Swift](https://github.com/EasyIOS/EasyIOS-Swift)版本发布!欢迎Star、Fork
 =======
 
-[![Pod Version](http://img.shields.io/cocoapods/v/EasyIOS.svg)](http://easyios.08dream.com)
+[![Pod Version](http://img.shields.io/cocoapods/v/EasyIOS.svg)](http://easyios.iosx.me)
 [![Pod Version](http://img.shields.io/cocoapods/p/EasyIOS.svg)](http://cocoadocs.org/docsets/EasyIOS/)
 [![License](http://img.shields.io/cocoapods/l/EasyIOS.svg)](http://cocoadocs.org/docsets/EasyIOS/)
 [![qq](http://img.shields.io/badge/QQ%E7%BE%A4-340906744-green.svg)](http://shang.qq.com/wpa/qunwpa?idkey=562d002e275a8199081313b00580fb7111a4faf694216a239064d29f5238bc91)
@@ -12,7 +12,7 @@
 EasyIOS is a new generation of development framework based on `Model-View-ViewModel` which makes faster and easier app development, Build your app by geek's way.
 
 
-* [EasyIOS官方论坛-IOSX](http://dev.iosx.me)
+* [EasyIOS官方论坛-IOSX](https://www.iosx.me)
 
 * [EasyIOS小组](https://github.com/EasyIOS)
  
