@@ -51,4 +51,13 @@
         self.interactivePopGestureRecognizer.enabled = self.popGestureRecognizerEnabled;
 }
 
+/*修复系统 push造成 crash http://www.cnblogs.com/lexingyu/p/3432444.html*/
+-(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    if(gestureRecognizer == self.interactivePopGestureRecognizer){
+        if(self.viewControllers.count <2 || self.visibleViewController == [self.viewControllers objectAtIndex:0]){
+            return NO;
+        }
+    }
+    return YES;
+}
 @end
