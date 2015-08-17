@@ -75,7 +75,7 @@ DEF_SINGLETON(Action)
     AFHTTPRequestOperation *op = [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         @strongify(msg,self);
         msg.output = [NSDictionary dictionary];
-        [self successAction:msg];
+        [self success:msg];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         @strongify(msg,self);
         msg.error = error;
@@ -143,7 +143,7 @@ DEF_SINGLETON(Action)
     @weakify(msg,self);
     AFHTTPRequestOperation *op =  [manager GET:url parameters:requestParams success:^(AFHTTPRequestOperation *operation, NSDictionary* jsonObject) {
         @strongify(msg,self);
-        if(_cacheEnable){
+        if(_cacheEnable && [self doCheckCode:msg]){
             [[TMCache sharedCache] setObject:jsonObject forKey:msg.cacheKey block:^(TMCache *cache, NSString *key, id object) {
                 EZLog(@"%@ has cached",url);
             }];
@@ -204,14 +204,18 @@ DEF_SINGLETON(Action)
     
     NSDictionary *file = msg.requestFiles;
     AFHTTPRequestOperation *op = [manager POST:url parameters:requestParams constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        if([file count]>0){
-            for (NSString *key in [file allKeys]) {
-                [formData appendPartWithFileURL:[file objectForKey:key] name:key error:nil];
+        [file enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
+            if([obj isKindOfClass:[NSURL class]]){
+                [formData appendPartWithFileURL:obj name:key error:nil];
+            }else if([obj isKindOfClass:[NSData class]]){
+                [formData appendPartWithFormData:obj name:key];
+            }else if([obj isKindOfClass:[NSString class]]){
+                [formData appendPartWithFileURL:[NSURL fileURLWithPath:obj] name:key error:nil];
             }
-        }
+        }];
     } success:^(AFHTTPRequestOperation *operation, NSDictionary* jsonObject) {
         @strongify(msg,self);
-        if([file count] == 0 && _cacheEnable){
+        if([file count] == 0 && _cacheEnable && [self doCheckCode:msg]){
             [[TMCache sharedCache] setObject:jsonObject forKey:msg.cacheKey block:^(TMCache *cache, NSString *key, id object) {
                 EZLog(@"%@ has cached",url);
             }];
@@ -245,15 +249,23 @@ DEF_SINGLETON(Action)
 }
 
 -(void)checkCode:(Request *)msg{
+    if([self doCheckCode:msg]){
+        [self success:msg];
+    }else{
+        [self error:msg];
+    }
+}
+
+-(BOOL)doCheckCode:(Request *)msg{
     if (msg.needCheckCode) {
         msg.codeKey = [msg.output objectAtPath:[Action sharedInstance].CODE_KEY];
         if([msg.output objectAtPath:[Action sharedInstance].CODE_KEY] && [[msg.output objectAtPath:[Action sharedInstance].CODE_KEY] intValue] == [Action sharedInstance].RIGHT_CODE){
-            [self success:msg];
+            return true;
         }else{
-            [self error:msg];
+            return false;
         }
     }else{
-        [self successAction:msg];
+        return true;
     }
 }
 
@@ -265,16 +277,13 @@ DEF_SINGLETON(Action)
 }
 
 - (void)success:(Request *)msg{
-    msg.message = [msg.output objectAtPath:[Action sharedInstance].MSG_KEY];
-    [self successAction:msg];
-}
-
--(void)successAction:(Request *)msg{
+    msg.message = [msg.output objectAtPath:[Action sharedInstance].MSG_KEY]?:@"";
     msg.state = RequestStateSuccess;
     if([self.aDelegaete respondsToSelector:@selector(handleActionMsg:)]){
         [self.aDelegaete handleActionMsg:msg];
     }
 }
+
 
 - (void)failed:(Request *)msg{
     if(msg.error.userInfo!= nil && [msg.error.userInfo objectForKey:@"NSLocalizedDescription"]){
