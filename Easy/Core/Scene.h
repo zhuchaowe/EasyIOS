@@ -29,7 +29,7 @@ typedef enum
     INSET_BOTTOM                =2,
     INSET_TOP_BOTTOM            =3,
 } EzAlignInset;
-
+#import "UIViewController+HUD.h"
 @interface Scene : UIViewController
 @property(nonatomic,retain)Scene *parentScene;
 
