@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 
 @interface UIViewController (HUD)
 #pragma mark - 任务型

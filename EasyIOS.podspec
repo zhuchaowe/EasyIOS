@@ -2,8 +2,8 @@ Pod::Spec.new do |s|
   s.name                  = "EasyIOS"
   s.version               = "2.2.3"
   s.summary               = "EasyIOS is a MVVM frameWork base on AFNetworking and ReactiveCocoa"
-  s.homepage              = "http://easyios.08dream.com"
-  s.social_media_url      = "http://easyios.08dream.com"
+  s.homepage              = "http://easyios.iosx.me"
+  s.social_media_url      = "http://www.iosx.me"
   s.platform     = :ios,'6.0'
   s.license               = { :type => "MIT", :file => "LICENSE" }
   s.author                = { "zhuchao" => "zhuchao@iosx.me" }
