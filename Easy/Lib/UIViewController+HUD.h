@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
+<<<<<<< HEAD
 
+=======
+>>>>>>> 34709fd23083ed846b4e199c479f4991961c8615
 @interface UIViewController (HUD)
 #pragma mark - 任务型
 - (MBProgressHUD *)showIndeterminateHUDWithText:(NSString *)text yOffset:(CGFloat)offset forKey:(NSString *)key;
