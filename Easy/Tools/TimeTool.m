@@ -24,7 +24,6 @@
 
 
 + (NSString *)getTimeDiffString:(NSTimeInterval)timestamp {
-	timestamp = timestamp / 1000.0f;
 	NSCalendar *cal = [NSCalendar currentCalendar];
 	NSDate *todate = [NSDate dateWithTimeIntervalSince1970:timestamp];
 	NSDate *today = [NSDate date]; //当前时间
