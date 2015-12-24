@@ -62,48 +62,45 @@ DEF_SINGLETON(Action)
     _dataFromCache = NO;
 }
 
--(AFHTTPRequestOperation *)Download:(Request *)msg{
-    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:[NSURL URLWithString:msg.downloadUrl]];
+-(NSURLSessionDownloadTask *)Download:(Request *)msg{
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:msg.downloadUrl]];
     if (msg.timeoutInterval != 0) {
-        manager.requestSerializer.timeoutInterval = msg.timeoutInterval;
+        request.timeoutInterval = msg.timeoutInterval;
     }
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-   
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:msg.downloadUrl]];
+    if(msg.httpHeaderFields.isNotEmpty){
+        [msg.httpHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
+            [request setValue:value forHTTPHeaderField:key];
+        }];
+    }
     [self sending:msg];
     @weakify(msg,self);
-    AFHTTPRequestOperation *op = [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+
+    NSURLSessionDownloadTask *op = [manager downloadTaskWithRequest:request progress:^(NSProgress * downloadProgress) {
         @strongify(msg,self);
-        msg.output = [NSDictionary dictionary];
-        [self success:msg];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        msg.progress = downloadProgress;
+        [self progressing:msg];
+    } destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        NSURL *documentsDirectoryURL = [NSURL URLWithString:msg.targetPath];
+        return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
+    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
         @strongify(msg,self);
         msg.error = error;
         [self failed:msg];
     }];
-    op.outputStream = [NSOutputStream outputStreamToFileAtPath:msg.targetPath append:NO];
-    [op setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
-        @strongify(msg,self);
-        msg.totalBytesRead = totalBytesRead;
-        msg.totalBytesExpectedToRead = totalBytesExpectedToRead;
-        msg.progress = (CGFloat)totalBytesRead/(CGFloat)totalBytesExpectedToRead;
-        [self progressing:msg];
-    }];
-    msg.url = op.request.URL;
+    
+    msg.url = op.currentRequest.URL;
     msg.op = op;
-    [op start];
+    
+    [op resume];
     return op;
 }
 
--(AFHTTPRequestOperation *)Send:(Request *)msg{
-    if([msg.METHOD isEqualToString:@"GET"]){
-        return [self GET:msg];
-    }else{
-        return [self POST:msg];
-    }
-}
 
--(AFHTTPRequestOperation *) GET:(Request *)msg
+-(NSURLSessionDataTask *) Send:(Request *)msg
 {
     NSString *url = @"";
     NSDictionary *requestParams = nil;
@@ -120,40 +117,40 @@ DEF_SINGLETON(Action)
         requestParams = msg.requestParams;
     }
     
-    [self sending:msg];
-    
-    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:[NSURL URLWithString:url]];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:msg.METHOD URLString:url parameters:requestParams error:nil];
     if(msg.httpHeaderFields.isNotEmpty){
         [msg.httpHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
-            [manager.requestSerializer setValue:value forHTTPHeaderField:key];
+            [request setValue:value forHTTPHeaderField:key];
         }];
     }
     if (msg.timeoutInterval != 0) {
-        manager.requestSerializer.timeoutInterval = msg.timeoutInterval;
+        request.timeoutInterval = msg.timeoutInterval;
     }
-    
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    if (msg.acceptableContentTypes.isNotEmpty) {
-        manager.responseSerializer.acceptableContentTypes = msg.acceptableContentTypes;
-    }
     
+    [self sending:msg];
     @weakify(msg,self);
-    AFHTTPRequestOperation *op =  [manager GET:url parameters:requestParams success:^(AFHTTPRequestOperation *operation, NSDictionary* jsonObject) {
-        msg.output = jsonObject;
-        @strongify(msg,self);
-        if(_cacheEnable && [self doCheckCode:msg]){
-            [[TMCache sharedCache] setObject:jsonObject forKey:msg.cacheKey block:^(TMCache *cache, NSString *key, id object) {
-                EZLog(@"%@ has cached",url);
-            }];
+    NSURLSessionDataTask *op = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * response, NSDictionary *responseObject, NSError * error) {
+        if(error == nil){
+            msg.output = responseObject;
+            @strongify(msg,self);
+            if(_cacheEnable && [self doCheckCode:msg]){
+                [[TMCache sharedCache] setObject:responseObject forKey:msg.cacheKey block:^(TMCache *cache, NSString *key, id object) {
+                    EZLog(@"%@ has cached",url);
+                }];
+            }
+            [self checkCode:msg];
+        }else{
+            @strongify(msg,self);
+            msg.error = error;
+            [self failed:msg];
         }
-        [self checkCode:msg];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        @strongify(msg,self);
-        msg.error = error;
-        [self failed:msg];
     }];
-    msg.url = op.request.URL;
+    
+    msg.url = op.currentRequest.URL;
     msg.op = op;
     msg.output = [[TMCache sharedCache] objectForKey:msg.cacheKey];
     if (_dataFromCache == YES && msg.output !=nil) {
@@ -161,11 +158,11 @@ DEF_SINGLETON(Action)
             [self checkCode:msg];
         } afterDelay:0.1f];
     }
+    [op resume];
     return op;
 }
 
-
--(AFHTTPRequestOperation *)POST:(Request *)msg{
+-(NSURLSessionDataTask *)Upload:(Request *)msg{
     NSString *url = @"";
     NSDictionary *requestParams = nil;
     if(msg.STATICPATH.isNotEmpty){
@@ -181,25 +178,12 @@ DEF_SINGLETON(Action)
         requestParams = msg.requestParams;
     }
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    if(msg.httpHeaderFields.isNotEmpty){
-        [msg.httpHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
-            [manager.requestSerializer setValue:value forHTTPHeaderField:key];
-        }];
-    }
-    if (msg.timeoutInterval != 0) {
-        manager.requestSerializer.timeoutInterval = msg.timeoutInterval;
-    }
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    if (msg.acceptableContentTypes.isNotEmpty) {
-        manager.responseSerializer.acceptableContentTypes = msg.acceptableContentTypes;
-    }
     [self sending:msg];
-    @weakify(msg,self);
-    
     NSDictionary *file = msg.requestFiles;
-    AFHTTPRequestOperation *op = [manager POST:url parameters:requestParams constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:url parameters:requestParams constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [file enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
             if([obj isKindOfClass:[NSURL class]]){
                 [formData appendPartWithFileURL:obj name:key error:nil];
@@ -209,38 +193,36 @@ DEF_SINGLETON(Action)
                 [formData appendPartWithFileURL:[NSURL fileURLWithPath:obj] name:key error:nil];
             }
         }];
-    } success:^(AFHTTPRequestOperation *operation, NSDictionary* jsonObject) {
-        msg.output = jsonObject;
-        @strongify(msg,self);
-        if([file count] == 0 && _cacheEnable && [self doCheckCode:msg]){
-            [[TMCache sharedCache] setObject:jsonObject forKey:msg.cacheKey block:^(TMCache *cache, NSString *key, id object) {
-                EZLog(@"%@ has cached",url);
-            }];
-        }
-        [self checkCode:msg];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        @strongify(msg,self);
-        msg.error = error;
-        [self failed:msg];
-    }];
-    msg.url = op.request.URL;
-    msg.op = op;
-    if(file.count >0){
-        [op setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-            @strongify(msg,self);
-            msg.totalBytesWritten = totalBytesWritten;
-            msg.totalBytesExpectedToWrite = totalBytesExpectedToWrite;
-            msg.progress = (CGFloat)totalBytesWritten/(CGFloat)totalBytesExpectedToWrite;
-            [self progressing:msg];
+    } error:nil];
+    
+    if(msg.httpHeaderFields.isNotEmpty){
+        [msg.httpHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
+            [request setValue:value forHTTPHeaderField:key];
         }];
-    }else{
-        msg.output = [[TMCache sharedCache] objectForKey:msg.cacheKey];
-        if (_dataFromCache == YES && msg.output !=nil) {
-            [[GCDQueue mainQueue] queueBlock:^{
-                [self checkCode:msg];
-            } afterDelay:0.1f];
-        }
     }
+    if (msg.timeoutInterval != 0) {
+        request.timeoutInterval = msg.timeoutInterval;
+    }
+    
+    @weakify(msg,self);
+    NSURLSessionDataTask *op = [manager uploadTaskWithStreamedRequest:request progress:^(NSProgress * uploadProgress) {
+        msg.progress = uploadProgress;
+        [self progressing:msg];
+    } completionHandler:^(NSURLResponse * response, NSDictionary*responseObject, NSError * error) {
+        @strongify(msg,self);
+        if (error == nil) {
+            msg.output = responseObject;
+            [self checkCode:msg];
+        }else{
+            msg.error = error;
+            [self failed:msg];
+        }
+    }];
+    
+    msg.url = op.currentRequest.URL;
+    msg.op = op;
+    
+    [op resume];
     return op;
 }
 

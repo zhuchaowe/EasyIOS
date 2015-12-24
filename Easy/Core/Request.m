@@ -46,7 +46,7 @@ NSString * const RequestStateCancle = @"RequestDidCancle";
 -(void)loadRequest{
     self.output = nil;
     self.message = @"";
-    self.progress = 0.0f;
+    self.progress = nil;
     self.freezable = NO;
     self.SCHEME = @"";
     self.HOST = @"";
@@ -94,11 +94,9 @@ NSString * const RequestStateCancle = @"RequestDidCancle";
 }
 
 - (void)cancle{
-    if(self.op.isNotEmpty && self.op.isExecuting){
+    if(self.op.isNotEmpty && self.op.state == NSURLSessionTaskStateRunning){
         [self.op cancel];
-        if(self.op.isCancelled){
-            self.state = RequestStateCancle;
-        }
+        self.state = RequestStateCancle;
     }
 }
 

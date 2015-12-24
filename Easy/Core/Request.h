@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "EasyKit.h"
-#import "AFHTTPRequestOperation.h"
 
 extern NSString * const RequestStateSuccess;
 extern NSString * const RequestStateFailed;
@@ -27,15 +26,15 @@ extern NSString * const RequestStateCancle;
 @property(nonatomic,strong)NSString *codeKey;  // 错误码返回
 //upload上传相关参数
 @property(nonatomic,strong)NSDictionary *requestFiles; //上传文件列表
-@property(nonatomic,assign)double progress; //上传进度
-@property(nonatomic,assign)long long totalBytesWritten; //已上传数据大小
-@property(nonatomic,assign)long long totalBytesExpectedToWrite; //全部需要上传的数据大小
+@property(nonatomic,assign)NSProgress *progress; //上传进度
+//@property(nonatomic,assign)long long totalBytesWritten; //已上传数据大小
+//@property(nonatomic,assign)long long totalBytesExpectedToWrite; //全部需要上传的数据大小
 
 // download下载相关参数
 @property(nonatomic,strong)NSString *downloadUrl; //下载链接
 @property(nonatomic,strong)NSString *targetPath; //下载到目标路径
-@property(nonatomic,assign)long long totalBytesRead; //已下载传数据大小
-@property(nonatomic,assign)long long totalBytesExpectedToRead; //全部需要下载的数据大小
+//@property(nonatomic,assign)long long totalBytesRead; //已下载传数据大小
+//@property(nonatomic,assign)long long totalBytesExpectedToRead; //全部需要下载的数据大小
 
 @property(nonatomic,assign)BOOL freezable;  //是否冻结，下次联网时继续(保留设计)
 
@@ -48,7 +47,7 @@ extern NSString * const RequestStateCancle;
 @property(nonatomic,strong)NSSet *acceptableContentTypes; //可接受的序列化返回数据的格式
 @property(nonatomic,strong)NSDictionary *httpHeaderFields;//Http头参数设置
 @property(nonatomic,assign)BOOL requestNeedActive; //是否启动发送请求(为MVVM设计)
-@property(nonatomic,strong)AFHTTPRequestOperation *op; //AFN返回的AFHTTPRequestOperation
+@property(nonatomic,strong)NSURLSessionTask *op; //AFN返回的NSURLSessionTask
 @property(nonatomic,copy)EZVoidBlock requestInActiveBlock;//激活请求后的Block
 /**
  * 设置请求超时时间，默认是60S。
