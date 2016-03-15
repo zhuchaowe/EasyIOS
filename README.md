@@ -64,7 +64,7 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 * 3.`SceneModel` 视图-数据模型，主要负责 视图与模型的绑定工作，其中binding的工作交给了`ReactiveCocoa`。
 * 4.`SceneModel`包含`Action`成员，`Action`类主要负责网络数据的请求,数据缓存，数据解析工作
 
-如果你有看Github的Trending Objective-C榜单，那你肯定是见过`ReactiveCocoa`了。如果你在微博上关注唐巧、onevcat等国内开发者。那也应该听说过`ReactiveCocoa`了。 
+如果你有看Github的Trending Objective-C榜单，那你肯定是见过`ReactiveCocoa`了, 
 `ReactiveCocoa`简称RAC，就是基于响应式编程思想的Objective-C实践，它是Github的一个开源项目，你可以在[这里](https://github.com/ReactiveCocoa/ReactiveCocoa)找到它。
 
 
