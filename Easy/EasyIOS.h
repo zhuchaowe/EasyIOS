@@ -9,7 +9,7 @@
 #import "Action.h"
 #import "Scene.h"
 #import "Model.h"
-#import <MagicalRecord/MagicalRecord.h>
+#import <DBAccess/DBAccess.h>
 #import <MJExtension/MJExtension.h>
 #import <AFNetworking/AFNetworking.h>
 #import <GCDObjC/GCDObjC.h>
