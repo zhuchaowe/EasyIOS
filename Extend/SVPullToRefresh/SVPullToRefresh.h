@@ -14,6 +14,3 @@
 #import "UIScrollView+SVPullToRefresh.h"
 #import "UIScrollView+SVInfiniteScrolling.h"
 #import "UIScrollView+EndReflash.h"
-#import "PullFooter.h"
-#import "PullHeader.h"
-

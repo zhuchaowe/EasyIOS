@@ -2,6 +2,9 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
+#define baseScrean 375
+#define rem(...)  [EzSystemInfo rem:__VA_ARGS__]
+
 #import "EzSingleton.h"
 
 extern const BOOL IOS8_OR_LATER;
@@ -47,5 +50,6 @@ AS_SINGLETON( EzSystemInfo )
 + (BOOL)isPad;
 + (BOOL)isPadRetina;
 + (BOOL)isScreenSize:(CGSize)size;
++ (CGFloat)rem:(CGFloat)rem;
 
 @end

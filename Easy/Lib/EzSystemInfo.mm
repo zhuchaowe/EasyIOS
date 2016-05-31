@@ -344,4 +344,11 @@ static const char * __jb_app = NULL;
 #endif	// #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
 }
 
++ (CGFloat)rem:(CGFloat)rem{
+    if (rem >= 0 && rem <=1) {
+        return rem*[UIScreen mainScreen].bounds.size.width;
+    }else{
+        return rem*[UIScreen mainScreen].bounds.size.width/baseScrean;
+    }
+}
 @end
