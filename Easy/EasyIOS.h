@@ -9,20 +9,21 @@
 #import "Action.h"
 #import "Scene.h"
 #import "Model.h"
-#import "MagicalRecord.h"
+#import <MagicalRecord/MagicalRecord.h>
+#import <MJExtension/MJExtension.h>
+#import <AFNetworking/AFNetworking.h>
+#import <GCDObjC/GCDObjC.h>
+#import <TMCache/TMCache.h>
+
 #import "SceneModel.h"
-#import "MJExtension.h"
 #import "SceneCollectionView.h"
 #import "SceneScrollView.h"
 #import "SceneTableView.h"
 #import "DialogUtil.h"
 #import "Request.h"
 #import "UIScrollView+CoverView.h"
-#import "TMCache.h"
-#import "AFNetworking.h"
 #import "MMPickerView.h"
 #import "SVPullToRefresh.h"
-#import "GCDObjC.h"
 #import "UIView+FLKAutoLayout.h"
 #import "UIView+EzGesture.h"
 #import "URLManager.h"
