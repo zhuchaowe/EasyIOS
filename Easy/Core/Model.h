@@ -7,9 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NSDictionary+EasyExtend.h"
-#import "JSONModelLib.h"
-@interface Model : JSONModel
+@interface Model : NSObject
 +(id)Model;
 -(void)loadModel;
 @end

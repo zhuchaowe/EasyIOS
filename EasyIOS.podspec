@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = "EasyIOS"
-  s.version               = "2.2.3"
+  s.version               = "2.3"
   s.summary               = "EasyIOS is a MVVM frameWork base on AFNetworking and ReactiveCocoa"
   s.homepage              = "http://easyios.iosx.me"
   s.social_media_url      = "http://www.iosx.me"
@@ -19,13 +19,14 @@ Pod::Spec.new do |s|
     sp.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libz, $(SDKROOT)/usr/include/libxml2', 'CLANG_CXX_LANGUAGE_STANDARD' => 'gnu++0x', 'CLANG_CXX_LIBRARY' => 'libstdc++', 'CLANG_WARN_DIRECT_OBJC_ISA_USAGE' => 'YES'}
     sp.dependency 'ReactiveCocoa','2.4.4'
     sp.dependency 'MBProgressHUD'
-    sp.dependency 'MojoDatabase'
+    sp.dependency 'MJExtension'
+    sp.dependency 'MagicalRecord'
     sp.dependency 'TMCache'
     sp.dependency 'UIActivityIndicator-for-SDWebImage'
     sp.dependency 'AFNetworking'
     sp.dependency 'GCDObjC'
     sp.dependency 'FLKAutoLayout','0.1.1'
     sp.dependency 'FontIcon'
-    sp.prefix_header_contents = '#import "swift-bridge.h"'
+    sp.prefix_header_contents = '#import "EasyIOS.h"'
   end
 end
