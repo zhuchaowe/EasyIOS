@@ -29,6 +29,14 @@ DEF_SINGLETON( EzUserDefaults )
 	return value;
 }
 
+- (id)objectForKey:(NSString *)key defaultValue:(id)defaultValue
+{
+    if ( nil == key )
+        return defaultValue;
+    id value = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+    return value ?: defaultValue;
+}
+
 - (void)setObject:(id)value forKey:(NSString *)key
 {
 	if ( nil == key || nil == value )

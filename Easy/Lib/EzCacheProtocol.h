@@ -9,6 +9,7 @@
 
 - (BOOL)hasObjectForKey:(id)key;
 - (id)objectForKey:(id)key;
+- (id)objectForKey:(NSString *)key defaultValue:(id)defaultValue;
 - (void)setObject:(id)object forKey:(id)key;
 - (void)removeObjectForKey:(id)key;
 - (void)removeAllObjects;
