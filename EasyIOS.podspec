@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
     sp.dependency 'ReactiveCocoa','2.4.4'
     sp.dependency 'MBProgressHUD'
     sp.dependency 'MJExtension'
-    sp.dependency 'MagicalRecord'
+    sp.dependency 'DBAccess'
     sp.dependency 'TMCache'
     sp.dependency 'UIActivityIndicator-for-SDWebImage'
     sp.dependency 'AFNetworking'
