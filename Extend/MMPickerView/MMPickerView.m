@@ -256,7 +256,7 @@ NSString * const MMtoolbarBackgroundImage = @"toolbarBackgroundImage";
     
     //Set selected row
     
-    id chosenObject = options[MMselectedObject];
+    NSArray* chosenObject = options[MMselectedObject];
     
     if (chosenObject!=nil) {
         for (int i=0;i<[chosenObject count];i++) {
@@ -274,10 +274,11 @@ NSString * const MMtoolbarBackgroundImage = @"toolbarBackgroundImage";
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent: (NSInteger)component {
+    NSArray *array = [_pickerViewArray objectAtIndex:component];
     if (component && _pickerViewArray.count >component) {
-        return [[_pickerViewArray safeObjectAtIndex:component] count];
+        return [array count];
     }else{
-        return [[_pickerViewArray safeObjectAtIndex:0] count];
+        return [array count];
     }
 }
 
