@@ -23,6 +23,30 @@
 }
 
 
++ (NSString *)formatFriendlyTime:(NSDate *)todate {
+    NSDate *today = [NSDate date]; //当前时间
+    NSTimeInterval time = [today timeIntervalSinceDate:todate];
+    
+    if(time < 60){
+        return @"刚刚";
+    }else if (time < 3600) {
+        unsigned int unitFlag = NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
+        NSDateComponents *gap = [[NSCalendar currentCalendar] components:unitFlag fromDate:today toDate:todate options:0]; //计算时间差
+        return [NSString stringWithFormat:@"%ld分钟前",  (long)(ABS([gap minute]))];
+    }else if(time < 24*3600){
+        unsigned int unitFlag = NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
+        NSDateComponents *gap = [[NSCalendar currentCalendar] components:unitFlag fromDate:today toDate:todate options:0]; //计算时间差
+        return [NSString stringWithFormat:@"%ld小时前", (long)(ABS([gap hour]))];
+    }else if (time < 48*3600){
+        return [self formatDate:todate formatWith:@"昨天 HH:mm"];
+    }else if (time < 365*3600){
+        return [self formatDate:todate formatWith:@"MM月dd日"];
+    }else{
+        return [self formatDate:todate formatWith:@"yyyy年MM月dd日"];
+    }
+}
+
+
 + (NSString *)getTimeDiffString:(NSTimeInterval)timestamp {
 	NSCalendar *cal = [NSCalendar currentCalendar];
 	NSDate *todate = [NSDate dateWithTimeIntervalSince1970:timestamp];
@@ -40,6 +64,7 @@
 		return [NSString stringWithFormat:@"%ld分钟前",  (long)(ABS([gap minute]))];
 	}
 }
+
 +(NSTimeInterval)formatTimeSinceNow:(NSTimeInterval)timestamp{
     NSDate *time = [NSDate dateWithTimeIntervalSinceNow:timestamp];
     

@@ -32,6 +32,9 @@ typedef NSComparisonResult	(^NSMutableArrayCompareBlock)( id left, id right );
 - (NSArray *)eachWithIndexAndStop:(void (^)(id obj, NSUInteger idx, BOOL *stop))block;
 - (NSArray *)filter:(BOOL(^)(id obj))block;
 - (id)find:(BOOL(^)(id obj))block;
+
+//翻转数组
+- (NSArray *)reversedArray;
 /**
  *	通过需要按【首字母分类】的 【姓名数组】 调用此函数
  *
@@ -79,4 +82,6 @@ typedef NSComparisonResult	(^NSMutableArrayCompareBlock)( id left, id right );
 
 - (void)removeObject:(NSObject *)obj usingComparator:(NSMutableArrayCompareBlock)cmptr;
 
+//翻转数组
+- (void)reverse;
 @end

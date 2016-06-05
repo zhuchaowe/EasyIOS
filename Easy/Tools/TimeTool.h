@@ -21,6 +21,7 @@
 + (NSString *)formatDateSinceNow:(NSTimeInterval)timestamp formatWith:(NSString *)format;
 //获取时间差
 + (NSString *)getTimeDiffString:(NSTimeInterval)timestamp;
++ (NSString *)formatFriendlyTime:(NSDate *)todate;
 
 //格式化时间 e.p “从 2013-8-12 至 2013-8-18 "
 + (NSString *)getWeekKeyString:(NSTimeInterval)timestamp;
