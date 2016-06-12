@@ -17,6 +17,12 @@
 
 + (DialogUtil *)sharedInstance;
 
++ (void)showDlgAlertVC:(NSString *)title
+               message:(NSString *)message
+    conformButtonTitle:(NSString *)conform
+     cancelButtonTitle:(NSString *)cancel
+               handler:(void (^ __nullable)(UIAlertAction *action))handler;
+
 + (void)showDlgAlert:(NSString *) label;
 + (void)showDlgAlert:(NSString *) label cancelButtonTitle:(NSString *)str title:(NSString *)tips;
 - (void)showDlgCommon:(UIView *) view;

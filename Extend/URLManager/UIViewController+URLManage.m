@@ -101,6 +101,9 @@ static char URLdictQuery;
                 class =  NSClassFromString([dict objectForKey:home]);
             }else{
                 class =  NSClassFromString(url.host);
+                if(class == nil && [dict.allKeys containsObject:@"base"]){
+                    class =  NSClassFromString([dict objectForKey:@"base"]);
+                }
             }
         }
         if(class !=nil){

@@ -7,6 +7,7 @@
 //
 
 #import "DialogUtil.h"
+#import "URLNavigation.h"
 
 @implementation DialogUtil
 
@@ -30,6 +31,19 @@
     }
     
     return self;
+}
+
++ (void)showDlgAlertVC:(NSString *)title
+               message:(NSString *)message
+     conformButtonTitle:(NSString *)conform
+     cancelButtonTitle:(NSString *)cancel
+      handler:(void (^ __nullable)(UIAlertAction *action))handler{
+    UIAlertController *alertViewvC = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *conformAction = [UIAlertAction actionWithTitle:conform style:UIAlertActionStyleDestructive handler:handler];
+    [alertViewvC addAction:conformAction];
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:cancel style:UIAlertActionStyleCancel handler:handler];
+    [alertViewvC addAction:cancleAction];
+    [[[URLNavigation navigation] currentViewController] presentViewController:alertViewvC animated:YES completion:nil];
 }
 
 + (void)showDlgAlert:(NSString *) label {

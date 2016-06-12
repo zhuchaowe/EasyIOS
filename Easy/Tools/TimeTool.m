@@ -39,7 +39,7 @@
         return [NSString stringWithFormat:@"%ld小时前", (long)(ABS([gap hour]))];
     }else if (time < 48*3600){
         return [self formatDate:todate formatWith:@"昨天 HH:mm"];
-    }else if (time < 365*3600){
+    }else if (time < 365*24*3600){
         return [self formatDate:todate formatWith:@"MM月dd日"];
     }else{
         return [self formatDate:todate formatWith:@"yyyy年MM月dd日"];
