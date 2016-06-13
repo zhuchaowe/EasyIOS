@@ -133,7 +133,7 @@
 	}
 	NSError * error = nil;
     
-	NSObject * obj = [NSJSONSerialization JSONObjectWithData:(NSData *)str options:0 error:&error];
+	NSObject * obj = [NSJSONSerialization JSONObjectWithData:[str dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
 
 	if ( nil == obj )
 	{
