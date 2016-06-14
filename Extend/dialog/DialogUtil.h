@@ -39,4 +39,5 @@
 - (void)showDlgWithGradient:(UIView *) view;
 - (void)showDlg:(UIView *) view textOnly:(NSString *) label;
 - (void)showDlg:(UIView *) view withColor:(UIColor *) color;
++(void)showMessage:(NSString *)message;
 @end
