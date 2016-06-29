@@ -40,9 +40,9 @@
     }else if (time < 48*3600){
         return [self formatDate:todate formatWith:@"昨天 HH:mm"];
     }else if (time < 365*24*3600){
-        return [self formatDate:todate formatWith:@"MM月dd日"];
+        return [self formatDate:todate formatWith:@"MM月dd日 HH:mm"];
     }else{
-        return [self formatDate:todate formatWith:@"yyyy年MM月dd日"];
+        return [self formatDate:todate formatWith:@"yyyy年MM月dd日 HH:mm"];
     }
 }
 
