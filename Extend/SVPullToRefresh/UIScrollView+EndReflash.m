@@ -66,7 +66,7 @@ static char MsgLabel;
     if(self.infiniteScrollingView !=nil){
         if(isEnd){
             [self.infiniteScrollingView setEnded];
-        }else if(self.infiniteScrollingView.state == SVInfiniteScrollingStateLoading){
+        }else{
             [self.infiniteScrollingView stopAnimating];
         }
     }
