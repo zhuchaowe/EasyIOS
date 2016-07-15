@@ -12,7 +12,18 @@
 
 @interface Action : NSObject
 @property(nonatomic,weak)id<ActionDelegate> aDelegaete;
-+(void)actionConfigHost:(NSString *)host client:(NSString *)client codeKey:(NSString *)codeKey rightCode:(NSInteger)rightCode msgKey:(NSString *)msgKey;
++(void)actionConfigScheme:(NSString *)scheme
+                     host:(NSString *)host
+                   client:(NSString *)client
+                  codeKey:(NSString *)codeKey
+                rightCode:(NSInteger)rightCode
+                   msgKey:(NSString *)msgKey;
++(void)actionConfigHost:(NSString *)host
+                 client:(NSString *)client
+                codeKey:(NSString *)codeKey
+              rightCode:(NSInteger)rightCode
+                 msgKey:(NSString *)msgKey DEPRECATED_MSG_ATTRIBUTE("Use actionConfigScheme: method instead.");
+
 + (id)Action;
 - (id)initWithCache;
 - (void)success:(Request *)msg;

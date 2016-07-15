@@ -14,6 +14,7 @@
 @property(nonatomic,assign)BOOL cacheEnable;
 @property(nonatomic,assign)BOOL dataFromCache;
 
+@property(nonatomic,retain)NSString *DEFAULT_SCHEME;//http/https/ftp协议
 @property(nonatomic,retain)NSString *HOST_URL;//服务端域名:端口
 @property(nonatomic,retain)NSString *CLIENT;//自定义客户端识别
 @property(nonatomic,retain)NSString *CODE_KEY;//错误码key,支持路径 如 data/code
@@ -23,12 +24,23 @@
 @implementation Action
 
 DEF_SINGLETON(Action)
-+(void)actionConfigHost:(NSString *)host client:(NSString *)client codeKey:(NSString *)codeKey rightCode:(NSInteger)rightCode msgKey:(NSString *)msgKey{
+
++(void)actionConfigScheme:(NSString *)scheme
+                     host:(NSString *)host
+                 client:(NSString *)client
+                codeKey:(NSString *)codeKey
+              rightCode:(NSInteger)rightCode
+                 msgKey:(NSString *)msgKey{
+    [Action sharedInstance].DEFAULT_SCHEME = scheme;
     [Action sharedInstance].HOST_URL = host;
     [Action sharedInstance].CLIENT = client;
     [Action sharedInstance].CODE_KEY = codeKey;
     [Action sharedInstance].RIGHT_CODE = rightCode;
     [Action sharedInstance].MSG_KEY = msgKey;
+}
+
++(void)actionConfigHost:(NSString *)host client:(NSString *)client codeKey:(NSString *)codeKey rightCode:(NSInteger)rightCode msgKey:(NSString *)msgKey{
+    [Action actionConfigScheme:@"http" host:host client:client codeKey:codeKey rightCode:rightCode msgKey:msgKey];
 }
 
 +(id)Action{
@@ -106,10 +118,11 @@ DEF_SINGLETON(Action)
     NSDictionary *requestParams = nil;
     if(msg.STATICPATH.isNotEmpty){
         url = msg.STATICPATH;
-    }else if(msg.SCHEME.isNotEmpty && msg.HOST.isNotEmpty){
-        url = [NSString stringWithFormat:@"%@://%@%@",msg.SCHEME,msg.HOST,msg.PATH];
     }else{
-        url = [NSString stringWithFormat:@"http://%@%@",[Action sharedInstance].HOST_URL,msg.PATH];
+        url = [NSString stringWithFormat:@"%@://%@%@",
+               msg.SCHEME.isNotEmpty?msg.SCHEME:[Action sharedInstance].DEFAULT_SCHEME,
+               msg.HOST.isNotEmpty?msg.HOST:[Action sharedInstance].HOST_URL,
+               msg.PATH];
     }
     if(msg.appendPathInfo.isNotEmpty){
         url = [url stringByAppendingString:msg.appendPathInfo];
@@ -167,10 +180,11 @@ DEF_SINGLETON(Action)
     NSDictionary *requestParams = nil;
     if(msg.STATICPATH.isNotEmpty){
         url = msg.STATICPATH;
-    }else if(msg.SCHEME.isNotEmpty && msg.HOST.isNotEmpty){
-        url = [NSString stringWithFormat:@"%@://%@%@",msg.SCHEME,msg.HOST,msg.PATH];
     }else{
-        url = [NSString stringWithFormat:@"http://%@%@",[Action sharedInstance].HOST_URL,msg.PATH];
+        url = [NSString stringWithFormat:@"%@://%@%@",
+               msg.SCHEME.isNotEmpty?msg.SCHEME:[Action sharedInstance].DEFAULT_SCHEME,
+               msg.HOST.isNotEmpty?msg.HOST:[Action sharedInstance].HOST_URL,
+               msg.PATH];
     }
     if(msg.appendPathInfo.isNotEmpty){
         url = [url stringByAppendingString:msg.appendPathInfo];
