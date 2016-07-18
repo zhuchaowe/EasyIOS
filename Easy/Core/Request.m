@@ -112,8 +112,8 @@ NSString * const RequestStateCancle = @"RequestDidCancle";
     NSArray *propertyList = [self getPropertyList:[self class]];
     [propertyList each:^(NSString *key) {
         NSObject *object = [self valueForKey:key];
-        if(object.isNotEmpty){
-            [dict setObject:[self valueForKey:key] forKey:key];
+        if(object != nil){
+            [dict setObject:object forKey:key];
         }
     }];
     if (self.params.isNotEmpty) {
