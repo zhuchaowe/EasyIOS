@@ -9,8 +9,8 @@
 #import "Action.h"
 #import "Scene.h"
 #import "Model.h"
-#import <DBAccess/DBAccess.h>
-#import <MJExtension/MJExtension.h>
+#import <SharkORM/SharkORM.h>
+#import <JSONModel/JSONModel.h>
 #import <AFNetworking/AFNetworking.h>
 #import <GCDObjC/GCDObjC.h>
 #import <TMCache/TMCache.h>
