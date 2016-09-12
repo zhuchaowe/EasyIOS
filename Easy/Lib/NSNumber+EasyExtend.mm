@@ -39,7 +39,7 @@
 }
 
 -(NSNumber *)decrease:(NSNumber *)number{
-    if (self.integerValue == 1) {
+    if (self.integerValue == 0) {
         return self;
     }else{
         return @(self.integerValue - number.integerValue);
