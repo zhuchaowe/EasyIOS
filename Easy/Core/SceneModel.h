@@ -7,7 +7,6 @@
 //
 
 #import "Action.h"
-#import "<ReactiveCocoa/RACEXTScope.h>"
 #import "<ReactiveCocoa/ReactiveCocoa.h>"
 #import "Request.h"
 @interface SceneModel : NSObject
