@@ -7,8 +7,8 @@
 //
 
 #import "Action.h"
-#import "RACEXTScope.h"
-#import "ReactiveCocoa.h"
+#import "<ReactiveCocoa/RACEXTScope.h>"
+#import "<ReactiveCocoa/ReactiveCocoa.h>"
 #import "Request.h"
 @interface SceneModel : NSObject
 @property(nonatomic,strong)Action *action;
