@@ -7,7 +7,7 @@
 //
 
 #import "Action.h"
-#import "RACEXTScope.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "TMCache.h"
 
 @interface Action()
@@ -75,10 +75,10 @@ DEF_SINGLETON(Action)
 }
 
 -(NSURLSessionDownloadTask *)Download:(Request *)msg{
-    
+
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    
+
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:msg.downloadUrl]];
     if (msg.timeoutInterval != 0) {
         request.timeoutInterval = msg.timeoutInterval;
@@ -103,10 +103,10 @@ DEF_SINGLETON(Action)
         msg.error = error;
         [self failed:msg];
     }];
-    
+
     msg.url = op.currentRequest.URL;
     msg.op = op;
-    
+
     [op resume];
     return op;
 }
@@ -129,7 +129,7 @@ DEF_SINGLETON(Action)
     }else{
         requestParams = msg.requestParams;
     }
-    
+
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
 
@@ -143,7 +143,7 @@ DEF_SINGLETON(Action)
         request.timeoutInterval = msg.timeoutInterval;
     }
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    
+
     [self sending:msg];
     @weakify(msg,self);
     NSURLSessionDataTask *op = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * response, NSDictionary *responseObject, NSError * error) {
@@ -162,7 +162,7 @@ DEF_SINGLETON(Action)
             [self failed:msg];
         }
     }];
-    
+
     msg.url = op.currentRequest.URL;
     msg.op = op;
     msg.output = [[TMCache sharedCache] objectForKey:msg.cacheKey];
@@ -191,7 +191,7 @@ DEF_SINGLETON(Action)
     }else{
         requestParams = msg.requestParams;
     }
-    
+
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -208,7 +208,7 @@ DEF_SINGLETON(Action)
             }
         }];
     } error:nil];
-    
+
     if(msg.httpHeaderFields.isNotEmpty){
         [msg.httpHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
             [request setValue:value forHTTPHeaderField:key];
@@ -217,7 +217,7 @@ DEF_SINGLETON(Action)
     if (msg.timeoutInterval != 0) {
         request.timeoutInterval = msg.timeoutInterval;
     }
-    
+
     @weakify(msg,self);
     NSURLSessionDataTask *op = [manager uploadTaskWithStreamedRequest:request progress:^(NSProgress * uploadProgress) {
         msg.progress = uploadProgress;
@@ -232,10 +232,10 @@ DEF_SINGLETON(Action)
             [self failed:msg];
         }
     }];
-    
+
     msg.url = op.currentRequest.URL;
     msg.op = op;
-    
+
     [op resume];
     return op;
 }
