@@ -22,7 +22,7 @@
 #import "UILabel+EasyExtend.h"
 #import "UIButton+EasyExtend.h"
 #import "UIImage+EasyExtend.h"
-#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
+#import <UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h>
 #import "UITabBarController+EasyExtend.h"
 #import "EzSystemInfo.h"
 #import "SysTool.h"
@@ -31,7 +31,5 @@
 #import "BEVersion.h"
 #import "EasyKit.h"
 #import "EZNavigationController.h"
-#import "IconFont.h"
+#import <IconFont/IconFont.h>
 #import "ALHeader.h"
-
-

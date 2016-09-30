@@ -24,7 +24,7 @@
 #import "UIScrollView+CoverView.h"
 #import "MMPickerView.h"
 #import "SVPullToRefresh.h"
-#import "UIView+FLKAutoLayout.h"
+#import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 #import "UIView+EzGesture.h"
 #import "URLManager.h"
 
