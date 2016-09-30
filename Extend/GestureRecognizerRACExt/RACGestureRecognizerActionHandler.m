@@ -8,7 +8,7 @@
 
 #import "RACGestureRecognizerActionHandler.h"
 
-#import <ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 #import "UIGestureRecognizer+ReactiveCocoa.h"
 #import "UIGestureRecognizer+ReactiveCocoaProtected.h"

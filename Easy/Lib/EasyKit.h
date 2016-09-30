@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "ReactiveCocoa.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 typedef void (^EZVoidBlock)(void);
 @interface EasyKit : NSObject {}
