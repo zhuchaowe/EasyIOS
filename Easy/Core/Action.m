@@ -83,6 +83,9 @@ DEF_SINGLETON(Action)
     if (msg.timeoutInterval != 0) {
         request.timeoutInterval = msg.timeoutInterval;
     }
+    if ([Action sharedInstance].CLIENT.isNotEmpty) {
+       [request setValue:[Action sharedInstance].CLIENT forHTTPHeaderField:@"User-Agent"];
+    }
     if(msg.httpHeaderFields.isNotEmpty){
         [msg.httpHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
             [request setValue:value forHTTPHeaderField:key];
@@ -134,6 +137,11 @@ DEF_SINGLETON(Action)
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
 
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:msg.METHOD URLString:url parameters:requestParams error:nil];
+
+    if ([Action sharedInstance].CLIENT.isNotEmpty) {
+       [request setValue:[Action sharedInstance].CLIENT forHTTPHeaderField:@"User-Agent"];
+    }
+
     if(msg.httpHeaderFields.isNotEmpty){
         [msg.httpHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
             [request setValue:value forHTTPHeaderField:key];
@@ -209,6 +217,9 @@ DEF_SINGLETON(Action)
         }];
     } error:nil];
 
+    if ([Action sharedInstance].CLIENT.isNotEmpty) {
+       [request setValue:[Action sharedInstance].CLIENT forHTTPHeaderField:@"User-Agent"];
+    }
     if(msg.httpHeaderFields.isNotEmpty){
         [msg.httpHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
             [request setValue:value forHTTPHeaderField:key];
