@@ -15,7 +15,7 @@ EasyIOS is a new generation of development framework based on `Model-View-ViewMo
 * [EasyIOS官方论坛-IOSX](https://www.iosx.me)
 
 * [EasyIOS小组](https://github.com/EasyIOS)
- 
+
 * [EasyIOS在线文档](http://easyios.iosx.me/)
 
 * EasyIOS官方qq群1群 :340906744(已满)
@@ -25,18 +25,18 @@ EasyIOS is a new generation of development framework based on `Model-View-ViewMo
 
 * [EasyRSS](https://github.com/zhuchaowe/EasyRSS):基于EasyIOS 2.2.2 的开源项目,EasyIOS的官方Demo
 
-* [json转Model工具 ModelCoder](https://github.com/zhuchaowe/ModelCoder) 
+* [json转Model工具 ModelCoder](https://github.com/zhuchaowe/ModelCoder)
 
-* [基于EasyIOS的上线应用](https://github.com/zhuchaowe/EasyIOS/wiki) 
+* [基于EasyIOS的上线应用](https://github.com/zhuchaowe/EasyIOS/wiki)
 
 
 ##EasyIOS 以提升开发效率为宗旨
 
 * 代码分离 -`Model-View-ViewModel`- 分离ViewController中的大量逻辑代码，解决ViewController承担了过多角色而造成的代码质量低下。增加视图与模型的绑定特性。
 
-* 自动持久化 -`Model to Db`– 我再也不想思考如何实现持久化了。在我的想法里，将模型对象直接扔到一个bucket里，然后它就能自动的对数据进行存储、缓存、合并以及唯一化。我应当关注于描述对象间的属性和联系，以及我希望它们分组的方式。其他的实现细节都应该是不可见的。 
+* 自动持久化 -`Model to Db`– 我再也不想思考如何实现持久化了。在我的想法里，将模型对象直接扔到一个bucket里，然后它就能自动的对数据进行存储、缓存、合并以及唯一化。我应当关注于描述对象间的属性和联系，以及我希望它们分组的方式。其他的实现细节都应该是不可见的。
 
-* 自动RESTful API –`Json to Model`- 一旦我给程序发出指令，将一个API响应对应到一个数据对象，网络和JSON转换应该被自动完成。我只想关注如何将JSON中那些项目展示给用户。 
+* 自动RESTful API –`Json to Model`- 一旦我给程序发出指令，将一个API响应对应到一个数据对象，网络和JSON转换应该被自动完成。我只想关注如何将JSON中那些项目展示给用户。
 
 * 有表现力的触发器和响应 -`ReactiveCocoa`– 我想用源于响应意图（Intent）的语法来描述事件的响应和触发器，我不关心它们间的连接是如何实现的，并且这些连接也不应该在重构时出错。
 
@@ -44,7 +44,7 @@ EasyIOS is a new generation of development framework based on `Model-View-ViewMo
 
 * 便捷的UI布局 – `FLKAutolayout`-更加便捷的进行autolayout布局,不管你使用springs & struts或者AutoLayout，每种方法都需要你明确相关视图如何排列。你需要花大量的时间编写和修正这些排列，特别是现在有这么多设备需要适配 的情况下。没有什么是自动写好的，UI布局依赖于对细节的不断调整。推荐开发期间Debug工具[FLEX](!https://github.com/Flipboard/FLEX),`pod 'FLEX', '~> 1.1.1'`需要手动集成，发布release版本时请删除。
 * 友好的线程控制 -`GCDObjC`-
-* 便捷的正则匹配 
+* 便捷的正则匹配
 * 富文本的Label
 * and so on……
 
@@ -64,7 +64,7 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 * 3.`SceneModel` 视图-数据模型，主要负责 视图与模型的绑定工作，其中binding的工作交给了`ReactiveCocoa`。
 * 4.`SceneModel`包含`Action`成员，`Action`类主要负责网络数据的请求,数据缓存，数据解析工作
 
-如果你有看Github的Trending Objective-C榜单，那你肯定是见过`ReactiveCocoa`了, 
+如果你有看Github的Trending Objective-C榜单，那你肯定是见过`ReactiveCocoa`了,
 `ReactiveCocoa`简称RAC，就是基于响应式编程思想的Objective-C实践，它是Github的一个开源项目，你可以在[这里](https://github.com/ReactiveCocoa/ReactiveCocoa)找到它。
 
 
@@ -96,13 +96,13 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 * [git on github ](https://github.com/zhuchaowe/EasyIOS)
 
 ###How To Install
-* Import from CocoaPods 
+* Import from CocoaPods
 * Add below to Podfile and run pod install
 
     	platform :ios, "6.0"
-    	pod 'EasyIOS', '~> 2.2.2'
+    	pod 'EasyIOS', :git=>'https://github.com/zhuchaowe/EasyIOS.git',:tag=>'2.3'
     	pod 'EasyIOS-Extention', '~> 1.2'
-    	
+
 * If you use swift , please click [here](https://github.com/zhuchaowe/RACSwift)
 
 ##2.2.3 版本更新
@@ -129,7 +129,7 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 * Action类新增Download下载方法
 * `EasyIOS-Extention`分离可选的第三方类库
 * 移除了`RTLabel`,`EzUILabel`
-* 修复部分bug 
+* 修复部分bug
 * ……
 
 
@@ -150,7 +150,7 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 * 新增gcd封装`GCDObjC`,告别CocoaTouch原生难记的gcd调用方法
 * 新增正则表达式封装`RegExCategories`,可以轻松的开始码正则表达式了
 * 新增缓存处理封装`TMCache`,方便手动操作数据缓存(MK的自动缓存没有采用TMCache)
-* Model层升级：[MojoDatabase+JsonModel](https://github.com/zhuchaowe/mojo-database)新增自动检测、自动创建数据表，新增查询方法 ，order by、group by、limit等等方法 
+* Model层升级：[MojoDatabase+JsonModel](https://github.com/zhuchaowe/mojo-database)新增自动检测、自动创建数据表，新增查询方法 ，order by、group by、limit等等方法
 * 新增功能[教程在Wiki Paper](https://github.com/zhuchaowe/EasyIOS/wiki)
 
 ##2.0.1版本更新
@@ -158,7 +158,7 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 * 修改pod依赖
 * [FontIcon](https://github.com/zhuchaowe/FontIcon)剥离项目，单独维护
 * Model层修改：移除Jastor，添加JsonModel[MojoDatabase+JsonModel](https://github.com/zhuchaowe/mojo-database)剥离项目，单独维护。
-* 增加懒人程序代码生成工具[ModelCoder](https://github.com/zhuchaowe/ModelCoder) 
+* 增加懒人程序代码生成工具[ModelCoder](https://github.com/zhuchaowe/ModelCoder)
 * 移除部分非必要类库，代码整合
 * 本着引导大家编程更easy的原则,增加`Easykit`、`FLKAutoLayout`类
 
@@ -191,7 +191,7 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 
 ##1.0.1版本更新
 * 1.增加了ORM支持，从此可以实现json、object、sqlite三者之间的一键转换,可以节省很多代码,是不是很酷。
-		
+
 model类整合了Jastor的类库和MojoDataBase类库
 
 * 2.修改了Action类中的post的参数，增加了files参数，
@@ -203,7 +203,3 @@ model类整合了Jastor的类库和MojoDataBase类库
 * 4.修复了一个下拉刷新的bug
 
 * 5.提供了一键打开百度地图、苹果地图、google地图、高德地图发起调用的接口，再也不用担心看地图文档了
-
-
-
-
