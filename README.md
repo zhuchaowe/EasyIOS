@@ -105,7 +105,13 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 
 * If you use swift , please click [here](https://github.com/zhuchaowe/RACSwift)
 
+##2.3版本更新
+
+* 修改Model层的实现方式
+* Request中增加了可自定义UserAgent的功能
+
 ##2.2.3 版本更新
+
 * 新增URLManager
 * EZNavigationController 默认全屏右滑返回
 * 修复Action类的缓存策略的bug
