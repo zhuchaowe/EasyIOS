@@ -11,15 +11,19 @@
 #pragma mark -
 
 #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
-const BOOL IOS10_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] compare:@"10.0" options:NSNumericSearch] != NSOrderedAscending );
-const BOOL IOS9_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] compare:@"9.0" options:NSNumericSearch] != NSOrderedAscending );
-const BOOL IOS8_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] compare:@"8.0" options:NSNumericSearch] != NSOrderedAscending );
-const BOOL IOS7_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] compare:@"7.0" options:NSNumericSearch] != NSOrderedAscending );
-const BOOL IOS6_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] compare:@"6.0" options:NSNumericSearch] != NSOrderedAscending );
-const BOOL IOS5_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] compare:@"5.0" options:NSNumericSearch] != NSOrderedAscending );
-const BOOL IOS4_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] compare:@"4.0" options:NSNumericSearch] != NSOrderedAscending );
-const BOOL IOS3_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] compare:@"3.0" options:NSNumericSearch] != NSOrderedAscending );
+const BOOL IOS12_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 12.0);
+const BOOL IOS11_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0);
+const BOOL IOS10_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0);
+const BOOL IOS9_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0 );
+const BOOL IOS8_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0);
+const BOOL IOS7_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0 );
+const BOOL IOS6_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 6.0);
+const BOOL IOS5_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0);
+const BOOL IOS4_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 4.0);
+const BOOL IOS3_OR_LATER = ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 3.0);
 
+const BOOL IOS11_OR_EARLIER = !IOS12_OR_LATER;
+const BOOL IOS10_OR_EARLIER = !IOS11_OR_LATER;
 const BOOL IOS9_OR_EARLIER = !IOS10_OR_LATER;
 const BOOL IOS8_OR_EARLIER = !IOS9_OR_LATER;
 const BOOL IOS7_OR_EARLIER = !IOS8_OR_LATER;
@@ -33,6 +37,10 @@ const BOOL IS_SCREEN_35_INCH = ([UIScreen instancesRespondToSelector:@selector(c
 const BOOL IS_SCREEN_47_INCH = ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO);
 const BOOL IS_SCREEN_55_INCH = ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) : NO);
 #else
+const BOOL IOS12_OR_LATER = NO;
+const BOOL IOS11_OR_LATER = NO;
+const BOOL IOS10_OR_LATER = NO;
+const BOOL IOS9_OR_LATER = NO;
 const BOOL IOS8_OR_LATER = NO;
 const BOOL IOS7_OR_LATER = NO;
 const BOOL IOS6_OR_LATER = NO;
@@ -40,6 +48,10 @@ const BOOL IOS5_OR_LATER = NO;
 const BOOL IOS4_OR_LATER = NO;
 const BOOL IOS3_OR_LATER = NO;
 
+const BOOL IOS11_OR_EARLIER = NO;
+const BOOL IOS10_OR_EARLIER = NO;
+const BOOL IOS9_OR_EARLIER = NO;
+const BOOL IOS8_OR_EARLIER = NO;
 const BOOL IOS7_OR_EARLIER = NO;
 const BOOL IOS6_OR_EARLIER = NO;
 const BOOL IOS5_OR_EARLIER = NO;
@@ -154,9 +166,9 @@ static const char * __jb_app = NULL;
 #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
 	static const char * __jb_apps[] =
 	{
-		"/Application/Cydia.app", 
-		"/Application/limera1n.app", 
-		"/Application/greenpois0n.app", 
+		"/Application/Cydia.app",
+		"/Application/limera1n.app",
+		"/Application/greenpois0n.app",
 		"/Application/blackra1n.app",
 		"/Application/blacksn0w.app",
 		"/Application/redsn0w.app",
@@ -174,20 +186,20 @@ static const char * __jb_app = NULL;
 			return YES;
         }
     }
-	
+
     // method 2
 	if ( [[NSFileManager defaultManager] fileExistsAtPath:@"/private/var/lib/apt/"] )
 	{
 		return YES;
 	}
-	
+
 	// method 3
 	if ( 0 == system("ls") )
 	{
 		return YES;
 	}
 #endif	// #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
-	
+
     return NO;
 }
 
@@ -207,7 +219,7 @@ static const char * __jb_app = NULL;
 {
 #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
 	NSString * deviceType = [UIDevice currentDevice].model;
-	
+
 	if ( [deviceType rangeOfString:@"iPhone" options:NSCaseInsensitiveSearch].length > 0 ||
 		[deviceType rangeOfString:@"iPod" options:NSCaseInsensitiveSearch].length > 0 ||
 		[deviceType rangeOfString:@"iTouch" options:NSCaseInsensitiveSearch].length > 0 )
@@ -215,7 +227,7 @@ static const char * __jb_app = NULL;
 		return YES;
 	}
 #endif	// #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
-	
+
 	return NO;
 }
 
@@ -223,13 +235,13 @@ static const char * __jb_app = NULL;
 {
 #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
 	NSString * deviceType = [UIDevice currentDevice].model;
-	
+
 	if ( [deviceType rangeOfString:@"iPad" options:NSCaseInsensitiveSearch].length > 0 )
 	{
 		return YES;
 	}
 #endif	// #if (TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
-	
+
 	return NO;
 }
 
@@ -248,7 +260,7 @@ static const char * __jb_app = NULL;
 	{
 		return YES;
 	}
-	
+
 	return NO;
 }
 
@@ -335,7 +347,7 @@ static const char * __jb_app = NULL;
 	{
 		CGSize size2 = CGSizeMake( size.height, size.width );
 		CGSize screenSize = [UIScreen mainScreen].currentMode.size;
-		
+
 		if ( CGSizeEqualToSize(size, screenSize) || CGSizeEqualToSize(size2, screenSize) )
 		{
 			return YES;
