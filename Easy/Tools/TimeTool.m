@@ -178,19 +178,17 @@
 }
 
 + (NSTimeInterval)getFirstDayOfWeek:(NSTimeInterval)timestamp {
-	NSDate *now = [NSDate dateWithTimeIntervalSince1970:timestamp];
+    NSDate *now = [NSDate dateWithTimeIntervalSince1970:timestamp];
 	NSCalendar *cal = [NSCalendar currentCalendar];
 	NSDateComponents *comps = [cal
 	                           components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday| NSCalendarUnitWeekOfMonth
                                fromDate:now];
 	NSLog(@"%ld,%ld,%ld,%ld", (long)comps.year, (long)comps.month, (long)comps.weekOfMonth, (long)comps.weekday);
-	if (comps.weekday < 2) {
-		comps.weekOfMonth = comps.weekOfMonth - 1;
-	}
-	comps.weekday = 2;
-	//   NSLog(@"%d,%d,%d,%d",comps.year,comps.month,comps.week,comps.weekday);
-	NSDate *firstDay = [cal dateFromComponents:comps];
-	return [firstDay timeIntervalSince1970];
+	if (comps.weekday == 1) {
+        return timestamp - 6*24*60*60;
+    }else {
+        return timestamp - (comps.weekday - 2)*24*60*60;
+    }
 }
 
 
