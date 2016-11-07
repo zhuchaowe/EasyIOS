@@ -14,11 +14,11 @@
 {
     static dispatch_once_t pred;
     static TimeTool *sharedInstance = nil;
-    
+
     dispatch_once(&pred, ^{
         sharedInstance = [[self alloc] init];
     });
-    
+
     return sharedInstance;
 }
 
@@ -26,7 +26,7 @@
 + (NSString *)formatFriendlyTime:(NSDate *)todate {
     NSDate *today = [NSDate date]; //当前时间
     NSTimeInterval time = [today timeIntervalSinceDate:todate];
-    
+
     if(time < 60){
         return @"刚刚";
     }else if (time < 3600) {
@@ -53,7 +53,7 @@
 	NSDate *today = [NSDate date]; //当前时间
 	unsigned int unitFlag = NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
 	NSDateComponents *gap = [cal components:unitFlag fromDate:today toDate:todate options:0]; //计算时间差
-    
+
 	if (ABS([gap day]) > 0) {
 		return [NSString stringWithFormat:@"%ld天前", (long)(ABS([gap day]))];
 	}
@@ -67,11 +67,11 @@
 
 +(NSTimeInterval)formatTimeSinceNow:(NSTimeInterval)timestamp{
     NSDate *time = [NSDate dateWithTimeIntervalSinceNow:timestamp];
-    
+
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat:@"yyy-MM-dd HH:mm:ss"];
 	NSString *thisDayMin = [dateFormatter stringFromDate:time];
-    
+
     return [[dateFormatter dateFromString:thisDayMin] timeIntervalSince1970];
 }
 
@@ -81,7 +81,7 @@
 }
 
 + (NSString *)formatTime:(NSTimeInterval)timestamp formatWith:(NSString *)format{
-    
+
     NSDate *time = [NSDate dateWithTimeIntervalSince1970:timestamp];
     if(time == 0){
         return @"";
@@ -109,9 +109,9 @@
 	NSTimeInterval timestampStart = [self getFirstDayOfWeek:timestamp];
 	NSDate *date = [NSDate dateWithTimeIntervalSince1970:timestampStart];
 	NSString *timeStart = [self formatDate:date formatWith:@"yyyy-MM-dd"];
-    
+
 	NSString *timeEnd = [self formatDate:[date dateByAddingTimeInterval:3600 * 24 * 6] formatWith:@"yyyy-MM-dd"];
-    
+
 	return [NSString stringWithFormat:@"From %@ to %@", timeStart, timeEnd];
 }
 
@@ -119,7 +119,7 @@
 	NSTimeInterval timestampStart = [self getFirstDayOfWeek:timestamp];
 	NSDate *date = [NSDate dateWithTimeIntervalSince1970:timestampStart];
 	NSString *timeStart = [self formatDate:date formatWith:@"yyyy-MM-dd"];
-    
+
 	return timeStart;
 }
 
@@ -128,7 +128,7 @@
 	NSDateComponents *comps = [cal
 	                           components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit
                                fromDate:[NSDate date]];
-    
+
 	comps.month = comps.month + month;
 	if (comps.month > 12) {
 		comps.year = comps.year + 1;
@@ -138,7 +138,7 @@
 		comps.year = comps.year - 1;
 		comps.month = comps.month + 12;
 	}
-    
+
 	NSDate *date = [cal dateFromComponents:comps];
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat:@"yyyy-MM"];
@@ -171,7 +171,7 @@
 	else if (comps.month <= 12) {
 		comps.month =  10;
 	}
-    
+
 	comps.day = 1;
 	NSDate *firstDay = [cal dateFromComponents:comps];
 	return [firstDay timeIntervalSince1970];
@@ -181,7 +181,7 @@
 	NSDate *now = [NSDate dateWithTimeIntervalSince1970:timestamp];
 	NSCalendar *cal = [NSCalendar currentCalendar];
 	NSDateComponents *comps = [cal
-	                           components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit | NSWeekdayCalendarUnit
+	                           components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday| NSCalendarUnitWeekOfMonth
                                fromDate:now];
 	NSLog(@"%ld,%ld,%ld,%ld", (long)comps.year, (long)comps.month, (long)comps.weekOfMonth, (long)comps.weekday);
 	if (comps.weekday < 2) {
