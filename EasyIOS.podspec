@@ -22,7 +22,6 @@ Pod::Spec.new do |s|
     sp.dependency 'JSONModel'
     sp.dependency 'SharkORM'
     sp.dependency 'TMCache'
-    sp.dependency 'UIActivityIndicator-for-SDWebImage'
     sp.dependency 'AFNetworking'
     sp.dependency 'GCDObjC'
     sp.dependency 'FLKAutoLayout','0.1.1'

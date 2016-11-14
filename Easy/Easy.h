@@ -22,7 +22,6 @@
 #import "UILabel+EasyExtend.h"
 #import "UIButton+EasyExtend.h"
 #import "UIImage+EasyExtend.h"
-#import <UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h>
 #import "UITabBarController+EasyExtend.h"
 #import "EzSystemInfo.h"
 #import "SysTool.h"
