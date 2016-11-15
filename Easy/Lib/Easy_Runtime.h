@@ -4,7 +4,6 @@
 
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
-#import "execinfo.h"
 #import "NSObject+EasyProperty.h"
 #import "EzSingleton.h"
 #pragma mark -
