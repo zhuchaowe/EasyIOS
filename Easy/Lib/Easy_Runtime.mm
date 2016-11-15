@@ -30,24 +30,24 @@ DEF_INT( NSDATE,		6 )
 {
 	if ( attr[0] != 'T' )
 		return BeeTypeEncoding.UNKNOWN;
-	
+
 	const char * type = &attr[1];
 	if ( type[0] == '@' )
 	{
 		if ( type[1] != '"' )
 			return BeeTypeEncoding.UNKNOWN;
-		
+
 		char typeClazz[128] = { 0 };
-		
+
 		const char * clazz = &type[2];
 		const char * clazzEnd = strchr( clazz, '"' );
-		
+
 		if ( clazzEnd && clazz != clazzEnd )
 		{
 			unsigned int size = (unsigned int)(clazzEnd - clazz);
 			strncpy( &typeClazz[0], clazz, size );
 		}
-		
+
 		if ( 0 == strcmp((const char *)typeClazz, "NSNumber") )
 		{
 			return BeeTypeEncoding.NSNUMBER;
@@ -136,7 +136,7 @@ DEF_INT( NSDATE,		6 )
 			return BeeTypeEncoding.UNKNOWN;
 		}
 	}
-	
+
 	return BeeTypeEncoding.UNKNOWN;
 }
 
@@ -149,7 +149,7 @@ DEF_INT( NSDATE,		6 )
 {
 	if ( nil == obj )
 		return BeeTypeEncoding.UNKNOWN;
-	
+
 	if ( [obj isKindOfClass:[NSNumber class]] )
 	{
 		return BeeTypeEncoding.NSNUMBER;
@@ -174,7 +174,7 @@ DEF_INT( NSDATE,		6 )
 	{
 		return BeeTypeEncoding.OBJECT;
 	}
-	
+
 	return BeeTypeEncoding.UNKNOWN;
 }
 
@@ -182,27 +182,27 @@ DEF_INT( NSDATE,		6 )
 {
 	if ( attr[0] != 'T' )
 		return nil;
-	
+
 	const char * type = &attr[1];
 	if ( type[0] == '@' )
 	{
 		if ( type[1] != '"' )
 			return nil;
-		
+
 		char typeClazz[128] = { 0 };
-		
+
 		const char * clazz = &type[2];
 		const char * clazzEnd = strchr( clazz, '"' );
-		
+
 		if ( clazzEnd && clazz != clazzEnd )
 		{
 			unsigned int size = (unsigned int)(clazzEnd - clazz);
 			strncpy( &typeClazz[0], clazz, size );
 		}
-		
+
 		return [NSString stringWithUTF8String:typeClazz];
 	}
-	
+
 	return nil;
 }
 
@@ -216,7 +216,7 @@ DEF_INT( NSDATE,		6 )
 	NSString * className = [self classNameOf:attr];
 	if ( nil == className )
 		return nil;
-	
+
 	return NSClassFromString( className );
 }
 
@@ -242,7 +242,7 @@ DEF_INT( NSDATE,		6 )
 		return YES;
 	if ( clazz == [NSValue class] )
 		return YES;
-	
+
 	return NO;
 }
 
@@ -294,7 +294,7 @@ DEF_INT( TYPE_NATIVEC,	2 )
 	else
 	{
 		return [NSString stringWithFormat:@"[X] <unknown>(0x%08x + %llu)", (unsigned int)_entry, (unsigned long long)_offset];
-	}	
+	}
 }
 
 + (NSUInteger)hex:(NSString *)text
@@ -308,7 +308,7 @@ DEF_INT( TYPE_NATIVEC,	2 )
 {
 //	example: peeper  0x00001eca -[PPAppDelegate application:didFinishLaunchingWithOptions:] + 106
 	NSError * error = NULL;
-	NSString * expr = @"^[0-9]*\\s*([a-z0-9_]+)\\s+(0x[0-9a-f]+)\\s+-\\[([a-z0-9_]+)\\s+([a-z0-9_:]+)]\\s+\\+\\s+([0-9]+)$";	
+	NSString * expr = @"^[0-9]*\\s*([a-z0-9_]+)\\s+(0x[0-9a-f]+)\\s+-\\[([a-z0-9_]+)\\s+([a-z0-9_:]+)]\\s+\\+\\s+([0-9]+)$";
 	NSRegularExpression * regex = [NSRegularExpression regularExpressionWithPattern:expr options:NSRegularExpressionCaseInsensitive error:&error];
 	NSTextCheckingResult * result = [regex firstMatchInString:line options:0 range:NSMakeRange(0, [line length])];
 	if ( result && (regex.numberOfCaptureGroups + 1) == result.numberOfRanges )
@@ -322,7 +322,7 @@ DEF_INT( TYPE_NATIVEC,	2 )
 		frame.offset = [[line substringWithRange:[result rangeAtIndex:5]] intValue];
 		return frame;
 	}
-	
+
 	return nil;
 }
 
@@ -344,7 +344,7 @@ DEF_INT( TYPE_NATIVEC,	2 )
 		frame.offset = [[line substringWithRange:[result rangeAtIndex:4]] intValue];
 		return frame;
 	}
-	
+
 	return nil;
 }
 
@@ -363,7 +363,7 @@ DEF_INT( TYPE_NATIVEC,	2 )
 	id frame1 = [BeeCallFrame parseFormat1:line];
 	if ( frame1 )
 		return frame1;
-	
+
 	id frame2 = [BeeCallFrame parseFormat2:line];
 	if ( frame2 )
 		return frame2;
@@ -401,31 +401,31 @@ DEF_SINGLETON( BeeRuntime )
 {
 	if ( nil == clazz )
 		return nil;
-	
-	return [clazz alloc];	
+
+	return [clazz alloc];
 }
 
 + (id)allocByClassName:(NSString *)clazzName
 {
 	if ( nil == clazzName || 0 == [clazzName length] )
 		return nil;
-	
+
 	Class clazz = NSClassFromString( clazzName );
 	if ( nil == clazz )
 		return nil;
-	
+
 	return [clazz alloc];
 }
 
 + (NSArray *)allClasses
 {
 	static NSMutableArray * __allClasses = nil;
-	
+
 	if ( nil == __allClasses )
 	{
 		__allClasses = [NSMutableArray nonRetainingArray];
 	}
-	
+
 	if ( 0 == __allClasses.count )
 	{
 		static const char * __blackList[] =
@@ -444,15 +444,15 @@ DEF_SINGLETON( BeeRuntime )
 			"AGSharePageContentView",
 			"AGBackground"
 		};
-				
+
 		unsigned int	classesCount = 0;
 		Class *			classes = objc_copyClassList( &classesCount );
-		
+
 		for ( unsigned int i = 0; i < classesCount; ++i )
 		{
 			Class classType = classes[i];
 			Class superClass = class_getSuperclass( classType );
-			
+
 			if ( nil == superClass )
 				continue;
 //			if ( NO == class_conformsToProtocol( classType, @protocol(NSObject)) )
@@ -476,55 +476,55 @@ DEF_SINGLETON( BeeRuntime )
 				{
 					isBlack = YES;
 					break;
-				}				
+				}
 			}
-			
+
 			if ( isBlack )
 				continue;
 
 			[__allClasses addObject:classType];
 		}
-		
+
 		free( classes );
 	}
-	
+
 	return __allClasses;
 }
 
 + (NSArray *)allSubClassesOf:(Class)superClass
 {
 	NSMutableArray * results = [[NSMutableArray alloc] init];
-	
+
 	for ( Class classType in [self allClasses] )
 	{
 		if ( classType == superClass )
 			continue;
-		
+
 		if ( NO == [classType isSubclassOfClass:superClass] )
 			continue;
 
 		[results addObject:classType];
 	}
-	
+
 	return results;
 }
 
 + (NSArray *)allInstanceMethodsOf:(Class)clazz
 {
 	static NSMutableDictionary * __cache = nil;
-	
+
 	if ( nil == __cache )
 	{
 		__cache = [[NSMutableDictionary alloc] init];
 	}
-	
+
 	NSMutableArray * methodNames = [__cache objectForKey:[clazz description]];
 	if ( nil == methodNames )
 	{
 		methodNames = [NSMutableArray array];
-		
+
 		Class thisClass = clazz;
-		
+
 		while ( NULL != thisClass )
 		{
 			unsigned int	methodCount = 0;
@@ -538,7 +538,7 @@ DEF_SINGLETON( BeeRuntime )
 					const char * cstrName = sel_getName(selector);
 					if ( NULL == cstrName )
 						continue;
-					
+
 					NSString * selectorName = [NSString stringWithUTF8String:cstrName];
 					if ( NULL == selectorName )
 						continue;
@@ -553,10 +553,10 @@ DEF_SINGLETON( BeeRuntime )
 				break;
 			}
 		}
-		
+
 		[__cache setObject:methodNames forKey:[clazz description]];
 	}
-	
+
 	return methodNames;
 }
 
@@ -567,178 +567,25 @@ DEF_SINGLETON( BeeRuntime )
 	{
 		return nil;
 	}
-	
+
 	if ( nil == prefix )
 	{
 		return methods;
 	}
-	
+
 	NSMutableArray * result = [NSMutableArray array];
-	
+
 	for ( NSString * selectorName in methods )
 	{
 		if ( NO == [selectorName hasPrefix:prefix] )
 		{
 			continue;
 		}
-		
+
 		[result addObject:selectorName];
 	}
-	
+
 	return result;
 }
 
-+ (NSArray *)callstack:(NSUInteger)depth
-{
-	NSMutableArray * array = [[NSMutableArray alloc] init];
-	
-	void * stacks[MAX_CALLSTACK_DEPTH] = { 0 };
-
-	depth = backtrace( stacks, (int)((depth > MAX_CALLSTACK_DEPTH) ? MAX_CALLSTACK_DEPTH : depth) );
-	if ( depth )
-	{
-		char ** symbols = backtrace_symbols( stacks, (int)depth );
-		if ( symbols )
-		{
-			for ( int i = 0; i < depth; ++i )
-			{
-				NSString * symbol = [NSString stringWithUTF8String:(const char *)symbols[i]];
-				if ( 0 == [symbol length] )
-					continue;
-
-				NSRange range1 = [symbol rangeOfString:@"["];
-				NSRange range2 = [symbol rangeOfString:@"]"];
-
-				if ( range1.length > 0 && range2.length > 0 )
-				{
-					NSRange range3;
-					range3.location = range1.location;
-					range3.length = range2.location + range2.length - range1.location;
-					[array addObject:[symbol substringWithRange:range3]];
-				}
-				else
-				{
-					[array addObject:symbol];
-				}					
-			}
-
-			free( symbols );
-		}
-	}
-	
-	return array;
-}
-
-+ (NSArray *)callframes:(NSUInteger)depth
-{
-	NSMutableArray * array = [[NSMutableArray alloc] init];
-	
-	void * stacks[MAX_CALLSTACK_DEPTH] = { 0 };
-	
-	depth = backtrace( stacks, int((depth > MAX_CALLSTACK_DEPTH) ? MAX_CALLSTACK_DEPTH : depth) );
-	if ( depth )
-	{
-		char ** symbols = backtrace_symbols( stacks, (int)depth );
-		if ( symbols )
-		{
-			for ( int i = 0; i < depth; ++i )
-			{
-				NSString * line = [NSString stringWithUTF8String:(const char *)symbols[i]];
-				if ( 0 == [line length] )
-					continue;
-
-				BeeCallFrame * frame = [BeeCallFrame parse:line];
-				if ( nil == frame )
-					continue;
-				
-				[array addObject:frame];
-			}
-			
-			free( symbols );
-		}
-	}
-	
-	return array;
-}
-
-
-+ (void)breakPoint
-{
-#if __BEE_DEVELOPMENT__
-#if defined(__ppc__)
-	asm("trap");
-#elif defined(__i386__)
-	asm("int3");
-#endif	// #elif defined(__i386__)
-#endif	// #if __BEE_DEVELOPMENT__
-}
-
-- (NSArray *)allClasses
-{
-	return [BeeRuntime allClasses];
-}
-
-- (NSArray *)callstack
-{
-	return [BeeRuntime callstack:MAX_CALLSTACK_DEPTH];
-}
-
-- (NSArray *)callframes
-{
-	return [BeeRuntime callframes:MAX_CALLSTACK_DEPTH];
-}
-
 @end
-
-// ----------------------------------
-// Unit test
-// ----------------------------------
-
-#pragma mark -
-
-#if defined(__BEE_UNITTEST__) && __BEE_UNITTEST__
-
-TEST_CASE( BeeRuntime )
-{
-	TIMES( 3 )
-	{
-		NSString * str = (NSString *)[BeeRuntime allocByClass:[NSString class]];
-		EXPECTED( str );
-		[str release];
-		
-		NSString * str2 = (NSString *)[BeeRuntime allocByClassName:@"NSString"];
-		EXPECTED( str2 );
-		[str2 release];
-		
-		NSArray * emptyStack = [BeeRuntime callstack:0];
-		EXPECTED( emptyStack );
-		EXPECTED( emptyStack.count == 0 );
-		
-		NSArray * maxStack = [BeeRuntime callstack:100000];
-		EXPECTED( maxStack );
-		EXPECTED( maxStack.count );
-		
-		NSArray * stack = [BeeRuntime callstack:1];
-		EXPECTED( stack && stack.count );
-		EXPECTED( [[stack objectAtIndex:0] isKindOfClass:[NSString class]] );
-		
-		NSArray * emptyFrames = [BeeRuntime callframes:0];
-		EXPECTED( emptyFrames );
-		EXPECTED( emptyFrames.count == 0 );
-		
-		NSArray * maxFrames = [BeeRuntime callframes:100000];
-		EXPECTED( maxFrames );
-		EXPECTED( maxFrames.count );
-		
-		NSArray * frames = [BeeRuntime callframes:1];
-		EXPECTED( frames && frames.count );
-		EXPECTED( [[frames objectAtIndex:0] isKindOfClass:[BeeCallFrame class]] );
-		
-		[BeeRuntime printCallstack:0];
-		[BeeRuntime printCallstack:1];
-		[BeeRuntime printCallstack:100000];
-	}
-}
-TEST_CASE_END
-
-#endif	// #if defined(__BEE_UNITTEST__) && __BEE_UNITTEST__

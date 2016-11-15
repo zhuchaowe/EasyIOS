@@ -8,18 +8,6 @@
 #import "EzSingleton.h"
 #pragma mark -
 
-#undef	PRINT_CALLSTACK
-#define PRINT_CALLSTACK( __n )	[BeeRuntime printCallstack:__n]
-
-#undef	BREAK_POINT
-#define BREAK_POINT()			[BeeRuntime breakPoint];
-
-#undef	BREAK_POINT_IF
-#define BREAK_POINT_IF( __x )	if ( __x ) { [BeeRuntime breakPoint]; }
-
-#undef	BB
-#define BB						[BeeRuntime breakPoint];
-
 #pragma mark -
 
 @interface BeeTypeEncoding : NSObject
@@ -83,11 +71,5 @@ AS_SINGLETON( BeeRuntime )
 
 + (NSArray *)allInstanceMethodsOf:(Class)clazz;
 + (NSArray *)allInstanceMethodsOf:(Class)clazz withPrefix:(NSString *)prefix;
-
-+ (NSArray *)callstack:(NSUInteger)depth;
-+ (NSArray *)callframes:(NSUInteger)depth;
-//
-//+ (void)printCallstack:(NSUInteger)depth;
-+ (void)breakPoint;
 
 @end

@@ -4,14 +4,14 @@ Pod::Spec.new do |s|
   s.summary               = "EasyIOS is a MVVM frameWork base on AFNetworking and ReactiveCocoa"
   s.homepage              = "http://easyios.iosx.me"
   s.social_media_url      = "http://www.iosx.me"
-  s.platform     = :ios,'6.0'
+  s.platform     = :ios,'8.0'
   s.license               = { :type => "MIT", :file => "LICENSE" }
   s.author                = { "zhuchao" => "zhuchao@iosx.me" }
   s.source                = { :git => "https://github.com/zhuchaowe/EasyIOS.git",:tag => "2.3" }
-  s.ios.deployment_target = "6.0"
+  s.ios.deployment_target = "8.0"
   s.requires_arc          = true
   s.framework             = "CoreFoundation","Foundation","CoreGraphics","Security","UIKit"
-  s.library		= "z.1.1.3","stdc++","sqlite3"
+  s.library		= "z.1.1.3","stdc++","sqlite3",'commonCrypto'
   s.subspec 'Easy' do |sp|
     sp.source_files = '*.{h,m,mm}','Easy/**/*.{h,m,mm}','Extend/**/*.{h,m,mm}'
     sp.resources   = "Extend/**/*.{png}"
