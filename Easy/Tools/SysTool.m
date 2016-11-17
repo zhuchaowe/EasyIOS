@@ -11,17 +11,18 @@
 #include <dirent.h>
 #include <sys/socket.h>
 #include <sys/sysctl.h>
+#import <CommonCrypto/CommonCrypto.h>
 
 @implementation SysTool
 + (SysTool *)sharedInstance
 {
     static dispatch_once_t pred;
     static SysTool *sharedInstance = nil;
-    
+
     dispatch_once(&pred, ^{
         sharedInstance = [[self alloc] init];
     });
-    
+
     return sharedInstance;
 }
 
@@ -128,7 +129,7 @@
                                         (child->d_name[0] == '.' && child->d_name[1] == 0) ||                         // 忽略目录 .
                                         (child->d_name[0] == '.' && child->d_name[1] == '.' && child->d_name[2] == 0)                         // 忽略目录 ..
                                         )) continue;
-        
+
 		NSUInteger folderPathLength = strlen(folderPath);
 		char childPath[1024]; // 子文件的路径地址
 		stpcpy(childPath, folderPath);
@@ -164,13 +165,13 @@
 +(NSString *)getSha256String:(NSString *)srcString {
     const char *cstr = [srcString cStringUsingEncoding:NSUTF8StringEncoding];
     NSData *data = [NSData dataWithBytes:cstr length:srcString.length];
-    
+
     uint8_t digest[CC_SHA256_DIGEST_LENGTH];
-    
+
     CC_SHA256(data.bytes, (CC_LONG)data.length, digest);
-    
+
     NSMutableString* result = [NSMutableString stringWithCapacity:CC_SHA256_DIGEST_LENGTH * 2];
-    
+
     for(int i = 0; i < CC_SHA256_DIGEST_LENGTH; i++) {
         [result appendFormat:@"%02x", digest[i]];
     }
