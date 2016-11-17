@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "8.0"
   s.requires_arc          = true
   s.framework             = "CoreFoundation","Foundation","CoreGraphics","Security","UIKit"
-  s.library		= "z.1.1.3","stdc++","sqlite3",'commonCrypto'
+  s.library		= "z.1.1.3","stdc++","sqlite3"
   s.subspec 'Easy' do |sp|
     sp.source_files = '*.{h,m,mm}','Easy/**/*.{h,m,mm}','Extend/**/*.{h,m,mm}'
     sp.resources   = "Extend/**/*.{png}"

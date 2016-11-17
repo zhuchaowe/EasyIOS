@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CommonCrypto/CommonDigest.h>
+#import <CommonCrypto/CommonCrypto.h>
 @interface NSData (EasyExtend)
 
 @property (nonatomic, readonly) NSData *	MD5;
