@@ -99,8 +99,8 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 * Import from CocoaPods
 * Add below to Podfile and run pod install
 
-    	platform :ios, "6.0"
-    	pod 'EasyIOS', :git=>'https://github.com/zhuchaowe/EasyIOS.git',:tag=>'2.3'
+    	platform :ios, "8.0"
+    	pod 'EasyIOS', '~> 2.3'
     	pod 'EasyIOS-Extention', '~> 1.2'
 
 * If you use swift , please click [here](https://github.com/zhuchaowe/RACSwift)
@@ -109,6 +109,7 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 
 * 修改Model层的实现方式
 * Request中增加了可自定义UserAgent的功能
+* 兼容IOS 8+
 
 ##2.2.3 版本更新
 
