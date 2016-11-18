@@ -9,7 +9,7 @@
 #import "Action.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "TMCache.h"
-
+static NSMutableDictionary const* mutableCommonHeaderFields;
 @interface Action()
 @property(nonatomic,assign)BOOL cacheEnable;
 @property(nonatomic,assign)BOOL dataFromCache;
@@ -20,10 +20,26 @@
 @property(nonatomic,retain)NSString *CODE_KEY;//错误码key,支持路径 如 data/code
 @property(nonatomic,assign)NSUInteger RIGHT_CODE;//正确校验码
 @property(nonatomic,retain)NSString *MSG_KEY;//消息提示msg,支持路径 如 data/msg
+
 @end
 @implementation Action
 
++ (void)initialize
+{
+    if (self == [Action self]) { //要确定是否为本类
+        //不要做太多任务的初始化操作
+        mutableCommonHeaderFields = [NSMutableDictionary dictionary];
+    }
+}
+
 DEF_SINGLETON(Action)
+
++ (void)addCommonHeaderFields:(NSDictionary<NSString *,NSString *> *)headerFields
+{
+    if (headerFields.isNotEmpty) {
+        [mutableCommonHeaderFields addEntriesFromDictionary:headerFields];
+    }
+}
 
 +(void)actionConfigScheme:(NSString *)scheme
                      host:(NSString *)host
@@ -83,6 +99,12 @@ DEF_SINGLETON(Action)
     if (msg.timeoutInterval != 0) {
         request.timeoutInterval = msg.timeoutInterval;
     }
+    if(mutableCommonHeaderFields){
+        [mutableCommonHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
+            [request setValue:obj forHTTPHeaderField:key];
+        }];
+    }
+
     if ([Action sharedInstance].CLIENT.isNotEmpty) {
        [request setValue:[Action sharedInstance].CLIENT forHTTPHeaderField:@"User-Agent"];
     }
@@ -137,6 +159,12 @@ DEF_SINGLETON(Action)
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
 
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:msg.METHOD URLString:url parameters:requestParams error:nil];
+
+    if(mutableCommonHeaderFields){
+        [mutableCommonHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
+            [request setValue:obj forHTTPHeaderField:key];
+        }];
+    }
 
     if ([Action sharedInstance].CLIENT.isNotEmpty) {
        [request setValue:[Action sharedInstance].CLIENT forHTTPHeaderField:@"User-Agent"];
@@ -217,6 +245,12 @@ DEF_SINGLETON(Action)
         }];
     } error:nil];
 
+    if(mutableCommonHeaderFields){
+        [mutableCommonHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
+            [request setValue:obj forHTTPHeaderField:key];
+        }];
+    }
+    
     if ([Action sharedInstance].CLIENT.isNotEmpty) {
        [request setValue:[Action sharedInstance].CLIENT forHTTPHeaderField:@"User-Agent"];
     }

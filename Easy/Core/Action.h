@@ -34,5 +34,11 @@
 - (void)notReadFromCache;
 - (AFHTTPSessionManager *)Send:(Request *) msg;
 - (AFHTTPSessionManager *)Download:(Request *)msg;
+
+
+/**
+ *  添加公共请求头
+ */
++ (void)addCommonHeaderFields:(NSDictionary<NSString *, NSString *> *)headerFields;
 AS_SINGLETON(Action)
 @end
