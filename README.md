@@ -107,7 +107,7 @@ EasyIOS 2.0是基于MVVM编程思想进行构建的，封装了Scene,SceneModel,
 
 ##2.3版本更新
 
-* 修改Model层的实现方式
+* 修改Model层的实现方式,详细使用方法见[SharkORM](http://sharkorm.com/) 如果打不开请翻墙
 * Request中增加了可自定义UserAgent的功能
 * 兼容IOS 8+
 
