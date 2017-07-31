@@ -32,8 +32,8 @@
 - (void)useCache;
 - (void)readFromCache;
 - (void)notReadFromCache;
-- (AFHTTPSessionManager *)Send:(Request *) msg;
-- (AFHTTPSessionManager *)Download:(Request *)msg;
+- (AFHTTPRequestOperation *)Send:(Request *) msg;
+- (AFHTTPRequestOperation *)Download:(Request *)msg;
 
 
 /**

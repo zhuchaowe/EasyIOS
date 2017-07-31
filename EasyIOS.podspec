@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
   s.name                  = "EasyIOS"
-  s.version               = "2.3"
+  s.version               = "2.3B"
   s.summary               = "EasyIOS is a MVVM frameWork base on AFNetworking and ReactiveCocoa"
   s.homepage              = "http://easyios.iosx.me"
   s.social_media_url      = "http://www.iosx.me"
   s.platform     = :ios,'8.0'
   s.license               = { :type => "MIT", :file => "LICENSE" }
   s.author                = { "zhuchao" => "zhuchao@iosx.me" }
-  s.source                = { :git => "https://github.com/zhuchaowe/EasyIOS.git",:tag => "2.3" }
+  s.source                = { :path => "./" }
   s.ios.deployment_target = "8.0"
   s.requires_arc          = true
   s.framework             = "CoreFoundation","Foundation","CoreGraphics","Security","UIKit"
@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
     sp.dependency 'SharkORM'
     sp.dependency 'TMCache'
     sp.dependency 'SDWebImage'
-    sp.dependency 'AFNetworking'
+    sp.dependency 'AFNetworking','2.6.3'
     sp.dependency 'GCDObjC'
     sp.dependency 'FLKAutoLayout','0.1.1'
     sp.dependency 'FontIcon'
