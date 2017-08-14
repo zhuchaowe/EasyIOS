@@ -141,6 +141,15 @@ DEF_SINGLETON(Action)
 }
 
 
+- (AFHTTPRequestOperation *)Send:(Request *) msg{
+    if ([msg.METHOD isEqualToString:@"GET"]) {
+        return [self GET:msg];
+    }else{
+        return [self POST:msg];
+    }
+}
+
+
 -(AFHTTPRequestOperation *) GET:(Request *)msg
 {
     NSString *url = @"";
@@ -194,12 +203,13 @@ DEF_SINGLETON(Action)
     
     AFHTTPRequestOperation *op =  [manager GET:url parameters:requestParams success:^(AFHTTPRequestOperation *operation, NSDictionary* jsonObject) {
         @strongify(msg,self);
+        
+        msg.output = jsonObject;
         if(_cacheEnable && [self doCheckCode:msg]){
             [[TMCache sharedCache] setObject:jsonObject forKey:msg.cacheKey block:^(TMCache *cache, NSString *key, id object) {
                 EZLog(@"%@ has cached",url);
             }];
         }
-        msg.output = jsonObject;
         [self checkCode:msg];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         @strongify(msg,self);
@@ -276,12 +286,13 @@ DEF_SINGLETON(Action)
         }
     } success:^(AFHTTPRequestOperation *operation, NSDictionary* jsonObject) {
         @strongify(msg,self);
-        if([file count] == 0 && _cacheEnable){
+        
+        msg.output = jsonObject;
+        if([file count] == 0 && _cacheEnable && [self doCheckCode:msg]){
             [[TMCache sharedCache] setObject:jsonObject forKey:msg.cacheKey block:^(TMCache *cache, NSString *key, id object) {
                 EZLog(@"%@ has cached",url);
             }];
         }
-        msg.output = jsonObject;
         [self checkCode:msg];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         @strongify(msg,self);
