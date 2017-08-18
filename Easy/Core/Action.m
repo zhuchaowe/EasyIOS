@@ -12,7 +12,7 @@
 static NSMutableDictionary const* mutableCommonHeaderFields;
 @interface Action()
 @property(nonatomic,assign)BOOL cacheEnable;
-@property(nonatomic,assign)BOOL dataFromCache;
+@property(nonatomic,assign)BOOL dataNeedFromCache;
 
 @property(nonatomic,retain)NSString *DEFAULT_SCHEME;//http/https/ftp协议
 @property(nonatomic,retain)NSString *HOST_URL;//服务端域名:端口
@@ -67,7 +67,7 @@ DEF_SINGLETON(Action)
     self = [super init];
     if(self){
         _cacheEnable = NO;
-        _dataFromCache = NO;
+        _dataNeedFromCache = NO;
     }
     return self;
 }
@@ -84,10 +84,10 @@ DEF_SINGLETON(Action)
 }
 
 -(void)readFromCache{
-    _dataFromCache = YES;
+    _dataNeedFromCache = YES;
 }
 -(void)notReadFromCache{
-    _dataFromCache = NO;
+    _dataNeedFromCache = NO;
 }
 
 -(AFHTTPRequestOperation *)Download:(Request *)msg{
@@ -210,6 +210,7 @@ DEF_SINGLETON(Action)
                 EZLog(@"%@ has cached",url);
             }];
         }
+        msg.dataFromCache = NO;
         [self checkCode:msg];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         @strongify(msg,self);
@@ -221,8 +222,9 @@ DEF_SINGLETON(Action)
     msg.url = op.request.URL;
     msg.op = op;
     msg.output = [[TMCache sharedCache] objectForKey:msg.cacheKey];
-    if (_dataFromCache == YES && msg.output !=nil) {
+    if (_dataNeedFromCache == YES && msg.output !=nil) {
         [[GCDQueue mainQueue] queueBlock:^{
+            msg.dataFromCache = YES;
             [self checkCode:msg];
         } afterDelay:0.1f];
     }
@@ -293,6 +295,7 @@ DEF_SINGLETON(Action)
                 EZLog(@"%@ has cached",url);
             }];
         }
+        msg.dataFromCache = NO;
         [self checkCode:msg];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         @strongify(msg,self);
@@ -311,7 +314,8 @@ DEF_SINGLETON(Action)
         }];
     }else{
         msg.output = [[TMCache sharedCache] objectForKey:msg.cacheKey];
-        if (_dataFromCache == YES && msg.output !=nil) {
+        if (_dataNeedFromCache == YES && msg.output !=nil) {
+            msg.dataFromCache = YES;
             [[GCDQueue mainQueue] queueBlock:^{
                 [self checkCode:msg];
             } afterDelay:0.1f];

@@ -55,6 +55,7 @@ NSString * const RequestStateCancle = @"RequestDidCancle";
     self.needCheckCode = YES;
     self.params = [NSMutableDictionary dictionary];
     self.isFirstRequest = YES;
+    self.dataFromCache = NO;
     [self loadActive];
 }
 
