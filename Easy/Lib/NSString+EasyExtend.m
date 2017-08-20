@@ -350,6 +350,8 @@
         value = [NSString jsonStringWithDictionary:object];
     }else if([object isKindOfClass:[NSArray class]]){
         value = [NSString jsonStringWithArray:object];
+    }else if([object isKindOfClass:[NSNumber class]]){
+        value = [object stringValue];
     }
     return value;
 }

@@ -142,11 +142,14 @@ DEF_SINGLETON(Action)
 
 
 - (AFHTTPRequestOperation *)Send:(Request *) msg{
-    if ([msg.METHOD isEqualToString:@"GET"]) {
-        return [self GET:msg];
-    }else{
+    if ([msg.METHOD isEqualToString:@"POST"]){
         return [self POST:msg];
+    }else if ([msg.METHOD isEqualToString:@"PUT"]){
+        return [self PUT:msg];
+    }else if ([msg.METHOD isEqualToString:@"DELETE"]){
+        return [self DELETE:msg];
     }
+    return [self GET:msg];
 }
 
 
@@ -164,9 +167,9 @@ DEF_SINGLETON(Action)
     }
     if(msg.appendPathInfo.isNotEmpty){
         url = [url stringByAppendingString:msg.appendPathInfo];
-    }else{
-        requestParams = msg.requestParams;
     }
+    requestParams = msg.requestParams;
+    
 
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:[NSURL URLWithString:url]];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -231,6 +234,163 @@ DEF_SINGLETON(Action)
     return op;
 }
 
+-(AFHTTPRequestOperation *)DELETE:(Request *)msg{
+    NSString *url = @"";
+    NSDictionary *requestParams = nil;
+    if(msg.STATICPATH.isNotEmpty){
+        url = msg.STATICPATH;
+    }else{
+        url = [NSString stringWithFormat:@"%@://%@%@",
+               msg.SCHEME.isNotEmpty?msg.SCHEME:[Action sharedInstance].DEFAULT_SCHEME,
+               msg.HOST.isNotEmpty?msg.HOST:[Action sharedInstance].HOST_URL,
+               msg.PATH];
+    }
+    if(msg.appendPathInfo.isNotEmpty){
+        url = [url stringByAppendingString:msg.appendPathInfo];
+    }
+    requestParams = msg.requestParams;
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    
+    if(mutableCommonHeaderFields){
+        [mutableCommonHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
+            [manager.requestSerializer setValue:obj forHTTPHeaderField:key];
+        }];
+    }
+    
+    if ([Action sharedInstance].CLIENT.isNotEmpty) {
+        [manager.requestSerializer setValue:[Action sharedInstance].CLIENT forHTTPHeaderField:@"User-Agent"];
+    }
+    
+    if(msg.httpHeaderFields.isNotEmpty){
+        [msg.httpHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
+            [manager.requestSerializer setValue:value forHTTPHeaderField:key];
+        }];
+    }
+    if (msg.timeoutInterval != 0) {
+        manager.requestSerializer.timeoutInterval = msg.timeoutInterval;
+    }
+    
+    if (msg.acceptableContentTypes.isNotEmpty) {
+        manager.responseSerializer.acceptableContentTypes = msg.acceptableContentTypes;
+    }
+    
+    [self sending:msg];
+    
+    @weakify(msg,self);
+    
+    NSDictionary *file = msg.requestFiles;
+    
+    AFHTTPRequestOperation *op = [manager DELETE:url parameters:requestParams
+                                      success:^(AFHTTPRequestOperation *operation, NSDictionary* jsonObject) {
+                                          @strongify(msg,self);
+                                          msg.output = jsonObject;
+                                          if([file count] == 0 && _cacheEnable && [self doCheckCode:msg]){
+                                              [[TMCache sharedCache] setObject:jsonObject forKey:msg.cacheKey block:^(TMCache *cache, NSString *key, id object) {
+                                                  EZLog(@"%@ has cached",url);
+                                              }];
+                                          }
+                                          msg.dataFromCache = NO;
+                                          [self checkCode:msg];
+                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                          @strongify(msg,self);
+                                          msg.error = error;
+                                          [self failed:msg];
+                                      }];
+    
+    msg.url = op.request.URL;
+    msg.output = [[TMCache sharedCache] objectForKey:msg.cacheKey];
+    if (_dataNeedFromCache == YES && msg.output !=nil) {
+        msg.dataFromCache = YES;
+        [[GCDQueue mainQueue] queueBlock:^{
+            [self checkCode:msg];
+        } afterDelay:0.1f];
+    }
+    msg.op = op;
+    return op;
+
+}
+
+-(AFHTTPRequestOperation *)PUT:(Request *)msg{
+    NSString *url = @"";
+    NSDictionary *requestParams = nil;
+    if(msg.STATICPATH.isNotEmpty){
+        url = msg.STATICPATH;
+    }else{
+        url = [NSString stringWithFormat:@"%@://%@%@",
+               msg.SCHEME.isNotEmpty?msg.SCHEME:[Action sharedInstance].DEFAULT_SCHEME,
+               msg.HOST.isNotEmpty?msg.HOST:[Action sharedInstance].HOST_URL,
+               msg.PATH];
+    }
+    if(msg.appendPathInfo.isNotEmpty){
+        url = [url stringByAppendingString:msg.appendPathInfo];
+    }
+    requestParams = msg.requestParams;
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    
+    if(mutableCommonHeaderFields){
+        [mutableCommonHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
+            [manager.requestSerializer setValue:obj forHTTPHeaderField:key];
+        }];
+    }
+    
+    if ([Action sharedInstance].CLIENT.isNotEmpty) {
+        [manager.requestSerializer setValue:[Action sharedInstance].CLIENT forHTTPHeaderField:@"User-Agent"];
+    }
+    
+    if(msg.httpHeaderFields.isNotEmpty){
+        [msg.httpHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
+            [manager.requestSerializer setValue:value forHTTPHeaderField:key];
+        }];
+    }
+    if (msg.timeoutInterval != 0) {
+        manager.requestSerializer.timeoutInterval = msg.timeoutInterval;
+    }
+    
+    if (msg.acceptableContentTypes.isNotEmpty) {
+        manager.responseSerializer.acceptableContentTypes = msg.acceptableContentTypes;
+    }
+    
+    [self sending:msg];
+    
+    @weakify(msg,self);
+    
+    NSDictionary *file = msg.requestFiles;
+    
+    AFHTTPRequestOperation *op = [manager PUT:url parameters:requestParams
+                                      success:^(AFHTTPRequestOperation *operation, NSDictionary* jsonObject) {
+        @strongify(msg,self);
+        msg.output = jsonObject;
+        if([file count] == 0 && _cacheEnable && [self doCheckCode:msg]){
+            [[TMCache sharedCache] setObject:jsonObject forKey:msg.cacheKey block:^(TMCache *cache, NSString *key, id object) {
+                EZLog(@"%@ has cached",url);
+            }];
+        }
+        msg.dataFromCache = NO;
+        [self checkCode:msg];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        @strongify(msg,self);
+        msg.error = error;
+        [self failed:msg];
+    }];
+    
+    msg.url = op.request.URL;
+    msg.output = [[TMCache sharedCache] objectForKey:msg.cacheKey];
+    if (_dataNeedFromCache == YES && msg.output !=nil) {
+        msg.dataFromCache = YES;
+        [[GCDQueue mainQueue] queueBlock:^{
+            [self checkCode:msg];
+        } afterDelay:0.1f];
+    }
+    msg.op = op;
+    return op;
+}
+
 -(AFHTTPRequestOperation *)POST:(Request *)msg{
     NSString *url = @"";
     NSDictionary *requestParams = nil;
@@ -244,10 +404,9 @@ DEF_SINGLETON(Action)
     }
     if(msg.appendPathInfo.isNotEmpty){
         url = [url stringByAppendingString:msg.appendPathInfo];
-    }else{
-        requestParams = msg.requestParams;
     }
-
+    requestParams = msg.requestParams;
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
