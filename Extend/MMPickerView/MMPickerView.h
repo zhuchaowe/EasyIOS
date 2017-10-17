@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString * const MMWrapbackgroundColor;
 extern NSString * const MMbackgroundColor;
 extern NSString * const MMtextColor;
 extern NSString * const MMtoolbarColor;

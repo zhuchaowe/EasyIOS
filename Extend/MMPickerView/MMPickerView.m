@@ -8,6 +8,7 @@
 
 #import "MMPickerView.h"
 
+NSString * const MMWrapbackgroundColor = @"wrapbackgroundColor";
 NSString * const MMbackgroundColor = @"backgroundColor";
 NSString * const MMtextColor = @"textColor";
 NSString * const MMtoolbarColor = @"toolbarColor";
@@ -134,6 +135,8 @@ NSString * const MMtoolbarBackgroundImage = @"toolbarBackgroundImage";
     
     _pickerViewArray = [NSMutableArray arrayWithArray:array];
     
+    
+    UIColor *pickerWrapbackgroundColor = [[UIColor alloc] initWithCGColor:[options[MMWrapbackgroundColor] CGColor]];
     UIColor *pickerViewBackgroundColor = [[UIColor alloc] initWithCGColor:[options[MMbackgroundColor] CGColor]];
     UIColor *pickerViewTextColor = [[UIColor alloc] initWithCGColor:[options[MMtextColor] CGColor]];
     UIColor *toolbarBackgroundColor = [[UIColor alloc] initWithCGColor:[options[MMtoolbarColor] CGColor]];
@@ -149,7 +152,14 @@ NSString * const MMtoolbarBackgroundImage = @"toolbarBackgroundImage";
     
     //Whole screen with PickerView and a dimmed background
     _pickerViewContainerView = [[UIView alloc] initWithFrame:view.bounds];
-    [_pickerViewContainerView setBackgroundColor: [UIColor colorWithRed:0.412 green:0.412 blue:0.412 alpha:0.7]];
+    if (pickerWrapbackgroundColor) {
+        [_pickerViewContainerView setBackgroundColor:pickerWrapbackgroundColor];
+    }else{
+        [_pickerViewContainerView setBackgroundColor: [UIColor colorWithRed:0.412 green:0.412 blue:0.412 alpha:0.7]];
+    }
+    
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismiss)];
+    [_pickerViewContainerView addGestureRecognizer:gesture];
     [self addSubview:_pickerViewContainerView];
     
     //PickerView Container with top bar

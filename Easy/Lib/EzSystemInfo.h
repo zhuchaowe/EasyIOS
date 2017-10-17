@@ -43,9 +43,6 @@ AS_SINGLETON( EzSystemInfo )
 + (NSString *)appSchema:(NSString *)name;
 + (NSString *)deviceModel;
 
-+ (BOOL)isJailBroken		NS_AVAILABLE_IOS(4_0);
-+ (NSString *)jailBreaker	NS_AVAILABLE_IOS(4_0);
-
 + (BOOL)isDevicePhone;
 + (BOOL)isDevicePad;
 
